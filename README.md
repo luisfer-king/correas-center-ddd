@@ -73,3 +73,31 @@ export default defineConfig([
 ])
 
 ```
+
+```
+correas-center-ddd
+├─ eslint.config.js
+├─ index.html
+├─ package.json
+├─ pnpm-lock.yaml
+├─ public
+│  ├─ favicon.svg
+│  └─ icons.svg
+├─ README.md
+├─ src
+│  ├─ App.css
+│  ├─ App.tsx
+│  ├─ assets
+│  │  ├─ hero.png
+│  │  ├─ react.svg
+│  │  └─ vite.svg
+│  ├─ backend
+│  ├─ frontend
+│  ├─ index.css
+│  └─ main.tsx
+├─ tsconfig.app.json
+├─ tsconfig.json
+├─ tsconfig.node.json
+└─ vite.config.ts
+
+```
