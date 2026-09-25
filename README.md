@@ -76,26 +76,85 @@ export default defineConfig([
 
 ```
 correas-center-ddd
+├─ .env
 ├─ eslint.config.js
 ├─ index.html
 ├─ package.json
 ├─ pnpm-lock.yaml
+├─ pnpm-workspace.yaml
+├─ prisma
+│  └─ schema.prisma
+├─ prisma7.config.ts
 ├─ public
 │  ├─ favicon.svg
 │  └─ icons.svg
 ├─ README.md
+├─ skills-lock.json
 ├─ src
-│  ├─ App.css
-│  ├─ App.tsx
-│  ├─ assets
-│  │  ├─ hero.png
-│  │  ├─ react.svg
-│  │  └─ vite.svg
 │  ├─ backend
-│  ├─ frontend
-│  ├─ index.css
-│  └─ main.tsx
+│  │  ├─ app.ts
+│  │  ├─ contexts
+│  │  │  ├─ catalog-management
+│  │  │  │  ├─ application
+│  │  │  │  ├─ domain
+│  │  │  │  │  ├─ asignacion-atributo.ts
+│  │  │  │  │  ├─ asignacion-industria.ts
+│  │  │  │  │  ├─ asignacion-marca.ts
+│  │  │  │  │  ├─ atributo-tecnico.ts
+│  │  │  │  │  ├─ catalog-values.ts
+│  │  │  │  │  ├─ categoria.ts
+│  │  │  │  │  ├─ industria.ts
+│  │  │  │  │  ├─ marca.ts
+│  │  │  │  │  ├─ producto.ts
+│  │  │  │  │  ├─ servicio.ts
+│  │  │  │  │  └─ tipo-atributo.ts
+│  │  │  │  ├─ infrastructure
+│  │  │  │  └─ presentation
+│  │  │  ├─ commercial
+│  │  │  │  ├─ application
+│  │  │  │  ├─ domain
+│  │  │  │  ├─ infrastructure
+│  │  │  │  └─ presentation
+│  │  │  ├─ content-management-system
+│  │  │  │  ├─ application
+│  │  │  │  ├─ domain
+│  │  │  │  ├─ infrastructure
+│  │  │  │  └─ presentation
+│  │  │  └─ identity-access-management
+│  │  │     ├─ application
+│  │  │     ├─ domain
+│  │  │     │  ├─ evento-auditoria.ts
+│  │  │     │  ├─ iam-values.ts
+│  │  │     │  ├─ perfil.ts
+│  │  │     │  ├─ permiso.ts
+│  │  │     │  ├─ rol-permiso.ts
+│  │  │     │  ├─ rol.ts
+│  │  │     │  ├─ sesion.ts
+│  │  │     │  ├─ usuario-rol.ts
+│  │  │     │  └─ usuario.ts
+│  │  │     ├─ infrastructure
+│  │  │     └─ presentation
+│  │  ├─ main.ts
+│  │  └─ shared
+│  │     └─ domain
+│  │        └─ value-objects.ts
+│  └─ frontend
+│     ├─ App.css
+│     ├─ App.tsx
+│     ├─ assets
+│     │  ├─ hero.png
+│     │  ├─ react.svg
+│     │  └─ vite.svg
+│     ├─ features
+│     │  ├─ catalog-management
+│     │  ├─ commercial
+│     │  ├─ content-management-system
+│     │  └─ identity-access-management
+│     ├─ index.css
+│     ├─ main.tsx
+│     └─ shared
 ├─ tsconfig.app.json
+├─ tsconfig.backend.json
 ├─ tsconfig.json
 ├─ tsconfig.node.json
 └─ vite.config.ts
