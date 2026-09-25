@@ -1,0 +1,1 @@
+export interface GeneradorIds { nuevo(): string }

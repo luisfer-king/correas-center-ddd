@@ -1,8 +1,10 @@
 import { Prisma, type PrismaClient } from '../../../generated/prisma/client.js'
 import type { RepositorioPerfiles } from '../application/ports/repositorio-perfiles.js'
+import { EventoAuditoria } from '../domain/evento-auditoria.js'
 import { uuid } from '../domain/iam-values.js'
 import type { Perfil } from '../domain/perfil.js'
 import { exigirPermisoEnTransaccion } from './exigir-permiso-en-transaccion.js'
+import { insertarAuditoria } from './insertar-auditoria.js'
 import { aPerfil } from './mappers/perfil.js'
 
 export class PrismaPerfiles implements RepositorioPerfiles {
@@ -60,6 +62,12 @@ export class PrismaPerfiles implements RepositorioPerfiles {
                     update: { estado: v.estado },
                 })
             }
+            await insertarAuditoria(tx, EventoAuditoria.registrar({
+                usuarioId: actorId, accion: 'Edición', tablaAfectada: 'usuario_rol',
+                registroId: perfil.id, datosAnteriores: null, datosNuevos: null,
+                ipAddress: null, userAgent: null, metadata: { operacion: 'iam.usuarios.roles.assign' },
+                creadoEn: new Date(),
+            }))
         }, { isolationLevel: Prisma.TransactionIsolationLevel.Serializable })
     }
 }

@@ -1,8 +1,10 @@
 import { Prisma, type PrismaClient } from '../../../generated/prisma/client.js'
 import type { RepositorioRoles } from '../application/ports/repositorio-roles.js'
+import { EventoAuditoria } from '../domain/evento-auditoria.js'
 import { idPositivo } from '../domain/iam-values.js'
 import type { Rol } from '../domain/rol.js'
 import { exigirPermisoEnTransaccion } from './exigir-permiso-en-transaccion.js'
+import { insertarAuditoria } from './insertar-auditoria.js'
 import { aRol } from './mappers/rol.js'
 
 export class PrismaRoles implements RepositorioRoles {
@@ -28,6 +30,13 @@ export class PrismaRoles implements RepositorioRoles {
                     esSistema: false, estado: 'activo',
                 }, include: { relRolPermiso: true }
             })
+            await insertarAuditoria(tx, EventoAuditoria.registrar({
+                usuarioId: actorId, accion: 'Creación', tablaAfectada: 'roles',
+                registroId: fila.id.toString(), datosAnteriores: null,
+                datosNuevos: { id: fila.id.toString(), slug: fila.slug },
+                ipAddress: null, userAgent: null, metadata: { operacion: 'iam.roles.create' },
+                creadoEn: new Date(),
+            }))
             return aRol(fila)
         }, { isolationLevel: Prisma.TransactionIsolationLevel.Serializable })
     }
@@ -35,7 +44,7 @@ export class PrismaRoles implements RepositorioRoles {
         permiso: 'iam.roles.update' | 'iam.roles.delete' | 'iam.roles.permisos.assign'): Promise<void> {
         await this.db.$transaction(async (tx) => {
             await exigirPermisoEnTransaccion(tx, actorId, permiso)
-            const anterior = await tx.rol.findUnique({ where: { id: rol.id }, select: { esSistema: true, nombre: true } })
+            const anterior = await tx.rol.findUnique({ where: { id: rol.id }, select: { esSistema: true, nombre: true, estado: true } })
             if (!anterior || anterior.esSistema !== rol.esSistema) throw new Error('Rol inexistente o protegido')
             if (anterior.esSistema && rol.estado !== 'activo') throw new Error('Rol del sistema protegido')
             if (anterior.esSistema && anterior.nombre !== rol.nombre) throw new Error('No se puede renombrar el rol del sistema')
@@ -59,6 +68,13 @@ export class PrismaRoles implements RepositorioRoles {
                     update: { estado: v.estado },
                 })
             }
+            await insertarAuditoria(tx, EventoAuditoria.registrar({
+                usuarioId: actorId, accion: rol.estado === 'eliminado' ? 'Eliminación' : 'Edición',
+                tablaAfectada: 'roles', registroId: rol.id.toString(),
+                datosAnteriores: { estado: anterior.estado }, datosNuevos: { estado: rol.estado },
+                ipAddress: null, userAgent: null, metadata: { operacion: permiso },
+                creadoEn: new Date(),
+            }))
         }, { isolationLevel: Prisma.TransactionIsolationLevel.Serializable })
     }
 }
