@@ -76,26 +76,153 @@ export default defineConfig([
 
 ```
 correas-center-ddd
+├─ .env
+├─ .env.example
 ├─ eslint.config.js
 ├─ index.html
 ├─ package.json
 ├─ pnpm-lock.yaml
+├─ pnpm-workspace.yaml
+├─ prisma
+│  ├─ migrations
+│  │  ├─ 20260925043331_inicial_cuatro_contextos
+│  │  │  └─ migration.sql
+│  │  ├─ 20260925054756_estado_asignaciones_iam
+│  │  │  └─ migration.sql
+│  │  └─ migration_lock.toml
+│  ├─ schema.prisma
+│  └─ seed.ts
+├─ prisma7.config.ts
 ├─ public
 │  ├─ favicon.svg
 │  └─ icons.svg
 ├─ README.md
+├─ skills-lock.json
 ├─ src
-│  ├─ App.css
-│  ├─ App.tsx
-│  ├─ assets
-│  │  ├─ hero.png
-│  │  ├─ react.svg
-│  │  └─ vite.svg
 │  ├─ backend
-│  ├─ frontend
-│  ├─ index.css
-│  └─ main.tsx
+│  │  ├─ app.ts
+│  │  ├─ contexts
+│  │  │  ├─ catalog-management
+│  │  │  │  ├─ application
+│  │  │  │  ├─ domain
+│  │  │  │  │  ├─ asignacion-atributo.ts
+│  │  │  │  │  ├─ asignacion-industria.ts
+│  │  │  │  │  ├─ asignacion-marca.ts
+│  │  │  │  │  ├─ atributo-tecnico.ts
+│  │  │  │  │  ├─ catalog-values.ts
+│  │  │  │  │  ├─ categoria.ts
+│  │  │  │  │  ├─ industria.ts
+│  │  │  │  │  ├─ marca.ts
+│  │  │  │  │  ├─ producto.ts
+│  │  │  │  │  ├─ servicio.ts
+│  │  │  │  │  └─ tipo-atributo.ts
+│  │  │  │  ├─ infrastructure
+│  │  │  │  └─ presentation
+│  │  │  ├─ commercial
+│  │  │  │  ├─ application
+│  │  │  │  ├─ domain
+│  │  │  │  │  ├─ commercial-values.ts
+│  │  │  │  │  ├─ contacto-entrante.ts
+│  │  │  │  │  ├─ empresa.ts
+│  │  │  │  │  ├─ lead.ts
+│  │  │  │  │  ├─ sucursal.ts
+│  │  │  │  │  └─ suscriptor.ts
+│  │  │  │  ├─ infrastructure
+│  │  │  │  └─ presentation
+│  │  │  ├─ content-management-system
+│  │  │  │  ├─ application
+│  │  │  │  ├─ domain
+│  │  │  │  │  ├─ cms-values.ts
+│  │  │  │  │  ├─ configuracion-sitio.ts
+│  │  │  │  │  ├─ contenido-registro.ts
+│  │  │  │  │  ├─ contenido-seccion.ts
+│  │  │  │  │  ├─ footer-elemento.ts
+│  │  │  │  │  ├─ menu-item.ts
+│  │  │  │  │  ├─ menu.ts
+│  │  │  │  │  ├─ metadata-seccion.ts
+│  │  │  │  │  ├─ paso-wizard.ts
+│  │  │  │  │  ├─ registro-cms.ts
+│  │  │  │  │  └─ tipo-seccion.ts
+│  │  │  │  ├─ infrastructure
+│  │  │  │  └─ presentation
+│  │  │  └─ identity-access-management
+│  │  │     ├─ application
+│  │  │     │  ├─ fecha-cambio.ts
+│  │  │     │  ├─ ports
+│  │  │     │  │  ├─ consulta-autorizacion.ts
+│  │  │     │  │  ├─ reloj.ts
+│  │  │     │  │  ├─ repositorio-perfiles.ts
+│  │  │     │  │  ├─ repositorio-permisos.ts
+│  │  │     │  │  ├─ repositorio-roles.ts
+│  │  │     │  │  └─ repositorio-usuarios.ts
+│  │  │     │  ├─ tests
+│  │  │     │  │  └─ iam-casos.test.ts
+│  │  │     │  └─ use-cases
+│  │  │     │     ├─ activar-rol.ts
+│  │  │     │     ├─ asignar-permiso-rol.ts
+│  │  │     │     ├─ asignar-rol-usuario.ts
+│  │  │     │     ├─ crear-rol.ts
+│  │  │     │     ├─ editar-rol.ts
+│  │  │     │     ├─ eliminar-rol.ts
+│  │  │     │     ├─ exigir-permiso.ts
+│  │  │     │     ├─ inactivar-rol.ts
+│  │  │     │     ├─ listar-permisos.ts
+│  │  │     │     ├─ listar-roles.ts
+│  │  │     │     ├─ listar-usuarios.ts
+│  │  │     │     ├─ obtener-permiso.ts
+│  │  │     │     ├─ obtener-rol.ts
+│  │  │     │     ├─ obtener-usuario.ts
+│  │  │     │     ├─ retirar-permiso-rol.ts
+│  │  │     │     └─ retirar-rol-usuario.ts
+│  │  │     ├─ domain
+│  │  │     │  ├─ evento-auditoria.ts
+│  │  │     │  ├─ iam-values.ts
+│  │  │     │  ├─ perfil.ts
+│  │  │     │  ├─ permiso.ts
+│  │  │     │  ├─ rol-permiso.ts
+│  │  │     │  ├─ rol.ts
+│  │  │     │  ├─ sesion.ts
+│  │  │     │  ├─ usuario-rol.ts
+│  │  │     │  └─ usuario.ts
+│  │  │     ├─ infrastructure
+│  │  │     │  ├─ exigir-permiso-en-transaccion.ts
+│  │  │     │  ├─ mappers
+│  │  │     │  │  ├─ perfil.ts
+│  │  │     │  │  ├─ permiso.ts
+│  │  │     │  │  ├─ rol.ts
+│  │  │     │  │  └─ usuario.ts
+│  │  │     │  ├─ prisma-autorizacion.ts
+│  │  │     │  ├─ prisma-iam-client.ts
+│  │  │     │  ├─ prisma-perfiles.ts
+│  │  │     │  ├─ prisma-permisos.ts
+│  │  │     │  ├─ prisma-roles.ts
+│  │  │     │  ├─ prisma-usuarios.ts
+│  │  │     │  ├─ reloj-sistema.ts
+│  │  │     │  └─ tests
+│  │  │     │     └─ prisma-perfiles.test.ts
+│  │  │     └─ presentation
+│  │  ├─ generated
+│  │  ├─ main.ts
+│  │  └─ shared
+│  │     └─ domain
+│  │        └─ value-objects.ts
+│  └─ frontend
+│     ├─ App.css
+│     ├─ App.tsx
+│     ├─ assets
+│     │  ├─ hero.png
+│     │  ├─ react.svg
+│     │  └─ vite.svg
+│     ├─ features
+│     │  ├─ catalog-management
+│     │  ├─ commercial
+│     │  ├─ content-management-system
+│     │  └─ identity-access-management
+│     ├─ index.css
+│     ├─ main.tsx
+│     └─ shared
 ├─ tsconfig.app.json
+├─ tsconfig.backend.json
 ├─ tsconfig.json
 ├─ tsconfig.node.json
 └─ vite.config.ts

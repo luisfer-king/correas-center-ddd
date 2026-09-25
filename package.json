@@ -4,8 +4,14 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
+    "dev:frontend": "vite",
+    "dev:backend": "node --watch --import tsx src/backend/main.ts",
+    "typecheck": "tsc -b && tsc -p tsconfig.backend.json",
+    "build": "pnpm typecheck && vite build",
+    "db:validate": "prisma validate",
+    "db:migrate": "prisma migrate dev",
+    "db:generate": "prisma generate",
+    "db:seed": "prisma db seed",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -17,6 +23,7 @@
     "argon2": "^0.45.1",
     "dotenv": "^18.0.3",
     "fastify": "^5.12.5",
+    "jose": "^6.2.12",
     "pg": "^8.23.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"

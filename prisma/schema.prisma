@@ -1,0 +1,666 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/backend/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  schemas  = ["auth", "public"]
+}
+
+enum Estado {
+  activo
+  inactivo
+  eliminado
+
+  @@map("enum_estado")
+  @@schema("public")
+}
+
+enum EstadoAsignacion {
+  activo
+  inactivo
+
+  @@map("enum_estado_asignacion")
+  @@schema("public")
+}
+
+enum EstadoContacto {
+  nuevo
+  respondido
+  archivado
+
+  @@map("enum_estado_contacto")
+  @@schema("public")
+}
+
+enum EstadoSuscriptor {
+  activo
+  inactivo
+  desuscrito
+
+  @@map("enum_estado_suscriptor")
+  @@schema("public")
+}
+
+// Los valores con tilde requieren @map. Ver nota de Prisma v7 en README.
+enum AccionAuditoria {
+  Lectura
+  Creacion    @map("Creación")
+  Edicion     @map("Edición")
+  Eliminacion @map("Eliminación")
+
+  @@map("enum_accion_auditoria")
+  @@schema("public")
+}
+
+enum EstadoLead {
+  nuevo
+  calificado
+  descartado
+
+  @@map("enum_estado_lead")
+  @@schema("public")
+}
+
+model Usuario {
+  id                String   @id @default(uuid()) @db.Uuid
+  email             String?  @unique @db.VarChar
+  encryptedPassword String?  @map("encrypted_password") @db.VarChar
+  relPerfil         Perfil?
+  relSesion         Sesion[]
+
+  @@map("users")
+  @@schema("auth")
+}
+
+model Empresa {
+  id                    BigInt               @id @default(autoincrement())
+  nombre                String               @db.VarChar
+  logo                  String?              @db.VarChar
+  estado                Estado               @default(activo)
+  eliminadoEn           DateTime?            @map("eliminado_en") @db.Timestamptz(6)
+  creadoEn              DateTime             @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn         DateTime             @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  relSucursal           Sucursal[]
+  relProducto           Producto[]
+  relIndustria          Industria[]
+  relServicio           Servicio[]
+  relContenidoSeccion   ContenidoSeccion[]
+  relContenidoRegistro  ContenidoRegistro[]
+  relMenu               Menu[]
+  relFooterElemento     FooterElemento[]
+  relPasoWizard         PasoWizard[]
+  relContactoEntrante   ContactoEntrante[]
+  relSuscriptor         Suscriptor[]
+  relConfiguracionSitio ConfiguracionSitio[]
+  relLead               Lead[]
+
+  @@map("empresas")
+  @@schema("public")
+}
+
+model Sucursal {
+  id             BigInt    @id @default(autoincrement())
+  empresaId      BigInt    @map("empresa_id")
+  nombre         String    @db.VarChar
+  direccion      String    @db.VarChar
+  telefono       String    @db.VarChar
+  email          String?   @db.VarChar
+  horarios       String?   @db.VarChar
+  mapaIncrustado String?   @map("mapa_incrustado") @db.Text
+  latitud        Decimal?  @db.Decimal
+  longitud       Decimal?  @db.Decimal
+  esPrincipal    Boolean   @default(false) @map("es_principal")
+  orden          Int       @default(0)
+  estado         Estado    @default(activo)
+  eliminadoEn    DateTime? @map("eliminado_en") @db.Timestamptz(6)
+  creadoEn       DateTime  @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn  DateTime  @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  empresa        Empresa   @relation(fields: [empresaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([empresaId, estado, orden])
+  @@map("sucursales")
+  @@schema("public")
+}
+
+model Producto {
+  id               BigInt          @id @default(autoincrement())
+  empresaId        BigInt          @map("empresa_id")
+  nombre           String          @db.VarChar
+  slug             String          @unique @db.VarChar
+  imagen           String?         @db.VarChar
+  orden            Int             @default(0)
+  estado           Estado          @default(activo)
+  eliminadoEn      DateTime?       @map("eliminado_en") @db.Timestamptz(6)
+  creadoEn         DateTime        @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn    DateTime        @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  empresa          Empresa         @relation(fields: [empresaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  relCategoria     Categoria[]
+  relProductoMarca ProductoMarca[]
+
+  @@index([empresaId, estado, orden])
+  @@map("productos")
+  @@schema("public")
+}
+
+model Categoria {
+  id                   BigInt              @id @default(autoincrement())
+  productoId           BigInt              @map("producto_id")
+  nombre               String              @db.VarChar
+  slug                 String              @unique @db.VarChar
+  imagen               String?             @db.VarChar
+  descripcion          String?             @db.Text
+  descripcionCorta     String?             @map("descripcion_corta") @db.Text
+  uso                  String?             @db.VarChar
+  orden                Int                 @default(0)
+  estado               Estado              @default(activo)
+  eliminadoEn          DateTime?           @map("eliminado_en") @db.Timestamptz(6)
+  creadoEn             DateTime            @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn        DateTime            @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  producto             Producto            @relation(fields: [productoId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  relCategoriaAtributo CategoriaAtributo[]
+
+  @@index([productoId, estado, orden])
+  @@map("categorias")
+  @@schema("public")
+}
+
+model Marca {
+  id               BigInt          @id @default(autoincrement())
+  nombre           String          @db.VarChar
+  slug             String          @unique @db.VarChar
+  logo             String?         @db.VarChar
+  orden            Int             @default(0)
+  estado           Estado          @default(activo)
+  eliminadoEn      DateTime?       @map("eliminado_en") @db.Timestamptz(6)
+  creadoEn         DateTime        @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn    DateTime        @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  relProductoMarca ProductoMarca[]
+
+  @@map("marcas")
+  @@schema("public")
+}
+
+model ProductoMarca {
+  id            BigInt   @id @default(autoincrement())
+  productoId    BigInt   @map("producto_id")
+  marcaId       BigInt   @map("marca_id")
+  estado        Estado   @default(activo)
+  creadoEn      DateTime @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn DateTime @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  orden         Int?
+  producto      Producto @relation(fields: [productoId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  marca         Marca    @relation(fields: [marcaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([productoId, estado, orden])
+  @@map("producto_marca")
+  @@schema("public")
+}
+
+model TipoAtributo {
+  id                   BigInt            @id @default(autoincrement())
+  nombre               String            @unique @db.VarChar
+  slug                 String            @unique @db.VarChar
+  descripcion          String?           @db.Text
+  permiteDescripcion   Boolean           @default(false) @map("permite_descripcion")
+  permiteValorNumerico Boolean           @default(false) @map("permite_valor_numerico")
+  permiteUnidadMedida  Boolean           @default(false) @map("permite_unidad_medida")
+  icono                String?           @db.VarChar
+  orden                Int               @default(0)
+  estado               Estado            @default(activo)
+  eliminadoEn          DateTime?         @map("eliminado_en") @db.Timestamptz(6)
+  creadoEn             DateTime          @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn        DateTime          @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  relAtributoTecnico   AtributoTecnico[]
+
+  @@map("tipo_atributo")
+  @@schema("public")
+}
+
+model AtributoTecnico {
+  id                   BigInt              @id @default(autoincrement())
+  tipoAtributoId       BigInt              @map("tipo_atributo_id")
+  nombre               String              @db.VarChar
+  descripcion          String?             @db.Text
+  valorNumerico        Decimal?            @map("valor_numerico") @db.Decimal
+  unidadMedida         String?             @map("unidad_medida") @db.VarChar
+  orden                Int                 @default(0)
+  estado               Estado              @default(activo)
+  eliminadoEn          DateTime?           @map("eliminado_en") @db.Timestamptz(6)
+  creadoEn             DateTime            @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn        DateTime            @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  tipoAtributo         TipoAtributo        @relation(fields: [tipoAtributoId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  relCategoriaAtributo CategoriaAtributo[]
+
+  @@index([tipoAtributoId, estado])
+  @@map("atributos_tecnico")
+  @@schema("public")
+}
+
+model CategoriaAtributo {
+  id                 BigInt          @id @default(autoincrement())
+  categoriaId        BigInt          @map("categoria_id")
+  atributoId         BigInt          @map("atributo_id")
+  valorPersonalizado Decimal?        @map("valor_personalizado") @db.Decimal
+  orden              Int             @default(0)
+  estado             Estado          @default(activo)
+  creadoEn           DateTime        @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn      DateTime        @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  categoria          Categoria       @relation(fields: [categoriaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  atributoTecnico    AtributoTecnico @relation(fields: [atributoId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([categoriaId, estado, orden])
+  @@map("categoria_atributo")
+  @@schema("public")
+}
+
+model Industria {
+  id                     BigInt                @id @default(autoincrement())
+  empresaId              BigInt                @map("empresa_id")
+  nombre                 String                @db.VarChar
+  slug                   String                @unique @db.VarChar
+  imagen                 String?               @db.VarChar
+  orden                  Int                   @default(0)
+  estado                 Estado                @default(activo)
+  eliminadoEn            DateTime?             @map("eliminado_en") @db.Timestamptz(6)
+  creadoEn               DateTime              @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn          DateTime              @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  empresa                Empresa               @relation(fields: [empresaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  relIndustriaAsignacion IndustriaAsignacion[]
+
+  @@index([empresaId, estado, orden])
+  @@map("industrias")
+  @@schema("public")
+}
+
+model Servicio {
+  id            BigInt    @id @default(autoincrement())
+  empresaId     BigInt    @map("empresa_id")
+  nombre        String    @db.VarChar
+  descripcion   String?   @db.Text
+  imagen        String?   @db.VarChar
+  orden         Int       @default(0)
+  estado        Estado    @default(activo)
+  eliminadoEn   DateTime? @map("eliminado_en") @db.Timestamptz(6)
+  creadoEn      DateTime  @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn DateTime  @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  empresa       Empresa   @relation(fields: [empresaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([empresaId, estado, orden])
+  @@map("servicios")
+  @@schema("public")
+}
+
+model IndustriaAsignacion {
+  id            BigInt    @id @default(autoincrement())
+  industriaId   BigInt    @map("industria_id")
+  tipoRegistro  String    @map("tipo_registro") @db.VarChar
+  registroId    BigInt    @map("registro_id")
+  orden         Int       @default(0)
+  estado        Estado    @default(activo)
+  creadoEn      DateTime  @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn DateTime  @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  industria     Industria @relation(fields: [industriaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([industriaId, estado, orden])
+  @@map("industria_asignacion")
+  @@schema("public")
+}
+
+model TipoSeccion {
+  id                  BigInt             @id @default(autoincrement())
+  nombre              String             @unique @db.VarChar
+  slug                String             @unique @db.VarChar
+  descripcion         String?            @db.Text
+  camposMetadata      Json               @default("[]") @map("campos_metadata")
+  icono               String?            @db.VarChar
+  orden               Int                @default(0)
+  estado              Estado             @default(activo)
+  eliminadoEn         DateTime?          @map("eliminado_en") @db.Timestamptz(6)
+  creadoEn            DateTime           @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn       DateTime           @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  relContenidoSeccion ContenidoSeccion[]
+
+  @@map("tipo_seccion")
+  @@schema("public")
+}
+
+model ContenidoSeccion {
+  id            BigInt      @id @default(autoincrement())
+  empresaId     BigInt      @map("empresa_id")
+  tipoSeccionId BigInt      @map("tipo_seccion_id")
+  titulo        String?     @db.VarChar
+  subtitulo     String?     @db.VarChar
+  descripcion   String?     @db.Text
+  icono         String?     @db.VarChar
+  imagen        String?     @db.VarChar
+  metadata      Json        @default("{}")
+  orden         Int         @default(0)
+  mostrar       Boolean     @default(true)
+  estado        Estado      @default(activo)
+  eliminadoEn   DateTime?   @map("eliminado_en") @db.Timestamptz(6)
+  creadoEn      DateTime    @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn DateTime    @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  empresa       Empresa     @relation(fields: [empresaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  tipoSeccion   TipoSeccion @relation(fields: [tipoSeccionId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([empresaId, tipoSeccionId, estado, mostrar, orden])
+  @@map("contenido_seccion")
+  @@schema("public")
+}
+
+model RegistroCMS {
+  id                   BigInt              @id @default(autoincrement())
+  identificador        String              @unique @db.VarChar
+  nombre               String              @db.VarChar
+  descripcion          String?             @db.Text
+  orden                Int                 @default(0)
+  estado               Estado              @default(activo)
+  eliminadoEn          DateTime?           @map("eliminado_en") @db.Timestamptz(6)
+  creadoEn             DateTime            @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn        DateTime            @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  relContenidoRegistro ContenidoRegistro[]
+
+  @@map("registros")
+  @@schema("public")
+}
+
+model ContenidoRegistro {
+  id            BigInt      @id @default(autoincrement())
+  empresaId     BigInt      @map("empresa_id")
+  registroId    BigInt      @map("registro_id")
+  titulo        String?     @db.VarChar
+  subtitulo     String?     @db.VarChar
+  descripcion   String?     @db.Text
+  icono         String?     @db.VarChar
+  stats         String?     @db.VarChar
+  orden         Int         @default(0)
+  estado        Estado      @default(activo)
+  eliminadoEn   DateTime?   @map("eliminado_en") @db.Timestamptz(6)
+  creadoEn      DateTime    @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn DateTime    @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  empresa       Empresa     @relation(fields: [empresaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  registro      RegistroCMS @relation(fields: [registroId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([empresaId, registroId, estado, orden])
+  @@map("registro_contenido")
+  @@schema("public")
+}
+
+model Menu {
+  id            BigInt     @id @default(autoincrement())
+  empresaId     BigInt     @map("empresa_id")
+  grupo         String     @db.VarChar
+  tipoRegistro  String     @map("tipo_registro") @db.VarChar
+  registroId    BigInt     @map("registro_id")
+  ruta          String     @db.VarChar
+  icono         String?    @db.VarChar
+  mostrar       Boolean    @default(true)
+  orden         Int        @default(0)
+  estado        Estado     @default(activo)
+  eliminadoEn   DateTime?  @map("eliminado_en") @db.Timestamptz(6)
+  creadoEn      DateTime   @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn DateTime   @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  cargarSubmenu String?    @default("activo") @map("cargar_submenu") @db.Text
+  empresa       Empresa    @relation(fields: [empresaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  relMenuItem   MenuItem[]
+
+  @@index([empresaId, estado, mostrar, orden])
+  @@map("menus")
+  @@schema("public")
+}
+
+model MenuItem {
+  id            BigInt    @id @default(autoincrement())
+  menuId        BigInt    @map("menu_id")
+  ruta          String    @db.VarChar
+  orden         Int       @default(0)
+  estado        Estado    @default(activo)
+  eliminadoEn   DateTime? @map("eliminado_en") @db.Timestamptz(6)
+  creadoEn      DateTime  @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn DateTime  @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  menu          Menu      @relation(fields: [menuId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([menuId, estado, orden])
+  @@map("menu_item")
+  @@schema("public")
+}
+
+model FooterElemento {
+  id            BigInt    @id @default(autoincrement())
+  empresaId     BigInt    @map("empresa_id")
+  tipo          String    @db.VarChar
+  tipoRegistro  String?   @map("tipo_registro") @db.VarChar
+  registroId    BigInt?   @map("registro_id")
+  titulo        String?   @db.VarChar
+  url           String?   @db.VarChar
+  icono         String?   @db.VarChar
+  orden         Int       @default(0)
+  mostrar       Boolean   @default(true)
+  estado        Estado    @default(activo)
+  eliminadoEn   DateTime? @map("eliminado_en") @db.Timestamptz(6)
+  creadoEn      DateTime  @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn DateTime  @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  empresa       Empresa   @relation(fields: [empresaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([empresaId, estado, mostrar, orden])
+  @@map("footers")
+  @@schema("public")
+}
+
+model PasoWizard {
+  id            BigInt    @id @default(autoincrement())
+  empresaId     BigInt    @map("empresa_id")
+  identificador String    @db.VarChar
+  titulo        String    @db.VarChar
+  descripcion   String    @db.VarChar
+  fuenteDatos   String    @map("fuente_datos") @db.VarChar
+  campoFiltro   String?   @map("campo_filtro") @db.VarChar
+  orden         Int       @default(0)
+  estado        Estado    @default(activo)
+  eliminadoEn   DateTime? @map("eliminado_en") @db.Timestamptz(6)
+  creadoEn      DateTime  @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn DateTime  @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  empresa       Empresa   @relation(fields: [empresaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([empresaId, estado, orden])
+  @@map("pasos_wizard")
+  @@schema("public")
+}
+
+model ContactoEntrante {
+  id                 BigInt         @id @default(autoincrement())
+  empresaId          BigInt         @map("empresa_id")
+  nombre             String         @db.VarChar
+  empresaDeclarada   String?        @map("empresa") @db.VarChar
+  telefono           String         @db.VarChar
+  email              String         @db.VarChar
+  mensaje            String         @db.Text
+  estado             EstadoContacto @default(nuevo)
+  eliminadoEn        DateTime?      @map("eliminado_en") @db.Timestamptz(6)
+  creadoEn           DateTime       @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn      DateTime       @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  empresaPropietaria Empresa        @relation(fields: [empresaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  relLead            Lead?
+
+  @@index([empresaId, estado, creadoEn])
+  @@map("contactos")
+  @@schema("public")
+}
+
+model Suscriptor {
+  id                BigInt           @id @default(autoincrement())
+  email             String           @unique @db.VarChar
+  nombre            String?          @db.VarChar
+  estado            EstadoSuscriptor @default(activo)
+  emailVerificadoEn DateTime?        @map("email_verificado_en") @db.Timestamptz(6)
+  eliminadoEn       DateTime?        @map("eliminado_en") @db.Timestamptz(6)
+  creadoEn          DateTime         @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn     DateTime         @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  empresaId         BigInt           @map("empresa_id")
+  empresa           Empresa          @relation(fields: [empresaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([empresaId, estado])
+  @@map("suscriptores")
+  @@schema("public")
+}
+
+model Perfil {
+  id                 String            @id @db.Uuid
+  nombreCompleto     String            @map("nombre_completo") @db.VarChar
+  telefono           String?           @db.VarChar
+  avatarUrl          String?           @map("avatar_url") @db.VarChar
+  estado             Estado            @default(activo)
+  eliminadoEn        DateTime?         @map("eliminado_en") @db.Timestamptz(6)
+  creadoEn           DateTime          @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn      DateTime          @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  email              String?           @db.VarChar
+  emailVerifiedAt    DateTime?         @map("email_verified_at") @db.Timestamptz(6)
+  usuario            Usuario           @relation(fields: [id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  relUsuarioRol      UsuarioRol[]
+  relEventoAuditoria EventoAuditoria[]
+  relLeadResponsable Lead[]
+
+  @@map("perfiles")
+  @@schema("public")
+}
+
+model Rol {
+  id            BigInt       @id @default(autoincrement())
+  nombre        String       @unique @db.VarChar
+  slug          String       @unique @db.VarChar
+  descripcion   String?      @db.Text
+  esSistema     Boolean      @default(false) @map("es_sistema")
+  estado        Estado       @default(activo)
+  eliminadoEn   DateTime?    @map("eliminado_en") @db.Timestamptz(6)
+  creadoEn      DateTime     @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn DateTime     @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  relRolPermiso RolPermiso[]
+  relUsuarioRol UsuarioRol[]
+
+  @@map("roles")
+  @@schema("public")
+}
+
+model Permiso {
+  id            BigInt       @id @default(autoincrement())
+  nombre        String       @unique @db.VarChar
+  slug          String       @unique @db.VarChar
+  grupo         String       @db.VarChar
+  descripcion   String?      @db.Text
+  estado        Estado       @default(activo)
+  eliminadoEn   DateTime?    @map("eliminado_en") @db.Timestamptz(6)
+  creadoEn      DateTime     @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn DateTime     @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  relRolPermiso RolPermiso[]
+
+  @@map("permisos")
+  @@schema("public")
+}
+
+model RolPermiso {
+  rolId     BigInt   @map("rol_id")
+  permisoId BigInt   @map("permiso_id")
+  creadoEn  DateTime @default(now()) @map("creado_en") @db.Timestamptz(6)
+  estado    EstadoAsignacion @default(activo)
+  rol       Rol      @relation(fields: [rolId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  permiso   Permiso  @relation(fields: [permisoId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([rolId, permisoId])
+  @@index([permisoId])
+  @@map("rol_permiso")
+  @@schema("public")
+}
+
+model UsuarioRol {
+  usuarioId String   @map("usuario_id") @db.Uuid
+  rolId     BigInt   @map("rol_id")
+  creadoEn  DateTime @default(now()) @map("creado_en") @db.Timestamptz(6)
+  estado    EstadoAsignacion @default(activo)
+  perfil    Perfil   @relation(fields: [usuarioId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  rol       Rol      @relation(fields: [rolId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([usuarioId, rolId])
+  @@index([rolId])
+  @@map("usuario_rol")
+  @@schema("public")
+}
+
+model EventoAuditoria {
+  id              BigInt          @id @default(autoincrement())
+  usuarioId       String?         @map("usuario_id") @db.Uuid
+  accion          AccionAuditoria
+  tablaAfectada   String          @map("tabla_afectada") @db.VarChar
+  registroId      String?         @map("registro_id") @db.VarChar
+  datosAnteriores Json?           @map("datos_anteriores")
+  datosNuevos     Json?           @map("datos_nuevos")
+  ipAddress       String?         @map("ip_address") @db.VarChar
+  userAgent       String?         @map("user_agent") @db.Text
+  metadata        Json?           @default("{}")
+  creadoEn        DateTime        @default(now()) @map("creado_en") @db.Timestamptz(6)
+  perfil          Perfil?         @relation(fields: [usuarioId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("auditoria")
+  @@schema("public")
+}
+
+model ConfiguracionSitio {
+  id            Int       @id @default(autoincrement())
+  empresaId     BigInt?   @map("empresa_id")
+  clave         String    @db.VarChar
+  valor         String?   @db.Text
+  tipo          String?   @default("texto") @db.VarChar
+  descripcion   String?   @db.Text
+  grupo         String?   @db.VarChar
+  activo        Boolean?  @default(true)
+  creadoEn      DateTime? @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn DateTime? @default(now()) @map("actualizado_en") @db.Timestamptz(6)
+  empresa       Empresa?  @relation(fields: [empresaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("configuracion_sitio")
+  @@schema("public")
+}
+
+// Tabla local nueva. Solo se almacena una huella opaca del token, nunca el JWT.
+model Sesion {
+  id            String    @id @default(uuid()) @db.Uuid
+  usuarioId     String    @map("usuario_id") @db.Uuid
+  huellaToken   String    @unique @map("huella_token") @db.VarChar(64)
+  expiraEn      DateTime  @map("expira_en") @db.Timestamptz(6)
+  revocadaEn    DateTime? @map("revocada_en") @db.Timestamptz(6)
+  estado        Estado    @default(activo)
+  creadoEn      DateTime  @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn DateTime  @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  eliminadoEn   DateTime? @map("eliminado_en") @db.Timestamptz(6)
+  usuario       Usuario   @relation(fields: [usuarioId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([usuarioId, estado, expiraEn])
+  @@map("sesiones")
+  @@schema("public")
+}
+
+// Tabla local nueva: propuesta de identidad UUID y estados del dominio CRM.
+model Lead {
+  id            String            @id @default(uuid()) @db.Uuid
+  empresaId     BigInt            @map("empresa_id")
+  contactoId    BigInt?           @unique @map("contacto_id")
+  responsableId String?           @map("responsable_id") @db.Uuid
+  estado        EstadoLead        @default(nuevo)
+  creadoEn      DateTime          @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn DateTime          @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  eliminadoEn   DateTime?         @map("eliminado_en") @db.Timestamptz(6)
+  empresa       Empresa           @relation(fields: [empresaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  contacto      ContactoEntrante? @relation(fields: [contactoId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  responsable   Perfil?           @relation(fields: [responsableId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([empresaId, estado])
+  @@index([responsableId, estado])
+  @@map("leads")
+  @@schema("public")
+}
