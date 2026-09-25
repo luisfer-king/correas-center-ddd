@@ -1,4 +1,5 @@
 export type EstadoIAM = 'activo' | 'inactivo' | 'eliminado'
+export type EstadoAsignacion = 'activo' | 'inactivo'
 export type AccionAuditoria = 'Lectura' | 'Creación' | 'Edición' | 'Eliminación'
 export type Json = null | boolean | number | string | Json[] | { [key: string]: Json }
 
@@ -18,6 +19,20 @@ export function texto(value: string, nombre: string): string {
     const limpio = value.trim()
     if (!limpio) throw new Error(nombre + ' no puede estar vacío')
     return limpio
+}
+
+// Código de autorización estable: contexto.recurso.acción.
+// Es distinto del Slug compartido usado para rutas y nombres de roles.
+export class CodigoPermiso {
+    private constructor(readonly value: string) { }
+    static create(input: string): CodigoPermiso {
+        const value = input.trim().toLowerCase()
+        if (!/^[a-z][a-z0-9_]*(?:\.[a-z][a-z0-9_]*)+$/.test(value)) {
+            throw new Error('Código de permiso inválido')
+        }
+        return new CodigoPermiso(value)
+    }
+    equals(other: CodigoPermiso): boolean { return this.value === other.value }
 }
 
 export function fecha(value: Date): Date {

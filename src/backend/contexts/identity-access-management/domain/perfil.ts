@@ -36,7 +36,8 @@ export class Perfil extends RegistroIAM {
     get avatarUrl(): string | null { return this._avatarUrl }
     get email(): Email | null { return this._email }
     get emailVerifiedAt(): Date | null { return this._emailVerifiedAt ? fecha(this._emailVerifiedAt) : null }
-    get rolesAsignados(): readonly UsuarioRol[] { return [...this.roles.values()] }
+    get rolesAsignados(): readonly UsuarioRol[] { return [...this.roles.values()].filter((v) => v.estado === 'activo') }
+    get asignacionesRoles(): readonly UsuarioRol[] { return [...this.roles.values()] }
     renombrar(nombre: string, cuando: Date): void {
         const nuevo = texto(nombre, 'Nombre completo')
         this.tocar(cuando)
@@ -60,13 +61,16 @@ export class Perfil extends RegistroIAM {
     asignarRol(rolId: bigint, cuando: Date): void {
         if (this.estado !== 'activo') throw new Error('Perfil no activo')
         idPositivo(rolId)
-        if (this.roles.has(rolId)) throw new Error('El perfil ya tiene el rol')
+        const asignacion = this.roles.get(rolId)
+        if (asignacion?.estado === 'activo') throw new Error('El perfil ya tiene el rol')
         this.tocar(cuando)
-        this.roles.set(rolId, new UsuarioRol(this.id, rolId, cuando))
+        if (asignacion) asignacion.activar()
+        else this.roles.set(rolId, new UsuarioRol(this.id, rolId, cuando))
     }
     retirarRol(rolId: bigint, cuando: Date): void {
-        if (!this.roles.has(rolId)) throw new Error('El perfil no tiene el rol')
+        const asignacion = this.roles.get(rolId)
+        if (!asignacion || asignacion.estado !== 'activo') throw new Error('El perfil no tiene el rol')
         this.tocar(cuando)
-        this.roles.delete(rolId)
+        asignacion.inactivar()
     }
 }

@@ -12,7 +12,7 @@ export class Slug {
     private constructor(readonly value: string) { }
     static create(input: string): Slug {
         const value = input.trim().toLowerCase()
-        if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value)) throw new Error('Slug inválido')
+        if (!/^[a-z0-9]+(?:[-_][a-z0-9]+)*$/.test(value)) throw new Error('Slug inválido')
         return new Slug(value)
     }
     equals(other: Slug): boolean { return this.value === other.value }

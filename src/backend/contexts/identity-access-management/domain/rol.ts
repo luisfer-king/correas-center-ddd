@@ -31,7 +31,8 @@ export class Rol extends RegistroIAM {
     }
     get nombre(): string { return this._nombre }
     get descripcion(): string | null { return this._descripcion }
-    get permisosAsignados(): readonly RolPermiso[] { return [...this.permisos.values()] }
+    get permisosAsignados(): readonly RolPermiso[] { return [...this.permisos.values()].filter((v) => v.estado === 'activo') }
+    get asignacionesPermisos(): readonly RolPermiso[] { return [...this.permisos.values()] }
     editar(nombre: string, descripcion: string | null, cuando: Date): void {
         const nuevo = texto(nombre, 'Nombre de rol')
         this.tocar(cuando)
@@ -41,14 +42,17 @@ export class Rol extends RegistroIAM {
     asignarPermiso(permisoId: bigint, cuando: Date): void {
         if (this.estado !== 'activo') throw new Error('Rol no activo')
         idPositivo(permisoId)
-        if (this.permisos.has(permisoId)) throw new Error('Permiso ya asignado')
+        const asignacion = this.permisos.get(permisoId)
+        if (asignacion?.estado === 'activo') throw new Error('Permiso ya asignado')
         this.tocar(cuando)
-        this.permisos.set(permisoId, new RolPermiso(this.id, permisoId, cuando))
+        if (asignacion) asignacion.activar()
+        else this.permisos.set(permisoId, new RolPermiso(this.id, permisoId, cuando))
     }
     retirarPermiso(permisoId: bigint, cuando: Date): void {
-        if (!this.permisos.has(permisoId)) throw new Error('Permiso no asignado')
+        const asignacion = this.permisos.get(permisoId)
+        if (!asignacion || asignacion.estado !== 'activo') throw new Error('Permiso no asignado')
         this.tocar(cuando)
-        this.permisos.delete(permisoId)
+        asignacion.inactivar()
     }
     override inactivar(cuando: Date): void {
         if (this.esSistema) throw new Error('Rol del sistema protegido')
