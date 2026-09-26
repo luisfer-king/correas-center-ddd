@@ -7,9 +7,11 @@ import { RolPermiso } from '../../domain/rol-permiso.js'
 import { Rol } from '../../domain/rol.js'
 import type { RepositorioPermisos } from '../ports/repositorio-permisos.js'
 import type { RepositorioRoles } from '../ports/repositorio-roles.js'
+import { ActivarRol } from '../use-cases/activar-rol.js'
 import { AsignarPermisoRol } from '../use-cases/asignar-permiso-rol.js'
 import { EliminarRol } from '../use-cases/eliminar-rol.js'
 import { ExigirPermiso } from '../use-cases/exigir-permiso.js'
+import { InactivarRol } from '../use-cases/inactivar-rol.js'
 import { ListarRoles } from '../use-cases/listar-roles.js'
 import { ObtenerCapacidadesRoles } from '../use-cases/obtener-capacidades-roles.js'
 import { ObtenerRol } from '../use-cases/obtener-rol.js'
@@ -97,6 +99,36 @@ test('el rol del sistema no puede eliminarse, incluso si el actor tiene permiso 
         .ejecutar(actorId, 1n), /Rol del sistema protegido/)
     assert.equal(escrituras, 0)
     assert.equal(protegido.estado, 'activo')
+})
+
+test('inactivar y reactivar conserva vínculos; eliminado no puede reactivarse', async () => {
+    const editable = rol(false)
+    const asignacion = editable.asignacionesPermisos[0]
+    let guardados = 0
+    const repositorio = {
+        buscarPorId: async () => editable,
+        guardar: async () => { guardados++ },
+    } as unknown as RepositorioRoles
+    const autorizar = acceso('iam.roles.update', 'iam.roles.delete')
+    await new InactivarRol(repositorio, autorizar, reloj).ejecutar(actorId, 1n)
+    assert.equal(editable.estado, 'inactivo')
+    assert.equal(editable.asignacionesPermisos[0], asignacion)
+    await new ActivarRol(repositorio, autorizar, reloj).ejecutar(actorId, 1n)
+    assert.equal(editable.estado, 'activo')
+    assert.equal(editable.asignacionesPermisos[0], asignacion)
+    await new EliminarRol(repositorio, autorizar, reloj).ejecutar(actorId, 1n)
+    assert.equal(editable.estado, 'eliminado')
+    await assert.rejects(new ActivarRol(repositorio, autorizar, reloj).ejecutar(actorId, 1n), /eliminado|inactivo/i)
+    assert.equal(guardados, 3)
+})
+
+test('el rol de sistema no puede inactivarse', async () => {
+    const sistema = rol(true)
+    let guardados = 0
+    const repositorio = { buscarPorId: async () => sistema, guardar: async () => { guardados++ } } as unknown as RepositorioRoles
+    await assert.rejects(new InactivarRol(repositorio, acceso('iam.roles.update'), reloj)
+        .ejecutar(actorId, 1n), /Rol del sistema protegido/)
+    assert.equal(guardados, 0)
 })
 
 test('retirar y reasignar un permiso reutiliza la fila y requiere autorización vigente', async () => {

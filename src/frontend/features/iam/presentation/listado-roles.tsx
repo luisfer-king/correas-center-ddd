@@ -6,17 +6,19 @@ import type { CapacidadesRoles, EstadoRol, RolIam } from '../api/tipos-iam'
 import { EstadoRolEtiqueta } from './datos-rol'
 import { ModalBajaRol } from './modal-baja-rol'
 import { ModalDetalleRol } from './modal-detalle-rol'
+import { ModalEstadoRol } from './modal-estado-rol'
 import { ModalFormularioRol } from './modal-formulario-rol'
 import { ModalPermisosRol } from './modal-permisos-rol'
 
 type Consulta = { tipo: 'cargando' } | { tipo: 'lista'; roles: RolIam[] } | { tipo: 'sin-permiso' | 'error' }
-type Modal = { tipo: 'crear' } | { tipo: 'detalle' | 'editar' | 'permisos' | 'baja'; rol: RolIam }
+type Modal = { tipo: 'crear' } | { tipo: 'detalle' | 'editar' | 'permisos' | 'baja' | 'activar' | 'inactivar'; rol: RolIam }
 
 export function ListadoRoles() {
     const [consulta, setConsulta] = useState<Consulta>({ tipo: 'cargando' })
     const [capacidades, setCapacidades] = useState<CapacidadesRoles | null>(null)
     const [modal, setModal] = useState<Modal | null>(null)
     const [errorDetalle, setErrorDetalle] = useState('')
+    const [mensaje, setMensaje] = useState('')
     const [busqueda, setBusqueda] = useState('')
     const [filtro, setFiltro] = useState<EstadoRol | 'todos'>('todos')
     const [revision, setRevision] = useState(0)
@@ -78,6 +80,11 @@ export function ListadoRoles() {
                 ? actual.roles.map((r) => r.id === rol.id ? rol : r) : [...actual.roles, rol],
         })
     }
+    function confirmadoEstado(accion: 'activar' | 'inactivar' | 'eliminar') {
+        cerrarModal()
+        setMensaje(accion === 'activar' ? 'Rol reactivado.' : accion === 'inactivar' ? 'Rol inactivado.' : 'Rol dado de baja.')
+        setRevision((n) => n + 1)
+    }
 
     return <main className="w-full px-6 py-10 sm:px-10">
         <div className="flex flex-wrap items-end justify-between gap-4">
@@ -92,6 +99,7 @@ export function ListadoRoles() {
             </div>
         </div>
         {errorDetalle && <p role="alert" className="mt-6 rounded-md bg-red-50 p-4 text-red-800">{errorDetalle}</p>}
+        {mensaje && <p role="status" className="mt-6 rounded-md bg-green-50 p-4 text-green-800">{mensaje}</p>}
         {consulta.tipo === 'cargando' && <p role="status" className="mt-8">Cargando roles…</p>}
         {consulta.tipo === 'sin-permiso' && <p role="alert" className="mt-8 rounded-md bg-amber-50 p-5 text-amber-900">Tu cuenta no tiene permiso para consultar roles.</p>}
         {consulta.tipo === 'error' && <p role="alert" className="mt-8 rounded-md bg-red-50 p-5 text-red-800">No se pudieron cargar los roles. Revisa la conexión y pulsa «Actualizar listado».</p>}
@@ -131,6 +139,10 @@ export function ListadoRoles() {
                                 <button type="button" onClick={() => navegar(`/portal/roles/${rol.id}`)} className="font-semibold text-red-700 underline">Ver detalle</button>
                                 {capacidades?.editarRol && !rol.esSistema && rol.estado !== 'eliminado' &&
                                     <button type="button" onClick={() => setModal({ tipo: 'editar', rol })} className="font-semibold text-red-700 underline">Editar</button>}
+                                {capacidades?.editarRol && !rol.esSistema && rol.estado === 'activo' &&
+                                    <button type="button" onClick={() => setModal({ tipo: 'inactivar', rol })} className="font-semibold text-red-700 underline">Inactivar</button>}
+                                {capacidades?.editarRol && !rol.esSistema && rol.estado === 'inactivo' &&
+                                    <button type="button" onClick={() => setModal({ tipo: 'activar', rol })} className="font-semibold text-red-700 underline">Reactivar</button>}
                                 {capacidades?.eliminarRol && !rol.esSistema && rol.estado !== 'eliminado' &&
                                     <button type="button" onClick={() => setModal({ tipo: 'baja', rol })} className="font-semibold text-red-700 underline">Dar de baja</button>}
                             </div></td>
@@ -144,6 +156,8 @@ export function ListadoRoles() {
         {modal?.tipo === 'permisos' && capacidades && <ModalPermisosRol rol={modal.rol} capacidades={capacidades}
             actualizado={actualizarFila} cerrar={cerrarModal} />}
         {modal?.tipo === 'baja' && <ModalBajaRol rol={modal.rol} cerrar={cerrarModal}
-            eliminado={() => { cerrarModal(); setRevision((n) => n + 1) }} />}
+            eliminado={() => confirmadoEstado('eliminar')} />}
+        {(modal?.tipo === 'activar' || modal?.tipo === 'inactivar') && <ModalEstadoRol rol={modal.rol} accion={modal.tipo}
+            cerrar={cerrarModal} confirmado={() => confirmadoEstado(modal.tipo as 'activar' | 'inactivar')} />}
     </main>
 }
