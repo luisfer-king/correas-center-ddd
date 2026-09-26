@@ -154,3 +154,28 @@ test('retirar y reasignar un permiso reutiliza la fila y requiere autorización 
     assert.equal(editable.asignacionesPermisos[0], fila)
     assert.equal(escrituras, 2)
 })
+
+test('no asigna un permiso inactivo ni retira vínculos del rol del sistema', async () => {
+    const editable = rol(false)
+    const sistema = rol(true)
+    let escrituras = 0
+    const repositorio = {
+        buscarPorId: async (id: bigint) => id === 1n ? editable : sistema,
+        guardar: async () => { escrituras++ },
+    } as unknown as RepositorioRoles
+    const permisoInactivo = new Permiso({
+        id: 3n, nombre: 'Inactivo', slug: CodigoPermiso.create('iam.inactivo.read'),
+        grupo: 'iam', descripcion: null, estado: 'inactivo',
+        fechas: { creadoEn: t0, actualizadoEn: t0, eliminadoEn: null },
+    })
+    const permisos = { buscarPorId: async () => permisoInactivo } as unknown as RepositorioPermisos
+    const autorizar = acceso('iam.roles.permisos.assign')
+    await assert.rejects(new AsignarPermisoRol(repositorio, permisos, autorizar, reloj)
+        .ejecutar(actorId, 1n, 3n), /no disponible/)
+    await assert.rejects(new RetirarPermisoRol({
+        buscarPorId: async () => sistema, guardar: async () => { escrituras++ },
+    } as unknown as RepositorioRoles, autorizar, reloj).ejecutar(actorId, 1n, 2n), /rol del sistema/)
+    assert.equal(escrituras, 0)
+    assert.equal(editable.asignacionesPermisos.length, 1)
+    assert.equal(sistema.permisosAsignados.length, 1)
+})
