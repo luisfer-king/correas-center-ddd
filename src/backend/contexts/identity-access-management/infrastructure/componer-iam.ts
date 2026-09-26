@@ -1,5 +1,6 @@
 import type { PrismaClient } from '../../../generated/prisma/client.js'
 import { ActivarRol } from '../application/use-cases/activar-rol.js'
+import { AdministrarUsuarios } from '../application/use-cases/administrar-usuarios.js'
 import { AsignarPermisoRol } from '../application/use-cases/asignar-permiso-rol.js'
 import { AsignarRolUsuario } from '../application/use-cases/asignar-rol-usuario.js'
 import { CerrarSesion } from '../application/use-cases/cerrar-sesion.js'
@@ -23,6 +24,7 @@ import { RetirarPermisoRol } from '../application/use-cases/retirar-permiso-rol.
 import { RetirarRolUsuario } from '../application/use-cases/retirar-rol-usuario.js'
 import { Argon2Verificador } from './argon2-verificador.js'
 import { JoseTokens } from './jose-tokens.js'
+import { PrismaAdministracionUsuarios } from './prisma-administracion-usuarios.js'
 import { PrismaAuditoria } from './prisma-auditoria.js'
 import { PrismaAutorizacion } from './prisma-autorizacion.js'
 import { PrismaPerfiles } from './prisma-perfiles.js'
@@ -37,6 +39,8 @@ import { UuidSeguro } from './uuid-seguro.js'
 export function componerIam(db: PrismaClient, secret: string, issuer: string, audience: string) {
     const usuarios = new PrismaUsuarios(db)
     const perfiles = new PrismaPerfiles(db)
+    const administracionUsuarios = new AdministrarUsuarios(perfiles, new PrismaAdministracionUsuarios(db),
+        new ExigirPermiso(new PrismaAutorizacion(db)))
     const roles = new PrismaRoles(db)
     const permisos = new PrismaPermisos(db)
     const sesiones = new PrismaSesiones(db)
@@ -59,6 +63,7 @@ export function componerIam(db: PrismaClient, secret: string, issuer: string, au
         retirarPermiso: new RetirarPermisoRol(roles, autorizar, reloj),
         listarPermisos: new ListarPermisos(permisos, autorizar), obtenerPermiso: new ObtenerPermiso(permisos, autorizar),
         listarUsuarios: new ListarUsuarios(perfiles, autorizar), obtenerUsuario: new ObtenerUsuario(perfiles, autorizar),
+        administrarUsuarios: administracionUsuarios,
         asignarRol: new AsignarRolUsuario(perfiles, roles, autorizar, reloj),
         retirarRol: new RetirarRolUsuario(perfiles, autorizar, reloj),
         listarAuditoria: new ListarAuditoria(auditoria, autorizar),

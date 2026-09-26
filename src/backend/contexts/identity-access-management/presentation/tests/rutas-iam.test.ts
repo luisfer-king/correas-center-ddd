@@ -46,5 +46,8 @@ test('IAM HTTP: sin cookie devuelve 401, origen ajeno 403, sin filtrar contrase√
         assert.ok(especificacion.paths['/api/portal/iam/roles']?.get)
         assert.ok(especificacion.paths['/api/iam/sesion']?.post)
         assert.ok(especificacion.paths['/api/portal/iam/auditoria']?.get)
+        assert.ok(especificacion.paths['/api/portal/iam/usuarios']?.post)
+        assert.ok(especificacion.paths['/api/portal/iam/usuarios/{id}']?.patch)
+        assert.ok(especificacion.paths['/api/portal/iam/usuarios/{id}/eliminar']?.patch)
     } finally { await app.close() }
 })

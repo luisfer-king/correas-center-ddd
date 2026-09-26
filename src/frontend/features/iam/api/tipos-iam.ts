@@ -12,6 +12,9 @@ export interface CapacidadesRoles {
     gestionarPermisos: boolean
     leerPermisos: boolean
     leerUsuarios: boolean
+    crearUsuario: boolean
+    editarUsuario: boolean
+    eliminarUsuario: boolean
     gestionarRolesUsuarios: boolean
     leerAuditoria: boolean
 }

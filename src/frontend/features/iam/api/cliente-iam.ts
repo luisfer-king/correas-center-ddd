@@ -38,6 +38,12 @@ export const iamApi = {
     listarUsuarios: (opciones?: Senal) => solicitarApi<UsuarioIam[]>(`${base}/usuarios`, opciones),
     obtenerUsuario: (uid: string, opciones?: Senal) =>
         solicitarApi<UsuarioIam>(`${base}/usuarios/${usuarioId(uid)}`, opciones),
+    crearUsuario: (datos: { nombreCompleto: string; email: string; telefono: string | null; password: string }) =>
+        solicitarApi<UsuarioIam>(`${base}/usuarios`, { metodo: 'POST', cuerpo: datos }),
+    editarUsuario: (uid: string, datos: { nombreCompleto: string; email: string; telefono: string | null }) =>
+        solicitarApi<UsuarioIam>(`${base}/usuarios/${usuarioId(uid)}`, { metodo: 'PATCH', cuerpo: datos }),
+    cambiarEstadoUsuario: (uid: string, accion: 'activar' | 'inactivar' | 'eliminar') =>
+        solicitarApi<Ok>(`${base}/usuarios/${usuarioId(uid)}/${accion}`, { metodo: 'PATCH' }),
     asignarRol: (uid: string, rolId: IdIam) =>
         solicitarApi<Ok>(`${base}/usuarios/${usuarioId(uid)}/roles/${id(rolId)}`, { metodo: 'PUT' }),
     retirarRol: (uid: string, rolId: IdIam) =>

@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { ErrorApi } from '../../../shared/api/cliente-http'
 import { iamApi } from '../api/cliente-iam'
 import type { CapacidadesRoles, UsuarioIam } from '../api/tipos-iam'
+import { ModalFormularioUsuario } from './modal-formulario-usuario'
 import { ModalRolesUsuario } from './modal-roles-usuario'
 
 type Consulta = { tipo: 'cargando' } | { tipo: 'lista'; usuarios: UsuarioIam[] } | { tipo: 'sin-permiso' | 'error' }
@@ -15,6 +16,10 @@ export function ListadoUsuarios() {
     const [busqueda, setBusqueda] = useState('')
     const [filtro, setFiltro] = useState<'todos' | 'activo' | 'inactivo' | 'eliminado'>('todos')
     const [revision, setRevision] = useState(0)
+    const [formulario, setFormulario] = useState<UsuarioIam | 'nuevo' | null>(null)
+    const [cambioEstado, setCambioEstado] = useState<{ usuario: UsuarioIam; accion: 'activar' | 'inactivar' | 'eliminar' } | null>(null)
+    const [procesando, setProcesando] = useState(false)
+    const [errorAccion, setErrorAccion] = useState('')
     const { id } = useParams<{ id: string }>()
     const navegar = useNavigate()
 
@@ -62,6 +67,33 @@ export function ListadoUsuarios() {
             tipo: 'lista', usuarios: previo.usuarios.map((item) => item.id === usuario.id ? usuario : item),
         })
     }
+    function guardado(usuario: UsuarioIam) {
+        setFormulario(null)
+        setErrorAccion('')
+        setConsulta((previo) => previo.tipo !== 'lista' ? previo : {
+            tipo: 'lista',
+            usuarios: previo.usuarios.some((item) => item.id === usuario.id)
+                ? previo.usuarios.map((item) => item.id === usuario.id ? usuario : item)
+                : [...previo.usuarios, usuario]
+        })
+        setRevision((n) => n + 1)
+    }
+    async function confirmarCambio() {
+        if (!cambioEstado || procesando) return
+        setProcesando(true)
+        setErrorAccion('')
+        try {
+            await iamApi.cambiarEstadoUsuario(cambioEstado.usuario.id, cambioEstado.accion)
+            setCambioEstado(null)
+            setRevision((n) => n + 1)
+        } catch (fallo) {
+            setErrorAccion(fallo instanceof ErrorApi && fallo.estado === 409
+                ? 'El usuario cambió o esta acción dejaría al sistema sin superadministrador. Actualiza el listado.'
+                : fallo instanceof ErrorApi && fallo.estado === 403 ? 'No tienes permiso para cambiar el estado.'
+                    : 'No se pudo cambiar el estado. Inténtalo nuevamente.')
+            setCambioEstado(null)
+        } finally { setProcesando(false) }
+    }
     function cerrarModal() { setDetalle(null); navegar('/portal/usuarios', { replace: true }) }
     const texto = busqueda.trim().toLocaleLowerCase('es')
     const visibles = consulta.tipo === 'lista' ? consulta.usuarios.filter((usuario) =>
@@ -74,9 +106,14 @@ export function ListadoUsuarios() {
             <div><p className="text-sm font-semibold uppercase tracking-widest text-red-700">Identidad y acceso</p>
                 <h1 className="mt-2 text-3xl font-semibold">Usuarios</h1>
                 <p className="mt-2 text-neutral-600">Consulta perfiles y administra sus roles según tus permisos.</p></div>
-            <button type="button" onClick={() => setRevision((n) => n + 1)}
-                className="rounded-md border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold">Actualizar listado</button>
+            <div className="flex flex-wrap gap-2">
+                {capacidades?.crearUsuario && <button type="button" onClick={() => setFormulario('nuevo')}
+                    className="rounded-md bg-red-700 px-4 py-2 text-sm font-semibold text-white">Crear usuario</button>}
+                <button type="button" onClick={() => setRevision((n) => n + 1)}
+                    className="rounded-md border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold">Actualizar listado</button>
+            </div>
         </div>
+        {errorAccion && <p role="alert" className="mt-6 rounded-md bg-red-50 p-4 text-red-800">{errorAccion}</p>}
         {errorDetalle && <p role="alert" className="mt-6 rounded-md bg-red-50 p-4 text-red-800">{errorDetalle}</p>}
         {consulta.tipo === 'cargando' && <p role="status" className="mt-8">Cargando usuarios…</p>}
         {consulta.tipo === 'sin-permiso' && <p role="alert" className="mt-8 rounded-md bg-amber-50 p-5 text-amber-900">Tu cuenta no tiene permiso para consultar usuarios.</p>}
@@ -111,13 +148,37 @@ export function ListadoUsuarios() {
                             <td className="break-all px-5 py-4">{usuario.email ?? 'Sin correo'}</td>
                             <td className="px-5 py-4">{usuario.estado}</td>
                             <td className="px-5 py-4">{usuario.roles.filter((r) => r.estado === 'activo').length}</td>
-                            <td className="px-5 py-4"><button type="button" onClick={() => navegar(`/portal/usuarios/${usuario.id}`)}
-                                className="font-semibold text-red-700 underline">Ver detalle y roles</button></td>
+                            <td className="px-5 py-4"><div className="flex flex-wrap gap-x-4 gap-y-2">
+                                <button type="button" onClick={() => navegar(`/portal/usuarios/${usuario.id}`)}
+                                    className="font-semibold text-red-700 underline">Ver detalle y roles</button>
+                                {capacidades?.editarUsuario && usuario.estado !== 'eliminado' && <button type="button"
+                                    onClick={() => setFormulario(usuario)} className="font-semibold underline">Editar</button>}
+                                {capacidades?.editarUsuario && usuario.estado === 'activo' && <button type="button"
+                                    onClick={() => setCambioEstado({ usuario, accion: 'inactivar' })} className="font-semibold underline">Inactivar</button>}
+                                {capacidades?.editarUsuario && usuario.estado === 'inactivo' && <button type="button"
+                                    onClick={() => setCambioEstado({ usuario, accion: 'activar' })} className="font-semibold underline">Activar</button>}
+                                {capacidades?.eliminarUsuario && usuario.estado !== 'eliminado' && <button type="button"
+                                    onClick={() => setCambioEstado({ usuario, accion: 'eliminar' })} className="font-semibold text-red-700 underline">Dar de baja</button>}
+                            </div></td>
                         </tr>)}</tbody>
                     </table>
                 </div>}
         </>}
         {id && detalle?.id === id && <ModalRolesUsuario key={id} usuario={detalle} capacidades={capacidades}
             cerrar={cerrarModal} actualizado={actualizarFila} />}
+        {formulario && <ModalFormularioUsuario key={formulario === 'nuevo' ? 'nuevo' : formulario.id}
+            usuario={formulario === 'nuevo' ? undefined : formulario} cerrar={() => setFormulario(null)} guardado={guardado} />}
+        {cambioEstado && <div role="presentation" className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
+            <div role="dialog" aria-modal="true" aria-labelledby="confirmar-estado-usuario" className="w-full max-w-md rounded-lg bg-white p-6 text-neutral-900 shadow-xl">
+                <h2 id="confirmar-estado-usuario" className="text-xl font-semibold">Confirmar cambio de estado</h2>
+                <p className="mt-3">¿{cambioEstado.accion === 'eliminar' ? 'Dar de baja' : cambioEstado.accion === 'inactivar' ? 'Inactivar' : 'Activar'} a {cambioEstado.usuario.nombreCompleto}?</p>
+                {cambioEstado.accion !== 'activar' && <p className="mt-2 text-sm">Se cerrarán sus sesiones activas. La baja lógica no permite reactivar la cuenta.</p>}
+                <div className="mt-6 flex justify-end gap-3">
+                    <button type="button" disabled={procesando} onClick={() => setCambioEstado(null)} className="rounded-md border px-4 py-2">Cancelar</button>
+                    <button type="button" disabled={procesando} onClick={() => void confirmarCambio()}
+                        className="rounded-md bg-red-700 px-4 py-2 font-semibold text-white disabled:opacity-60">{procesando ? 'Guardando…' : 'Confirmar'}</button>
+                </div>
+            </div>
+        </div>}
     </main>
 }

@@ -10,7 +10,8 @@ export function registrarErroresIam(app: FastifyInstance) {
             return reply.code(401).send({ error: msg })
         }
         if (msg === 'Acceso denegado') return reply.code(403).send({ error: msg })
-        if (['Slug inválido', 'Nombre de rol no puede estar vacío', 'UUID inválido',
+        if (['Slug inválido', 'Nombre de rol no puede estar vacío', 'Nombre completo no puede estar vacío',
+            'Contraseña inicial inválida', 'Email inválido', 'UUID inválido',
             'Rango de fechas inválido',
             'ID inválido'].includes(msg)) return reply.code(400).send({ error: 'Solicitud inválida' })
         if (['Rol no encontrado', 'Permiso no encontrado', 'Usuario no encontrado', 'Perfil no encontrado',
@@ -27,7 +28,8 @@ export function registrarErroresIam(app: FastifyInstance) {
             'No se puede asignar un permiso inexistente o inactivo',
             'No se puede asignar un rol inexistente o inactivo',
             'Rol no activo', 'Perfil no activo', 'Permiso ya asignado', 'Permiso no asignado',
-            'El perfil ya tiene el rol', 'El perfil no tiene el rol'].includes(msg) ||
+            'El perfil ya tiene el rol', 'El perfil no tiene el rol', 'Estado de usuario incompatible',
+            'No puedes dar de baja tu propia cuenta'].includes(msg) ||
             (error as { code?: string }).code === 'P2002') {
             return reply.code(409).send({ error: 'Operación en conflicto con el estado actual' })
         }
