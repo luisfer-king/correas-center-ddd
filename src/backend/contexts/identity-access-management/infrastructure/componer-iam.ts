@@ -18,6 +18,7 @@ import { ObtenerCapacidadesRoles } from '../application/use-cases/obtener-capaci
 import { ObtenerPermiso } from '../application/use-cases/obtener-permiso.js'
 import { ObtenerRol } from '../application/use-cases/obtener-rol.js'
 import { ObtenerUsuario } from '../application/use-cases/obtener-usuario.js'
+import { RegistrarLecturaIam } from '../application/use-cases/registrar-lectura-iam.js'
 import { RetirarPermisoRol } from '../application/use-cases/retirar-permiso-rol.js'
 import { RetirarRolUsuario } from '../application/use-cases/retirar-rol-usuario.js'
 import { Argon2Verificador } from './argon2-verificador.js'
@@ -39,6 +40,7 @@ export function componerIam(db: PrismaClient, secret: string, issuer: string, au
     const roles = new PrismaRoles(db)
     const permisos = new PrismaPermisos(db)
     const sesiones = new PrismaSesiones(db)
+    const auditoria = new PrismaAuditoria(db)
     const reloj = new RelojSistema()
     const autorizar = new ExigirPermiso(new PrismaAutorizacion(db))
     const comprobar = new ComprobarSesion(new JoseTokens(secret, issuer, audience), sesiones,
@@ -59,7 +61,8 @@ export function componerIam(db: PrismaClient, secret: string, issuer: string, au
         listarUsuarios: new ListarUsuarios(perfiles, autorizar), obtenerUsuario: new ObtenerUsuario(perfiles, autorizar),
         asignarRol: new AsignarRolUsuario(perfiles, roles, autorizar, reloj),
         retirarRol: new RetirarRolUsuario(perfiles, autorizar, reloj),
-        listarAuditoria: new ListarAuditoria(new PrismaAuditoria(db), autorizar),
+        listarAuditoria: new ListarAuditoria(auditoria, autorizar),
+        registrarLectura: new RegistrarLecturaIam(auditoria, reloj),
     }
 }
 

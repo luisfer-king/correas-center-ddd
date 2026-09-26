@@ -42,9 +42,11 @@ export const iamApi = {
         solicitarApi<Ok>(`${base}/usuarios/${usuarioId(uid)}/roles/${id(rolId)}`, { metodo: 'PUT' }),
     retirarRol: (uid: string, rolId: IdIam) =>
         solicitarApi<Ok>(`${base}/usuarios/${usuarioId(uid)}/roles/${id(rolId)}/retirar`, { metodo: 'PATCH' }),
-    listarAuditoria: (limite = 50, antesDeId?: IdIam, opciones?: Senal) => {
+    listarAuditoria: (limite = 50, antesDeId?: IdIam, opciones?: Senal & { desde?: string; hasta?: string }) => {
         const query = new URLSearchParams({ limite: String(limite) })
         if (antesDeId) query.set('antesDeId', id(antesDeId))
+        if (opciones?.desde) query.set('desde', opciones.desde)
+        if (opciones?.hasta) query.set('hasta', opciones.hasta)
         return solicitarApi<EventoAuditoriaIam[]>(`${base}/auditoria?${query}`, opciones)
     },
 }

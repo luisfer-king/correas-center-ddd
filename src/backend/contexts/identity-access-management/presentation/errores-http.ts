@@ -11,6 +11,7 @@ export function registrarErroresIam(app: FastifyInstance) {
         }
         if (msg === 'Acceso denegado') return reply.code(403).send({ error: msg })
         if (['Slug inválido', 'Nombre de rol no puede estar vacío', 'UUID inválido',
+            'Rango de fechas inválido',
             'ID inválido'].includes(msg)) return reply.code(400).send({ error: 'Solicitud inválida' })
         if (['Rol no encontrado', 'Permiso no encontrado', 'Usuario no encontrado', 'Perfil no encontrado',
             'Rol o permiso no disponible', 'Usuario o rol no disponible'].includes(msg)) {

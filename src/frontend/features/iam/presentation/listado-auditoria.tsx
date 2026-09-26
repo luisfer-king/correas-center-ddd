@@ -2,10 +2,16 @@ import { useEffect, useState } from 'react'
 import { ErrorApi } from '../../../shared/api/cliente-http'
 import { iamApi } from '../api/cliente-iam'
 import type { EventoAuditoriaIam } from '../api/tipos-iam'
+import { csvAuditoria } from './exportar-auditoria-csv'
 import { ModalPortal } from './modal-portal'
 
 const TAMANO_PAGINA = 25
 const fecha = (valor: string | null) => valor ? new Date(valor).toLocaleString('es-BO') : 'Sin registro'
+function limiteDia(dia: string, siguiente = false): string | undefined {
+    if (!dia) return undefined
+    const [anio, mes, numero] = dia.split('-').map(Number)
+    return new Date(anio, mes - 1, numero + Number(siguiente)).toISOString()
+}
 type Consulta = { tipo: 'cargando' } | { tipo: 'lista'; eventos: EventoAuditoriaIam[]; siguiente: string | null }
     | { tipo: 'sin-permiso' | 'error' }
 
@@ -43,11 +49,16 @@ export function ListadoAuditoria() {
     const [detalle, setDetalle] = useState<EventoAuditoriaIam | null>(null)
     const [busqueda, setBusqueda] = useState('')
     const [accion, setAccion] = useState('todas')
+    const [desde, setDesde] = useState('')
+    const [hasta, setHasta] = useState('')
+    const [rango, setRango] = useState<{ desde?: string; hasta?: string }>({})
+    const [errorFechas, setErrorFechas] = useState('')
 
     useEffect(() => {
         const controlador = new AbortController()
         setConsulta({ tipo: 'cargando' })
-        void iamApi.listarAuditoria(TAMANO_PAGINA + 1, cursores[pagina], { signal: controlador.signal })
+        void iamApi.listarAuditoria(TAMANO_PAGINA + 1, cursores[pagina],
+            { signal: controlador.signal, ...rango })
             .then((datos) => {
                 if (controlador.signal.aborted) return
                 const eventos = datos.slice(0, TAMANO_PAGINA)
@@ -68,6 +79,30 @@ export function ListadoAuditoria() {
         setPagina(0)
         setCursores([undefined])
         setRevision((n) => n + 1)
+    }
+    function aplicarFechas() {
+        if (desde && hasta && desde > hasta) {
+            setErrorFechas('La fecha inicial debe ser anterior o igual a la final.')
+            return
+        }
+        setErrorFechas('')
+        setDetalle(null)
+        setPagina(0)
+        setCursores([undefined])
+        setRango({ desde: limiteDia(desde), hasta: limiteDia(hasta, true) })
+        setRevision((n) => n + 1)
+    }
+    function descargarVisibles() {
+        if (visibles.length === 0) return
+        const contenido = csvAuditoria(visibles)
+        const url = URL.createObjectURL(new Blob([contenido], { type: 'text/csv;charset=utf-8' }))
+        const enlace = document.createElement('a')
+        enlace.href = url
+        enlace.download = `auditoria-iam-pagina-${pagina + 1}.csv`
+        document.body.append(enlace)
+        enlace.click()
+        enlace.remove()
+        window.setTimeout(() => URL.revokeObjectURL(url), 0)
     }
     function siguiente() {
         if (consulta.tipo !== 'lista' || !consulta.siguiente) return
@@ -102,7 +137,23 @@ export function ListadoAuditoria() {
         {consulta.tipo === 'error' && pagina > 0 && <button type="button" onClick={() => setPagina((n) => n - 1)}
             className="mt-4 rounded-md border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold">Volver a la página anterior</button>}
         {consulta.tipo === 'lista' && <>
-            <div className="mt-8 flex flex-wrap gap-4 rounded-lg border border-neutral-200 bg-white p-5">
+            <form onSubmit={(e) => { e.preventDefault(); aplicarFechas() }}
+                className="mt-8 flex flex-wrap items-end gap-4 rounded-lg border border-neutral-200 bg-white p-5">
+                <label className="text-sm font-medium">Desde
+                    <input type="date" value={desde} onChange={(e) => setDesde(e.target.value)}
+                        className="mt-2 block rounded-md border border-neutral-300 px-3 py-2" />
+                </label>
+                <label className="text-sm font-medium">Hasta (incluido)
+                    <input type="date" value={hasta} onChange={(e) => setHasta(e.target.value)}
+                        className="mt-2 block rounded-md border border-neutral-300 px-3 py-2" />
+                </label>
+                <button type="submit" className="rounded-md bg-red-700 px-4 py-2 text-sm font-semibold text-white">Aplicar fechas</button>
+                <button type="button" onClick={() => { setDesde(''); setHasta(''); setErrorFechas(''); setRango({}); actualizar() }}
+                    className="rounded-md border border-neutral-300 px-4 py-2 text-sm font-semibold">Quitar fechas</button>
+                {errorFechas && <p role="alert" className="w-full text-sm text-red-800">{errorFechas}</p>}
+            </form>
+            <p className="mt-2 text-sm text-neutral-600">El rango se aplica a todas las páginas antes de paginar. La fecha final incluye el día completo en tu zona horaria.</p>
+            <div className="mt-5 flex flex-wrap gap-4 rounded-lg border border-neutral-200 bg-white p-5">
                 <label className="min-w-52 flex-1 text-sm font-medium">Buscar en esta página
                     <input type="search" value={busqueda} onChange={(e) => setBusqueda(e.target.value)}
                         placeholder="Actor, tabla, registro u operación"
@@ -118,6 +169,11 @@ export function ListadoAuditoria() {
                 </label>
             </div>
             <p role="status" className="mt-4 text-sm text-neutral-600">Página {pagina + 1} · {visibles.length} de {consulta.eventos.length} eventos en esta página.</p>
+            <button type="button" disabled={visibles.length === 0} onClick={descargarVisibles}
+                className="mt-3 rounded-md border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold disabled:opacity-50">
+                Exportar filas visibles a CSV
+            </button>
+            <p className="mt-2 text-xs text-neutral-600">El CSV se abre en Excel e incluye solo las filas visibles de esta página, tras aplicar búsqueda y acción.</p>
             {visibles.length === 0 ? <p className="mt-6 rounded-lg border border-neutral-200 bg-white p-6">
                 {consulta.eventos.length === 0 ? 'No hay eventos registrados en esta página.' : 'No hay eventos que coincidan con estos filtros en esta página.'}
             </p> : <div className="mt-4 overflow-x-auto rounded-lg border border-neutral-200 bg-white">

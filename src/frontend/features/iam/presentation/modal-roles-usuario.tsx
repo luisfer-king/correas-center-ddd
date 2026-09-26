@@ -27,8 +27,9 @@ export function ModalRolesUsuario({ usuario, capacidades, cerrar, actualizado }:
     useEffect(() => {
         if (!capacidades?.leerRoles) return
         const controlador = new AbortController()
+        setCargando(true)
         void iamApi.listarRoles({ signal: controlador.signal }).then((datos) => {
-            if (!controlador.signal.aborted) setRoles(datos)
+            if (!controlador.signal.aborted) setRoles(datos.filter((rol) => rol.estado === 'activo'))
         }).catch((fallo: unknown) => {
             if (!controlador.signal.aborted) setError(fallo instanceof ErrorApi && fallo.estado === 403
                 ? 'No tienes permiso para consultar el catálogo de roles.' : 'No se pudo cargar el catálogo de roles. Pulsa «Actualizar datos» para reintentar.')
@@ -44,7 +45,7 @@ export function ModalRolesUsuario({ usuario, capacidades, cerrar, actualizado }:
             setActual(nuevo)
             actualizado(nuevo)
             if (capacidades?.leerRoles) {
-                try { setRoles(await iamApi.listarRoles()) }
+                try { setRoles((await iamApi.listarRoles()).filter((rol) => rol.estado === 'activo')) }
                 catch (fallo) { setRoles(null); throw fallo }
             }
             setDatosPendientes(false)
@@ -96,15 +97,13 @@ export function ModalRolesUsuario({ usuario, capacidades, cerrar, actualizado }:
         const asignado = relaciones.get(rol.id) === 'activo'
         return (!termino || [rol.nombre, rol.slug, rol.id].some((v) => v.toLocaleLowerCase('es').includes(termino))) &&
             (filtro === 'todos' || (filtro === 'asignados' && asignado) ||
-                (filtro === 'disponibles' && !asignado && rol.estado === 'activo') ||
-                (filtro === 'inactivos' && (rol.estado !== 'activo' || relaciones.get(rol.id) === 'inactivo')))
+                (filtro === 'disponibles' && !asignado) ||
+                (filtro === 'inactivos' && relaciones.get(rol.id) === 'inactivo'))
     }) ?? []
-    const conocidos = new Set(roles?.map((r) => r.id) ?? [])
-    const otros = actual.roles.filter((r) => !conocidos.has(r.rolId))
     const ocupado = guardandoId !== null || recargando
     const accionesDeshabilitadas = ocupado || datosPendientes
     const gestionar = Boolean(capacidades?.gestionarRolesUsuarios)
-    const activos = actual.roles.filter((r) => r.estado === 'activo').length
+    const activos = roles?.filter((rol) => relaciones.get(rol.id) === 'activo').length ?? 0
 
     function accion(rolId: string, asignado: boolean) {
         if (asignado && confirmandoId !== rolId) { setConfirmandoId(rolId); return }
@@ -123,14 +122,15 @@ export function ModalRolesUsuario({ usuario, capacidades, cerrar, actualizado }:
         </dl>
         <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-neutral-200 pt-5">
             <div><h3 className="font-semibold">Roles del usuario</h3>
-                <p className="text-sm text-neutral-600">{activos} vínculos activos · {actual.roles.length - activos} inactivos.</p></div>
+                <p className="text-sm text-neutral-600">{roles ? `${activos} vínculos activos a roles activos.`
+                    : cargando ? 'Cargando roles activos…' : 'Roles activos no disponibles para esta cuenta.'}</p></div>
             <button type="button" disabled={ocupado || cargando} onClick={() => { setError(''); setMensaje(''); void actualizarDatos() }}
                 className="rounded-md border border-neutral-300 px-3 py-2 text-sm font-semibold disabled:opacity-60">
                 {recargando ? 'Actualizando…' : 'Actualizar datos'}
             </button>
         </div>
         {actual.estado !== 'activo' && <p className="mt-3 rounded-md bg-amber-50 p-3 text-sm text-amber-900">El perfil está {actual.estado}; no puede recibir roles ni ejercer los asignados.</p>}
-        {!capacidades?.leerRoles && <p className="mt-3 rounded-md bg-amber-50 p-3 text-sm text-amber-900">Para ver los nombres y códigos de los roles se requiere iam.roles.read; aquí se muestran solo los IDs vinculados.</p>}
+        {!capacidades?.leerRoles && <p className="mt-3 rounded-md bg-amber-50 p-3 text-sm text-amber-900">Para comprobar cuáles roles están activos y mostrar sus vínculos se requiere iam.roles.read.</p>}
         {datosPendientes && <p className="mt-3 text-sm text-neutral-600">Actualiza los datos antes de otra asignación.</p>}
         {cargando && <p role="status" className="mt-3">Cargando roles…</p>}
         {error && <p role="alert" className="mt-3 rounded-md bg-red-50 p-3 text-sm text-red-800">{error}</p>}
@@ -149,16 +149,16 @@ export function ModalRolesUsuario({ usuario, capacidades, cerrar, actualizado }:
                     </select>
                 </label>
             </div>
-            <p role="status" className="mt-3 text-sm text-neutral-600">{visibles.length} de {roles.length} roles del catálogo.</p>
+            <p role="status" className="mt-3 text-sm text-neutral-600">{visibles.length} de {roles.length} roles activos del catálogo. Los roles inactivos o eliminados no se muestran.</p>
             {visibles.length === 0 ? <p className="mt-3 text-sm">No hay roles que coincidan con los filtros.</p> :
                 <ul className="mt-2 divide-y divide-neutral-200">{visibles.map((rol) => {
                     const asignado = relaciones.get(rol.id) === 'activo'
                     return <li key={rol.id} className="flex flex-wrap items-center justify-between gap-3 py-3">
                         <div className="min-w-0"><p className="font-medium">{rol.nombre}</p>
-                            <p className="break-all text-sm text-neutral-600">{rol.slug} · ID {rol.id} · rol {rol.estado}</p>
+                            <p className="break-all text-sm text-neutral-600">{rol.slug} · ID {rol.id}</p>
                             <p className="text-sm">{asignado ? 'Vínculo activo' : relaciones.get(rol.id) === 'inactivo' ? 'Vínculo inactivo' : 'Sin asignar'}</p>
                         </div>
-                        {gestionar && (asignado ? actual.estado !== 'eliminado' : actual.estado === 'activo' && rol.estado === 'activo') &&
+                        {gestionar && (asignado ? actual.estado !== 'eliminado' : actual.estado === 'activo') &&
                             <div className="flex items-center gap-2">
                                 {confirmandoId === rol.id && <button type="button" disabled={ocupado} onClick={() => setConfirmandoId(null)} className="text-sm underline">Cancelar</button>}
                                 <button type="button" disabled={accionesDeshabilitadas} onClick={() => accion(rol.id, asignado)}
@@ -169,17 +169,6 @@ export function ModalRolesUsuario({ usuario, capacidades, cerrar, actualizado }:
                     </li>
                 })}</ul>}
         </>}
-        {otros.length > 0 && <div className="mt-5"><h3 className="font-semibold">Otros vínculos registrados</h3>
-            <ul className="mt-2 divide-y divide-neutral-200">{otros.map((r) => <li key={r.rolId} className="flex flex-wrap items-center justify-between gap-3 py-2 text-sm">
-                <span>Rol ID {r.rolId} · vínculo {r.estado}</span>
-                {gestionar && r.estado === 'activo' && actual.estado !== 'eliminado' && <div className="flex items-center gap-2">
-                    {confirmandoId === r.rolId && <button type="button" disabled={ocupado} onClick={() => setConfirmandoId(null)} className="underline">Cancelar</button>}
-                    <button type="button" disabled={accionesDeshabilitadas} onClick={() => accion(r.rolId, true)}
-                        className="rounded-md border border-neutral-300 px-3 py-2 font-semibold disabled:opacity-60">
-                        {guardandoId === r.rolId ? 'Guardando…' : confirmandoId === r.rolId ? 'Confirmar retiro' : 'Retirar'}
-                    </button></div>}
-            </li>)}</ul>
-        </div>}
         {confirmandoId && <p className="mt-3 text-sm text-amber-900">Confirma el retiro. Si es el último superadministrador activo, el servidor rechazará la operación.</p>}
     </ModalPortal>
 }

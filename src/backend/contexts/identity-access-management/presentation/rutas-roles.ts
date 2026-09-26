@@ -27,13 +27,17 @@ export function rutasRoles(app: FastifyInstance, casos: CasosIam, config: Seguri
         },
     }, async (req, reply) => {
         const id = await actor(req, reply); if (!id) return reply
-        return casos.capacidadesRoles.ejecutar(id)
+        const capacidades = await casos.capacidadesRoles.ejecutar(id)
+        await casos.registrarLectura.ejecutar(id, 'portal')
+        return capacidades
     })
     app.get('/api/portal/iam/roles', {
         schema: { ...base, summary: 'Listar roles', response: { 200: lista(rolSchema), ...errors } },
     }, async (req, reply) => {
         const id = await actor(req, reply); if (!id) return reply
-        return (await casos.listarRoles.ejecutar(id)).map(rolDto)
+        const roles = await casos.listarRoles.ejecutar(id)
+        await casos.registrarLectura.ejecutar(id, 'roles')
+        return roles.map(rolDto)
     })
     app.get<{ Params: Id }>('/api/portal/iam/roles/:id', {
         schema: {
@@ -42,7 +46,9 @@ export function rutasRoles(app: FastifyInstance, casos: CasosIam, config: Seguri
         },
     }, async (req, reply) => {
         const id = await actor(req, reply); if (!id) return reply
-        return rolDto(await casos.obtenerRol.ejecutar(id, BigInt(req.params.id)))
+        const rol = await casos.obtenerRol.ejecutar(id, BigInt(req.params.id))
+        await casos.registrarLectura.ejecutar(id, 'roles', rol.id.toString())
+        return rolDto(rol)
     })
     app.post<{ Body: { nombre: string; slug: string; descripcion: string | null } }>('/api/portal/iam/roles', {
         onRequest: origen,

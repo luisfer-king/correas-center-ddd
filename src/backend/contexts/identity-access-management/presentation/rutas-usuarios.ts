@@ -15,7 +15,9 @@ export function rutasUsuarios(app: FastifyInstance, casos: CasosIam, config: Seg
         schema: { ...base, summary: 'Listar perfiles de usuarios', response: { 200: lista(usuarioSchema), ...errors } },
     }, async (req, reply) => {
         const id = await actor(req, reply); if (!id) return reply
-        return (await casos.listarUsuarios.ejecutar(id)).map(usuarioDto)
+        const usuarios = await casos.listarUsuarios.ejecutar(id)
+        await casos.registrarLectura.ejecutar(id, 'usuarios')
+        return usuarios.map(usuarioDto)
     })
     app.get<{ Params: Id }>('/api/portal/iam/usuarios/:id', {
         schema: {
@@ -24,7 +26,9 @@ export function rutasUsuarios(app: FastifyInstance, casos: CasosIam, config: Seg
         },
     }, async (req, reply) => {
         const id = await actor(req, reply); if (!id) return reply
-        return usuarioDto(await casos.obtenerUsuario.ejecutar(id, req.params.id))
+        const usuario = await casos.obtenerUsuario.ejecutar(id, req.params.id)
+        await casos.registrarLectura.ejecutar(id, 'usuarios', usuario.id)
+        return usuarioDto(usuario)
     })
     app.put<{ Params: Rol }>('/api/portal/iam/usuarios/:id/roles/:rolId', {
         onRequest: origen, schema: {
