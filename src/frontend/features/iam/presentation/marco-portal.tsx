@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import { usarSesion } from './sesion-portal'
+import { usarTemaPortal } from './tema-portal'
 
 const estiloEnlace = ({ isActive }: { isActive: boolean }) =>
     `rounded-md px-3 py-2 text-sm font-medium ${isActive ? 'bg-red-700 text-white' : 'text-neutral-700 hover:bg-neutral-100'}`
 
 export function MarcoPortal() {
     const { cerrar } = usarSesion()
+    const { tema, alternar } = usarTemaPortal()
     const [cerrando, setCerrando] = useState(false)
     const [error, setError] = useState('')
 
@@ -26,6 +28,10 @@ export function MarcoPortal() {
                 <nav aria-label="Navegación del portal" className="flex flex-wrap items-center gap-2">
                     <NavLink to="/portal" end className={estiloEnlace}>Inicio</NavLink>
                     <NavLink to="/portal/roles" className={estiloEnlace}>Roles</NavLink>
+                    <button type="button" onClick={alternar} aria-label={tema === 'oscuro' ? 'Activar tema claro' : 'Activar tema oscuro'}
+                        className="rounded-md border border-neutral-300 px-3 py-2 text-sm font-semibold hover:bg-neutral-100">
+                        {tema === 'oscuro' ? '☀ Tema claro' : '◐ Tema oscuro'}
+                    </button>
                     <button type="button" onClick={() => void salir()} disabled={cerrando}
                         className="rounded-md border border-neutral-300 px-3 py-2 text-sm font-semibold hover:bg-neutral-100 disabled:opacity-60">
                         {cerrando ? 'Saliendo…' : 'Cerrar sesión'}

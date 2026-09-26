@@ -13,6 +13,22 @@ export function rutasRoles(app: FastifyInstance, casos: CasosIam, config: Seguri
     const sesion = exigirSesion(casos, config)
     const actor = (req: FastifyRequest, reply: FastifyReply) => sesion(req, reply)
     const base = { tags: ['IAM · Roles'], security: [{ cookieAuth: [] }], response: errors }
+    app.get('/api/portal/iam/capacidades-roles', {
+        schema: {
+            ...base, summary: 'Capacidades IAM del usuario autenticado para las vistas de roles',
+            response: {
+                200: {
+                    type: 'object', additionalProperties: false,
+                    required: ['verEliminados', 'crearRol', 'editarRol', 'eliminarRol', 'gestionarPermisos', 'leerPermisos'],
+                    properties: Object.fromEntries(['verEliminados', 'crearRol', 'editarRol', 'eliminarRol', 'gestionarPermisos', 'leerPermisos']
+                        .map((clave) => [clave, { type: 'boolean' }]))
+                }, ...errors
+            }
+        },
+    }, async (req, reply) => {
+        const id = await actor(req, reply); if (!id) return reply
+        return casos.capacidadesRoles.ejecutar(id)
+    })
     app.get('/api/portal/iam/roles', {
         schema: { ...base, summary: 'Listar roles', response: { 200: lista(rolSchema), ...errors } },
     }, async (req, reply) => {

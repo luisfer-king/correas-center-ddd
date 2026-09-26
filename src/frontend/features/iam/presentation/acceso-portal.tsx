@@ -2,9 +2,11 @@ import { useState, type FormEvent } from 'react'
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { ErrorApi } from '../../../shared/api/cliente-http'
 import { usarSesion } from './sesion-portal'
+import { usarTemaPortal } from './tema-portal'
 
 export function AccesoPortal() {
     const { estado, iniciar, comprobar } = usarSesion()
+    const { tema, alternar } = usarTemaPortal()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [enviando, setEnviando] = useState(false)
@@ -49,6 +51,9 @@ export function AccesoPortal() {
         </section>
         <section className="flex w-full items-center justify-center px-6 py-12 sm:px-12">
             <div className="w-full max-w-md rounded-xl border border-neutral-200 bg-white p-7 shadow-sm sm:p-10">
+                <button type="button" onClick={alternar} className="float-right text-sm font-medium text-red-700 underline">
+                    {tema === 'oscuro' ? 'Tema claro' : 'Tema oscuro'}
+                </button>
                 <p className="font-bold text-red-700 lg:hidden">Correas Center</p>
                 <h2 className="mt-3 text-3xl font-semibold text-neutral-950">Iniciar sesión</h2>
                 <p className="mt-2 text-sm text-neutral-600">Ingresa con tu cuenta del portal.</p>

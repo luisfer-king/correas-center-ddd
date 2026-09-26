@@ -14,6 +14,7 @@ import { ListarAuditoria } from '../application/use-cases/listar-auditoria.js'
 import { ListarPermisos } from '../application/use-cases/listar-permisos.js'
 import { ListarRoles } from '../application/use-cases/listar-roles.js'
 import { ListarUsuarios } from '../application/use-cases/listar-usuarios.js'
+import { ObtenerCapacidadesRoles } from '../application/use-cases/obtener-capacidades-roles.js'
 import { ObtenerPermiso } from '../application/use-cases/obtener-permiso.js'
 import { ObtenerRol } from '../application/use-cases/obtener-rol.js'
 import { ObtenerUsuario } from '../application/use-cases/obtener-usuario.js'
@@ -48,6 +49,7 @@ export function componerIam(db: PrismaClient, secret: string, issuer: string, au
         comprobar,
         cerrar: new CerrarSesion(comprobar, sesiones, reloj),
         listarRoles: new ListarRoles(roles, autorizar), obtenerRol: new ObtenerRol(roles, autorizar),
+        capacidadesRoles: new ObtenerCapacidadesRoles(autorizar),
         crearRol: new CrearRol(roles, autorizar), editarRol: new EditarRol(roles, autorizar, reloj),
         inactivarRol: new InactivarRol(roles, autorizar, reloj), activarRol: new ActivarRol(roles, autorizar, reloj),
         eliminarRol: new EliminarRol(roles, autorizar, reloj),

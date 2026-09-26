@@ -1,5 +1,5 @@
 import { solicitarApi } from '../../../shared/api/cliente-http'
-import type { EventoAuditoriaIam, IdIam, PermisoIam, RolIam, UsuarioIam } from './tipos-iam'
+import type { CapacidadesRoles, EventoAuditoriaIam, IdIam, PermisoIam, RolIam, UsuarioIam } from './tipos-iam'
 
 const base = '/api/portal/iam'
 const id = (valor: IdIam) => {
@@ -16,6 +16,8 @@ export const iamApi = {
     comprobarSesion: (opciones?: Senal) =>
         solicitarApi<{ usuarioId: string }>('/api/iam/sesion', opciones),
     cerrarSesion: () => solicitarApi<void>('/api/iam/sesion/cerrar', { metodo: 'POST' }),
+
+    capacidadesRoles: (opciones?: Senal) => solicitarApi<CapacidadesRoles>(`${base}/capacidades-roles`, opciones),
 
     listarRoles: (opciones?: Senal) => solicitarApi<RolIam[]>(`${base}/roles`, opciones),
     obtenerRol: (rolId: IdIam, opciones?: Senal) => solicitarApi<RolIam>(`${base}/roles/${id(rolId)}`, opciones),

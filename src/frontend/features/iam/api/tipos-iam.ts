@@ -2,6 +2,14 @@
 export type IdIam = string
 export type EstadoAsignacion = 'activo' | 'inactivo'
 export type EstadoRol = 'activo' | 'inactivo' | 'eliminado'
+export interface CapacidadesRoles {
+    verEliminados: boolean
+    crearRol: boolean
+    editarRol: boolean
+    eliminarRol: boolean
+    gestionarPermisos: boolean
+    leerPermisos: boolean
+}
 
 export interface AsignacionPermiso { permisoId: IdIam; estado: EstadoAsignacion }
 export interface AsignacionRol { rolId: IdIam; estado: EstadoAsignacion }

@@ -11,6 +11,8 @@ import { AsignarPermisoRol } from '../use-cases/asignar-permiso-rol.js'
 import { EliminarRol } from '../use-cases/eliminar-rol.js'
 import { ExigirPermiso } from '../use-cases/exigir-permiso.js'
 import { ListarRoles } from '../use-cases/listar-roles.js'
+import { ObtenerCapacidadesRoles } from '../use-cases/obtener-capacidades-roles.js'
+import { ObtenerRol } from '../use-cases/obtener-rol.js'
 import { RetirarPermisoRol } from '../use-cases/retirar-permiso-rol.js'
 
 const actorId = '11111111-1111-4111-8111-111111111111'
@@ -25,15 +27,63 @@ function rol(esSistema: boolean): Rol {
         permisos: [new RolPermiso(1n, 2n, t0)],
     })
 }
-function acceso(...claves: string[]): ExigirPermiso {
-    return new ExigirPermiso({ permisosEfectivos: async () => new Set(claves) })
+function accesoConRoles(slugs: readonly string[], ...claves: string[]): ExigirPermiso {
+    return new ExigirPermiso({
+        permisosEfectivos: async () => new Set(claves),
+        tieneRolActivo: async (_id, permitidos) => permitidos.some((s) => slugs.includes(s)),
+    })
 }
+const acceso = (...claves: string[]) => accesoConRoles(['super_admin'], ...claves)
 
 test('denegación por defecto: consultar roles no llega al repositorio sin permiso', async () => {
     let consultas = 0
     const repositorio = { listar: async () => { consultas++; return [] } } as unknown as RepositorioRoles
     await assert.rejects(new ListarRoles(repositorio, acceso()).ejecutar(actorId), /Acceso denegado/)
     assert.equal(consultas, 0)
+})
+
+test('solo super_admin ve roles eliminados en lista y detalle', async () => {
+    const vigente = rol(false)
+    const eliminado = new Rol({
+        id: 2n, nombre: 'Retirado', slug: Slug.create('retirado'),
+        descripcion: null, esSistema: false, estado: 'eliminado',
+        fechas: { creadoEn: t0, actualizadoEn: t1, eliminadoEn: t1 }, permisos: []
+    })
+    const repositorio = {
+        listar: async () => [vigente, eliminado],
+        buscarPorId: async () => eliminado
+    } as unknown as RepositorioRoles
+    const admin = accesoConRoles(['administrador'], 'iam.roles.read')
+    assert.deepEqual((await new ListarRoles(repositorio, admin).ejecutar(actorId)).map((r) => r.id), [1n])
+    await assert.rejects(new ObtenerRol(repositorio, admin).ejecutar(actorId, 2n), /Rol no encontrado/)
+    assert.equal((await new ListarRoles(repositorio, acceso('iam.roles.read')).ejecutar(actorId)).length, 2)
+    assert.equal((await new ObtenerRol(repositorio, acceso('iam.roles.read')).ejecutar(actorId, 2n)).id, 2n)
+})
+
+test('baja requiere rol administrador vigente y permiso delete', async () => {
+    let escrituras = 0
+    const repositorio = {
+        buscarPorId: async () => rol(false),
+        guardar: async () => { escrituras++ }
+    } as unknown as RepositorioRoles
+    await assert.rejects(new EliminarRol(repositorio,
+        accesoConRoles(['operador'], 'iam.roles.delete'), reloj).ejecutar(actorId, 1n), /Acceso denegado/)
+    await assert.rejects(new EliminarRol(repositorio,
+        accesoConRoles(['administrador'], 'iam.roles.read'), reloj).ejecutar(actorId, 1n), /Acceso denegado/)
+    await new EliminarRol(repositorio,
+        accesoConRoles(['administrador'], 'iam.roles.delete'), reloj).ejecutar(actorId, 1n)
+    assert.equal(escrituras, 1)
+})
+
+test('capacidades de interfaz reflejan rol vigente y permiso, sin concederlos', async () => {
+    const operador = await new ObtenerCapacidadesRoles(accesoConRoles(['operador'],
+        'iam.roles.read', 'iam.roles.delete')).ejecutar(actorId)
+    assert.equal(operador.verEliminados, false)
+    assert.equal(operador.eliminarRol, false)
+    const admin = await new ObtenerCapacidadesRoles(accesoConRoles(['administrador'],
+        'iam.roles.read', 'iam.roles.delete')).ejecutar(actorId)
+    assert.equal(admin.verEliminados, false)
+    assert.equal(admin.eliminarRol, true)
 })
 
 test('el rol del sistema no puede eliminarse, incluso si el actor tiene permiso de baja', async () => {
