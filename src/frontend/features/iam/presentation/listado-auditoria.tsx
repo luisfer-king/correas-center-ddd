@@ -3,7 +3,9 @@ import { ErrorApi } from '../../../shared/api/cliente-http'
 import { iamApi } from '../api/cliente-iam'
 import type { EventoAuditoriaIam } from '../api/tipos-iam'
 import { csvAuditoria } from './exportar-auditoria-csv'
+import { xlsxAuditoria } from './exportar-auditoria-xlsx'
 import { ModalPortal } from './modal-portal'
+import { nombreExportacionAuditoria } from './nombre-exportacion-auditoria'
 
 const TAMANO_PAGINA = 25
 const fecha = (valor: string | null) => valor ? new Date(valor).toLocaleString('es-BO') : 'Sin registro'
@@ -52,7 +54,9 @@ export function ListadoAuditoria() {
     const [desde, setDesde] = useState('')
     const [hasta, setHasta] = useState('')
     const [rango, setRango] = useState<{ desde?: string; hasta?: string }>({})
+    const [fechasAplicadas, setFechasAplicadas] = useState({ desde: '', hasta: '' })
     const [errorFechas, setErrorFechas] = useState('')
+    const [errorExportacion, setErrorExportacion] = useState('')
 
     useEffect(() => {
         const controlador = new AbortController()
@@ -90,19 +94,28 @@ export function ListadoAuditoria() {
         setPagina(0)
         setCursores([undefined])
         setRango({ desde: limiteDia(desde), hasta: limiteDia(hasta, true) })
+        setFechasAplicadas({ desde, hasta })
+        setErrorExportacion('')
         setRevision((n) => n + 1)
     }
-    function descargarVisibles() {
+    function descargarVisibles(formato: 'csv' | 'xlsx') {
         if (visibles.length === 0) return
-        const contenido = csvAuditoria(visibles)
-        const url = URL.createObjectURL(new Blob([contenido], { type: 'text/csv;charset=utf-8' }))
-        const enlace = document.createElement('a')
-        enlace.href = url
-        enlace.download = `auditoria-iam-pagina-${pagina + 1}.csv`
-        document.body.append(enlace)
-        enlace.click()
-        enlace.remove()
-        window.setTimeout(() => URL.revokeObjectURL(url), 0)
+        setErrorExportacion('')
+        try {
+            const contenido = formato === 'csv' ? csvAuditoria(visibles) : new Uint8Array(xlsxAuditoria(visibles))
+            const tipo = formato === 'csv' ? 'text/csv;charset=utf-8'
+                : 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+            const url = URL.createObjectURL(new Blob([contenido], { type: tipo }))
+            const enlace = document.createElement('a')
+            enlace.href = url
+            enlace.download = nombreExportacionAuditoria(fechasAplicadas, accion, pagina, formato)
+            document.body.append(enlace)
+            enlace.click()
+            enlace.remove()
+            window.setTimeout(() => URL.revokeObjectURL(url), 0)
+        } catch (fallo) {
+            setErrorExportacion(fallo instanceof Error ? fallo.message : 'No se pudo generar el archivo.')
+        }
     }
     function siguiente() {
         if (consulta.tipo !== 'lista' || !consulta.siguiente) return
@@ -148,7 +161,7 @@ export function ListadoAuditoria() {
                         className="mt-2 block rounded-md border border-neutral-300 px-3 py-2" />
                 </label>
                 <button type="submit" className="rounded-md bg-red-700 px-4 py-2 text-sm font-semibold text-white">Aplicar fechas</button>
-                <button type="button" onClick={() => { setDesde(''); setHasta(''); setErrorFechas(''); setRango({}); actualizar() }}
+                <button type="button" onClick={() => { setDesde(''); setHasta(''); setErrorFechas(''); setRango({}); setFechasAplicadas({ desde: '', hasta: '' }); actualizar() }}
                     className="rounded-md border border-neutral-300 px-4 py-2 text-sm font-semibold">Quitar fechas</button>
                 {errorFechas && <p role="alert" className="w-full text-sm text-red-800">{errorFechas}</p>}
             </form>
@@ -169,11 +182,14 @@ export function ListadoAuditoria() {
                 </label>
             </div>
             <p role="status" className="mt-4 text-sm text-neutral-600">Página {pagina + 1} · {visibles.length} de {consulta.eventos.length} eventos en esta página.</p>
-            <button type="button" disabled={visibles.length === 0} onClick={descargarVisibles}
-                className="mt-3 rounded-md border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold disabled:opacity-50">
-                Exportar filas visibles a CSV
-            </button>
-            <p className="mt-2 text-xs text-neutral-600">El CSV se abre en Excel e incluye solo las filas visibles de esta página, tras aplicar búsqueda y acción.</p>
+            <div className="mt-3 flex flex-wrap gap-3">
+                <button type="button" disabled={visibles.length === 0} onClick={() => descargarVisibles('csv')}
+                    className="rounded-md border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold disabled:opacity-50">Exportar CSV</button>
+                <button type="button" disabled={visibles.length === 0} onClick={() => descargarVisibles('xlsx')}
+                    className="rounded-md border border-neutral-300 bg-white px-4 py-2 text-sm font-semibold disabled:opacity-50">Exportar Excel (.xlsx)</button>
+            </div>
+            {errorExportacion && <p role="alert" className="mt-2 text-sm text-red-800">{errorExportacion}</p>}
+            <p className="mt-2 text-xs text-neutral-600">Ambos archivos incluyen solo las filas visibles de esta página. El nombre indica las fechas aplicadas y la acción; sin rango usa la fecha de hoy y sin acción usa «general».</p>
             {visibles.length === 0 ? <p className="mt-6 rounded-lg border border-neutral-200 bg-white p-6">
                 {consulta.eventos.length === 0 ? 'No hay eventos registrados en esta página.' : 'No hay eventos que coincidan con estos filtros en esta página.'}
             </p> : <div className="mt-4 overflow-x-auto rounded-lg border border-neutral-200 bg-white">
