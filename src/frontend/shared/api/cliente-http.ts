@@ -31,6 +31,9 @@ export async function solicitarApi<T>(ruta: string, opciones: Opciones = {}): Pr
         try { contenido = await respuesta.json() } catch { /* respuesta JSON inválida */ }
     }
     if (!respuesta.ok) {
+        if (respuesta.status === 401 && ruta !== '/api/iam/sesion' && typeof window !== 'undefined') {
+            window.dispatchEvent(new Event('iam:sesion-caducada'))
+        }
         const detalle = contenido && typeof contenido === 'object' && 'error' in contenido
             ? (contenido as { error?: unknown }).error : undefined
         throw new ErrorApi(respuesta.status,

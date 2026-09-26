@@ -42,3 +42,21 @@ test('el estado HTTP y el error llegan al consumidor', async () => {
     await assert.rejects(solicitarApi('/api/iam/sesion'), (error: unknown) =>
         error instanceof ErrorApi && error.estado === 401 && error.message === 'Sesión inválida')
 })
+
+test('401 en una ruta protegida avisa la caducidad; credenciales incorrectas no la avisan', async () => {
+    const eventos: string[] = []
+    const ventana = new EventTarget()
+    ventana.addEventListener('iam:sesion-caducada', () => eventos.push('caducada'))
+    const anterior = globalThis.window
+    Object.defineProperty(globalThis, 'window', { configurable: true, value: ventana })
+    try {
+        globalThis.fetch = async () => new Response(JSON.stringify({ error: 'Sesión inválida' }), {
+            status: 401, headers: { 'content-type': 'application/json' },
+        })
+        await assert.rejects(solicitarApi('/api/portal/iam/roles'), ErrorApi)
+        await assert.rejects(solicitarApi('/api/iam/sesion', { metodo: 'POST', cuerpo: {} }), ErrorApi)
+        assert.deepEqual(eventos, ['caducada'])
+    } finally {
+        Object.defineProperty(globalThis, 'window', { configurable: true, value: anterior })
+    }
+})
