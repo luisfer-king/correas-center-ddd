@@ -4,7 +4,7 @@ export class ObtenerCapacidadesRoles {
     constructor(private readonly autorizar: ExigirPermiso) { }
     async ejecutar(actorId: string) {
         const [superAdmin, admin, leer, crear, editar, eliminar, asignar, leerPermisos,
-            leerUsuarios, gestionarRolesUsuarios] = await Promise.all([
+            leerUsuarios, gestionarRolesUsuarios, leerAuditoria] = await Promise.all([
                 this.autorizar.tieneRolActivo(actorId, ['super_admin']),
                 this.autorizar.tieneRolActivo(actorId, ['administrador', 'admin']),
                 this.autorizar.tienePermiso(actorId, 'iam.roles.read'),
@@ -15,6 +15,7 @@ export class ObtenerCapacidadesRoles {
                 this.autorizar.tienePermiso(actorId, 'iam.permisos.read'),
                 this.autorizar.tienePermiso(actorId, 'iam.usuarios.read'),
                 this.autorizar.tienePermiso(actorId, 'iam.usuarios.roles.assign'),
+                this.autorizar.tienePermiso(actorId, 'iam.auditoria.read'),
             ])
         return {
             verEliminados: superAdmin && leer,
@@ -27,6 +28,7 @@ export class ObtenerCapacidadesRoles {
             leerPermisos,
             leerUsuarios,
             gestionarRolesUsuarios,
+            leerAuditoria,
         }
     }
 }

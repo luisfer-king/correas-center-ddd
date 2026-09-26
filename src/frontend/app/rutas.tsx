@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom'
 import { AccesoPortal } from '../features/iam/presentation/acceso-portal'
+import { ListadoAuditoria } from '../features/iam/presentation/listado-auditoria'
 import { ListadoRoles } from '../features/iam/presentation/listado-roles'
 import { ListadoUsuarios } from '../features/iam/presentation/listado-usuarios'
 import { MarcoPortal } from '../features/iam/presentation/marco-portal'
@@ -21,6 +22,7 @@ export function Rutas() {
           <Route path="roles/:id" element={<ListadoRoles />} />
           <Route path="usuarios" element={<ListadoUsuarios />} />
           <Route path="usuarios/:id" element={<ListadoUsuarios />} />
+          <Route path="auditoria" element={<ListadoAuditoria />} />
         </Route>
       </Route>
     </Route>

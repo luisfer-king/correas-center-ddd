@@ -13,6 +13,7 @@ export interface CapacidadesRoles {
     leerPermisos: boolean
     leerUsuarios: boolean
     gestionarRolesUsuarios: boolean
+    leerAuditoria: boolean
 }
 
 export interface AsignacionPermiso { permisoId: IdIam; estado: EstadoAsignacion }

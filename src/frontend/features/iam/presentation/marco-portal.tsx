@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
+import { iamApi } from '../api/cliente-iam'
 import { usarSesion } from './sesion-portal'
 import { usarTemaPortal } from './tema-portal'
 
@@ -11,6 +12,15 @@ export function MarcoPortal() {
     const { tema, alternar } = usarTemaPortal()
     const [cerrando, setCerrando] = useState(false)
     const [error, setError] = useState('')
+    const [leerAuditoria, setLeerAuditoria] = useState(false)
+
+    useEffect(() => {
+        const controlador = new AbortController()
+        void iamApi.capacidadesRoles({ signal: controlador.signal }).then((capacidades) => {
+            if (!controlador.signal.aborted) setLeerAuditoria(capacidades.leerAuditoria)
+        }).catch(() => { if (!controlador.signal.aborted) setLeerAuditoria(false) })
+        return () => controlador.abort()
+    }, [])
 
     async function salir() {
         if (cerrando) return
@@ -29,6 +39,7 @@ export function MarcoPortal() {
                     <NavLink to="/portal" end className={estiloEnlace}>Inicio</NavLink>
                     <NavLink to="/portal/roles" className={estiloEnlace}>Roles</NavLink>
                     <NavLink to="/portal/usuarios" className={estiloEnlace}>Usuarios</NavLink>
+                    {leerAuditoria && <NavLink to="/portal/auditoria" className={estiloEnlace}>Auditoría</NavLink>}
                     <button type="button" onClick={alternar} aria-label={tema === 'oscuro' ? 'Activar tema claro' : 'Activar tema oscuro'}
                         className="rounded-md border border-neutral-300 px-3 py-2 text-sm font-semibold hover:bg-neutral-100">
                         {tema === 'oscuro' ? '☀ Tema claro' : '◐ Tema oscuro'}

@@ -15,12 +15,12 @@ export function rutasRoles(app: FastifyInstance, casos: CasosIam, config: Seguri
     const base = { tags: ['IAM · Roles'], security: [{ cookieAuth: [] }], response: errors }
     app.get('/api/portal/iam/capacidades-roles', {
         schema: {
-            ...base, summary: 'Capacidades IAM del usuario autenticado para las vistas de roles y usuarios',
+            ...base, summary: 'Capacidades IAM del usuario autenticado para las vistas del portal',
             response: {
                 200: {
                     type: 'object', additionalProperties: false,
-                    required: ['verEliminados', 'verUsuariosEliminados', 'leerRoles', 'crearRol', 'editarRol', 'eliminarRol', 'gestionarPermisos', 'leerPermisos', 'leerUsuarios', 'gestionarRolesUsuarios'],
-                    properties: Object.fromEntries(['verEliminados', 'verUsuariosEliminados', 'leerRoles', 'crearRol', 'editarRol', 'eliminarRol', 'gestionarPermisos', 'leerPermisos', 'leerUsuarios', 'gestionarRolesUsuarios']
+                    required: ['verEliminados', 'verUsuariosEliminados', 'leerRoles', 'crearRol', 'editarRol', 'eliminarRol', 'gestionarPermisos', 'leerPermisos', 'leerUsuarios', 'gestionarRolesUsuarios', 'leerAuditoria'],
+                    properties: Object.fromEntries(['verEliminados', 'verUsuariosEliminados', 'leerRoles', 'crearRol', 'editarRol', 'eliminarRol', 'gestionarPermisos', 'leerPermisos', 'leerUsuarios', 'gestionarRolesUsuarios', 'leerAuditoria']
                         .map((clave) => [clave, { type: 'boolean' }]))
                 }, ...errors
             }
