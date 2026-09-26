@@ -7,7 +7,8 @@ export class ObtenerUsuario {
     async ejecutar(actorId: string, usuarioId: string): Promise<Perfil> {
         await this.autorizar.ejecutar(actorId, 'iam.usuarios.read')
         const perfil = await this.perfiles.buscarPorId(usuarioId)
-        if (!perfil) throw new Error('Usuario no encontrado')
+        if (!perfil || (perfil.estado === 'eliminado' &&
+            !(await this.autorizar.tieneRolActivo(actorId, ['super_admin'])))) throw new Error('Usuario no encontrado')
         return perfil
     }
 }

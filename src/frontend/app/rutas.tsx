@@ -1,6 +1,7 @@
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom'
 import { AccesoPortal } from '../features/iam/presentation/acceso-portal'
 import { ListadoRoles } from '../features/iam/presentation/listado-roles'
+import { ListadoUsuarios } from '../features/iam/presentation/listado-usuarios'
 import { MarcoPortal } from '../features/iam/presentation/marco-portal'
 import { PortalBase } from '../features/iam/presentation/portal-base'
 import { PortalProtegido } from '../features/iam/presentation/portal-protegido'
@@ -18,6 +19,8 @@ export function Rutas() {
           <Route index element={<PortalBase />} />
           <Route path="roles" element={<ListadoRoles />} />
           <Route path="roles/:id" element={<ListadoRoles />} />
+          <Route path="usuarios" element={<ListadoUsuarios />} />
+          <Route path="usuarios/:id" element={<ListadoUsuarios />} />
         </Route>
       </Route>
     </Route>

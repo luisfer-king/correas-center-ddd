@@ -28,6 +28,7 @@ export function MarcoPortal() {
                 <nav aria-label="Navegación del portal" className="flex flex-wrap items-center gap-2">
                     <NavLink to="/portal" end className={estiloEnlace}>Inicio</NavLink>
                     <NavLink to="/portal/roles" className={estiloEnlace}>Roles</NavLink>
+                    <NavLink to="/portal/usuarios" className={estiloEnlace}>Usuarios</NavLink>
                     <button type="button" onClick={alternar} aria-label={tema === 'oscuro' ? 'Activar tema claro' : 'Activar tema oscuro'}
                         className="rounded-md border border-neutral-300 px-3 py-2 text-sm font-semibold hover:bg-neutral-100">
                         {tema === 'oscuro' ? '☀ Tema claro' : '◐ Tema oscuro'}

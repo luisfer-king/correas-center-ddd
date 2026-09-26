@@ -4,11 +4,15 @@ export type EstadoAsignacion = 'activo' | 'inactivo'
 export type EstadoRol = 'activo' | 'inactivo' | 'eliminado'
 export interface CapacidadesRoles {
     verEliminados: boolean
+    verUsuariosEliminados: boolean
+    leerRoles: boolean
     crearRol: boolean
     editarRol: boolean
     eliminarRol: boolean
     gestionarPermisos: boolean
     leerPermisos: boolean
+    leerUsuarios: boolean
+    gestionarRolesUsuarios: boolean
 }
 
 export interface AsignacionPermiso { permisoId: IdIam; estado: EstadoAsignacion }

@@ -15,12 +15,12 @@ export function rutasRoles(app: FastifyInstance, casos: CasosIam, config: Seguri
     const base = { tags: ['IAM · Roles'], security: [{ cookieAuth: [] }], response: errors }
     app.get('/api/portal/iam/capacidades-roles', {
         schema: {
-            ...base, summary: 'Capacidades IAM del usuario autenticado para las vistas de roles',
+            ...base, summary: 'Capacidades IAM del usuario autenticado para las vistas de roles y usuarios',
             response: {
                 200: {
                     type: 'object', additionalProperties: false,
-                    required: ['verEliminados', 'crearRol', 'editarRol', 'eliminarRol', 'gestionarPermisos', 'leerPermisos'],
-                    properties: Object.fromEntries(['verEliminados', 'crearRol', 'editarRol', 'eliminarRol', 'gestionarPermisos', 'leerPermisos']
+                    required: ['verEliminados', 'verUsuariosEliminados', 'leerRoles', 'crearRol', 'editarRol', 'eliminarRol', 'gestionarPermisos', 'leerPermisos', 'leerUsuarios', 'gestionarRolesUsuarios'],
+                    properties: Object.fromEntries(['verEliminados', 'verUsuariosEliminados', 'leerRoles', 'crearRol', 'editarRol', 'eliminarRol', 'gestionarPermisos', 'leerPermisos', 'leerUsuarios', 'gestionarRolesUsuarios']
                         .map((clave) => [clave, { type: 'boolean' }]))
                 }, ...errors
             }
