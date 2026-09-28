@@ -1,6 +1,6 @@
-import type { EventoAuditoria } from '../../domain/evento-auditoria.js';
-import type { RepositorioAuditoria } from '../ports/repositorio-auditoria.js';
-import { ExigirPermiso } from './exigir-permiso.js';
+import type { EventoAuditoria } from '../../../domain/evento-auditoria.js';
+import type { RepositorioAuditoria } from '../../ports/repositorio-auditoria.js';
+import { ExigirPermiso } from '../autorizacion/exigir-permiso.js';
 
 export class ListarAuditoria {
     constructor(private readonly auditoria: RepositorioAuditoria,

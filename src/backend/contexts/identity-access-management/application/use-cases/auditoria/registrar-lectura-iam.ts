@@ -1,6 +1,6 @@
-import { EventoAuditoria } from '../../domain/evento-auditoria.js'
-import type { Reloj } from '../ports/reloj.js'
-import type { RepositorioAuditoria } from '../ports/repositorio-auditoria.js'
+import { EventoAuditoria } from '../../../domain/evento-auditoria.js'
+import type { Reloj } from '../../ports/reloj.js'
+import type { RepositorioAuditoria } from '../../ports/repositorio-auditoria.js'
 
 type Recurso = 'portal' | 'roles' | 'permisos' | 'usuarios' | 'auditoria' | 'mi-perfil'
 

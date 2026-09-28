@@ -1,9 +1,9 @@
 import { argon2id, hash } from 'argon2'
-import { Email } from '../../../../shared/domain/value-objects.js'
-import { texto, uuid } from '../../domain/iam-values.js'
-import type { RepositorioAdministracionUsuarios } from '../ports/repositorio-administracion-usuarios.js'
-import type { RepositorioPerfiles } from '../ports/repositorio-perfiles.js'
-import { ExigirPermiso } from './exigir-permiso.js'
+import { Email } from '../../../../../shared/domain/value-objects.js'
+import { texto, uuid } from '../../../domain/iam-values.js'
+import type { RepositorioAdministracionUsuarios } from '../../ports/repositorio-administracion-usuarios.js'
+import type { RepositorioPerfiles } from '../../ports/repositorio-perfiles.js'
+import { ExigirPermiso } from '../autorizacion/exigir-permiso.js'
 
 export class AdministrarUsuarios {
     constructor(private readonly perfiles: RepositorioPerfiles,

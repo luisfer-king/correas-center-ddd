@@ -2,9 +2,9 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { EventoAuditoria } from '../../domain/evento-auditoria.js'
 import type { RepositorioAuditoria } from '../ports/repositorio-auditoria.js'
-import { ExigirPermiso } from '../use-cases/exigir-permiso.js'
-import { ListarAuditoria } from '../use-cases/listar-auditoria.js'
-import { RegistrarLecturaIam } from '../use-cases/registrar-lectura-iam.js'
+import { ListarAuditoria } from '../use-cases/auditoria/listar-auditoria.js'
+import { RegistrarLecturaIam } from '../use-cases/auditoria/registrar-lectura-iam.js'
+import { ExigirPermiso } from '../use-cases/autorizacion/exigir-permiso.js'
 
 const actor = '11111111-1111-4111-8111-111111111111'
 const acceso = (permitido: boolean) => new ExigirPermiso({

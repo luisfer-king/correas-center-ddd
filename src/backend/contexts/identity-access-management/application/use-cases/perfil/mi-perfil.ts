@@ -1,6 +1,6 @@
-import { texto, uuid } from '../../domain/iam-values.js'
-import type { RepositorioMiPerfil } from '../ports/repositorio-mi-perfil.js'
-import type { RepositorioPerfiles } from '../ports/repositorio-perfiles.js'
+import { texto, uuid } from '../../../domain/iam-values.js'
+import type { RepositorioMiPerfil } from '../../ports/repositorio-mi-perfil.js'
+import type { RepositorioPerfiles } from '../../ports/repositorio-perfiles.js'
 
 export class MiPerfil {
     constructor(private readonly perfiles: RepositorioPerfiles, private readonly escritura: RepositorioMiPerfil) { }

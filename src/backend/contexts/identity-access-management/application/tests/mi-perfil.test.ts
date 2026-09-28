@@ -4,7 +4,7 @@ import { Email } from '../../../../shared/domain/value-objects.js'
 import { Perfil } from '../../domain/perfil.js'
 import type { RepositorioMiPerfil } from '../ports/repositorio-mi-perfil.js'
 import type { RepositorioPerfiles } from '../ports/repositorio-perfiles.js'
-import { MiPerfil } from '../use-cases/mi-perfil.js'
+import { MiPerfil } from '../use-cases/perfil/mi-perfil.js'
 
 const id = 'a0c14443-9978-48a1-8878-f1e57a7911b1'
 const fecha = new Date('2026-01-01')

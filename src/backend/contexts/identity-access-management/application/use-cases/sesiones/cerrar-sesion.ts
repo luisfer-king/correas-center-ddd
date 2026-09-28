@@ -1,6 +1,6 @@
-import { EventoAuditoria } from '../../domain/evento-auditoria.js'
-import type { Reloj } from '../ports/reloj.js'
-import type { RepositorioSesiones } from '../ports/repositorio-sesiones.js'
+import { EventoAuditoria } from '../../../domain/evento-auditoria.js'
+import type { Reloj } from '../../ports/reloj.js'
+import type { RepositorioSesiones } from '../../ports/repositorio-sesiones.js'
 import { ComprobarSesion } from './comprobar-sesion.js'
 
 export class CerrarSesion {
