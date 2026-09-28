@@ -150,28 +150,49 @@ correas-center-ddd
 │  │  │     │  ├─ fecha-cambio.ts
 │  │  │     │  ├─ ports
 │  │  │     │  │  ├─ consulta-autorizacion.ts
+│  │  │     │  │  ├─ generador-ids.ts
+│  │  │     │  │  ├─ huella-token.ts
 │  │  │     │  │  ├─ reloj.ts
+│  │  │     │  │  ├─ repositorio-administracion-usuarios.ts
+│  │  │     │  │  ├─ repositorio-auditoria.ts
+│  │  │     │  │  ├─ repositorio-mi-perfil.ts
 │  │  │     │  │  ├─ repositorio-perfiles.ts
 │  │  │     │  │  ├─ repositorio-permisos.ts
 │  │  │     │  │  ├─ repositorio-roles.ts
-│  │  │     │  │  └─ repositorio-usuarios.ts
+│  │  │     │  │  ├─ repositorio-sesiones.ts
+│  │  │     │  │  ├─ repositorio-usuarios.ts
+│  │  │     │  │  ├─ servicio-tokens.ts
+│  │  │     │  │  └─ verificador-clave-seguro.ts
 │  │  │     │  ├─ tests
-│  │  │     │  │  └─ iam-casos.test.ts
+│  │  │     │  │  ├─ administrar-usuarios.test.ts
+│  │  │     │  │  ├─ auditoria-casos.test.ts
+│  │  │     │  │  ├─ autenticacion-casos.test.ts
+│  │  │     │  │  ├─ iam-casos.test.ts
+│  │  │     │  │  ├─ mi-perfil.test.ts
+│  │  │     │  │  └─ usuarios-casos.test.ts
 │  │  │     │  └─ use-cases
 │  │  │     │     ├─ activar-rol.ts
+│  │  │     │     ├─ administrar-usuarios.ts
 │  │  │     │     ├─ asignar-permiso-rol.ts
 │  │  │     │     ├─ asignar-rol-usuario.ts
+│  │  │     │     ├─ cerrar-sesion.ts
+│  │  │     │     ├─ comprobar-sesion.ts
 │  │  │     │     ├─ crear-rol.ts
 │  │  │     │     ├─ editar-rol.ts
 │  │  │     │     ├─ eliminar-rol.ts
 │  │  │     │     ├─ exigir-permiso.ts
 │  │  │     │     ├─ inactivar-rol.ts
+│  │  │     │     ├─ iniciar-sesion.ts
+│  │  │     │     ├─ listar-auditoria.ts
 │  │  │     │     ├─ listar-permisos.ts
 │  │  │     │     ├─ listar-roles.ts
 │  │  │     │     ├─ listar-usuarios.ts
+│  │  │     │     ├─ mi-perfil.ts
+│  │  │     │     ├─ obtener-capacidades-roles.ts
 │  │  │     │     ├─ obtener-permiso.ts
 │  │  │     │     ├─ obtener-rol.ts
 │  │  │     │     ├─ obtener-usuario.ts
+│  │  │     │     ├─ registrar-lectura-iam.ts
 │  │  │     │     ├─ retirar-permiso-rol.ts
 │  │  │     │     └─ retirar-rol-usuario.ts
 │  │  │     ├─ domain
@@ -185,28 +206,62 @@ correas-center-ddd
 │  │  │     │  ├─ usuario-rol.ts
 │  │  │     │  └─ usuario.ts
 │  │  │     ├─ infrastructure
+│  │  │     │  ├─ argon2-verificador.ts
+│  │  │     │  ├─ componer-iam.ts
+│  │  │     │  ├─ contexto-auditoria-http.ts
 │  │  │     │  ├─ exigir-permiso-en-transaccion.ts
+│  │  │     │  ├─ exigir-super-admin-para-perfil.ts
+│  │  │     │  ├─ insertar-auditoria.ts
+│  │  │     │  ├─ jose-tokens.ts
 │  │  │     │  ├─ mappers
 │  │  │     │  │  ├─ perfil.ts
 │  │  │     │  │  ├─ permiso.ts
 │  │  │     │  │  ├─ rol.ts
+│  │  │     │  │  ├─ sesion.ts
 │  │  │     │  │  └─ usuario.ts
+│  │  │     │  ├─ prisma-administracion-usuarios.ts
+│  │  │     │  ├─ prisma-auditoria.ts
 │  │  │     │  ├─ prisma-autorizacion.ts
 │  │  │     │  ├─ prisma-iam-client.ts
+│  │  │     │  ├─ prisma-mi-perfil.ts
 │  │  │     │  ├─ prisma-perfiles.ts
 │  │  │     │  ├─ prisma-permisos.ts
 │  │  │     │  ├─ prisma-roles.ts
+│  │  │     │  ├─ prisma-sesiones.ts
 │  │  │     │  ├─ prisma-usuarios.ts
 │  │  │     │  ├─ reloj-sistema.ts
-│  │  │     │  └─ tests
-│  │  │     │     └─ prisma-perfiles.test.ts
+│  │  │     │  ├─ sha256-huella-token.ts
+│  │  │     │  ├─ tests
+│  │  │     │  │  ├─ contexto-auditoria-http.test.ts
+│  │  │     │  │  ├─ exigir-permiso-en-transaccion.test.ts
+│  │  │     │  │  ├─ jose-tokens.test.ts
+│  │  │     │  │  ├─ prisma-auditoria.test.ts
+│  │  │     │  │  └─ prisma-perfiles.test.ts
+│  │  │     │  └─ uuid-seguro.ts
 │  │  │     └─ presentation
+│  │  │        ├─ errores-http.ts
+│  │  │        ├─ esquemas-iam.ts
+│  │  │        ├─ registrar-rutas-iam.ts
+│  │  │        ├─ rutas-auditoria.ts
+│  │  │        ├─ rutas-mi-perfil.ts
+│  │  │        ├─ rutas-permisos.ts
+│  │  │        ├─ rutas-roles.ts
+│  │  │        ├─ rutas-sesiones.ts
+│  │  │        ├─ rutas-usuarios.ts
+│  │  │        ├─ salidas-iam.ts
+│  │  │        ├─ seguridad-http.ts
+│  │  │        └─ tests
+│  │  │           ├─ lecturas-iam.test.ts
+│  │  │           └─ rutas-iam.test.ts
 │  │  ├─ generated
 │  │  ├─ main.ts
 │  │  └─ shared
 │  │     └─ domain
 │  │        └─ value-objects.ts
 │  └─ frontend
+│     ├─ app
+│     │  ├─ portada-temporal.tsx
+│     │  └─ rutas.tsx
 │     ├─ App.css
 │     ├─ App.tsx
 │     ├─ assets
@@ -214,13 +269,48 @@ correas-center-ddd
 │     │  ├─ react.svg
 │     │  └─ vite.svg
 │     ├─ features
-│     │  ├─ catalog-management
+│     │  ├─ catalog
+│     │  ├─ cms
 │     │  ├─ commercial
-│     │  ├─ content-management-system
-│     │  └─ identity-access-management
+│     │  └─ iam
+│     │     ├─ api
+│     │     │  ├─ cliente-iam.ts
+│     │     │  └─ tipos-iam.ts
+│     │     └─ presentation
+│     │        ├─ acceso-portal.tsx
+│     │        ├─ acceso-temporal.tsx
+│     │        ├─ datos-rol.tsx
+│     │        ├─ exportar-auditoria-csv.ts
+│     │        ├─ exportar-auditoria-xlsx.ts
+│     │        ├─ listado-auditoria.tsx
+│     │        ├─ listado-roles.tsx
+│     │        ├─ listado-usuarios.tsx
+│     │        ├─ marco-portal.tsx
+│     │        ├─ modal-baja-rol.tsx
+│     │        ├─ modal-detalle-rol.tsx
+│     │        ├─ modal-estado-rol.tsx
+│     │        ├─ modal-formulario-rol.tsx
+│     │        ├─ modal-formulario-usuario.tsx
+│     │        ├─ modal-permisos-rol.tsx
+│     │        ├─ modal-portal.tsx
+│     │        ├─ modal-roles-usuario.tsx
+│     │        ├─ nombre-exportacion-auditoria.ts
+│     │        ├─ portal-base.tsx
+│     │        ├─ portal-protegido.tsx
+│     │        ├─ sesion-portal.tsx
+│     │        ├─ tema-portal.tsx
+│     │        └─ vista-mi-perfil.tsx
 │     ├─ index.css
 │     ├─ main.tsx
-│     └─ shared
+│     ├─ shared
+│     │  └─ api
+│     │     └─ cliente-http.ts
+│     └─ styles.css
+├─ tests
+│  └─ frontend
+│     ├─ cliente-http.test.ts
+│     ├─ exportar-auditoria-csv.test.ts
+│     └─ exportar-auditoria-xlsx.test.ts
 ├─ tsconfig.app.json
 ├─ tsconfig.backend.json
 ├─ tsconfig.json
