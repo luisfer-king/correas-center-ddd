@@ -1,7 +1,7 @@
-import type { Perfil } from '../../domain/perfil.js'
-import type { RepositorioPerfiles } from '../ports/repositorio-perfiles.js'
-import type { RepositorioRoles } from '../ports/repositorio-roles.js'
-import { ExigirPermiso } from './exigir-permiso.js'
+import type { Perfil } from '../../../domain/perfil.js'
+import type { RepositorioPerfiles } from '../../ports/repositorio-perfiles.js'
+import type { RepositorioRoles } from '../../ports/repositorio-roles.js'
+import { ExigirPermiso } from '../autorizacion/exigir-permiso.js'
 
 export class ObtenerUsuario {
     constructor(private readonly perfiles: RepositorioPerfiles, private readonly autorizar: ExigirPermiso,

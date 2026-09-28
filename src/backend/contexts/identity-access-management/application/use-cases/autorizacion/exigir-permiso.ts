@@ -1,5 +1,5 @@
-import { CodigoPermiso, uuid } from '../../domain/iam-values.js'
-import type { ConsultaAutorizacion } from '../ports/consulta-autorizacion.js'
+import { CodigoPermiso, uuid } from '../../../domain/iam-values.js'
+import type { ConsultaAutorizacion } from '../../ports/consulta-autorizacion.js'
 
 // El actorId debe venir de la sesión verificada, nunca del cuerpo HTTP.
 export class ExigirPermiso {

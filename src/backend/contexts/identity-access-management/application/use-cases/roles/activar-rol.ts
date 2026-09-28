@@ -1,7 +1,7 @@
-import { fechaCambio } from '../fecha-cambio.js'
-import type { Reloj } from '../ports/reloj.js'
-import type { RepositorioRoles } from '../ports/repositorio-roles.js'
-import { ExigirPermiso } from './exigir-permiso.js'
+import { fechaCambio } from '../../fecha-cambio.js'
+import type { Reloj } from '../../ports/reloj.js'
+import type { RepositorioRoles } from '../../ports/repositorio-roles.js'
+import { ExigirPermiso } from '../autorizacion/exigir-permiso.js'
 
 // Solo reactiva un rol 'inactivo'; 'eliminado' es terminal según el dominio.
 export class ActivarRol {

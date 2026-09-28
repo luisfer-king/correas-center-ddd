@@ -1,6 +1,6 @@
-import type { Rol } from '../../domain/rol.js'
-import type { RepositorioRoles } from '../ports/repositorio-roles.js'
-import { ExigirPermiso } from './exigir-permiso.js'
+import type { Rol } from '../../../domain/rol.js'
+import type { RepositorioRoles } from '../../ports/repositorio-roles.js'
+import { ExigirPermiso } from '../autorizacion/exigir-permiso.js'
 
 export class ListarRoles {
     constructor(private readonly roles: RepositorioRoles, private readonly autorizar: ExigirPermiso) { }

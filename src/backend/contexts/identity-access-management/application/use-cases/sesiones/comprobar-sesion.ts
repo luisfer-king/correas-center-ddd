@@ -1,9 +1,9 @@
-import type { Sesion } from '../../domain/sesion.js'
-import type { HuellaToken } from '../ports/huella-token.js'
-import type { Reloj } from '../ports/reloj.js'
-import type { RepositorioPerfiles } from '../ports/repositorio-perfiles.js'
-import type { RepositorioSesiones } from '../ports/repositorio-sesiones.js'
-import type { ServicioTokens } from '../ports/servicio-tokens.js'
+import type { Sesion } from '../../../domain/sesion.js'
+import type { HuellaToken } from '../../ports/huella-token.js'
+import type { Reloj } from '../../ports/reloj.js'
+import type { RepositorioPerfiles } from '../../ports/repositorio-perfiles.js'
+import type { RepositorioSesiones } from '../../ports/repositorio-sesiones.js'
+import type { ServicioTokens } from '../../ports/servicio-tokens.js'
 
 export type SesionVerificada = Readonly<{ usuarioId: string; sesion: Sesion }>
 

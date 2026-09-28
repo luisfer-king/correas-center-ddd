@@ -1,4 +1,4 @@
-import { ExigirPermiso } from './exigir-permiso.js'
+import { ExigirPermiso } from '../autorizacion/exigir-permiso.js'
 
 export class ObtenerCapacidadesRoles {
     constructor(private readonly autorizar: ExigirPermiso) { }

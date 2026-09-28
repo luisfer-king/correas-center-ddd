@@ -1,6 +1,6 @@
-import type { Permiso } from '../../domain/permiso.js'
-import type { RepositorioPermisos } from '../ports/repositorio-permisos.js'
-import { ExigirPermiso } from './exigir-permiso.js'
+import type { Permiso } from '../../../domain/permiso.js'
+import type { RepositorioPermisos } from '../../ports/repositorio-permisos.js'
+import { ExigirPermiso } from '../autorizacion/exigir-permiso.js'
 
 export class ObtenerPermiso {
     constructor(private readonly permisos: RepositorioPermisos, private readonly autorizar: ExigirPermiso) { }
