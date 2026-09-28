@@ -167,7 +167,8 @@ export function ListadoUsuarios() {
         {id && detalle?.id === id && <ModalRolesUsuario key={id} usuario={detalle} capacidades={capacidades}
             cerrar={cerrarModal} actualizado={actualizarFila} />}
         {formulario && <ModalFormularioUsuario key={formulario === 'nuevo' ? 'nuevo' : formulario.id}
-            usuario={formulario === 'nuevo' ? undefined : formulario} cerrar={() => setFormulario(null)} guardado={guardado} />}
+            usuario={formulario === 'nuevo' ? undefined : formulario} puedeCambiarClave={capacidades?.cambiarClaveUsuario === true}
+            cerrar={() => setFormulario(null)} guardado={guardado} />}
         {cambioEstado && <div role="presentation" className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
             <div role="dialog" aria-modal="true" aria-labelledby="confirmar-estado-usuario" className="w-full max-w-md rounded-lg bg-white p-6 text-neutral-900 shadow-xl">
                 <h2 id="confirmar-estado-usuario" className="text-xl font-semibold">Confirmar cambio de estado</h2>

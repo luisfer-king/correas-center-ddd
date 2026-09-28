@@ -28,10 +28,11 @@ export class PrismaAdministracionUsuarios implements RepositorioAdministracionUs
         }, { isolationLevel: Prisma.TransactionIsolationLevel.Serializable })
     }
 
-    async actualizar(id: string, datos: { nombreCompleto: string; email: string; telefono: string | null },
+    async actualizar(id: string, datos: { nombreCompleto: string; email: string; telefono: string | null; hash?: string },
         version: Date, actorId: string) {
         return this.db.$transaction(async (tx) => {
-            await exigirPermisoEnTransaccion(tx, actorId, 'iam.usuarios.update')
+            await exigirPermisoEnTransaccion(tx, actorId, 'iam.usuarios.update',
+                datos.hash === undefined ? undefined : ['super_admin'])
             const anterior = await tx.perfil.findUnique({
                 where: { id }, select: {
                     email: true, nombreCompleto: true,
@@ -48,12 +49,24 @@ export class PrismaAdministracionUsuarios implements RepositorioAdministracionUs
                 }
             })
             if (actualizado.count !== 1) throw new Error('Perfil modificado por otra operación; vuelve a cargarlo')
-            if (cambioEmail) await tx.usuario.update({ where: { id }, data: { email: datos.email } })
+            if (cambioEmail || datos.hash !== undefined) await tx.usuario.update({
+                where: { id },
+                data: {
+                    ...(cambioEmail ? { email: datos.email } : {}),
+                    ...(datos.hash !== undefined ? { encryptedPassword: datos.hash } : {})
+                }
+            })
+            if (datos.hash !== undefined) await tx.sesion.updateMany({
+                where: { usuarioId: id, estado: 'activo' },
+                data: { estado: 'inactivo', revocadaEn: new Date() }
+            })
             await insertarAuditoria(tx, EventoAuditoria.registrar({
                 usuarioId: actorId, accion: 'Edición', tablaAfectada: 'perfiles', registroId: id,
                 datosAnteriores: { email: anterior.email, nombreCompleto: anterior.nombreCompleto, telefono: anterior.telefono },
                 datosNuevos: { email: datos.email, nombreCompleto: datos.nombreCompleto, telefono: datos.telefono },
-                ipAddress: null, userAgent: null, metadata: { operacion: 'iam.usuarios.update' }, creadoEn: new Date(),
+                ipAddress: null, userAgent: null, metadata: {
+                    operacion: 'iam.usuarios.update', claveRestablecida: datos.hash !== undefined,
+                }, creadoEn: new Date(),
             }))
             const fila = await tx.perfil.findUniqueOrThrow({ where: { id }, include: { relUsuarioRol: true } })
             return aPerfil(fila)

@@ -16,10 +16,10 @@ const perfil = new Perfil({
     fechas: { creadoEn: ahora, actualizadoEn: ahora, eliminadoEn: null }, roles: []
 })
 
-function crearCaso(permisos: string[], escribir: Partial<RepositorioAdministracionUsuarios> = {}) {
+function crearCaso(permisos: string[], escribir: Partial<RepositorioAdministracionUsuarios> = {}, esSuper = true) {
     const autorizacion = new ExigirPermiso({
         permisosEfectivos: async () => new Set(permisos),
-        tieneRolActivo: async () => true,
+        tieneRolActivo: async () => esSuper,
     } as never)
     return new AdministrarUsuarios({ buscarPorId: async () => perfil } as unknown as RepositorioPerfiles,
         escribir as RepositorioAdministracionUsuarios, autorizacion)
@@ -52,4 +52,32 @@ test('solo un estado compatible alcanza el repositorio', async () => {
     await assert.rejects(caso.estado(actor, usuarioId, 'activar'), /Estado de usuario incompatible/)
     await caso.estado(actor, usuarioId, 'inactivar')
     assert.equal(cambios, 1)
+})
+
+test('editar con contraseña exige rol super_admin vigente además del permiso update', async () => {
+    let escritos = 0
+    const caso = crearCaso(['iam.usuarios.update'], { actualizar: async () => { escritos++; return perfil } }, false)
+    await assert.rejects(caso.editar(actor, usuarioId, {
+        nombreCompleto: 'Usuaria',
+        email: 'usuaria@example.com', telefono: null, password: 'una-clave-nueva-segura'
+    }), /Acceso denegado/)
+    assert.equal(escritos, 0)
+    await caso.editar(actor, usuarioId, { nombreCompleto: 'Usuaria', email: 'usuaria@example.com', telefono: null })
+    assert.equal(escritos, 1)
+})
+
+test('editar contraseña envía solo hash Argon2id y no revela la clave en el perfil', async () => {
+    let hashGuardado = ''
+    const caso = crearCaso(['iam.usuarios.update'], {
+        actualizar: async (_id, datos) => {
+            hashGuardado = datos.hash ?? ''; return perfil
+        }
+    })
+    const resultado = await caso.editar(actor, usuarioId, {
+        nombreCompleto: 'Usuaria',
+        email: 'usuaria@example.com', telefono: null, password: 'una-clave-nueva-segura'
+    })
+    assert.match(hashGuardado, /^\$argon2id\$/)
+    assert.doesNotMatch(hashGuardado, /una-clave-nueva-segura/)
+    assert.doesNotMatch(JSON.stringify(resultado), /una-clave-nueva-segura|argon2id/)
 })

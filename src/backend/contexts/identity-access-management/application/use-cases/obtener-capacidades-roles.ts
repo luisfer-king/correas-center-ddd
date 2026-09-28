@@ -31,6 +31,7 @@ export class ObtenerCapacidadesRoles {
             leerPermisos,
             leerUsuarios,
             crearUsuario, editarUsuario, eliminarUsuario: (superAdmin || admin) && eliminarUsuario,
+            cambiarClaveUsuario: superAdmin && editarUsuario,
             gestionarRolesUsuarios,
             leerAuditoria,
         }

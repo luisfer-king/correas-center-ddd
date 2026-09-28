@@ -14,7 +14,7 @@ const campos = {
 }
 const editarBody = {
     type: 'object', additionalProperties: false, required: ['nombreCompleto', 'email', 'telefono'],
-    properties: campos
+    properties: { ...campos, password: { type: 'string', minLength: 12, maxLength: 256 } }
 }
 const crearBody = {
     ...editarBody, required: [...editarBody.required, 'password'],
@@ -55,11 +55,11 @@ export function rutasUsuarios(app: FastifyInstance, casos: CasosIam, config: Seg
         const usuario = await casos.administrarUsuarios.crear(id, req.body)
         return reply.code(201).send(usuarioDto(usuario))
     })
-    app.patch<{ Params: Id; Body: { nombreCompleto: string; email: string; telefono: string | null } }>(
+    app.patch<{ Params: Id; Body: { nombreCompleto: string; email: string; telefono: string | null; password?: string } }>(
         '/api/portal/iam/usuarios/:id', {
             onRequest: origen,
         schema: {
-            ...base, summary: 'Editar perfil y correo de acceso', params: usuarioParams,
+            ...base, summary: 'Editar perfil y opcionalmente restablecer contraseña', params: usuarioParams,
             body: editarBody, response: { 200: usuarioSchema, ...errors }
         },
     }, async (req, reply) => {

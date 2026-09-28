@@ -19,8 +19,8 @@ export function rutasRoles(app: FastifyInstance, casos: CasosIam, config: Seguri
             response: {
                 200: {
                     type: 'object', additionalProperties: false,
-                    required: ['verEliminados', 'verUsuariosEliminados', 'leerRoles', 'crearRol', 'editarRol', 'eliminarRol', 'gestionarPermisos', 'leerPermisos', 'leerUsuarios', 'gestionarRolesUsuarios', 'leerAuditoria', 'crearUsuario', 'editarUsuario', 'eliminarUsuario'],
-                    properties: Object.fromEntries(['verEliminados', 'verUsuariosEliminados', 'leerRoles', 'crearRol', 'editarRol', 'eliminarRol', 'gestionarPermisos', 'leerPermisos', 'leerUsuarios', 'gestionarRolesUsuarios', 'leerAuditoria', 'crearUsuario', 'editarUsuario', 'eliminarUsuario']
+                    required: ['verEliminados', 'verUsuariosEliminados', 'leerRoles', 'crearRol', 'editarRol', 'eliminarRol', 'gestionarPermisos', 'leerPermisos', 'leerUsuarios', 'gestionarRolesUsuarios', 'leerAuditoria', 'crearUsuario', 'editarUsuario', 'eliminarUsuario', 'cambiarClaveUsuario'],
+                    properties: Object.fromEntries(['verEliminados', 'verUsuariosEliminados', 'leerRoles', 'crearRol', 'editarRol', 'eliminarRol', 'gestionarPermisos', 'leerPermisos', 'leerUsuarios', 'gestionarRolesUsuarios', 'leerAuditoria', 'crearUsuario', 'editarUsuario', 'eliminarUsuario', 'cambiarClaveUsuario']
                         .map((clave) => [clave, { type: 'boolean' }]))
                 }, ...errors
             }

@@ -27,11 +27,22 @@ export class AdministrarUsuarios {
         return this.escritura.crear({ ...validos, hash: clave }, actorId)
     }
 
-    async editar(actorId: string, id: string, datos: { nombreCompleto: string; email: string; telefono: string | null }) {
+    async editar(actorId: string, id: string, datos: {
+        nombreCompleto: string; email: string; telefono: string | null; password?: string
+    }) {
         await this.autorizar.ejecutar(actorId, 'iam.usuarios.update')
+        if (datos.password !== undefined) {
+            if (!(await this.autorizar.tieneRolActivo(actorId, ['super_admin']))) throw new Error('Acceso denegado')
+            if (datos.password.length < 12 || datos.password.length > 256) throw new Error('Contraseña inicial inválida')
+        }
         const perfil = await this.perfiles.buscarPorId(uuid(id))
         if (!perfil || perfil.estado === 'eliminado') throw new Error('Usuario no encontrado')
-        return this.escritura.actualizar(id, this.validar(datos), perfil.actualizadoEn, actorId)
+        const hashNuevo = datos.password === undefined ? {} : {
+            hash: await hash(datos.password, {
+                type: argon2id, memoryCost: 19456, timeCost: 2, parallelism: 1,
+            })
+        }
+        return this.escritura.actualizar(id, { ...this.validar(datos), ...hashNuevo }, perfil.actualizadoEn, actorId)
     }
 
     async estado(actorId: string, id: string, accion: 'activar' | 'inactivar' | 'eliminar') {
