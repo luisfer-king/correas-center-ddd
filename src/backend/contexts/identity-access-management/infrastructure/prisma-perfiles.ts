@@ -4,6 +4,7 @@ import { EventoAuditoria } from '../domain/evento-auditoria.js'
 import { uuid } from '../domain/iam-values.js'
 import type { Perfil } from '../domain/perfil.js'
 import { exigirPermisoEnTransaccion } from './exigir-permiso-en-transaccion.js'
+import { exigirSuperAdminParaPerfil } from './exigir-super-admin-para-perfil.js'
 import { insertarAuditoria } from './insertar-auditoria.js'
 import { aPerfil } from './mappers/perfil.js'
 
@@ -31,6 +32,7 @@ export class PrismaPerfiles implements RepositorioPerfiles {
             const validos = await tx.rol.count({ where: { id: { in: activos }, estado: 'activo', eliminadoEn: null } })
             if (validos !== activos.length) throw new Error('No se puede asignar un rol inexistente o inactivo')
             const sistema = await tx.rol.findUnique({ where: { slug: 'super_admin' }, select: { id: true } })
+            await exigirSuperAdminParaPerfil(tx, actorId, perfil.id, Boolean(sistema && activos.includes(sistema.id)))
             if (sistema && !activos.includes(sistema.id)) {
                 const tieneSuperAdmin = await tx.usuarioRol.findUnique({
                     where: { usuarioId_rolId: { usuarioId: perfil.id, rolId: sistema.id } },

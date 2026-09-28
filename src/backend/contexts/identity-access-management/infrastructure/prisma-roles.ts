@@ -43,7 +43,17 @@ export class PrismaRoles implements RepositorioRoles {
     async guardar(rol: Rol, versionAnterior: Date, actorId: string,
         permiso: 'iam.roles.update' | 'iam.roles.delete' | 'iam.roles.permisos.assign'): Promise<void> {
         await this.db.$transaction(async (tx) => {
-            await exigirPermisoEnTransaccion(tx, actorId, permiso)
+            await exigirPermisoEnTransaccion(tx, actorId, permiso,
+                permiso === 'iam.roles.delete' ? ['super_admin', 'administrador', 'admin'] : undefined)
+            if (rol.slug.value === 'super_admin') {
+                const actorSuper = await tx.perfil.findFirst({
+                    where: {
+                        id: actorId, estado: 'activo', eliminadoEn: null,
+                        relUsuarioRol: { some: { estado: 'activo', rol: { slug: 'super_admin', estado: 'activo', eliminadoEn: null } } },
+                    }, select: { id: true }
+                })
+                if (!actorSuper) throw new Error('Acceso denegado')
+            }
             const anterior = await tx.rol.findUnique({ where: { id: rol.id }, select: { esSistema: true, nombre: true, estado: true } })
             if (!anterior || anterior.esSistema !== rol.esSistema) throw new Error('Rol inexistente o protegido')
             if (anterior.esSistema && rol.estado !== 'activo') throw new Error('Rol del sistema protegido')

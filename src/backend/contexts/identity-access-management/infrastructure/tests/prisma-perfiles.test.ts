@@ -31,6 +31,7 @@ test('la persistencia no elimina el último super_admin activo', async () => {
         },
         rol: { count: async () => 0, findUnique: async () => ({ id: 7n }) },
         usuarioRol: {
+            findFirst: async () => ({ rolId: 7n }),
             findUnique: async () => ({ estado: 'activo' }), count: async () => 0,
             upsert: async () => { escrituras++ },
         },

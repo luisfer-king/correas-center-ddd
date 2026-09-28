@@ -10,9 +10,11 @@ export function registrarErroresIam(app: FastifyInstance) {
             return reply.code(401).send({ error: msg })
         }
         if (msg === 'Acceso denegado') return reply.code(403).send({ error: msg })
-        if (['Slug inválido', 'Nombre de rol no puede estar vacío', 'UUID inválido',
+        if (['Slug inválido', 'Nombre de rol no puede estar vacío', 'Nombre completo no puede estar vacío',
+            'Contraseña inicial inválida', 'Contraseña nueva inválida', 'Email inválido', 'UUID inválido',
+            'Rango de fechas inválido',
             'ID inválido'].includes(msg)) return reply.code(400).send({ error: 'Solicitud inválida' })
-        if (['Rol no encontrado', 'Permiso no encontrado', 'Usuario no encontrado',
+        if (['Rol no encontrado', 'Permiso no encontrado', 'Usuario no encontrado', 'Perfil no encontrado',
             'Rol o permiso no disponible', 'Usuario o rol no disponible'].includes(msg)) {
             return reply.code(404).send({ error: msg })
         }
@@ -26,13 +28,15 @@ export function registrarErroresIam(app: FastifyInstance) {
             'No se puede asignar un permiso inexistente o inactivo',
             'No se puede asignar un rol inexistente o inactivo',
             'Rol no activo', 'Perfil no activo', 'Permiso ya asignado', 'Permiso no asignado',
-            'El perfil ya tiene el rol', 'El perfil no tiene el rol'].includes(msg) ||
+            'El perfil ya tiene el rol', 'El perfil no tiene el rol', 'Estado de usuario incompatible',
+            'No puedes dar de baja tu propia cuenta'].includes(msg) ||
             (error as { code?: string }).code === 'P2002') {
             return reply.code(409).send({ error: 'Operación en conflicto con el estado actual' })
         }
         if ((error as { code?: string }).code === 'P2034') {
             return reply.code(409).send({ error: 'Modificación concurrente; vuelve a cargar los datos' })
         }
+        if (msg === 'Contraseña actual incorrecta') return reply.code(403).send({ error: msg })
         request.log.error({ err: error }, 'Fallo IAM')
         return reply.code(500).send({ error: 'Error interno' })
     })

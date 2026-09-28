@@ -9,7 +9,8 @@ export class PrismaAuditoria implements RepositorioAuditoria {
     async registrar(evento: EventoAuditoria): Promise<void> {
         await this.db.$transaction((tx) => insertarAuditoria(tx, evento))
     }
-    async listar(limite: number, antesDeId: bigint | null): Promise<readonly EventoAuditoria[]> {
+    async listar(limite: number, antesDeId: bigint | null,
+        rango: { desde: Date | null; hasta: Date | null } = { desde: null, hasta: null }): Promise<readonly EventoAuditoria[]> {
         if (!Number.isSafeInteger(limite) || limite < 1 || limite > 100) throw new Error('Límite inválido')
         if (antesDeId !== null && antesDeId <= 0n) throw new Error('Cursor inválido')
         type Fila = {
@@ -18,15 +19,17 @@ export class PrismaAuditoria implements RepositorioAuditoria {
             datosAnteriores: Json; datosNuevos: Json; ipAddress: string | null
             userAgent: string | null; metadata: Json; creadoEn: Date
         }
-        const cursor = antesDeId === null ? Prisma.empty : Prisma.sql`WHERE id < ${antesDeId}`
+        const cursor = antesDeId === null ? Prisma.empty : Prisma.sql`AND id < ${antesDeId}`
+        const desde = rango.desde === null ? Prisma.empty : Prisma.sql`AND creado_en >= ${rango.desde}`
+        const hasta = rango.hasta === null ? Prisma.empty : Prisma.sql`AND creado_en < ${rango.hasta}`
         // accion::text evita la conversión de enums con @map y tilde al leer.
         const filas = await this.db.$queryRaw<Fila[]>(Prisma.sql`
-            SELECT id, usuario_id AS "usuarioId", accion::text AS accion,
-                tabla_afectada AS "tablaAfectada", registro_id AS "registroId",
-                datos_anteriores AS "datosAnteriores", datos_nuevos AS "datosNuevos",
-                ip_address AS "ipAddress", user_agent AS "userAgent",
-                metadata, creado_en AS "creadoEn"
-            FROM public.auditoria ${cursor} ORDER BY id DESC LIMIT ${limite}`)
+        SELECT id, usuario_id AS "usuarioId", accion::text AS accion,
+            tabla_afectada AS "tablaAfectada", registro_id AS "registroId",
+            datos_anteriores AS "datosAnteriores", datos_nuevos AS "datosNuevos",
+            ip_address AS "ipAddress", user_agent AS "userAgent",
+            metadata, creado_en AS "creadoEn"
+        FROM public.auditoria WHERE TRUE ${cursor} ${desde} ${hasta} ORDER BY id DESC LIMIT ${limite}`)
         return filas.map((f) => EventoAuditoria.rehidratar({
             id: f.id, usuarioId: f.usuarioId,
             accion: f.accion,
