@@ -3,6 +3,7 @@ import type { CasosIam } from '../infrastructure/componer-iam.js'
 import { conContextoAuditoriaHttp } from '../infrastructure/contexto-auditoria-http.js'
 import { registrarErroresIam } from './errores-http.js'
 import { rutasAuditoria } from './rutas-auditoria.js'
+import { rutasMiPerfil } from './rutas-mi-perfil.js'
 import { rutasPermisos } from './rutas-permisos.js'
 import { rutasRoles } from './rutas-roles.js'
 import { rutasSesiones } from './rutas-sesiones.js'
@@ -21,5 +22,6 @@ export async function registrarRutasIam(app: FastifyInstance, casos: CasosIam, c
     rutasRoles(app, casos, config)
     rutasPermisos(app, casos, config)
     rutasUsuarios(app, casos, config)
+    rutasMiPerfil(app, casos, config)
     rutasAuditoria(app, casos, config)
 }

@@ -44,13 +44,14 @@ test('lectura de usuarios exige permiso y solo super_admin puede ver perfiles el
         listar: async () => { consultas++; return [vigente, eliminado] },
         buscarPorId: async () => eliminado,
     } as unknown as RepositorioPerfiles
-    await assert.rejects(new ListarUsuarios(repositorio, acceso(false)).ejecutar(actor), /Acceso denegado/)
+    const roles = { buscarPorSlug: async () => null } as unknown as RepositorioRoles
+    await assert.rejects(new ListarUsuarios(repositorio, acceso(false), roles).ejecutar(actor), /Acceso denegado/)
     assert.equal(consultas, 0)
-    assert.deepEqual(await new ListarUsuarios(repositorio, acceso(false, 'iam.usuarios.read')).ejecutar(actor), [vigente])
-    await assert.rejects(new ObtenerUsuario(repositorio, acceso(false, 'iam.usuarios.read'))
+    assert.deepEqual(await new ListarUsuarios(repositorio, acceso(false, 'iam.usuarios.read'), roles).ejecutar(actor), [vigente])
+    await assert.rejects(new ObtenerUsuario(repositorio, acceso(false, 'iam.usuarios.read'), roles)
         .ejecutar(actor, uid), /Usuario no encontrado/)
-    assert.deepEqual(await new ListarUsuarios(repositorio, acceso(true, 'iam.usuarios.read')).ejecutar(actor), [vigente, eliminado])
-    assert.equal(await new ObtenerUsuario(repositorio, acceso(true, 'iam.usuarios.read')).ejecutar(actor, uid), eliminado)
+    assert.deepEqual(await new ListarUsuarios(repositorio, acceso(true, 'iam.usuarios.read'), roles).ejecutar(actor), [vigente, eliminado])
+    assert.equal(await new ObtenerUsuario(repositorio, acceso(true, 'iam.usuarios.read'), roles).ejecutar(actor, uid), eliminado)
 })
 
 test('retirar y reasignar un rol reutiliza el vínculo y requiere permiso vigente', async () => {
@@ -60,12 +61,12 @@ test('retirar y reasignar un rol reutiliza el vínculo y requiere permiso vigent
         buscarPorId: async () => usuario,
         guardar: async () => { guardados++ },
     } as unknown as RepositorioPerfiles
-    const roles = { buscarPorId: async () => rol('activo', 2n) } as unknown as RepositorioRoles
+    const roles = { buscarPorId: async () => rol('activo', 2n), buscarPorSlug: async () => null } as unknown as RepositorioRoles
     let guardados = 0
     const autorizado = acceso(true, 'iam.usuarios.roles.assign')
-    await assert.rejects(new RetirarRolUsuario(repositorio, acceso(true), reloj)
+    await assert.rejects(new RetirarRolUsuario(repositorio, acceso(true), reloj, roles)
         .ejecutar(actor, uid, 2n), /Acceso denegado/)
-    await new RetirarRolUsuario(repositorio, autorizado, reloj).ejecutar(actor, uid, 2n)
+    await new RetirarRolUsuario(repositorio, autorizado, reloj, roles).ejecutar(actor, uid, 2n)
     assert.equal(asignacion.estado, 'inactivo')
     await new AsignarRolUsuario(repositorio, roles, autorizado, reloj).ejecutar(actor, uid, 2n)
     assert.equal(usuario.rolesAsignados.length, 1)
@@ -80,4 +81,32 @@ test('no asigna un rol inactivo a un perfil activo', async () => {
     await assert.rejects(new AsignarRolUsuario(repositorio, roles, acceso(true, 'iam.usuarios.roles.assign'), reloj)
         .ejecutar(actor, uid, 3n), /no disponible/)
     assert.equal(escrituras, 0)
+})
+
+test('usuarios con vínculo super_admin activo no aparecen ni admiten consulta directa para otros roles', async () => {
+    const protegido = perfil()
+    const superRol = 2n
+    const repositorio = { listar: async () => [protegido], buscarPorId: async () => protegido } as unknown as RepositorioPerfiles
+    const roles = { buscarPorSlug: async () => ({ id: superRol }) } as unknown as RepositorioRoles
+    const admin = acceso(false, 'iam.usuarios.read')
+    assert.deepEqual(await new ListarUsuarios(repositorio, admin, roles).ejecutar(actor), [])
+    await assert.rejects(new ObtenerUsuario(repositorio, admin, roles).ejecutar(actor, uid), /Usuario no encontrado/)
+    assert.deepEqual(await new ListarUsuarios(repositorio, acceso(true, 'iam.usuarios.read'), roles).ejecutar(actor), [protegido])
+})
+
+test('un usuario no super no puede asignar ni retirar super_admin por ID directo', async () => {
+    const protegido = perfil()
+    let guardados = 0
+    const repositorio = { buscarPorId: async () => protegido, guardar: async () => { guardados++ } } as unknown as RepositorioPerfiles
+    const rolSuper = new Rol({
+        id: 2n, nombre: 'Superadministrador', slug: Slug.create('super_admin'),
+        esSistema: true, descripcion: null, estado: 'activo',
+        fechas: { creadoEn: t0, actualizadoEn: t0, eliminadoEn: null }, permisos: []
+    })
+    const roles = { buscarPorId: async () => rolSuper, buscarPorSlug: async () => rolSuper } as unknown as RepositorioRoles
+    await assert.rejects(new AsignarRolUsuario(repositorio, roles, acceso(false, 'iam.usuarios.roles.assign'), reloj)
+        .ejecutar(actor, uid, 2n), /no disponible/)
+    await assert.rejects(new RetirarRolUsuario(repositorio, acceso(false, 'iam.usuarios.roles.assign'), reloj, roles)
+        .ejecutar(actor, uid, 2n), /Perfil no encontrado/)
+    assert.equal(guardados, 0)
 })

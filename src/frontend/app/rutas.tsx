@@ -8,6 +8,7 @@ import { PortalBase } from '../features/iam/presentation/portal-base'
 import { PortalProtegido } from '../features/iam/presentation/portal-protegido'
 import { ProveedorSesion } from '../features/iam/presentation/sesion-portal'
 import { TemaPortal } from '../features/iam/presentation/tema-portal'
+import { VistaMiPerfil } from '../features/iam/presentation/vista-mi-perfil'
 import { PortadaTemporal } from './portada-temporal'
 
 export function Rutas() {
@@ -23,6 +24,7 @@ export function Rutas() {
           <Route path="usuarios" element={<ListadoUsuarios />} />
           <Route path="usuarios/:id" element={<ListadoUsuarios />} />
           <Route path="auditoria" element={<ListadoAuditoria />} />
+          <Route path="mi-perfil" element={<VistaMiPerfil />} />
         </Route>
       </Route>
     </Route>

@@ -8,6 +8,6 @@ export class ListarRoles {
         await this.autorizar.ejecutar(actorId, 'iam.roles.read')
         const esSuper = await this.autorizar.tieneRolActivo(actorId, ['super_admin'])
         const roles = await this.roles.listar()
-        return esSuper ? roles : roles.filter((rol) => rol.estado !== 'eliminado')
+        return esSuper ? roles : roles.filter((rol) => rol.estado !== 'eliminado' && rol.slug.value !== 'super_admin')
     }
 }

@@ -7,7 +7,7 @@ export class ObtenerRol {
     async ejecutar(actorId: string, rolId: bigint): Promise<Rol> {
         await this.autorizar.ejecutar(actorId, 'iam.roles.read')
         const rol = await this.roles.buscarPorId(rolId)
-        if (!rol || (rol.estado === 'eliminado' &&
+        if (!rol || ((rol.estado === 'eliminado' || rol.slug.value === 'super_admin') &&
             !(await this.autorizar.tieneRolActivo(actorId, ['super_admin'])))) throw new Error('Rol no encontrado')
         return rol
     }

@@ -38,6 +38,11 @@ export const iamApi = {
     listarUsuarios: (opciones?: Senal) => solicitarApi<UsuarioIam[]>(`${base}/usuarios`, opciones),
     obtenerUsuario: (uid: string, opciones?: Senal) =>
         solicitarApi<UsuarioIam>(`${base}/usuarios/${usuarioId(uid)}`, opciones),
+    miPerfil: (opciones?: Senal) => solicitarApi<UsuarioIam>(`${base}/mi-perfil`, opciones),
+    editarMiPerfil: (datos: { nombreCompleto: string; telefono: string | null }) =>
+        solicitarApi<UsuarioIam>(`${base}/mi-perfil`, { metodo: 'PATCH', cuerpo: datos }),
+    cambiarMiClave: (actual: string, nueva: string) =>
+        solicitarApi<Ok>(`${base}/mi-perfil/clave`, { metodo: 'POST', cuerpo: { actual, nueva } }),
     crearUsuario: (datos: { nombreCompleto: string; email: string; telefono: string | null; password: string }) =>
         solicitarApi<UsuarioIam>(`${base}/usuarios`, { metodo: 'POST', cuerpo: datos }),
     editarUsuario: (uid: string, datos: { nombreCompleto: string; email: string; telefono: string | null; password?: string }) =>

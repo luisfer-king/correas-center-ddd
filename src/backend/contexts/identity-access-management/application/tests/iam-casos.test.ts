@@ -62,6 +62,15 @@ test('solo super_admin ve roles eliminados en lista y detalle', async () => {
     assert.equal((await new ObtenerRol(repositorio, acceso('iam.roles.read')).ejecutar(actorId, 2n)).id, 2n)
 })
 
+test('el rol super_admin está oculto por lista e ID a todos los demás', async () => {
+    const sistema = rol(true)
+    const repositorio = { listar: async () => [sistema], buscarPorId: async () => sistema } as unknown as RepositorioRoles
+    const admin = accesoConRoles(['administrador'], 'iam.roles.read')
+    assert.deepEqual(await new ListarRoles(repositorio, admin).ejecutar(actorId), [])
+    await assert.rejects(new ObtenerRol(repositorio, admin).ejecutar(actorId, sistema.id), /Rol no encontrado/)
+    assert.deepEqual(await new ListarRoles(repositorio, acceso('iam.roles.read')).ejecutar(actorId), [sistema])
+})
+
 test('baja requiere rol administrador vigente y permiso delete', async () => {
     let escrituras = 0
     const repositorio = {

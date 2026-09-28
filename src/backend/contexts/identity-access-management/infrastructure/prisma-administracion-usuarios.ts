@@ -2,6 +2,7 @@ import { Prisma, type PrismaClient } from '../../../generated/prisma/client.js'
 import type { RepositorioAdministracionUsuarios } from '../application/ports/repositorio-administracion-usuarios.js'
 import { EventoAuditoria } from '../domain/evento-auditoria.js'
 import { exigirPermisoEnTransaccion } from './exigir-permiso-en-transaccion.js'
+import { exigirSuperAdminParaPerfil } from './exigir-super-admin-para-perfil.js'
 import { insertarAuditoria } from './insertar-auditoria.js'
 import { aPerfil } from './mappers/perfil.js'
 
@@ -33,6 +34,7 @@ export class PrismaAdministracionUsuarios implements RepositorioAdministracionUs
         return this.db.$transaction(async (tx) => {
             await exigirPermisoEnTransaccion(tx, actorId, 'iam.usuarios.update',
                 datos.hash === undefined ? undefined : ['super_admin'])
+            await exigirSuperAdminParaPerfil(tx, actorId, id)
             const anterior = await tx.perfil.findUnique({
                 where: { id }, select: {
                     email: true, nombreCompleto: true,
@@ -78,6 +80,7 @@ export class PrismaAdministracionUsuarios implements RepositorioAdministracionUs
         await this.db.$transaction(async (tx) => {
             await exigirPermisoEnTransaccion(tx, actorId, permiso,
                 estado === 'eliminado' ? ['super_admin', 'administrador', 'admin'] : undefined)
+            await exigirSuperAdminParaPerfil(tx, actorId, id)
             if (actorId === id && estado !== 'activo') throw new Error('No puedes dar de baja tu propia cuenta')
             const anterior = await tx.perfil.findUnique({ where: { id }, select: { estado: true } })
             if (!anterior) throw new Error('Usuario no encontrado')

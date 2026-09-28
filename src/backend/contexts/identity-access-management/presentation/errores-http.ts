@@ -11,7 +11,7 @@ export function registrarErroresIam(app: FastifyInstance) {
         }
         if (msg === 'Acceso denegado') return reply.code(403).send({ error: msg })
         if (['Slug inválido', 'Nombre de rol no puede estar vacío', 'Nombre completo no puede estar vacío',
-            'Contraseña inicial inválida', 'Email inválido', 'UUID inválido',
+            'Contraseña inicial inválida', 'Contraseña nueva inválida', 'Email inválido', 'UUID inválido',
             'Rango de fechas inválido',
             'ID inválido'].includes(msg)) return reply.code(400).send({ error: 'Solicitud inválida' })
         if (['Rol no encontrado', 'Permiso no encontrado', 'Usuario no encontrado', 'Perfil no encontrado',
@@ -36,6 +36,7 @@ export function registrarErroresIam(app: FastifyInstance) {
         if ((error as { code?: string }).code === 'P2034') {
             return reply.code(409).send({ error: 'Modificación concurrente; vuelve a cargar los datos' })
         }
+        if (msg === 'Contraseña actual incorrecta') return reply.code(403).send({ error: msg })
         request.log.error({ err: error }, 'Fallo IAM')
         return reply.code(500).send({ error: 'Error interno' })
     })

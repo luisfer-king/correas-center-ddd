@@ -15,6 +15,7 @@ import { ListarAuditoria } from '../application/use-cases/listar-auditoria.js'
 import { ListarPermisos } from '../application/use-cases/listar-permisos.js'
 import { ListarRoles } from '../application/use-cases/listar-roles.js'
 import { ListarUsuarios } from '../application/use-cases/listar-usuarios.js'
+import { MiPerfil } from '../application/use-cases/mi-perfil.js'
 import { ObtenerCapacidadesRoles } from '../application/use-cases/obtener-capacidades-roles.js'
 import { ObtenerPermiso } from '../application/use-cases/obtener-permiso.js'
 import { ObtenerRol } from '../application/use-cases/obtener-rol.js'
@@ -27,6 +28,7 @@ import { JoseTokens } from './jose-tokens.js'
 import { PrismaAdministracionUsuarios } from './prisma-administracion-usuarios.js'
 import { PrismaAuditoria } from './prisma-auditoria.js'
 import { PrismaAutorizacion } from './prisma-autorizacion.js'
+import { PrismaMiPerfil } from './prisma-mi-perfil.js'
 import { PrismaPerfiles } from './prisma-perfiles.js'
 import { PrismaPermisos } from './prisma-permisos.js'
 import { PrismaRoles } from './prisma-roles.js'
@@ -62,10 +64,11 @@ export function componerIam(db: PrismaClient, secret: string, issuer: string, au
         asignarPermiso: new AsignarPermisoRol(roles, permisos, autorizar, reloj),
         retirarPermiso: new RetirarPermisoRol(roles, autorizar, reloj),
         listarPermisos: new ListarPermisos(permisos, autorizar), obtenerPermiso: new ObtenerPermiso(permisos, autorizar),
-        listarUsuarios: new ListarUsuarios(perfiles, autorizar), obtenerUsuario: new ObtenerUsuario(perfiles, autorizar),
+        listarUsuarios: new ListarUsuarios(perfiles, autorizar, roles), obtenerUsuario: new ObtenerUsuario(perfiles, autorizar, roles),
         administrarUsuarios: administracionUsuarios,
+        miPerfil: new MiPerfil(perfiles, new PrismaMiPerfil(db)),
         asignarRol: new AsignarRolUsuario(perfiles, roles, autorizar, reloj),
-        retirarRol: new RetirarRolUsuario(perfiles, autorizar, reloj),
+        retirarRol: new RetirarRolUsuario(perfiles, autorizar, reloj, roles),
         listarAuditoria: new ListarAuditoria(auditoria, autorizar),
         registrarLectura: new RegistrarLecturaIam(auditoria, reloj),
     }

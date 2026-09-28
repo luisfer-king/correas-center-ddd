@@ -2,10 +2,11 @@ import { EventoAuditoria } from '../../domain/evento-auditoria.js'
 import type { Reloj } from '../ports/reloj.js'
 import type { RepositorioAuditoria } from '../ports/repositorio-auditoria.js'
 
-type Recurso = 'portal' | 'roles' | 'permisos' | 'usuarios' | 'auditoria'
+type Recurso = 'portal' | 'roles' | 'permisos' | 'usuarios' | 'auditoria' | 'mi-perfil'
 
 const tabla: Record<Recurso, string> = {
     portal: 'portal_iam', roles: 'rol', permisos: 'permiso', usuarios: 'perfil', auditoria: 'auditoria',
+    'mi-perfil': 'perfil',
 }
 
 export class RegistrarLecturaIam {
