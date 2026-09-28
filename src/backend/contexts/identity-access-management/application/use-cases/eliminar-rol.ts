@@ -9,6 +9,9 @@ export class EliminarRol {
         private readonly reloj: Reloj) { }
     async ejecutar(actorId: string, rolId: bigint): Promise<void> {
         await this.autorizar.ejecutar(actorId, 'iam.roles.delete')
+        if (!(await this.autorizar.tieneRolActivo(actorId, ['super_admin', 'administrador', 'admin']))) {
+            throw new Error('Acceso denegado')
+        }
         const rol = await this.roles.buscarPorId(rolId)
         if (!rol) throw new Error('Rol no encontrado')
         const versionAnterior = rol.actualizadoEn

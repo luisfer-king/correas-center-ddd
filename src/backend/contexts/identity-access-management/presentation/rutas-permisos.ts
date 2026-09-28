@@ -13,7 +13,9 @@ export function rutasPermisos(app: FastifyInstance, casos: CasosIam, config: Seg
         },
     }, async (req, reply) => {
         const id = await actor(req, reply); if (!id) return reply
-        return (await casos.listarPermisos.ejecutar(id)).map(permisoDto)
+        const permisos = await casos.listarPermisos.ejecutar(id)
+        await casos.registrarLectura.ejecutar(id, 'permisos')
+        return permisos.map(permisoDto)
     })
     app.get<{ Params: { id: string } }>('/api/portal/iam/permisos/:id', {
         schema: {
@@ -22,6 +24,8 @@ export function rutasPermisos(app: FastifyInstance, casos: CasosIam, config: Seg
         },
     }, async (req, reply) => {
         const id = await actor(req, reply); if (!id) return reply
-        return permisoDto(await casos.obtenerPermiso.ejecutar(id, BigInt(req.params.id)))
+        const permiso = await casos.obtenerPermiso.ejecutar(id, BigInt(req.params.id))
+        await casos.registrarLectura.ejecutar(id, 'permisos', permiso.id.toString())
+        return permisoDto(permiso)
     })
 }

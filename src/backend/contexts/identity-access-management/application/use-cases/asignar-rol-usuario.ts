@@ -12,6 +12,9 @@ export class AsignarRolUsuario {
         const perfil = await this.perfiles.buscarPorId(usuarioId)
         const rol = await this.roles.buscarPorId(rolId)
         if (!perfil || !rol || rol.estado !== 'activo') throw new Error('Usuario o rol no disponible')
+        const superRol = await this.roles.buscarPorSlug('super_admin')
+        if ((rol.slug.value === 'super_admin' || perfil.rolesAsignados.some((v) => v.rolId === superRol?.id)) &&
+            !(await this.autorizar.tieneRolActivo(actorId, ['super_admin']))) throw new Error('Usuario o rol no disponible')
         const versionAnterior = perfil.actualizadoEn
         perfil.asignarRol(rol.id, fechaCambio(this.reloj, versionAnterior))
         await this.perfiles.guardar(perfil, versionAnterior, actorId)
