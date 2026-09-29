@@ -5,6 +5,7 @@ export type DatosNuevaSucursal = {
     empresaId: bigint
     datos: DatosSucursal
     esPrincipal: boolean
+    ordenAutomatico?: boolean
     orden: Orden
 }
 

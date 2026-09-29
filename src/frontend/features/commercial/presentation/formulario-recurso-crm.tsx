@@ -1,11 +1,19 @@
 import { useEffect, useId, useState, type FormEvent } from 'react'
 import { ModalPortal } from '../../iam/presentation/modal-portal'
 import { empresasApi } from '../api/empresas'
-import type { BaseCrm, EmpresaCrm } from '../api/tipos-crm'
+import type { BaseCrm, EmpresaCrm, SucursalCrm } from '../api/tipos-crm'
 import type { ConfiguracionCrm } from './campos-crm'
+import { FormularioSucursal } from './formulario-sucursal'
 import { SelectorLogoEmpresa } from './selector-logo-empresa'
 
-export function FormularioRecursoCrm<T extends BaseCrm, A extends string>({ config, registro, cerrar, guardado }: {
+export function FormularioRecursoCrm<T extends BaseCrm, A extends string>(props: {
+  config: ConfiguracionCrm<T, A>; registro: T | null; cerrar: () => void; guardado: () => void
+}) {
+  if (props.config.recurso === 'sucursales') return <FormularioSucursal registro={props.registro as unknown as SucursalCrm | null} cerrar={props.cerrar} guardado={props.guardado} />
+  return <FormularioGeneralCrm {...props} />
+}
+
+function FormularioGeneralCrm<T extends BaseCrm, A extends string>({ config, registro, cerrar, guardado }: {
   config: ConfiguracionCrm<T, A>; registro: T | null; cerrar: () => void; guardado: () => void
 }) {
   const [datos, setDatos] = useState<Record<string, unknown>>(() => Object.fromEntries(config.campos.map((campo) =>

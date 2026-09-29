@@ -55,7 +55,12 @@ export class PrismaSucursales implements RepositorioSucursales {
         return transaccionCrm(this.db, async (tx) => {
             await permitirGestion(tx, actorId, 'sucursales')
             await empresaActiva(tx, datos.empresaId)
-            if (datos.esPrincipal) await bloquearPrincipal(tx, datos.empresaId)
+            await bloquearPrincipal(tx, datos.empresaId)
+            const maximo = datos.ordenAutomatico ? await tx.sucursal.aggregate({
+                where: { empresaId: datos.empresaId, eliminadoEn: null }, _max: { orden: true },
+            }) : null
+            const orden = datos.ordenAutomatico ? Math.max(0, maximo?._max.orden ?? 0) + 1 : datos.orden.value
+            if (!Number.isInteger(orden) || orden < 1 || orden > 2147483647) throw new Error('Orden inválido')
             const ahora = new Date()
             if (datos.esPrincipal) await retirarOtrasPrincipales(tx, datos.empresaId, null, ahora)
             const fila = await tx.sucursal.create({
@@ -66,7 +71,7 @@ export class PrismaSucursales implements RepositorioSucursales {
                     mapaIncrustado: datos.datos.mapaIncrustado,
                     latitud: datos.datos.ubicacion.latitud,
                     longitud: datos.datos.ubicacion.longitud,
-                    esPrincipal: datos.esPrincipal, orden: datos.orden.value,
+                    esPrincipal: datos.esPrincipal, orden,
                     estado: 'activo', creadoEn: ahora, actualizadoEn: ahora,
                 }
             })
