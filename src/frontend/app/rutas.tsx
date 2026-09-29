@@ -1,4 +1,9 @@
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom'
+import { VistaContactos } from '../features/commercial/presentation/vista-contactos'
+import { VistaEmpresas } from '../features/commercial/presentation/vista-empresas'
+import { VistaLeads } from '../features/commercial/presentation/vista-leads'
+import { VistaSucursales } from '../features/commercial/presentation/vista-sucursales'
+import { VistaSuscriptores } from '../features/commercial/presentation/vista-suscriptores'
 import { AccesoPortal } from '../features/iam/presentation/acceso-portal'
 import { ListadoAuditoria } from '../features/iam/presentation/listado-auditoria'
 import { ListadoRoles } from '../features/iam/presentation/listado-roles'
@@ -25,6 +30,16 @@ export function Rutas() {
           <Route path="usuarios/:id" element={<ListadoUsuarios />} />
           <Route path="auditoria" element={<ListadoAuditoria />} />
           <Route path="mi-perfil" element={<VistaMiPerfil />} />
+          <Route path="crm/empresas" element={<VistaEmpresas />} />
+          <Route path="crm/empresas/:id" element={<VistaEmpresas />} />
+          <Route path="crm/sucursales" element={<VistaSucursales />} />
+          <Route path="crm/sucursales/:id" element={<VistaSucursales />} />
+          <Route path="crm/contactos" element={<VistaContactos />} />
+          <Route path="crm/contactos/:id" element={<VistaContactos />} />
+          <Route path="crm/suscriptores" element={<VistaSuscriptores />} />
+          <Route path="crm/suscriptores/:id" element={<VistaSuscriptores />} />
+          <Route path="crm/leads" element={<VistaLeads />} />
+          <Route path="crm/leads/:id" element={<VistaLeads />} />
         </Route>
       </Route>
     </Route>
