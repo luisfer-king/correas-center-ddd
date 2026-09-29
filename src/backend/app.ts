@@ -3,12 +3,14 @@ import rateLimit from "@fastify/rate-limit";
 import swagger from "@fastify/swagger";
 import swaggerUi from "@fastify/swagger-ui";
 import Fastify from "fastify";
+import { componerCrm, type CasosCrm } from './contexts/commercial/infrastructure/componer-crm.js';
+import { registrarRutasCrm } from './contexts/commercial/presentation/registrar-rutas-crm.js';
 import { componerIam, type CasosIam } from './contexts/identity-access-management/infrastructure/componer-iam.js';
 import { crearClienteIam } from './contexts/identity-access-management/infrastructure/prisma-iam-client.js';
 import { registrarRutasIam } from './contexts/identity-access-management/presentation/registrar-rutas-iam.js';
 import type { SeguridadIam } from './contexts/identity-access-management/presentation/seguridad-http.js';
 
-export async function createApp(pruebas?: { casos: CasosIam; config: SeguridadIam }) {
+export async function createApp(pruebas?: { casos: CasosIam; config: SeguridadIam; crm?: CasosCrm }) {
   const app = Fastify({
     logger: {
       redact: ['req.headers.cookie', 'req.headers.authorization',
@@ -35,7 +37,7 @@ export async function createApp(pruebas?: { casos: CasosIam; config: SeguridadIa
   await app.register(swagger, {
     openapi: {
       openapi: "3.0.3",
-      info: { title: "Correas Center API", version: "0.2.0", description: "IAM del portal; cookie HttpOnly y Origin obligatorio en escrituras" },
+      info: { title: "Correas Center API", version: "0.3.0", description: "IAM y CRM del portal; cookie HttpOnly y Origin obligatorio en escrituras" },
       components: { securitySchemes: { cookieAuth: { type: 'apiKey', in: 'cookie', name: config.cookie } } },
     },
   });
@@ -57,6 +59,8 @@ export async function createApp(pruebas?: { casos: CasosIam; config: SeguridadIa
   await app.register(cookie);
   await app.register(rateLimit, { global: false });
   await app.register(async (scope) => registrarRutasIam(scope, casos, config));
+  if (db || pruebas?.crm) await app.register(async (scope) =>
+    registrarRutasCrm(scope, pruebas?.crm ?? componerCrm(db!), casos, config));
 
   app.get("/api/health", {
     schema: {

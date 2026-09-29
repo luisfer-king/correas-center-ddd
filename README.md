@@ -78,6 +78,11 @@ export default defineConfig([
 correas-center-ddd
 ├─ .env
 ├─ .env.example
+├─ docs
+│  ├─ delimitacion_sustantiva.mmd
+│  ├─ Delimitacion_Sustantiva.pdf
+│  ├─ Delimitacion_Sustantiva.png
+│  └─ Delimitacion_Sustantiva.vsdx
 ├─ eslint.config.js
 ├─ index.html
 ├─ package.json
@@ -131,6 +136,9 @@ correas-center-ddd
 │  │  │  │  └─ presentation
 │  │  │  ├─ content-management-system
 │  │  │  │  ├─ application
+│  │  │  │  │  ├─ ports
+│  │  │  │  │  ├─ tests
+│  │  │  │  │  └─ use-cases
 │  │  │  │  ├─ domain
 │  │  │  │  │  ├─ cms-values.ts
 │  │  │  │  │  ├─ configuracion-sitio.ts
@@ -171,30 +179,37 @@ correas-center-ddd
 │  │  │     │  │  ├─ mi-perfil.test.ts
 │  │  │     │  │  └─ usuarios-casos.test.ts
 │  │  │     │  └─ use-cases
-│  │  │     │     ├─ activar-rol.ts
-│  │  │     │     ├─ administrar-usuarios.ts
-│  │  │     │     ├─ asignar-permiso-rol.ts
-│  │  │     │     ├─ asignar-rol-usuario.ts
-│  │  │     │     ├─ cerrar-sesion.ts
-│  │  │     │     ├─ comprobar-sesion.ts
-│  │  │     │     ├─ crear-rol.ts
-│  │  │     │     ├─ editar-rol.ts
-│  │  │     │     ├─ eliminar-rol.ts
-│  │  │     │     ├─ exigir-permiso.ts
-│  │  │     │     ├─ inactivar-rol.ts
-│  │  │     │     ├─ iniciar-sesion.ts
-│  │  │     │     ├─ listar-auditoria.ts
-│  │  │     │     ├─ listar-permisos.ts
-│  │  │     │     ├─ listar-roles.ts
-│  │  │     │     ├─ listar-usuarios.ts
-│  │  │     │     ├─ mi-perfil.ts
-│  │  │     │     ├─ obtener-capacidades-roles.ts
-│  │  │     │     ├─ obtener-permiso.ts
-│  │  │     │     ├─ obtener-rol.ts
-│  │  │     │     ├─ obtener-usuario.ts
-│  │  │     │     ├─ registrar-lectura-iam.ts
-│  │  │     │     ├─ retirar-permiso-rol.ts
-│  │  │     │     └─ retirar-rol-usuario.ts
+│  │  │     │     ├─ auditoria
+│  │  │     │     │  ├─ listar-auditoria.ts
+│  │  │     │     │  └─ registrar-lectura-iam.ts
+│  │  │     │     ├─ autorizacion
+│  │  │     │     │  └─ exigir-permiso.ts
+│  │  │     │     ├─ perfil
+│  │  │     │     │  └─ mi-perfil.ts
+│  │  │     │     ├─ permisos
+│  │  │     │     │  ├─ listar-permisos.ts
+│  │  │     │     │  └─ obtener-permiso.ts
+│  │  │     │     ├─ roles
+│  │  │     │     │  ├─ activar-rol.ts
+│  │  │     │     │  ├─ asignar-permiso-rol.ts
+│  │  │     │     │  ├─ crear-rol.ts
+│  │  │     │     │  ├─ editar-rol.ts
+│  │  │     │     │  ├─ eliminar-rol.ts
+│  │  │     │     │  ├─ inactivar-rol.ts
+│  │  │     │     │  ├─ listar-roles.ts
+│  │  │     │     │  ├─ obtener-capacidades-roles.ts
+│  │  │     │     │  ├─ obtener-rol.ts
+│  │  │     │     │  └─ retirar-permiso-rol.ts
+│  │  │     │     ├─ sesiones
+│  │  │     │     │  ├─ cerrar-sesion.ts
+│  │  │     │     │  ├─ comprobar-sesion.ts
+│  │  │     │     │  └─ iniciar-sesion.ts
+│  │  │     │     └─ usuarios
+│  │  │     │        ├─ administrar-usuarios.ts
+│  │  │     │        ├─ asignar-rol-usuario.ts
+│  │  │     │        ├─ listar-usuarios.ts
+│  │  │     │        ├─ obtener-usuario.ts
+│  │  │     │        └─ retirar-rol-usuario.ts
 │  │  │     ├─ domain
 │  │  │     │  ├─ evento-auditoria.ts
 │  │  │     │  ├─ iam-values.ts
