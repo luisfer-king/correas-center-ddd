@@ -1,22 +1,18 @@
 import { suscriptoresApi } from '../api/suscriptores'
-import type { EntradaSuscriptor, SuscriptorCrm } from '../api/tipos-crm'
+import type { SuscriptorCrm } from '../api/tipos-crm'
 import type { ConfiguracionCrm } from './campos-crm'
 import { ListadoRecursoCrm } from './listado-recurso-crm'
 
-type Accion = 'activar' | 'inactivar' | 'desuscribir' | 'eliminar'
+type Accion = 'activar' | 'inactivar' | 'desuscribir'
 const config: ConfiguracionCrm<SuscriptorCrm, Accion> = {
-  recurso: 'suscriptores', titulo: 'Suscriptores', descripcion: 'Suscripciones y estados de comunicación.',
+  recurso: 'suscriptores', titulo: 'Bandeja de suscriptores',
+  descripcion: 'Consulta las suscripciones recibidas y administra su estado: activo, inactivo o desuscrito.',
   columnas: [{ clave: 'email', titulo: 'Correo' }, { clave: 'nombre', titulo: 'Nombre' },
-    { clave: 'empresaId', titulo: 'Empresa' }, { clave: 'emailVerificadoEn', titulo: 'Verificado' }],
-  campos: [{ clave: 'empresaId', etiqueta: 'Empresa', obligatorio: true, soloCrear: true },
-    { clave: 'email', etiqueta: 'Correo', tipo: 'email', obligatorio: true, soloCrear: true },
-    { clave: 'nombre', etiqueta: 'Nombre' }],
+  { clave: 'creadoEn', titulo: 'Suscripción' }, { clave: 'emailVerificadoEn', titulo: 'Correo verificado el' }],
+  campos: [],
   acciones: [{ valor: 'activar', etiqueta: 'Activar', estados: ['inactivo'] },
-    { valor: 'inactivar', etiqueta: 'Inactivar', estados: ['activo'] },
-    { valor: 'desuscribir', etiqueta: 'Desuscribir', estados: ['activo', 'inactivo'] },
-    { valor: 'eliminar', etiqueta: 'Dar de baja', estados: ['activo', 'inactivo', 'desuscrito'] }],
-  ...suscriptoresApi,
-  crear: (datos) => suscriptoresApi.crear(datos as EntradaSuscriptor & { empresaId: string }),
-  editar: (id, datos) => suscriptoresApi.editar(id, (datos.nombre as string | null) ?? null),
+  { valor: 'inactivar', etiqueta: 'Inactivar', estados: ['activo'] },
+  { valor: 'desuscribir', etiqueta: 'Desuscribir', estados: ['activo', 'inactivo'] }],
+  listar: suscriptoresApi.listar, obtener: suscriptoresApi.obtener, cambiar: suscriptoresApi.cambiar,
 }
 export function VistaSuscriptores() { return <ListadoRecursoCrm config={config} /> }

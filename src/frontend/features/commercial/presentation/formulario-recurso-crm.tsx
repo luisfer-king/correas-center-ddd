@@ -43,7 +43,8 @@ function FormularioGeneralCrm<T extends BaseCrm, A extends string>({ config, reg
     }))
     try {
       if (registro && config.editar) await config.editar(registro.id, cuerpo)
-      else if (!registro) await config.crear(cuerpo)
+      else if (!registro && config.crear) await config.crear(cuerpo)
+      else throw new Error('Este recurso solo admite consulta y cambios de estado.')
       guardado()
     } catch (fallo) { setError(fallo instanceof Error ? fallo.message : 'No se pudo guardar el registro.') }
     finally { setOcupado(false) }

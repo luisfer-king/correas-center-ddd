@@ -1,23 +1,17 @@
 import { contactosApi } from '../api/contactos'
-import type { ContactoCrm, EntradaContacto } from '../api/tipos-crm'
+import type { ContactoCrm } from '../api/tipos-crm'
 import type { ConfiguracionCrm } from './campos-crm'
 import { ListadoRecursoCrm } from './listado-recurso-crm'
 
-type Accion = 'respondido' | 'archivar' | 'eliminar'
+type Accion = 'respondido' | 'archivar'
 const config: ConfiguracionCrm<ContactoCrm, Accion> = {
-  recurso: 'contactos', titulo: 'Contactos entrantes', descripcion: 'Mensajes recibidos y seguimiento de respuesta.',
-  columnas: [{ clave: 'nombre', titulo: 'Nombre' }, { clave: 'empresaId', titulo: 'Empresa' },
-    { clave: 'email', titulo: 'Correo' }, { clave: 'mensaje', titulo: 'Mensaje' }],
-  campos: [{ clave: 'empresaId', etiqueta: 'Empresa', obligatorio: true },
-    { clave: 'nombre', etiqueta: 'Nombre', obligatorio: true },
-    { clave: 'empresaDeclarada', etiqueta: 'Empresa declarada' },
-    { clave: 'telefono', etiqueta: 'Teléfono', obligatorio: true },
-    { clave: 'email', etiqueta: 'Correo', tipo: 'email', obligatorio: true },
-    { clave: 'mensaje', etiqueta: 'Mensaje', tipo: 'textarea', obligatorio: true }],
+  recurso: 'contactos', titulo: 'Bandeja de contactos',
+  descripcion: 'Mensajes recibidos desde el sitio público. Consulta el mensaje completo y actualiza su estado.',
+  columnas: [{ clave: 'nombre', titulo: 'Remitente' }, { clave: 'email', titulo: 'Correo' },
+  { clave: 'mensaje', titulo: 'Mensaje' }, { clave: 'creadoEn', titulo: 'Recibido' }],
+  campos: [],
   acciones: [{ valor: 'respondido', etiqueta: 'Marcar respondido', estados: ['nuevo'] },
-    { valor: 'archivar', etiqueta: 'Archivar', estados: ['nuevo', 'respondido'] },
-    { valor: 'eliminar', etiqueta: 'Dar de baja', estados: ['nuevo', 'respondido', 'archivado'] }],
-  ...contactosApi,
-  crear: (datos) => contactosApi.crear(datos as EntradaContacto & { empresaId: string }),
+  { valor: 'archivar', etiqueta: 'Archivar', estados: ['nuevo', 'respondido'] }],
+  listar: contactosApi.listar, obtener: contactosApi.obtener, cambiar: contactosApi.cambiar,
 }
 export function VistaContactos() { return <ListadoRecursoCrm config={config} /> }

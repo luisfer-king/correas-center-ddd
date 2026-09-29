@@ -29,12 +29,12 @@ test('clientes CRM usan rutas separadas, encabezado de escritura y capacidad con
         await empresasApi.listar(2)
         await sucursalesApi.cambiar('15', 'activar')
         await contactosApi.cambiar('8', 'respondido')
-        await suscriptoresApi.editar('7', null)
+        await suscriptoresApi.cambiar('7', 'inactivar')
         await leadsApi.asignarResponsable('22222222-2222-4222-8222-222222222222', null)
         assert.deepEqual(llamadas.map(({ ruta, metodo }) => [ruta, metodo]), [
             ['/api/portal/crm/capacidades', 'GET'], ['/api/portal/crm/empresas?pagina=2', 'GET'],
             ['/api/portal/crm/sucursales/15/activar', 'PATCH'], ['/api/portal/crm/contactos/8/respondido', 'PATCH'],
-            ['/api/portal/crm/suscriptores/7', 'PATCH'],
+            ['/api/portal/crm/suscriptores/7/inactivar', 'PATCH'],
             ['/api/portal/crm/leads/22222222-2222-4222-8222-222222222222/responsable', 'PATCH'],
         ])
         assert.deepEqual(llamadas.at(-1)?.body, { responsableId: null })

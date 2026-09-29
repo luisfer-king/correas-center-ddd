@@ -39,8 +39,10 @@ export function ListadoRecursoCrm<T extends BaseCrm & { estado: string }, A exte
     void config.listar(pagina, { signal: controlador.signal }).then((datos) => {
       if (!controlador.signal.aborted) setConsulta({ estado: 'lista', datos })
     }).catch((fallo: unknown) => {
-      if (!controlador.signal.aborted) setConsulta({ estado: fallo instanceof ErrorApi && fallo.estado === 403
-        ? 'sin-permiso' : 'error' })
+      if (!controlador.signal.aborted) setConsulta({
+        estado: fallo instanceof ErrorApi && fallo.estado === 403
+          ? 'sin-permiso' : 'error'
+      })
     })
     return () => controlador.abort()
   }, [config, pagina, revision])
@@ -57,8 +59,10 @@ export function ListadoRecursoCrm<T extends BaseCrm & { estado: string }, A exte
     setDetalle(null); setErrorDetalle('')
     void config.obtener(id, { signal: controlador.signal }).then((registro) => {
       if (!controlador.signal.aborted) setDetalle(registro)
-    }).catch((fallo: unknown) => { if (!controlador.signal.aborted) setErrorDetalle(fallo instanceof ErrorApi
-      && fallo.estado === 404 ? 'Registro no disponible.' : 'No se pudo cargar el detalle.') })
+    }).catch((fallo: unknown) => {
+      if (!controlador.signal.aborted) setErrorDetalle(fallo instanceof ErrorApi
+        && fallo.estado === 404 ? 'Registro no disponible.' : 'No se pudo cargar el detalle.')
+    })
     return () => controlador.abort()
   }, [config, id, revision])
 
@@ -85,7 +89,7 @@ export function ListadoRecursoCrm<T extends BaseCrm & { estado: string }, A exte
     <div className="mt-2 flex flex-wrap items-end justify-between gap-4">
       <div><h1 className="text-3xl font-semibold">{config.titulo}</h1>
         <p className="mt-2 text-neutral-600">{config.descripcion}</p></div>
-      <div className="flex gap-2">{gestionar && <button type="button" onClick={() => setFormulario('nuevo')}
+      <div className="flex gap-2">{gestionar && config.crear && <button type="button" onClick={() => setFormulario('nuevo')}
         className="rounded bg-red-700 px-4 py-2 text-white">Crear registro</button>}
         <button type="button" onClick={actualizar} className="rounded border border-neutral-300 bg-white px-4 py-2">Actualizar</button></div>
     </div>
@@ -145,6 +149,11 @@ export function ListadoRecursoCrm<T extends BaseCrm & { estado: string }, A exte
           <dt className="text-xs uppercase text-neutral-500">{clave}</dt>
           <dd className="break-words whitespace-pre-wrap">{mostrarCrm(valor, clave)}</dd>
         </div>)}</dl>
+      {gestionar && !detalle.eliminadoEn && <div className="mt-5 flex flex-wrap gap-2">
+        {config.acciones.filter((item) => item.estados.includes(detalle.estado)).map((item) =>
+          <button type="button" key={item.valor} className="rounded border border-red-300 px-3 py-2 text-red-700"
+            onClick={() => { setAccion({ registro: detalle, ...item }); cerrarDetalle() }}>{item.etiqueta}</button>)}
+      </div>}
       {gestionar && detalleExtra?.(detalle, () => { cerrarDetalle(); actualizar() })}
     </ModalPortal>}
     {formulario && (formularioExtra ? formularioExtra(formulario === 'nuevo' ? null : formulario,
