@@ -1,0 +1,2 @@
+import type { TipoAtributo } from '../../domain/tipo-atributo.js'
+export const dtoTipoAtributo = (r: TipoAtributo) => ({ id: r.id.toString(), nombre: r.nombre, slug: r.slug .value, descripcion: r.descripcion, icono: r.icono, capacidades: r.capacidades, orden: r.orden.value, estado: r.estado, creadoEn: r.creadoEn.toISOString(), actualizadoEn: r.actualizadoEn.toISOString(), eliminadoEn: r.eliminadoEn?.toISOString() ?? null })

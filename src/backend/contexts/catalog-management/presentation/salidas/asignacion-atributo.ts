@@ -1,0 +1,2 @@
+import type { AsignacionAtributo } from '../../domain/asignacion-atributo.js'
+export const dtoAsignacionAtributo = (r: AsignacionAtributo) => ({ id: r.id.toString(), categoriaId: r.categoriaId.toString(), atributoId: r.atributoId.toString(), valorPersonalizado: r.valorPersonalizado, orden: r.orden.value, estado: r.estado, creadoEn: r.creadoEn.toISOString(), actualizadoEn: r.actualizadoEn.toISOString() })
