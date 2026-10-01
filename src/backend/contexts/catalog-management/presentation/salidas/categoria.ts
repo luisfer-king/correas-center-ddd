@@ -1,0 +1,2 @@
+import type { Categoria } from '../../domain/categoria.js'
+export const dtoCategoria = (r: Categoria) => ({ id: r.id.toString(), productoId: r.productoId.toString(), nombre: r.nombre, slug: r.slug .value, imagen: r.imagen, descripcion: r.descripcion, descripcionCorta: r.descripcionCorta, uso: r.uso, orden: r.orden.value, estado: r.estado, creadoEn: r.creadoEn.toISOString(), actualizadoEn: r.actualizadoEn.toISOString(), eliminadoEn: r.eliminadoEn?.toISOString() ?? null })
