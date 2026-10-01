@@ -1,0 +1,2 @@
+import type { AtributoTecnico } from '../../domain/atributo-tecnico.js'
+export const dtoAtributoTecnico = (r: AtributoTecnico) => ({ id: r.id.toString(), tipoAtributoId: r.tipoAtributoId.toString(), nombre: r.nombre, valores: r.valores, orden: r.orden.value, estado: r.estado, creadoEn: r.creadoEn.toISOString(), actualizadoEn: r.actualizadoEn.toISOString(), eliminadoEn: r.eliminadoEn?.toISOString() ?? null })

@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
+import { catalogoApi, type CapacidadesCatalogo } from '../../catalog/api/cliente-catalogo'
+import { grupoCatalogo } from '../../catalog/presentation/navegacion-catalogo'
 import { crmApi, type CapacidadesCrm } from '../../commercial/api/cliente-crm'
 import { grupoComercial } from '../../commercial/presentation/navegacion-crm'
 import { iamApi } from '../api/cliente-iam'
@@ -17,6 +19,7 @@ export function MarcoPortal() {
     const [error, setError] = useState('')
     const [capacidadesIam, setCapacidadesIam] = useState<CapacidadesRoles | null>(null)
     const [crm, setCrm] = useState<CapacidadesCrm | null>(null)
+    const [catalogo, setCatalogo] = useState<CapacidadesCatalogo | null>(null)
 
     useEffect(() => {
         const controlador = new AbortController()
@@ -31,6 +34,14 @@ export function MarcoPortal() {
         void crmApi.capacidades({ signal: controlador.signal }).then((datos) => {
             if (!controlador.signal.aborted) setCrm(datos)
         }).catch(() => { if (!controlador.signal.aborted) setCrm(null) })
+        return () => controlador.abort()
+    }, [])
+
+    useEffect(() => {
+        const controlador = new AbortController()
+        void catalogoApi.capacidades({ signal: controlador.signal }).then(datos => {
+            if (!controlador.signal.aborted) setCatalogo(datos)
+        }).catch(() => { if (!controlador.signal.aborted) setCatalogo(null) })
         return () => controlador.abort()
     }, [])
 
@@ -57,6 +68,12 @@ export function MarcoPortal() {
                         <div className="flex flex-wrap items-center gap-2" aria-label={grupoComercial.titulo}>
                             <span className="px-2 text-xs font-semibold uppercase text-neutral-500">{grupoComercial.titulo}</span>
                             {grupoComercial.enlaces.filter((enlace) => crm.recursos[enlace.recurso]?.leer).map((enlace) =>
+                                <NavLink key={enlace.ruta} to={enlace.ruta} className={estiloEnlace}>{enlace.etiqueta}</NavLink>)}
+                        </div>}
+                    {catalogo && grupoCatalogo.enlaces.some(enlace => catalogo.recursos[enlace.recurso]?.leer) &&
+                        <div className="flex flex-wrap items-center gap-2" aria-label={grupoCatalogo.titulo}>
+                            <span className="px-2 text-xs font-semibold uppercase text-neutral-500">{grupoCatalogo.titulo}</span>
+                            {grupoCatalogo.enlaces.filter(enlace => catalogo.recursos[enlace.recurso]?.leer).map(enlace =>
                                 <NavLink key={enlace.ruta} to={enlace.ruta} className={estiloEnlace}>{enlace.etiqueta}</NavLink>)}
                         </div>}
                     <button type="button" onClick={alternar} aria-label={tema === 'oscuro' ? 'Activar tema claro' : 'Activar tema oscuro'}

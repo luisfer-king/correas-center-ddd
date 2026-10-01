@@ -1,4 +1,14 @@
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom'
+import { VistaAsignacionesAtributo } from '../features/catalog/presentation/vista-asignaciones-atributo'
+import { VistaAsignacionesIndustria } from '../features/catalog/presentation/vista-asignaciones-industria'
+import { VistaAsignacionesMarca } from '../features/catalog/presentation/vista-asignaciones-marca'
+import { VistaAtributosTecnicos } from '../features/catalog/presentation/vista-atributos-tecnicos'
+import { VistaCategorias } from '../features/catalog/presentation/vista-categorias'
+import { VistaIndustrias } from '../features/catalog/presentation/vista-industrias'
+import { VistaMarcas } from '../features/catalog/presentation/vista-marcas'
+import { VistaProductos } from '../features/catalog/presentation/vista-productos'
+import { VistaServicios } from '../features/catalog/presentation/vista-servicios'
+import { VistaTiposAtributo } from '../features/catalog/presentation/vista-tipos-atributo'
 import { VistaContactos } from '../features/commercial/presentation/vista-contactos'
 import { VistaEmpresas } from '../features/commercial/presentation/vista-empresas'
 import { VistaLeads } from '../features/commercial/presentation/vista-leads'
@@ -40,6 +50,26 @@ export function Rutas() {
           <Route path="crm/suscriptores/:id" element={<VistaSuscriptores />} />
           <Route path="crm/leads" element={<VistaLeads />} />
           <Route path="crm/leads/:id" element={<VistaLeads />} />
+          <Route path="catalogo/productos" element={<VistaProductos />} />
+          <Route path="catalogo/productos/:id" element={<VistaProductos />} />
+          <Route path="catalogo/categorias" element={<VistaCategorias />} />
+          <Route path="catalogo/categorias/:id" element={<VistaCategorias />} />
+          <Route path="catalogo/marcas" element={<VistaMarcas />} />
+          <Route path="catalogo/marcas/:id" element={<VistaMarcas />} />
+          <Route path="catalogo/tipos-atributo" element={<VistaTiposAtributo />} />
+          <Route path="catalogo/tipos-atributo/:id" element={<VistaTiposAtributo />} />
+          <Route path="catalogo/atributos-tecnicos" element={<VistaAtributosTecnicos />} />
+          <Route path="catalogo/atributos-tecnicos/:id" element={<VistaAtributosTecnicos />} />
+          <Route path="catalogo/industrias" element={<VistaIndustrias />} />
+          <Route path="catalogo/industrias/:id" element={<VistaIndustrias />} />
+          <Route path="catalogo/servicios" element={<VistaServicios />} />
+          <Route path="catalogo/servicios/:id" element={<VistaServicios />} />
+          <Route path="catalogo/asignaciones-marca" element={<VistaAsignacionesMarca />} />
+          <Route path="catalogo/asignaciones-marca/:id" element={<VistaAsignacionesMarca />} />
+          <Route path="catalogo/asignaciones-atributo" element={<VistaAsignacionesAtributo />} />
+          <Route path="catalogo/asignaciones-atributo/:id" element={<VistaAsignacionesAtributo />} />
+          <Route path="catalogo/asignaciones-industria" element={<VistaAsignacionesIndustria />} />
+          <Route path="catalogo/asignaciones-industria/:id" element={<VistaAsignacionesIndustria />} />
         </Route>
       </Route>
     </Route>

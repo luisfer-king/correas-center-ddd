@@ -3,6 +3,8 @@ import rateLimit from "@fastify/rate-limit";
 import swagger from "@fastify/swagger";
 import swaggerUi from "@fastify/swagger-ui";
 import Fastify from "fastify";
+import { componerCatalogo, type CasosCatalogo } from './contexts/catalog-management/infrastructure/componer-catalogo.js';
+import { registrarRutasCatalogo } from './contexts/catalog-management/presentation/registrar-rutas-catalogo.js';
 import { componerCrm, type CasosCrm } from './contexts/commercial/infrastructure/componer-crm.js';
 import { registrarRutasCrm } from './contexts/commercial/presentation/registrar-rutas-crm.js';
 import { componerIam, type CasosIam } from './contexts/identity-access-management/infrastructure/componer-iam.js';
@@ -10,13 +12,9 @@ import { crearClienteIam } from './contexts/identity-access-management/infrastru
 import { registrarRutasIam } from './contexts/identity-access-management/presentation/registrar-rutas-iam.js';
 import type { SeguridadIam } from './contexts/identity-access-management/presentation/seguridad-http.js';
 
-export async function createApp(pruebas?: { casos: CasosIam; config: SeguridadIam; crm?: CasosCrm }) {
-  const app = Fastify({
-    logger: {
-      redact: ['req.headers.cookie', 'req.headers.authorization',
-        'req.body.password', 'res.headers.set-cookie']
-    }, trustProxy: false
-  });
+export async function createApp(pruebas?: { casos: CasosIam; config: SeguridadIam; crm?: CasosCrm; catalogo?: CasosCatalogo }) {
+  const app = Fastify({ logger: { redact: ['req.headers.cookie', 'req.headers.authorization',
+    'req.body.password', 'res.headers.set-cookie'] }, trustProxy: false });
   const origen = process.env.PORTAL_ORIGIN ?? 'http://localhost:5173';
   const url = new URL(origen);
   if (url.origin !== origen || url.pathname !== '/' || url.search || url.hash ||
@@ -26,10 +24,8 @@ export async function createApp(pruebas?: { casos: CasosIam; config: SeguridadIa
   }
   const secure = url.protocol === 'https:';
   if (process.env.NODE_ENV === 'production' && !secure) throw new Error('El portal de producción requiere HTTPS');
-  const config: SeguridadIam = pruebas?.config ?? {
-    origen,
-    cookie: secure ? '__Host-cc_portal' : 'cc_portal_local', secure
-  };
+  const config: SeguridadIam = pruebas?.config ?? { origen,
+    cookie: secure ? '__Host-cc_portal' : 'cc_portal_local', secure };
   const db = pruebas ? null : crearClienteIam(process.env.DATABASE_URL ?? '');
   const casos = pruebas?.casos ?? componerIam(db!, process.env.IAM_JWT_SECRET_B64 ?? '',
     process.env.IAM_JWT_ISSUER ?? '', process.env.IAM_JWT_AUDIENCE ?? '');
@@ -37,7 +33,7 @@ export async function createApp(pruebas?: { casos: CasosIam; config: SeguridadIa
   await app.register(swagger, {
     openapi: {
       openapi: "3.0.3",
-      info: { title: "Correas Center API", version: "0.3.0", description: "IAM y CRM del portal; cookie HttpOnly y Origin obligatorio en escrituras" },
+      info: { title: "Correas Center API", version: "0.3.0", description: "IAM, CRM y Catálogo del portal; cookie HttpOnly y Origin obligatorio en escrituras" },
       components: { securitySchemes: { cookieAuth: { type: 'apiKey', in: 'cookie', name: config.cookie } } },
     },
   });
@@ -61,6 +57,8 @@ export async function createApp(pruebas?: { casos: CasosIam; config: SeguridadIa
   await app.register(async (scope) => registrarRutasIam(scope, casos, config));
   if (db || pruebas?.crm) await app.register(async (scope) =>
     registrarRutasCrm(scope, pruebas?.crm ?? componerCrm(db!), casos, config));
+  if (db || pruebas?.catalogo) await app.register(async (scope) =>
+    registrarRutasCatalogo(scope, pruebas?.catalogo ?? componerCatalogo(db!), casos, config));
 
   app.get("/api/health", {
     schema: {
