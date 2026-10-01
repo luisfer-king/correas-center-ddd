@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import { solicitarApi } from '../api/cliente-http'
+import { exportarEdicion, imagenBase64 } from './exportar-edicion'
 import { quitarFondoConectado, rectanguloRecorte } from './operaciones-imagen'
 
 const limite = 8 * 1024 * 1024
@@ -70,7 +71,8 @@ export function CampoImagen({ etiqueta, valor, endpoint, actualizar, actividad, 
     setError(''); setOcupado(true)
     try {
       const { nodo } = contexto()
-      const base64 = nodo.toDataURL('image/png').split(',')[1]
+      const editada = await exportarEdicion(nodo, recorte)
+      const base64 = await imagenBase64(editada)
       if (base64.length > Math.ceil(limite / 3) * 4) throw new Error('El resultado supera 8 MB. Recorta la imagen o utiliza una de menor resolución.')
       const salida = await solicitarApi<{ url: string }>(endpoint, { metodo: 'POST', cuerpo: { base64 } })
       if (vivo.current) {
@@ -134,7 +136,7 @@ export function CampoImagen({ etiqueta, valor, endpoint, actualizar, actividad, 
         <button type="button" disabled={deshabilitado} onClick={() => void subir()} className="rounded bg-red-700 px-3 py-2 text-white">Usar y subir esta imagen</button>
         <button type="button" disabled={deshabilitado} onClick={() => { setEditor(false); setError(''); original.current = null; historial.current = [] }} className="rounded border px-3 py-2">Cancelar edición</button>
       </div>
-      <p className="mt-2 text-sm">Confirma la imagen para habilitar Guardar. Los cambios no sustituyen la imagen del registro hasta guardar el formulario.</p>
+      <p className="mt-2 text-sm">La subida aplica también el recorte marcado. Confirma la imagen para habilitar Guardar. Los cambios no sustituyen la imagen del registro hasta guardar el formulario.</p>
     </div>
     <label className="text-sm">URL
       <input value={valor} disabled={deshabilitado || editor} onChange={e => actualizar(e.target.value)} className="mt-1 block w-full rounded border bg-white p-2" />

@@ -15,6 +15,11 @@ export class Slug {
         if (!/^[a-z0-9]+(?:[-_][a-z0-9]+)*$/.test(value)) throw new Error('Slug inválido')
         return new Slug(value)
     }
+    static rutaCategoria(input: string): Slug {
+        const value = input.trim().toLowerCase()
+        if (!/^[a-z0-9]+(?:[-_][a-z0-9]+)*(?:\/[a-z0-9]+(?:[-_][a-z0-9]+)*)?$/.test(value)) throw new Error('Slug inválido')
+        return new Slug(value)
+    }
     equals(other: Slug): boolean { return this.value === other.value }
 }
 

@@ -62,6 +62,7 @@ import { ActivarProducto } from '../application/use-cases/productos/activar-prod
 import { CrearProducto } from '../application/use-cases/productos/crear-producto.js'
 import { EditarProducto } from '../application/use-cases/productos/editar-producto.js'
 import { EliminarProducto } from '../application/use-cases/productos/eliminar-producto.js'
+import { GestionarMarcasProducto } from '../application/use-cases/productos/gestionar-marcas-producto.js'
 import { InactivarProducto } from '../application/use-cases/productos/inactivar-producto.js'
 import { ListarProductos } from '../application/use-cases/productos/listar-productos.js'
 import { ObtenerProducto } from '../application/use-cases/productos/obtener-producto.js'
@@ -88,6 +89,7 @@ import { PrismaAsignacionesMarca } from './prisma-asignaciones-marca.js'
 import { PrismaAtributosTecnicos } from './prisma-atributos-tecnicos.js'
 import { PrismaCategorias } from './prisma-categorias.js'
 import { PrismaIndustrias } from './prisma-industrias.js'
+import { PrismaMarcasProducto } from './prisma-marcas-producto.js'
 import { PrismaMarcas } from './prisma-marcas.js'
 import { PrismaProductos } from './prisma-productos.js'
 import { PrismaServicios } from './prisma-servicios.js'
@@ -106,10 +108,11 @@ export function componerCatalogo(db: PrismaClient) {
     const asignaciones_atributo = new PrismaAsignacionesAtributo(db)
     const asignaciones_industria = new PrismaAsignacionesIndustria(db)
     return {
+        marcasProducto: new GestionarMarcasProducto(new PrismaMarcasProducto(db), autorizar),
         capacidades: new ObtenerCapacidadesCatalogo(autorizar),
         registrarLectura: new RegistrarLecturaCatalogo(new PrismaAuditoria(db), reloj),
         'productos': { listar: new ListarProductos(productos, autorizar), obtener: new ObtenerProducto(productos, autorizar), crear: new CrearProducto(productos, autorizar), editar: new EditarProducto(productos, autorizar, reloj), activar: new ActivarProducto(productos, autorizar, reloj), inactivar: new InactivarProducto(productos, autorizar, reloj), eliminar: new EliminarProducto(productos, autorizar, reloj), reordenar: new ReordenarProducto(productos, autorizar, reloj) },
-        'categorias': { listar: new ListarCategorias(categorias, autorizar), obtener: new ObtenerCategoria(categorias, autorizar), crear: new CrearCategoria(categorias, autorizar), editar: new EditarCategoria(categorias, autorizar, reloj), activar: new ActivarCategoria(categorias, autorizar, reloj), inactivar: new InactivarCategoria(categorias, autorizar, reloj), eliminar: new EliminarCategoria(categorias, autorizar, reloj), reordenar: new ReordenarCategoria(categorias, autorizar, reloj) },
+        'categorias': { listar: new ListarCategorias(categorias, autorizar), obtener: new ObtenerCategoria(categorias, autorizar), crear: new CrearCategoria(categorias, autorizar, productos), editar: new EditarCategoria(categorias, autorizar, reloj), activar: new ActivarCategoria(categorias, autorizar, reloj), inactivar: new InactivarCategoria(categorias, autorizar, reloj), eliminar: new EliminarCategoria(categorias, autorizar, reloj), reordenar: new ReordenarCategoria(categorias, autorizar, reloj) },
         'marcas': { listar: new ListarMarcas(marcas, autorizar), obtener: new ObtenerMarca(marcas, autorizar), crear: new CrearMarca(marcas, autorizar), editar: new EditarMarca(marcas, autorizar, reloj), activar: new ActivarMarca(marcas, autorizar, reloj), inactivar: new InactivarMarca(marcas, autorizar, reloj), eliminar: new EliminarMarca(marcas, autorizar, reloj), reordenar: new ReordenarMarca(marcas, autorizar, reloj) },
         'tipos-atributo': { listar: new ListarTiposAtributo(tipos_atributo, autorizar), obtener: new ObtenerTipoAtributo(tipos_atributo, autorizar), crear: new CrearTipoAtributo(tipos_atributo, autorizar), editar: new EditarTipoAtributo(tipos_atributo, autorizar, reloj), activar: new ActivarTipoAtributo(tipos_atributo, autorizar, reloj), inactivar: new InactivarTipoAtributo(tipos_atributo, autorizar, reloj), eliminar: new EliminarTipoAtributo(tipos_atributo, autorizar, reloj), reordenar: new ReordenarTipoAtributo(tipos_atributo, autorizar, reloj) },
         'atributos-tecnicos': { listar: new ListarAtributosTecnicos(atributos_tecnicos, autorizar), obtener: new ObtenerAtributoTecnico(atributos_tecnicos, autorizar), crear: new CrearAtributoTecnico(atributos_tecnicos, autorizar), editar: new EditarAtributoTecnico(atributos_tecnicos, autorizar, reloj), activar: new ActivarAtributoTecnico(atributos_tecnicos, autorizar, reloj), inactivar: new InactivarAtributoTecnico(atributos_tecnicos, autorizar, reloj), eliminar: new EliminarAtributoTecnico(atributos_tecnicos, autorizar, reloj), reordenar: new ReordenarAtributoTecnico(atributos_tecnicos, autorizar, reloj) },

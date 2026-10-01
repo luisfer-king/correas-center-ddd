@@ -1,16 +1,19 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ErrorApi } from '../../../shared/api/cliente-http'
+import { MiniaturaImagen } from '../../../shared/imagenes/miniatura-imagen'
 import { ModalPortal } from '../../iam/presentation/modal-portal'
 import { catalogoApi } from '../api/cliente-catalogo'
 import type { BaseCatalogo, CapacidadesCatalogo } from '../api/tipos-catalogo'
 import { presentarValor, valorCampo, type ConfiguracionCatalogo } from './configuracion-catalogo'
 import { FormularioCatalogo } from './formulario-catalogo'
+import { ModalMarcasProducto } from './modal-marcas-producto'
 import { SelectorCatalogo } from './selector-catalogo'
 type Consulta<T> = { tipo: 'cargando' } | { tipo: 'listo'; filas: T[] } | { tipo: 'error' | 'sin-permiso'; mensaje: string }
 export function ListadoCatalogo<T extends BaseCatalogo>({ config }: { config: ConfiguracionCatalogo<T> }) {
   const { id } = useParams<{ id: string }>()
   const navegar = useNavigate()
+  const [productoMarcas, setProductoMarcas] = useState<T | null>(null)
   const [pagina, setPagina] = useState(1)
   const [filtro, setFiltro] = useState('')
   const [busqueda, setBusqueda] = useState('')
@@ -34,10 +37,12 @@ export function ListadoCatalogo<T extends BaseCatalogo>({ config }: { config: Co
     setConsulta({ tipo: 'cargando' })
     void config.listar(pagina, config.filtro && filtro ? { [config.filtro.clave]: filtro } : {}, { signal: controlador.signal })
       .then(filas => { if (!controlador.signal.aborted) setConsulta({ tipo: 'listo', filas }) })
-      .catch((fallo: unknown) => { if (!controlador.signal.aborted) setConsulta({
-        tipo: fallo instanceof ErrorApi && fallo.estado === 403 ? 'sin-permiso' : 'error',
-        mensaje: fallo instanceof Error ? fallo.message : 'No se pudo cargar el listado.',
-      }) })
+      .catch((fallo: unknown) => {
+        if (!controlador.signal.aborted) setConsulta({
+          tipo: fallo instanceof ErrorApi && fallo.estado === 403 ? 'sin-permiso' : 'error',
+          mensaje: fallo instanceof Error ? fallo.message : 'No se pudo cargar el listado.',
+        })
+      })
     return () => controlador.abort()
   }, [config, pagina, filtro, revision])
   useEffect(() => {
@@ -107,13 +112,15 @@ export function ListadoCatalogo<T extends BaseCatalogo>({ config }: { config: Co
           <caption className="sr-only">{config.titulo}</caption><thead className="bg-neutral-100"><tr><th className="p-3">ID</th>
             {config.columnas.map(c => <th scope="col" key={c.clave} className="p-3">{c.etiqueta}</th>)}<th className="p-3">Estado</th><th className="p-3">Acciones</th></tr></thead>
           <tbody>{visibles.map(fila => <tr key={fila.id} className="border-t"><th scope="row" className="p-3 font-normal">{fila.id}</th>
-            {config.columnas.map(c => <td key={c.clave} className="max-w-72 truncate p-3" title={presentarValor(valorCampo(fila, c.clave))}>{presentarValor(valorCampo(fila, c.clave))}</td>)}
+            {config.columnas.map(c => <td key={c.clave} className="max-w-72 truncate p-3" title={presentarValor(valorCampo(fila, c.clave))}>{['imagen', 'logo'].includes(c.clave) ? <MiniaturaImagen url={valorCampo(fila, c.clave)} nombre={String(valorCampo(fila, 'nombre') ?? 'Imagen')} /> : presentarValor(valorCampo(fila, c.clave))}</td>)}
             <td className="p-3 capitalize">{fila.estado}</td><td className="p-3"><div className="flex flex-wrap gap-2">
               <button type="button" onClick={() => navegar(`${base}/${fila.id}`)} className="rounded border px-2 py-1">Detalle</button>
+              {config.recurso === 'productos' && fila.estado === 'activo' && capacidades?.recursos['asignaciones-marca']?.gestionar &&
+                <button type="button" onClick={() => setProductoMarcas(fila)} className="rounded border px-2 py-1">Marcas</button>}
               {gestionar && fila.estado !== 'eliminado' && <>
                 <button type="button" onClick={() => setFormulario(fila)} className="rounded border px-2 py-1">Editar</button>
                 {config.reordenar && <button type="button" onClick={() => { setNuevoOrden(String(valorCampo(fila, 'orden') ?? 0)); setOrden(fila) }} className="rounded border px-2 py-1">Orden</button>}
-                {(fila.estado === 'activo' ? ['inactivar','eliminar'] : ['activar','eliminar']).map(valor =>
+                {(fila.estado === 'activo' ? ['inactivar', 'eliminar'] : ['activar', 'eliminar']).map(valor =>
                   <button key={valor} type="button" onClick={() => setAccion({ registro: fila, accion: valor as 'activar' | 'inactivar' | 'eliminar' })}
                     className="rounded border border-red-300 px-2 py-1 text-red-700">{valor}</button>)}
               </>}
@@ -123,8 +130,10 @@ export function ListadoCatalogo<T extends BaseCatalogo>({ config }: { config: Co
     </>}
     {id && detalle && <ModalPortal titulo={`Detalle · ${config.titulo}`} cerrar={() => navegar(base, { replace: true })}>
       <dl className="grid gap-3 sm:grid-cols-2">{Object.entries(detalle).map(([clave, valor]) => <div key={clave}><dt className="text-xs uppercase text-neutral-500">{clave}</dt>
-        <dd className="break-words whitespace-pre-wrap">{presentarValor(valor)}</dd></div>)}</dl>
+        <dd className="break-words whitespace-pre-wrap">{['imagen', 'logo'].includes(clave) ? <MiniaturaImagen url={valor} grande /> : presentarValor(valor)}</dd></div>)}</dl>
     </ModalPortal>}
+    {productoMarcas && <ModalMarcasProducto productoId={productoMarcas.id} nombre={String(valorCampo(productoMarcas, 'nombre') ?? '')}
+      cerrar={() => setProductoMarcas(null)} guardado={() => { setProductoMarcas(null); setMensaje('Marcas actualizadas.'); actualizar() }} />}
     {formulario && <FormularioCatalogo key={formulario === 'nuevo' ? 'nuevo' : formulario.id} config={config}
       registro={formulario === 'nuevo' ? null : formulario} cerrar={() => setFormulario(null)} guardado={() => { setFormulario(null); actualizar() }} />}
     {accion && <ModalPortal titulo="Confirmar cambio de estado" cerrar={() => setAccion(null)} bloqueado={ocupado}>

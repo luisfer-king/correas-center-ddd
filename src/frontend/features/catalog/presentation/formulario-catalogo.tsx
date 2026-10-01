@@ -1,6 +1,8 @@
-import { useState, type FormEvent } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
+import { slugNombre } from '../../../../shared/slug-nombre'
 import { CampoImagen } from '../../../shared/imagenes/campo-imagen'
 import { ModalPortal } from '../../iam/presentation/modal-portal'
+import { productosApi } from '../api/productos'
 import type { BaseCatalogo } from '../api/tipos-catalogo'
 import { cuerpoFormulario, valorCampo, type ConfiguracionCatalogo } from './configuracion-catalogo'
 import { SelectorCatalogo } from './selector-catalogo'
@@ -9,22 +11,41 @@ export function FormularioCatalogo<T extends BaseCatalogo>({ config, registro, c
 }) {
   const [datos, setDatos] = useState<Record<string, unknown>>(() => Object.fromEntries(config.campos.map(c =>
     [c.clave, registro ? valorCampo(registro, c.clave) : c.tipo === 'checkbox' ? false : c.tipo === 'number' || c.tipo === 'number-nullable' ? 0 : ''])))
+  const [slugProducto, setSlugProducto] = useState('')
+  const [cargandoProducto, setCargandoProducto] = useState(false)
+  const [errorProducto, setErrorProducto] = useState('')
   const [ocupado, setOcupado] = useState(false)
   const [imagenPendiente, setImagenPendiente] = useState(false)
   const [error, setError] = useState('')
+  const automatico = ['productos', 'categorias', 'marcas', 'industrias'].includes(config.recurso)
+  const productoId = String(datos.productoId ?? '')
+  useEffect(() => {
+    if (config.recurso !== 'categorias' || registro) return
+    setSlugProducto(''); setErrorProducto('')
+    if (!productoId) { setCargandoProducto(false); return }
+    const control = new AbortController(); setCargandoProducto(true)
+    void productosApi.obtener(productoId, { signal: control.signal }).then(p => {
+      if (!control.signal.aborted) setSlugProducto(p.slug)
+    }).catch(() => { if (!control.signal.aborted) setErrorProducto('No se pudo consultar el slug del producto seleccionado.') })
+      .finally(() => { if (!control.signal.aborted) setCargandoProducto(false) })
+    return () => control.abort()
+  }, [config.recurso, productoId, registro])
+  const segmento = slugNombre(String(datos.nombre ?? ''))
+  const slugPrevio = config.recurso === 'categorias' ? (slugProducto && segmento ? `${slugProducto}/${segmento}` : '') : segmento
   async function enviar(e: FormEvent) {
     e.preventDefault()
-    if (ocupado || imagenPendiente) return
+    if (ocupado || imagenPendiente || cargandoProducto || (!registro && automatico && !slugPrevio)) return
     setError(''); setOcupado(true)
     try {
-      const cuerpo = cuerpoFormulario(config.campos, datos, registro !== null)
+      const camposEnvio = automatico ? config.campos.filter(c => c.clave !== 'slug') : config.campos
+      const cuerpo = cuerpoFormulario(camposEnvio, datos, registro !== null)
       if (registro) await config.editar(registro.id, cuerpo)
       else await config.crear(cuerpo)
       guardado()
     } catch (fallo) { setError(fallo instanceof Error ? fallo.message : 'No se pudo guardar.') }
     finally { setOcupado(false) }
   }
-  const campos = config.campos.filter(c => !registro || !c.soloCrear)
+  const campos = config.campos.filter(c => (!registro || !c.soloCrear) && (!automatico || c.clave !== 'slug'))
   return <ModalPortal titulo={`${registro ? 'Editar' : 'Crear'} · ${config.titulo}`} cerrar={cerrar} bloqueado={ocupado}>
     <form onSubmit={e => void enviar(e)} className="grid gap-4 sm:grid-cols-2">
       {campos.map(c => {
@@ -55,9 +76,14 @@ export function FormularioCatalogo<T extends BaseCatalogo>({ config, registro, c
           {c.ayuda && <small className="block text-neutral-500">{c.ayuda}</small>}
         </label>
       })}
+      {automatico && <label className="sm:col-span-2">Slug automático
+        <input readOnly value={registro ? String(valorCampo(registro, 'slug') ?? '') : slugPrevio} className="mt-1 block w-full rounded border bg-neutral-100 p-2" />
+        <small>{registro ? 'Se conserva el slug creado para mantener los enlaces.' : 'Se genera a partir del nombre al registrar.'}</small>
+      </label>}
+      {errorProducto && <p role="alert" className="sm:col-span-2 text-red-700">{errorProducto}</p>}
       {error && <p role="alert" className="text-red-700 sm:col-span-2">{error}</p>}
       <div className="flex justify-end gap-3 sm:col-span-2"><button type="button" onClick={cerrar} disabled={ocupado} className="rounded border px-4 py-2">Cancelar</button>
-        <button type="submit" disabled={ocupado || imagenPendiente} className="rounded bg-red-700 px-4 py-2 text-white disabled:opacity-50">{ocupado ? 'Guardando…' : 'Guardar'}</button></div>
+        <button type="submit" disabled={ocupado || imagenPendiente || cargandoProducto || (!registro && automatico && !slugPrevio)} className="rounded bg-red-700 px-4 py-2 text-white disabled:opacity-50">{ocupado ? 'Guardando…' : 'Guardar'}</button></div>
     </form>
   </ModalPortal>
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ErrorApi } from '../../../shared/api/cliente-http'
+import { MiniaturaImagen } from '../../../shared/imagenes/miniatura-imagen'
 import { ModalPortal } from '../../iam/presentation/modal-portal'
 import { crmApi } from '../api/cliente-crm'
 import type { BaseCrm, CapacidadesCrm, RecursoCrm } from '../api/tipos-crm'
@@ -120,7 +121,7 @@ export function ListadoRecursoCrm<T extends BaseCrm & { estado: string }, A exte
             <tbody>{visibles.map((fila) => <tr key={fila.id} className="border-t border-neutral-200">
               <th scope="row" className="max-w-40 truncate p-3 font-normal" title={fila.id}>{fila.id}</th>
               {config.columnas.map((columna) => <td key={columna.clave} className="max-w-72 truncate p-3"
-                title={mostrarCrm(fila[columna.clave], columna.clave)}>{mostrarCrm(fila[columna.clave], columna.clave)}</td>)}
+                title={mostrarCrm(fila[columna.clave], columna.clave)}>{columna.clave === 'logo' ? <MiniaturaImagen url={fila[columna.clave]} /> : mostrarCrm(fila[columna.clave], columna.clave)}</td>)}
               <td className="p-3 capitalize">{fila.estado}</td>
               <td className="p-3"><div className="flex flex-wrap gap-2">
                 <button type="button" onClick={() => navegar(`/portal/crm/${recurso}/${encodeURIComponent(fila.id)}`)}
@@ -147,7 +148,7 @@ export function ListadoRecursoCrm<T extends BaseCrm & { estado: string }, A exte
       <dl className="grid gap-3 sm:grid-cols-2">{Object.entries(detalle).map(([clave, valor]) =>
         <div key={clave} className={clave === 'mensaje' ? 'sm:col-span-2' : ''}>
           <dt className="text-xs uppercase text-neutral-500">{clave}</dt>
-          <dd className="break-words whitespace-pre-wrap">{mostrarCrm(valor, clave)}</dd>
+          <dd className="break-words whitespace-pre-wrap">{clave === 'logo' ? <MiniaturaImagen url={valor} grande /> : mostrarCrm(valor, clave)}</dd>
         </div>)}</dl>
       {gestionar && !detalle.eliminadoEn && <div className="mt-5 flex flex-wrap gap-2">
         {config.acciones.filter((item) => item.estados.includes(detalle.estado)).map((item) =>
