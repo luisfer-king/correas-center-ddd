@@ -115,8 +115,11 @@ export function ListadoCatalogo<T extends BaseCatalogo>({ config }: { config: Co
             {config.columnas.map(c => <td key={c.clave} className="max-w-72 truncate p-3" title={presentarValor(valorCampo(fila, c.clave))}>{['imagen', 'logo'].includes(c.clave) ? <MiniaturaImagen url={valorCampo(fila, c.clave)} nombre={String(valorCampo(fila, 'nombre') ?? 'Imagen')} /> : presentarValor(valorCampo(fila, c.clave))}</td>)}
             <td className="p-3 capitalize">{fila.estado}</td><td className="p-3"><div className="flex flex-wrap gap-2">
               <button type="button" onClick={() => navegar(`${base}/${fila.id}`)} className="rounded border px-2 py-1">Detalle</button>
-              {config.recurso === 'productos' && fila.estado === 'activo' && capacidades?.recursos['asignaciones-marca']?.gestionar &&
-                <button type="button" onClick={() => setProductoMarcas(fila)} className="rounded border px-2 py-1">Marcas</button>}
+              {config.recurso === 'productos' &&
+                <button type="button" disabled={fila.estado !== 'activo'}
+                  aria-label={`Asignar marcas a ${String(valorCampo(fila, 'nombre') ?? fila.id)}`}
+                  title={fila.estado === 'activo' ? 'Ver y asignar marcas del producto' : 'Activa el producto para gestionar sus marcas'}
+                  onClick={() => setProductoMarcas(fila)} className="rounded border border-red-300 px-2 py-1 font-medium text-red-700 disabled:opacity-50">Asignar marcas</button>}
               {gestionar && fila.estado !== 'eliminado' && <>
                 <button type="button" onClick={() => setFormulario(fila)} className="rounded border px-2 py-1">Editar</button>
                 {config.reordenar && <button type="button" onClick={() => { setNuevoOrden(String(valorCampo(fila, 'orden') ?? 0)); setOrden(fila) }} className="rounded border px-2 py-1">Orden</button>}
@@ -132,7 +135,7 @@ export function ListadoCatalogo<T extends BaseCatalogo>({ config }: { config: Co
       <dl className="grid gap-3 sm:grid-cols-2">{Object.entries(detalle).map(([clave, valor]) => <div key={clave}><dt className="text-xs uppercase text-neutral-500">{clave}</dt>
         <dd className="break-words whitespace-pre-wrap">{['imagen', 'logo'].includes(clave) ? <MiniaturaImagen url={valor} grande /> : presentarValor(valor)}</dd></div>)}</dl>
     </ModalPortal>}
-    {productoMarcas && <ModalMarcasProducto productoId={productoMarcas.id} nombre={String(valorCampo(productoMarcas, 'nombre') ?? '')}
+    {productoMarcas && <ModalMarcasProducto key={productoMarcas.id} puedeGestionar={capacidades?.recursos['asignaciones-marca']?.gestionar === true} permisosComprobados={capacidades !== null} productoId={productoMarcas.id} nombre={String(valorCampo(productoMarcas, 'nombre') ?? '')}
       cerrar={() => setProductoMarcas(null)} guardado={() => { setProductoMarcas(null); setMensaje('Marcas actualizadas.'); actualizar() }} />}
     {formulario && <FormularioCatalogo key={formulario === 'nuevo' ? 'nuevo' : formulario.id} config={config}
       registro={formulario === 'nuevo' ? null : formulario} cerrar={() => setFormulario(null)} guardado={() => { setFormulario(null); actualizar() }} />}
