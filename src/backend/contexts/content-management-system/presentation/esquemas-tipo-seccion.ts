@@ -1,0 +1,5 @@
+import * as S from './esquemas-cms.js'
+
+export const crearTipoSeccionSchema = S.objetoCms({ nombre: S.textoObligatorioSchemaCms, slug: S.textoObligatorioSchemaCms, descripcion: S.textoNullableSchemaCms, camposMetadata: { type: 'array', uniqueItems: true, items: S.textoObligatorioSchemaCms }, icono: S.textoNullableSchemaCms, orden: S.ordenSchemaCms })
+export const editarTipoSeccionSchema = S.objetoCms({ version: S.versionSchemaCms, nombre: S.textoObligatorioSchemaCms, descripcion: S.textoNullableSchemaCms, icono: S.textoNullableSchemaCms })
+export const salidaTipoSeccionSchema = S.objetoCms({ id: S.idSchemaCms, nombre: S.textoObligatorioSchemaCms, slug: S.textoObligatorioSchemaCms, descripcion: S.textoNullableSchemaCms, camposMetadata: { type: 'array', uniqueItems: true, items: S.textoObligatorioSchemaCms }, icono: S.textoNullableSchemaCms, orden: S.ordenSchemaCms, estado: S.estadoSchemaCms, creadoEn: S.versionSchemaCms, actualizadoEn: S.versionSchemaCms, eliminadoEn: S.nullableCms(S.versionSchemaCms) })

@@ -1,0 +1,6 @@
+import * as S from './esquemas-cms.js'
+import { salidaMenuItemSchema } from './esquemas-menu-item.js'
+
+export const crearMenuSchema = S.objetoCms({ empresaId: S.idSchemaCms, grupo: S.textoObligatorioSchemaCms, destino: S.destinoSchemaCms, ruta: S.textoObligatorioSchemaCms, icono: S.textoNullableSchemaCms, mostrar: { type: 'boolean' }, orden: S.ordenSchemaCms, cargarSubmenu: { anyOf: [{ type: 'string', enum: ['activo','inactivo'] }, { type: 'null' }] } })
+export const editarMenuSchema = S.objetoCms({ version: S.versionSchemaCms, grupo: S.textoObligatorioSchemaCms, ruta: S.textoObligatorioSchemaCms, icono: S.textoNullableSchemaCms, mostrar: { type: 'boolean' }, cargarSubmenu: { anyOf: [{ type: 'string', enum: ['activo','inactivo'] }, { type: 'null' }] } })
+export const salidaMenuSchema = S.objetoCms({ id: S.idSchemaCms, empresaId: S.idSchemaCms, grupo: S.textoObligatorioSchemaCms, destino: S.destinoSchemaCms, ruta: S.textoObligatorioSchemaCms, icono: S.textoNullableSchemaCms, mostrar: { type: 'boolean' }, orden: S.ordenSchemaCms, cargarSubmenu: { anyOf: [{ type: 'string', enum: ['activo','inactivo'] }, { type: 'null' }] }, estado: S.estadoSchemaCms, creadoEn: S.versionSchemaCms, actualizadoEn: S.versionSchemaCms, eliminadoEn: S.nullableCms(S.versionSchemaCms), items: { type: 'array', items: salidaMenuItemSchema } })
