@@ -1,3 +1,4 @@
+import { codigosPermisoCms } from '../permisos-cms.js'
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { entorno, entrada, contexto, actor, antes, despues } from './soporte-pruebas-cms.js'
@@ -16,7 +17,7 @@ test('ActivarTipoSeccion: autoriza antes de consultar o escribir', async () => {
   const env = entorno('TipoSeccion'); env.opciones.permitir = false; const caso = new ActivarTipoSeccion(env.repo as unknown as RepositorioTiposSeccion, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.tipos_seccion.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('tipos_seccion', 'manage')])
 })
 
 test('ActivarTipoSeccion: aplica operación y conserva contexto/versión', async () => {
@@ -35,7 +36,7 @@ test('CambiarClavesTipoSeccion: autoriza antes de consultar o escribir', async (
   const env = entorno('TipoSeccion'); env.opciones.permitir = false; const caso = new CambiarClavesTipoSeccion(env.repo as unknown as RepositorioTiposSeccion, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes, ['cta', 'otra']), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.tipos_seccion.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('tipos_seccion', 'manage')])
 })
 
 test('CambiarClavesTipoSeccion: aplica operación y conserva contexto/versión', async () => {
@@ -53,7 +54,7 @@ test('CrearTipoSeccion: autoriza antes de consultar o escribir', async () => {
   const env = entorno('TipoSeccion'); env.opciones.permitir = false; const caso = new CrearTipoSeccion(env.repo as unknown as RepositorioTiposSeccion, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, entrada('TipoSeccion')), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.tipos_seccion.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('tipos_seccion', 'manage')])
 })
 
 test('CrearTipoSeccion: aplica operación y conserva contexto/versión', async () => {
@@ -67,7 +68,7 @@ test('EditarTipoSeccion: autoriza antes de consultar o escribir', async () => {
   const env = entorno('TipoSeccion'); env.opciones.permitir = false; const caso = new EditarTipoSeccion(env.repo as unknown as RepositorioTiposSeccion, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes, entrada('TipoSeccion')), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.tipos_seccion.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('tipos_seccion', 'manage')])
 })
 
 test('EditarTipoSeccion: aplica operación y conserva contexto/versión', async () => {
@@ -85,7 +86,7 @@ test('EliminarTipoSeccion: autoriza antes de consultar o escribir', async () => 
   const env = entorno('TipoSeccion'); env.opciones.permitir = false; const caso = new EliminarTipoSeccion(env.repo as unknown as RepositorioTiposSeccion, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.tipos_seccion.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('tipos_seccion', 'manage')])
 })
 
 test('EliminarTipoSeccion: aplica operación y conserva contexto/versión', async () => {
@@ -105,7 +106,7 @@ test('InactivarTipoSeccion: autoriza antes de consultar o escribir', async () =>
   const env = entorno('TipoSeccion'); env.opciones.permitir = false; const caso = new InactivarTipoSeccion(env.repo as unknown as RepositorioTiposSeccion, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.tipos_seccion.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('tipos_seccion', 'manage')])
 })
 
 test('InactivarTipoSeccion: aplica operación y conserva contexto/versión', async () => {
@@ -124,7 +125,7 @@ test('ListarTiposSeccion: autoriza antes de consultar o escribir', async () => {
   const env = entorno('TipoSeccion'); env.opciones.permitir = false; const caso = new ListarTiposSeccion(env.repo as unknown as RepositorioTiposSeccion, env.auth)
   await assert.rejects(caso.ejecutar(actor, {}), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.tipos_seccion.read'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('tipos_seccion', 'read')])
 })
 
 test('ListarTiposSeccion: aplica operación y conserva contexto/versión', async () => {
@@ -137,7 +138,7 @@ test('ObtenerTipoSeccion: autoriza antes de consultar o escribir', async () => {
   const env = entorno('TipoSeccion'); env.opciones.permitir = false; const caso = new ObtenerTipoSeccion(env.repo as unknown as RepositorioTiposSeccion, env.auth)
   await assert.rejects(caso.ejecutar(actor, 2n), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.tipos_seccion.read'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('tipos_seccion', 'read')])
 })
 
 test('ObtenerTipoSeccion: aplica operación y conserva contexto/versión', async () => {
@@ -150,7 +151,7 @@ test('ReordenarTipoSeccion: autoriza antes de consultar o escribir', async () =>
   const env = entorno('TipoSeccion'); env.opciones.permitir = false; const caso = new ReordenarTipoSeccion(env.repo as unknown as RepositorioTiposSeccion, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes, 4), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.tipos_seccion.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('tipos_seccion', 'manage')])
 })
 
 test('ReordenarTipoSeccion: aplica operación y conserva contexto/versión', async () => {

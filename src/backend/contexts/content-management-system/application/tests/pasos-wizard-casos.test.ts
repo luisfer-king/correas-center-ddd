@@ -1,3 +1,4 @@
+import { codigosPermisoCms } from '../permisos-cms.js'
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { entorno, entrada, contexto, actor, antes, despues } from './soporte-pruebas-cms.js'
@@ -15,7 +16,7 @@ test('ActivarPasoWizard: autoriza antes de consultar o escribir', async () => {
   const env = entorno('PasoWizard'); env.opciones.permitir = false; const caso = new ActivarPasoWizard(env.repo as unknown as RepositorioPasosWizard, env.auth, env.reloj, env.fuentes)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.pasos_wizard.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('pasos_wizard', 'manage')])
 })
 
 test('ActivarPasoWizard: aplica operación y conserva contexto/versión', async () => {
@@ -34,7 +35,7 @@ test('CrearPasoWizard: autoriza antes de consultar o escribir', async () => {
   const env = entorno('PasoWizard'); env.opciones.permitir = false; const caso = new CrearPasoWizard(env.repo as unknown as RepositorioPasosWizard, env.auth, env.reloj, env.fuentes)
   await assert.rejects(caso.ejecutar(contexto, entrada('PasoWizard')), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.pasos_wizard.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('pasos_wizard', 'manage')])
 })
 
 test('CrearPasoWizard: aplica operación y conserva contexto/versión', async () => {
@@ -48,7 +49,7 @@ test('EditarPasoWizard: autoriza antes de consultar o escribir', async () => {
   const env = entorno('PasoWizard'); env.opciones.permitir = false; const caso = new EditarPasoWizard(env.repo as unknown as RepositorioPasosWizard, env.auth, env.reloj, env.fuentes)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes, entrada('PasoWizard')), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.pasos_wizard.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('pasos_wizard', 'manage')])
 })
 
 test('EditarPasoWizard: aplica operación y conserva contexto/versión', async () => {
@@ -66,7 +67,7 @@ test('EliminarPasoWizard: autoriza antes de consultar o escribir', async () => {
   const env = entorno('PasoWizard'); env.opciones.permitir = false; const caso = new EliminarPasoWizard(env.repo as unknown as RepositorioPasosWizard, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.pasos_wizard.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('pasos_wizard', 'manage')])
 })
 
 test('EliminarPasoWizard: aplica operación y conserva contexto/versión', async () => {
@@ -86,7 +87,7 @@ test('InactivarPasoWizard: autoriza antes de consultar o escribir', async () => 
   const env = entorno('PasoWizard'); env.opciones.permitir = false; const caso = new InactivarPasoWizard(env.repo as unknown as RepositorioPasosWizard, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.pasos_wizard.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('pasos_wizard', 'manage')])
 })
 
 test('InactivarPasoWizard: aplica operación y conserva contexto/versión', async () => {
@@ -105,7 +106,7 @@ test('ListarPasosWizard: autoriza antes de consultar o escribir', async () => {
   const env = entorno('PasoWizard'); env.opciones.permitir = false; const caso = new ListarPasosWizard(env.repo as unknown as RepositorioPasosWizard, env.auth)
   await assert.rejects(caso.ejecutar(actor, {}), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.pasos_wizard.read'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('pasos_wizard', 'read')])
 })
 
 test('ListarPasosWizard: aplica operación y conserva contexto/versión', async () => {
@@ -118,7 +119,7 @@ test('ObtenerPasoWizard: autoriza antes de consultar o escribir', async () => {
   const env = entorno('PasoWizard'); env.opciones.permitir = false; const caso = new ObtenerPasoWizard(env.repo as unknown as RepositorioPasosWizard, env.auth)
   await assert.rejects(caso.ejecutar(actor, 2n), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.pasos_wizard.read'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('pasos_wizard', 'read')])
 })
 
 test('ObtenerPasoWizard: aplica operación y conserva contexto/versión', async () => {
@@ -131,7 +132,7 @@ test('ReordenarPasoWizard: autoriza antes de consultar o escribir', async () => 
   const env = entorno('PasoWizard'); env.opciones.permitir = false; const caso = new ReordenarPasoWizard(env.repo as unknown as RepositorioPasosWizard, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes, 4), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.pasos_wizard.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('pasos_wizard', 'manage')])
 })
 
 test('ReordenarPasoWizard: aplica operación y conserva contexto/versión', async () => {

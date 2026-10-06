@@ -1,3 +1,4 @@
+import { codigosPermisoCms, exigirAlternativaCms } from '../application/permisos-cms.js'
 import { Prisma, type PrismaClient } from '../../../generated/prisma/client.js'
 import type { Json } from '../../identity-access-management/domain/iam-values.js'
 import { EventoAuditoria } from '../../identity-access-management/domain/evento-auditoria.js'
@@ -16,7 +17,7 @@ export function transaccionCms<T>(db: PrismaClient, tarea: (tx: TxCms) => Promis
 }
 export async function gestionarCms(tx: TxCms, contexto: ContextoCms, recurso: RecursoCms): Promise<void> {
   fechaCMS(contexto.cuando)
-  await exigirPermisoEnTransaccion(tx, contexto.actorId, `cms.${recurso.replaceAll('-', '_')}.manage`)
+  await exigirAlternativaCms(codigosPermisoCms(recurso, 'manage'), codigo => exigirPermisoEnTransaccion(tx, contexto.actorId, codigo))
 }
 export function paginaCms(q: { limite?: number; desplazamiento?: number }): { take: number; skip: number } {
   const take = q.limite ?? 100, skip = q.desplazamiento ?? 0

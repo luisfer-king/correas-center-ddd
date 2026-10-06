@@ -1,3 +1,5 @@
+// CMS: integración explícita y navegación central v2
+import { usarCargaCapacidadesCms } from '../../cms/presentation/capacidades-cms'
 import { useEffect, useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import { NavegacionAgrupada } from '../../../shared/navegacion/navegacion-agrupada'
@@ -13,6 +15,7 @@ const estiloEnlace = ({ isActive }: { isActive: boolean }) =>
     `rounded-md px-3 py-2 text-sm font-medium ${isActive ? 'bg-red-700 text-white' : 'text-neutral-700 hover:bg-neutral-100'}`
 
 export function MarcoPortal() {
+    const cms = usarCargaCapacidadesCms()
     const { cerrar } = usarSesion()
     const { tema, alternar } = usarTemaPortal()
     const [cerrando, setCerrando] = useState(false)
@@ -60,7 +63,7 @@ export function MarcoPortal() {
                 <span className="font-bold tracking-wide">Correas Center · Portal</span>
                 <nav aria-label="Navegación del portal" className="flex w-full flex-wrap items-center gap-2 xl:w-auto">
                     <NavLink to="/portal" end className={estiloEnlace}>Inicio</NavLink>
-                    <NavegacionAgrupada grupos={gruposPermitidos(capacidadesIam, crm, catalogo)} />
+                    <NavegacionAgrupada grupos={gruposPermitidos(capacidadesIam, crm, catalogo, cms.datos)} />
                     <button type="button" onClick={alternar} aria-label={tema === 'oscuro' ? 'Activar tema claro' : 'Activar tema oscuro'}
                         className="rounded-md border border-neutral-300 px-3 py-2 text-sm font-semibold hover:bg-neutral-100">
                         {tema === 'oscuro' ? '☀ Tema claro' : '◐ Tema oscuro'}

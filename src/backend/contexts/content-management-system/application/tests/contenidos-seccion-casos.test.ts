@@ -1,3 +1,4 @@
+import { codigosPermisoCms } from '../permisos-cms.js'
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { entorno, entrada, contexto, actor, antes, despues } from './soporte-pruebas-cms.js'
@@ -16,7 +17,7 @@ test('ActivarContenidoSeccion: autoriza antes de consultar o escribir', async ()
   const env = entorno('ContenidoSeccion'); env.opciones.permitir = false; const caso = new ActivarContenidoSeccion(env.repo as unknown as RepositorioContenidosSeccion, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.contenidos_seccion.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('contenidos_seccion', 'manage')])
 })
 
 test('ActivarContenidoSeccion: aplica operación y conserva contexto/versión', async () => {
@@ -35,7 +36,7 @@ test('CrearContenidoSeccion: autoriza antes de consultar o escribir', async () =
   const env = entorno('ContenidoSeccion'); env.opciones.permitir = false; const caso = new CrearContenidoSeccion(env.repo as unknown as RepositorioContenidosSeccion, env.auth, env.reloj, env.tipos as unknown as ConstructorParameters<typeof CrearContenidoSeccion>[3])
   await assert.rejects(caso.ejecutar(contexto, entrada('ContenidoSeccion')), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.contenidos_seccion.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('contenidos_seccion', 'manage')])
 })
 
 test('CrearContenidoSeccion: aplica operación y conserva contexto/versión', async () => {
@@ -49,7 +50,7 @@ test('EditarContenidoSeccion: autoriza antes de consultar o escribir', async () 
   const env = entorno('ContenidoSeccion'); env.opciones.permitir = false; const caso = new EditarContenidoSeccion(env.repo as unknown as RepositorioContenidosSeccion, env.auth, env.reloj, env.tipos as unknown as ConstructorParameters<typeof EditarContenidoSeccion>[3])
   await assert.rejects(caso.ejecutar(contexto, 2n, antes, entrada('ContenidoSeccion')), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.contenidos_seccion.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('contenidos_seccion', 'manage')])
 })
 
 test('EditarContenidoSeccion: aplica operación y conserva contexto/versión', async () => {
@@ -67,7 +68,7 @@ test('EliminarContenidoSeccion: autoriza antes de consultar o escribir', async (
   const env = entorno('ContenidoSeccion'); env.opciones.permitir = false; const caso = new EliminarContenidoSeccion(env.repo as unknown as RepositorioContenidosSeccion, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.contenidos_seccion.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('contenidos_seccion', 'manage')])
 })
 
 test('EliminarContenidoSeccion: aplica operación y conserva contexto/versión', async () => {
@@ -87,7 +88,7 @@ test('FijarVisibilidadContenidoSeccion: autoriza antes de consultar o escribir',
   const env = entorno('ContenidoSeccion'); env.opciones.permitir = false; const caso = new FijarVisibilidadContenidoSeccion(env.repo as unknown as RepositorioContenidosSeccion, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes, false), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.contenidos_seccion.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('contenidos_seccion', 'manage')])
 })
 
 test('FijarVisibilidadContenidoSeccion: aplica operación y conserva contexto/versión', async () => {
@@ -106,7 +107,7 @@ test('InactivarContenidoSeccion: autoriza antes de consultar o escribir', async 
   const env = entorno('ContenidoSeccion'); env.opciones.permitir = false; const caso = new InactivarContenidoSeccion(env.repo as unknown as RepositorioContenidosSeccion, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.contenidos_seccion.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('contenidos_seccion', 'manage')])
 })
 
 test('InactivarContenidoSeccion: aplica operación y conserva contexto/versión', async () => {
@@ -125,7 +126,7 @@ test('ListarContenidosSeccion: autoriza antes de consultar o escribir', async ()
   const env = entorno('ContenidoSeccion'); env.opciones.permitir = false; const caso = new ListarContenidosSeccion(env.repo as unknown as RepositorioContenidosSeccion, env.auth)
   await assert.rejects(caso.ejecutar(actor, {}), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.contenidos_seccion.read'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('contenidos_seccion', 'read')])
 })
 
 test('ListarContenidosSeccion: aplica operación y conserva contexto/versión', async () => {
@@ -138,7 +139,7 @@ test('ObtenerContenidoSeccion: autoriza antes de consultar o escribir', async ()
   const env = entorno('ContenidoSeccion'); env.opciones.permitir = false; const caso = new ObtenerContenidoSeccion(env.repo as unknown as RepositorioContenidosSeccion, env.auth)
   await assert.rejects(caso.ejecutar(actor, 2n), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.contenidos_seccion.read'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('contenidos_seccion', 'read')])
 })
 
 test('ObtenerContenidoSeccion: aplica operación y conserva contexto/versión', async () => {
@@ -151,7 +152,7 @@ test('ReordenarContenidoSeccion: autoriza antes de consultar o escribir', async 
   const env = entorno('ContenidoSeccion'); env.opciones.permitir = false; const caso = new ReordenarContenidoSeccion(env.repo as unknown as RepositorioContenidosSeccion, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes, 4), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.contenidos_seccion.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('contenidos_seccion', 'manage')])
 })
 
 test('ReordenarContenidoSeccion: aplica operación y conserva contexto/versión', async () => {

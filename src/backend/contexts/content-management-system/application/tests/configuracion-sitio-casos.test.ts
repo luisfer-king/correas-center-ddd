@@ -1,3 +1,4 @@
+import { codigosPermisoCms } from '../permisos-cms.js'
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { entorno, entrada, contexto, actor, antes, despues } from './soporte-pruebas-cms.js'
@@ -12,7 +13,7 @@ test('CambiarActividadConfiguracionSitio: autoriza antes de consultar o escribir
   const env = entorno('ConfiguracionSitio'); env.opciones.permitir = false; const caso = new CambiarActividadConfiguracionSitio(env.repo as unknown as RepositorioConfiguracionesSitio, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2, antes, true), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.configuracion_sitio.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('configuracion_sitio', 'manage')])
 })
 
 test('CambiarActividadConfiguracionSitio: aplica operación y conserva contexto/versión', async () => {
@@ -30,7 +31,7 @@ test('CrearConfiguracionSitio: autoriza antes de consultar o escribir', async ()
   const env = entorno('ConfiguracionSitio'); env.opciones.permitir = false; const caso = new CrearConfiguracionSitio(env.repo as unknown as RepositorioConfiguracionesSitio, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, entrada('ConfiguracionSitio')), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.configuracion_sitio.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('configuracion_sitio', 'manage')])
 })
 
 test('CrearConfiguracionSitio: aplica operación y conserva contexto/versión', async () => {
@@ -44,7 +45,7 @@ test('EditarConfiguracionSitio: autoriza antes de consultar o escribir', async (
   const env = entorno('ConfiguracionSitio'); env.opciones.permitir = false; const caso = new EditarConfiguracionSitio(env.repo as unknown as RepositorioConfiguracionesSitio, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2, antes, entrada('ConfiguracionSitio')), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.configuracion_sitio.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('configuracion_sitio', 'manage')])
 })
 
 test('EditarConfiguracionSitio: aplica operación y conserva contexto/versión', async () => {
@@ -62,7 +63,7 @@ test('ListarConfiguracionesSitio: autoriza antes de consultar o escribir', async
   const env = entorno('ConfiguracionSitio'); env.opciones.permitir = false; const caso = new ListarConfiguracionesSitio(env.repo as unknown as RepositorioConfiguracionesSitio, env.auth)
   await assert.rejects(caso.ejecutar(actor, {}), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.configuracion_sitio.read'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('configuracion_sitio', 'read')])
 })
 
 test('ListarConfiguracionesSitio: aplica operación y conserva contexto/versión', async () => {
@@ -75,7 +76,7 @@ test('ObtenerConfiguracionSitio: autoriza antes de consultar o escribir', async 
   const env = entorno('ConfiguracionSitio'); env.opciones.permitir = false; const caso = new ObtenerConfiguracionSitio(env.repo as unknown as RepositorioConfiguracionesSitio, env.auth)
   await assert.rejects(caso.ejecutar(actor, 2), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.configuracion_sitio.read'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('configuracion_sitio', 'read')])
 })
 
 test('ObtenerConfiguracionSitio: aplica operación y conserva contexto/versión', async () => {

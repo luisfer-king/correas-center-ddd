@@ -1,3 +1,4 @@
+import { codigosPermisoCms } from '../permisos-cms.js'
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { entorno, entrada, contexto, actor, antes, despues } from './soporte-pruebas-cms.js'
@@ -16,7 +17,7 @@ test('ActivarFooterElemento: autoriza antes de consultar o escribir', async () =
   const env = entorno('FooterElemento'); env.opciones.permitir = false; const caso = new ActivarFooterElemento(env.repo as unknown as RepositorioElementosFooter, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.elementos_footer.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('elementos_footer', 'manage')])
 })
 
 test('ActivarFooterElemento: aplica operación y conserva contexto/versión', async () => {
@@ -35,7 +36,7 @@ test('CrearFooterElemento: autoriza antes de consultar o escribir', async () => 
   const env = entorno('FooterElemento'); env.opciones.permitir = false; const caso = new CrearFooterElemento(env.repo as unknown as RepositorioElementosFooter, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, entrada('FooterElemento')), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.elementos_footer.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('elementos_footer', 'manage')])
 })
 
 test('CrearFooterElemento: aplica operación y conserva contexto/versión', async () => {
@@ -49,7 +50,7 @@ test('EditarFooterElemento: autoriza antes de consultar o escribir', async () =>
   const env = entorno('FooterElemento'); env.opciones.permitir = false; const caso = new EditarFooterElemento(env.repo as unknown as RepositorioElementosFooter, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes, entrada('FooterElemento')), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.elementos_footer.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('elementos_footer', 'manage')])
 })
 
 test('EditarFooterElemento: aplica operación y conserva contexto/versión', async () => {
@@ -67,7 +68,7 @@ test('EliminarFooterElemento: autoriza antes de consultar o escribir', async () 
   const env = entorno('FooterElemento'); env.opciones.permitir = false; const caso = new EliminarFooterElemento(env.repo as unknown as RepositorioElementosFooter, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.elementos_footer.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('elementos_footer', 'manage')])
 })
 
 test('EliminarFooterElemento: aplica operación y conserva contexto/versión', async () => {
@@ -87,7 +88,7 @@ test('FijarVisibilidadFooterElemento: autoriza antes de consultar o escribir', a
   const env = entorno('FooterElemento'); env.opciones.permitir = false; const caso = new FijarVisibilidadFooterElemento(env.repo as unknown as RepositorioElementosFooter, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes, false), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.elementos_footer.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('elementos_footer', 'manage')])
 })
 
 test('FijarVisibilidadFooterElemento: aplica operación y conserva contexto/versión', async () => {
@@ -106,7 +107,7 @@ test('InactivarFooterElemento: autoriza antes de consultar o escribir', async ()
   const env = entorno('FooterElemento'); env.opciones.permitir = false; const caso = new InactivarFooterElemento(env.repo as unknown as RepositorioElementosFooter, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.elementos_footer.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('elementos_footer', 'manage')])
 })
 
 test('InactivarFooterElemento: aplica operación y conserva contexto/versión', async () => {
@@ -125,7 +126,7 @@ test('ListarElementosFooter: autoriza antes de consultar o escribir', async () =
   const env = entorno('FooterElemento'); env.opciones.permitir = false; const caso = new ListarElementosFooter(env.repo as unknown as RepositorioElementosFooter, env.auth)
   await assert.rejects(caso.ejecutar(actor, {}), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.elementos_footer.read'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('elementos_footer', 'read')])
 })
 
 test('ListarElementosFooter: aplica operación y conserva contexto/versión', async () => {
@@ -138,7 +139,7 @@ test('ObtenerFooterElemento: autoriza antes de consultar o escribir', async () =
   const env = entorno('FooterElemento'); env.opciones.permitir = false; const caso = new ObtenerFooterElemento(env.repo as unknown as RepositorioElementosFooter, env.auth)
   await assert.rejects(caso.ejecutar(actor, 2n), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.elementos_footer.read'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('elementos_footer', 'read')])
 })
 
 test('ObtenerFooterElemento: aplica operación y conserva contexto/versión', async () => {
@@ -151,7 +152,7 @@ test('ReordenarFooterElemento: autoriza antes de consultar o escribir', async ()
   const env = entorno('FooterElemento'); env.opciones.permitir = false; const caso = new ReordenarFooterElemento(env.repo as unknown as RepositorioElementosFooter, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes, 4), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.elementos_footer.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('elementos_footer', 'manage')])
 })
 
 test('ReordenarFooterElemento: aplica operación y conserva contexto/versión', async () => {

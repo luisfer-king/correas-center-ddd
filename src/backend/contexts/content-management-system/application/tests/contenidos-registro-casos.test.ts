@@ -1,3 +1,4 @@
+import { codigosPermisoCms } from '../permisos-cms.js'
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { entorno, entrada, contexto, actor, antes, despues } from './soporte-pruebas-cms.js'
@@ -15,7 +16,7 @@ test('ActivarContenidoRegistro: autoriza antes de consultar o escribir', async (
   const env = entorno('ContenidoRegistro'); env.opciones.permitir = false; const caso = new ActivarContenidoRegistro(env.repo as unknown as RepositorioContenidosRegistro, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.contenidos_registro.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('contenidos_registro', 'manage')])
 })
 
 test('ActivarContenidoRegistro: aplica operación y conserva contexto/versión', async () => {
@@ -34,7 +35,7 @@ test('CrearContenidoRegistro: autoriza antes de consultar o escribir', async () 
   const env = entorno('ContenidoRegistro'); env.opciones.permitir = false; const caso = new CrearContenidoRegistro(env.repo as unknown as RepositorioContenidosRegistro, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, entrada('ContenidoRegistro')), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.contenidos_registro.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('contenidos_registro', 'manage')])
 })
 
 test('CrearContenidoRegistro: aplica operación y conserva contexto/versión', async () => {
@@ -48,7 +49,7 @@ test('EditarContenidoRegistro: autoriza antes de consultar o escribir', async ()
   const env = entorno('ContenidoRegistro'); env.opciones.permitir = false; const caso = new EditarContenidoRegistro(env.repo as unknown as RepositorioContenidosRegistro, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes, entrada('ContenidoRegistro')), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.contenidos_registro.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('contenidos_registro', 'manage')])
 })
 
 test('EditarContenidoRegistro: aplica operación y conserva contexto/versión', async () => {
@@ -66,7 +67,7 @@ test('EliminarContenidoRegistro: autoriza antes de consultar o escribir', async 
   const env = entorno('ContenidoRegistro'); env.opciones.permitir = false; const caso = new EliminarContenidoRegistro(env.repo as unknown as RepositorioContenidosRegistro, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.contenidos_registro.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('contenidos_registro', 'manage')])
 })
 
 test('EliminarContenidoRegistro: aplica operación y conserva contexto/versión', async () => {
@@ -86,7 +87,7 @@ test('InactivarContenidoRegistro: autoriza antes de consultar o escribir', async
   const env = entorno('ContenidoRegistro'); env.opciones.permitir = false; const caso = new InactivarContenidoRegistro(env.repo as unknown as RepositorioContenidosRegistro, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.contenidos_registro.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('contenidos_registro', 'manage')])
 })
 
 test('InactivarContenidoRegistro: aplica operación y conserva contexto/versión', async () => {
@@ -105,7 +106,7 @@ test('ListarContenidosRegistro: autoriza antes de consultar o escribir', async (
   const env = entorno('ContenidoRegistro'); env.opciones.permitir = false; const caso = new ListarContenidosRegistro(env.repo as unknown as RepositorioContenidosRegistro, env.auth)
   await assert.rejects(caso.ejecutar(actor, {}), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.contenidos_registro.read'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('contenidos_registro', 'read')])
 })
 
 test('ListarContenidosRegistro: aplica operación y conserva contexto/versión', async () => {
@@ -118,7 +119,7 @@ test('ObtenerContenidoRegistro: autoriza antes de consultar o escribir', async (
   const env = entorno('ContenidoRegistro'); env.opciones.permitir = false; const caso = new ObtenerContenidoRegistro(env.repo as unknown as RepositorioContenidosRegistro, env.auth)
   await assert.rejects(caso.ejecutar(actor, 2n), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.contenidos_registro.read'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('contenidos_registro', 'read')])
 })
 
 test('ObtenerContenidoRegistro: aplica operación y conserva contexto/versión', async () => {
@@ -131,7 +132,7 @@ test('ReordenarContenidoRegistro: autoriza antes de consultar o escribir', async
   const env = entorno('ContenidoRegistro'); env.opciones.permitir = false; const caso = new ReordenarContenidoRegistro(env.repo as unknown as RepositorioContenidosRegistro, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes, 4), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.contenidos_registro.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('contenidos_registro', 'manage')])
 })
 
 test('ReordenarContenidoRegistro: aplica operación y conserva contexto/versión', async () => {

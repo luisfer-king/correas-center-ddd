@@ -1,3 +1,4 @@
+import { codigosPermisoCms, exigirAlternativaCms } from '../application/permisos-cms.js'
 import type { PrismaClient } from '../../../generated/prisma/client.js'
 import { EventoAuditoria } from '../../identity-access-management/domain/evento-auditoria.js'
 import { exigirPermisoEnTransaccion } from '../../identity-access-management/infrastructure/exigir-permiso-en-transaccion.js'
@@ -16,12 +17,12 @@ export class PrismaLecturasCms {
   async ejecutar(contexto: ContextoAccionCms, recurso: RecursoCms | 'portal', registroId: string | null = null): Promise<void> {
     await transaccionCms(this.db, async tx => {
       const actorId = actorCms(contexto.actorId)
-      if (recurso !== 'portal') await exigirPermisoEnTransaccion(tx, actorId, `cms.${recurso}.read`)
+      if (recurso !== 'portal') await exigirAlternativaCms(codigosPermisoCms(recurso, 'read'), codigo => exigirPermisoEnTransaccion(tx, actorId, codigo))
       else {
         const cuenta = await tx.perfil.findFirst({ where: { id: actorId, estado: 'activo', eliminadoEn: null,
           relUsuarioRol: { some: { estado: 'activo', rol: { estado: 'activo', eliminadoEn: null,
             relRolPermiso: { some: { estado: 'activo', permiso: { estado: 'activo', eliminadoEn: null,
-              slug: { in: recursosCms.flatMap(r => [`cms.${r}.read`, `cms.${r}.manage`]) } } } } } } } }, select: { id: true } })
+              slug: { in: recursosCms.flatMap(r => [...codigosPermisoCms(r, 'read'), ...codigosPermisoCms(r, 'manage')]) } } } } } } } }, select: { id: true } })
         if (!cuenta) throw new Error('Acceso denegado')
       }
       await insertarAuditoria(tx, EventoAuditoria.registrar({ usuarioId: actorId, accion: 'Lectura',

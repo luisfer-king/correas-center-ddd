@@ -1,3 +1,4 @@
+import { codigosPermisoCms } from '../permisos-cms.js'
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { ObtenerMetadataSeccion } from '../use-cases/metadata-seccion/obtener-metadata-seccion.js'
@@ -18,7 +19,7 @@ test('metadata: lectura y reemplazo comprueban su permiso antes de acceder', asy
   await assert.rejects(casos(env).obtener.ejecutar(actor, 2n), /Acceso denegado/)
   await assert.rejects(casos(env).reemplazar.ejecutar(contexto, 2n, antes, {}), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.metadata_seccion.read', 'cms.metadata_seccion.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('metadata_seccion', 'read'), ...codigosPermisoCms('metadata_seccion', 'manage')])
 })
 test('metadata: devuelve proyección de la sección con su versión', async () => {
   const env = entorno('MetadataSeccion')

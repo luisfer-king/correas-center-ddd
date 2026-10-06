@@ -1,0 +1,10 @@
+import type { CrearContenidoSeccion, EditarContenidoSeccion } from '../api/tipos-contenidos-seccion'
+import { contenidos_seccionApi } from '../api/cliente-contenidos-seccion'
+import type { ConfiguracionVistaCms } from './listado-cms'
+export const vistaContenidoSeccion: ConfiguracionVistaCms = {
+ recurso: 'contenidos_seccion', ruta: 'contenidos-seccion', titulo: 'Secciones',
+ crear: [{"clave": "empresaId", "etiqueta": "Empresa (ID)", "tipo": "id", "ayuda": "ID de la empresa registrada."}, {"clave": "tipoSeccionId", "etiqueta": "Tipo de sección (ID)", "tipo": "id"}, {"clave": "campos.titulo", "etiqueta": "Título", "tipo": "texto", "nullable": true}, {"clave": "campos.subtitulo", "etiqueta": "Subtitulo", "tipo": "texto", "nullable": true}, {"clave": "campos.descripcion", "etiqueta": "Descripción", "tipo": "area", "nullable": true}, {"clave": "campos.icono", "etiqueta": "Icono", "tipo": "texto", "nullable": true}, {"clave": "campos.imagen", "etiqueta": "Imagen", "tipo": "texto", "nullable": true}, {"clave": "metadata", "etiqueta": "Metadata", "tipo": "json", "ayuda": "Objeto con las claves permitidas por el tipo de sección."}, {"clave": "orden", "etiqueta": "Orden", "tipo": "numero"}, {"clave": "mostrar", "etiqueta": "Visible", "tipo": "booleano"}],
+ editar: [{"clave": "campos.titulo", "etiqueta": "Título", "tipo": "texto", "nullable": true}, {"clave": "campos.subtitulo", "etiqueta": "Subtitulo", "tipo": "texto", "nullable": true}, {"clave": "campos.descripcion", "etiqueta": "Descripción", "tipo": "area", "nullable": true}, {"clave": "campos.icono", "etiqueta": "Icono", "tipo": "texto", "nullable": true}, {"clave": "campos.imagen", "etiqueta": "Imagen", "tipo": "texto", "nullable": true}, {"clave": "metadata", "etiqueta": "Metadata", "tipo": "json", "ayuda": "Objeto con las claves permitidas por el tipo de sección."}],
+ filtros: ["empresaId", "tipoSeccionId"],
+ api: { ...contenidos_seccionApi, crear: datos => contenidos_seccionApi.crear(datos as CrearContenidoSeccion), editar: (id, version, datos) => contenidos_seccionApi.editar(id, version, datos as EditarContenidoSeccion) },
+}

@@ -1,3 +1,4 @@
+import { codigosPermisoCms } from '../permisos-cms.js'
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { entorno, entrada, contexto, actor, antes, despues } from './soporte-pruebas-cms.js'
@@ -16,7 +17,7 @@ test('ActivarMenu: autoriza antes de consultar o escribir', async () => {
   const env = entorno('Menu'); env.opciones.permitir = false; const caso = new ActivarMenu(env.repo as unknown as RepositorioMenus, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.menus.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('menus', 'manage')])
 })
 
 test('ActivarMenu: aplica operación y conserva contexto/versión', async () => {
@@ -35,7 +36,7 @@ test('CrearMenu: autoriza antes de consultar o escribir', async () => {
   const env = entorno('Menu'); env.opciones.permitir = false; const caso = new CrearMenu(env.repo as unknown as RepositorioMenus, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, entrada('Menu')), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.menus.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('menus', 'manage')])
 })
 
 test('CrearMenu: aplica operación y conserva contexto/versión', async () => {
@@ -49,7 +50,7 @@ test('EditarMenu: autoriza antes de consultar o escribir', async () => {
   const env = entorno('Menu'); env.opciones.permitir = false; const caso = new EditarMenu(env.repo as unknown as RepositorioMenus, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes, entrada('Menu')), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.menus.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('menus', 'manage')])
 })
 
 test('EditarMenu: aplica operación y conserva contexto/versión', async () => {
@@ -67,7 +68,7 @@ test('EliminarMenu: autoriza antes de consultar o escribir', async () => {
   const env = entorno('Menu'); env.opciones.permitir = false; const caso = new EliminarMenu(env.repo as unknown as RepositorioMenus, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.menus.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('menus', 'manage')])
 })
 
 test('EliminarMenu: aplica operación y conserva contexto/versión', async () => {
@@ -87,7 +88,7 @@ test('FijarVisibilidadMenu: autoriza antes de consultar o escribir', async () =>
   const env = entorno('Menu'); env.opciones.permitir = false; const caso = new FijarVisibilidadMenu(env.repo as unknown as RepositorioMenus, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes, false), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.menus.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('menus', 'manage')])
 })
 
 test('FijarVisibilidadMenu: aplica operación y conserva contexto/versión', async () => {
@@ -106,7 +107,7 @@ test('InactivarMenu: autoriza antes de consultar o escribir', async () => {
   const env = entorno('Menu'); env.opciones.permitir = false; const caso = new InactivarMenu(env.repo as unknown as RepositorioMenus, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.menus.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('menus', 'manage')])
 })
 
 test('InactivarMenu: aplica operación y conserva contexto/versión', async () => {
@@ -125,7 +126,7 @@ test('ListarMenus: autoriza antes de consultar o escribir', async () => {
   const env = entorno('Menu'); env.opciones.permitir = false; const caso = new ListarMenus(env.repo as unknown as RepositorioMenus, env.auth)
   await assert.rejects(caso.ejecutar(actor, {}), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.menus.read'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('menus', 'read')])
 })
 
 test('ListarMenus: aplica operación y conserva contexto/versión', async () => {
@@ -138,7 +139,7 @@ test('ObtenerMenu: autoriza antes de consultar o escribir', async () => {
   const env = entorno('Menu'); env.opciones.permitir = false; const caso = new ObtenerMenu(env.repo as unknown as RepositorioMenus, env.auth)
   await assert.rejects(caso.ejecutar(actor, 2n), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.menus.read'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('menus', 'read')])
 })
 
 test('ObtenerMenu: aplica operación y conserva contexto/versión', async () => {
@@ -151,7 +152,7 @@ test('ReordenarMenu: autoriza antes de consultar o escribir', async () => {
   const env = entorno('Menu'); env.opciones.permitir = false; const caso = new ReordenarMenu(env.repo as unknown as RepositorioMenus, env.auth, env.reloj)
   await assert.rejects(caso.ejecutar(contexto, 2n, antes, 4), /Acceso denegado/)
   assert.equal(env.llamadas.length, 0)
-  assert.deepEqual(env.permisos, ['cms.menus.manage'])
+  assert.deepEqual(env.permisos, [...codigosPermisoCms('menus', 'manage')])
 })
 
 test('ReordenarMenu: aplica operación y conserva contexto/versión', async () => {

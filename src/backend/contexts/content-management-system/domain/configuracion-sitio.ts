@@ -1,4 +1,4 @@
-import { fechaCMS, textoCMS } from './cms-values.js'
+import { fechaCMS, idCMS, textoCMS } from './cms-values.js'
 
 function enteroPositivo(id: number): number {
     if (!Number.isSafeInteger(id) || id <= 0) throw new Error('ID integer positivo requerido')
@@ -8,7 +8,7 @@ function enteroPositivo(id: number): number {
 // La tabla antigua usa activo booleano, no enum estado ni eliminado_en.
 export class ConfiguracionSitio {
     readonly id: number
-    readonly empresaId: number | null
+    readonly empresaId: bigint | null
     readonly clave: string
     private _valor: string | null
     private _tipo: string | null
@@ -18,10 +18,10 @@ export class ConfiguracionSitio {
     private readonly _creadoEn: Date | null
     private _actualizadoEn: Date | null
 
-    constructor(d: { id: number; empresaId: number | null; clave: string; valor: string | null; tipo: string | null; descripcion: string | null; grupo: string | null; activo: boolean | null; creadoEn: Date | null; actualizadoEn: Date | null }) {
+    constructor(d: { id: number; empresaId: bigint | null; clave: string; valor: string | null; tipo: string | null; descripcion: string | null; grupo: string | null; activo: boolean | null; creadoEn: Date | null; actualizadoEn: Date | null }) {
         if (d.activo !== null && typeof d.activo !== 'boolean') throw new Error('Indicador activo inválido')
         this.id = enteroPositivo(d.id)
-        this.empresaId = d.empresaId === null ? null : enteroPositivo(d.empresaId)
+        this.empresaId = d.empresaId === null ? null : idCMS(d.empresaId)
         this.clave = textoCMS(d.clave, 'Clave')
         this._valor = d.valor; this._tipo = d.tipo; this._descripcion = d.descripcion
         this._grupo = d.grupo; this._activo = d.activo

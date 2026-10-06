@@ -1,3 +1,4 @@
+import { codigosPermisoCms, exigirAlternativaCms } from './permisos-cms.js'
 /** Contrato estructural compatible con ExigirPermiso de IAM. */
 export interface AutorizacionCms {
   ejecutar(actorId: string, codigo: string): Promise<void>
@@ -11,7 +12,8 @@ export function actorCms(actorId: string): string {
   return actorId.toLowerCase()
 }
 export async function permitirCms(auth: AutorizacionCms, actorId: string, recurso: RecursoCms, accion: 'read' | 'manage'): Promise<void> {
-  await auth.ejecutar(actorCms(actorId), `cms.${recurso}.${accion}`)
+  const actor = actorCms(actorId)
+  await exigirAlternativaCms(codigosPermisoCms(recurso, accion), codigo => auth.ejecutar(actor, codigo))
 }
 export async function verEliminadosCms(auth: AutorizacionCms, actorId: string): Promise<boolean> {
   return auth.tieneRolActivo(actorCms(actorId), ['super_admin'])
