@@ -1,3 +1,4 @@
+import { grupoMenu, validarReferenciaGrupoMenu } from '../domain/menu-values.js'
 import type { TxCms } from './operaciones-cms.js'
 import { empresaCms, destinoDisponibleCms } from './operaciones-cms.js'
 import type { TipoSeccion } from '../domain/tipo-seccion.js'
@@ -26,6 +27,7 @@ export async function validarContenidoSeccion(tx: TxCms, entidad: ContenidoSecci
   mapearTipoSeccion(fila).validarMetadata(entidad.metadata)
 }
 export async function validarMenu(tx: TxCms, entidad: Menu): Promise<void> {
+  validarReferenciaGrupoMenu(grupoMenu(entidad.grupo),entidad.destino)
   await empresaCms(tx, entidad.empresaId, entidad.estado === 'activo')
   await destinoDisponibleCms(tx, entidad.empresaId, entidad.destino, entidad.estado === 'activo')
   if (entidad.estado !== 'activo' && await tx.menuItem.findFirst({ where: { menuId: entidad.id, estado: 'activo', eliminadoEn: null }, select: { id: true } })) throw new Error('Menú con ítems activos')

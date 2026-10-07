@@ -1,3 +1,7 @@
+import { Orden } from '../../../shared/domain/value-objects.js'
+import { grupoMenu, aliasesGrupoMenu, validarReferenciaGrupoMenu } from '../domain/menu-values.js'
+import type { GrupoMenu } from '../domain/menu-values.js'
+import type { TxCms } from './operaciones-cms.js'
 import { Menu as EntidadMenu } from '../domain/menu.js'
 import type { PrismaClient } from '../../../generated/prisma/client.js'
 import type { RepositorioMenus, ConsultaMenus, NuevaMenu, EscrituraMenu } from '../application/ports/repositorio-menu.js'
@@ -25,6 +29,13 @@ function datosMenu(e: Menu) {
   }
 }
 
+async function siguienteNumero(tx: TxCms, grupo: GrupoMenu): Promise<number> {
+  const maximo = await tx.menu.aggregate({ where: { grupo: { in: aliasesGrupoMenu(grupo) }, eliminadoEn: null }, _max: { orden: true } })
+  const numero = Math.max(0,maximo._max.orden ?? 0)+1
+  if(numero > 2147483647) throw new Error('Orden automático de menú inválido: fuera de rango')
+  return numero
+}
+
 export class PrismaMenus implements RepositorioMenus {
   constructor(private readonly db: PrismaClient) {}
 
@@ -43,7 +54,8 @@ export class PrismaMenus implements RepositorioMenus {
   async crear(datos: NuevaMenu, contexto: EscrituraMenu): Promise<Menu> {
     return transaccionCms(this.db, async tx => {
       await gestionarCms(tx, contexto, 'menus')
-      const e = new EntidadMenu({ ...datos, id: 1n, estado: 'activo', fechas: { creadoEn: contexto.cuando, actualizadoEn: contexto.cuando, eliminadoEn: null }, items: [] })
+      const grupo = grupoMenu(datos.grupo), numero = await siguienteNumero(tx, grupo)
+      const e = new EntidadMenu({ ...datos, grupo, destino: validarReferenciaGrupoMenu(grupo,datos.destino), orden: Orden.create(numero), id: 1n, estado: 'activo', fechas: { creadoEn: contexto.cuando, actualizadoEn: contexto.cuando, eliminadoEn: null }, items: [] })
       await validarMenu(tx, e)
       const fila = await tx.menu.create({ data: datosMenu(e), include: { relMenuItem: true } })
       const resultado = mapearMenu(fila)
@@ -59,11 +71,14 @@ export class PrismaMenus implements RepositorioMenus {
       const anterior = await tx.menu.findUnique({ where: { id: entidad.id }, include: { relMenuItem: true } })
       if (!anterior || anterior.eliminadoEn !== null) throw new Error('Registro CMS no disponible')
       if (!mismoCms(anterior.actualizadoEn, actualizadoEnAnterior)) throw new Error('Registro CMS modificado por otra operación')
+      const cambioGrupo = !aliasesGrupoMenu(grupoMenu(entidad.grupo)).includes(anterior.grupo)
+      if (cambioGrupo) {
+        const grupo = grupoMenu(entidad.grupo), numero = await siguienteNumero(tx,grupo)
+        entidad.reordenar(Orden.create(numero),contexto.cuando)
+      }
       const datos = datosMenu(entidad)
       if (!mismoCms(anterior.creadoEn, datos.creadoEn)) throw new Error('Campo inmutable: creadoEn')
       if (!mismoCms(anterior.empresaId, datos.empresaId)) throw new Error('Campo inmutable: empresaId')
-      if (!mismoCms(anterior.tipoRegistro, datos.tipoRegistro)) throw new Error('Campo inmutable: tipoRegistro')
-      if (!mismoCms(anterior.registroId, datos.registroId)) throw new Error('Campo inmutable: registroId')
       await validarMenu(tx, entidad)
       // Los cambios de ítems usan su repositorio; no descartarlos silenciosamente al guardar el menú.
       const items = entidad.itemsOrdenados

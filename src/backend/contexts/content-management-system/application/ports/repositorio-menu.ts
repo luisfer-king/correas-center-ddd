@@ -10,7 +10,7 @@ export type ConsultaMenus = Readonly<{
   desplazamiento?: number
 }>
 
-export type NuevaMenu = Omit<ConstructorParameters<typeof Menu>[0], 'id' | 'fechas' | 'estado' | 'items'>
+export type NuevaMenu = Omit<ConstructorParameters<typeof Menu>[0], 'id' | 'fechas' | 'estado' | 'items' | 'orden'> & { orden?: Menu['orden'] | null }
 
 export type EscrituraMenu = Readonly<{
   actorId: string

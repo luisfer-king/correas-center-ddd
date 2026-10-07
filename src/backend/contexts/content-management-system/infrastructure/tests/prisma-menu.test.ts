@@ -79,9 +79,9 @@ test('menús: eliminar con ítems activos se rechaza', async () => {
   const e = mapearMenu({ ...env.fila(), relMenuItem: [] } as unknown as Parameters<typeof mapearMenu>[0]); e.eliminar(despues)
   await assert.rejects(new PrismaMenus(env.db).guardar(e, antes, contexto), /ítems activos/)
 })
-test('menús: destino de otra empresa se rechaza', async () => {
+test('menús: registro real de otra empresa se rechaza', async () => {
   const env = entorno('menu'); env.tablas.producto[0].empresaId = 9n
-  await assert.rejects(new PrismaMenus(env.db).crear(datosParaCrear(env), contexto), /otra empresa/)
+  await assert.rejects(new PrismaMenus(env.db).crear(datosParaCrear(env), contexto),/otra empresa/)
 })
 test('menús: consultas reconstruyen todos los ítems del agregado', async () => {
   const env = entorno('menu'); env.tablas.menuItem[0].menuId = 2n

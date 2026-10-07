@@ -1,8 +1,8 @@
 import { Menu } from '../../domain/menu.js'
 import { Orden } from '../../../../shared/domain/value-objects.js'
 import type { EstadoCMS } from '../../domain/cms-values.js'
-import { RutaInterna, destinoCMS } from '../../domain/cms-values.js'
-import type { TipoDestinoCMS } from '../../domain/cms-values.js'
+import { RutaInterna } from '../../domain/cms-values.js'
+import { referenciaMenu, type ReferenciaMenu } from '../../domain/menu-values.js'
 import type { FilaMenuItem } from './menu-item.js'
 import { mapearMenuItem } from './menu-item.js'
 
@@ -24,7 +24,8 @@ export type FilaMenu = Readonly<{
   cargarSubmenu: string | null
 }>
 
-function tipoDestino(valor: string): TipoDestinoCMS {
+function tipoDestino(valor: string): ReferenciaMenu['tipo'] {
+  if (valor === 'aplicacion') return 'industria' // Lectura de la entrega anterior; el ID requiere revisión humana.
   if (valor !== 'producto' && valor !== 'industria' && valor !== 'servicio') throw new Error('Tipo de destino CMS inválido')
   return valor
 }
@@ -43,7 +44,7 @@ export function mapearMenu(fila: FilaMenu & Readonly<{ relMenuItem: readonly Fil
     estado: fila.estado,
     cargarSubmenu: submenu,
     fechas: { creadoEn: fila.creadoEn, actualizadoEn: fila.actualizadoEn, eliminadoEn: fila.eliminadoEn },
-    destino: destinoCMS(tipoDestino(fila.tipoRegistro), fila.registroId),
+    destino: referenciaMenu(tipoDestino(fila.tipoRegistro), fila.registroId),
     items: fila.relMenuItem.map(mapearMenuItem),
   })
 }

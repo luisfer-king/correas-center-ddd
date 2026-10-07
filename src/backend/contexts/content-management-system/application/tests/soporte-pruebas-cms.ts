@@ -21,7 +21,7 @@ export function entrada(cls: string): any {
   const datos: Record<string, any> = {
     TipoSeccion: { nombre: 'Hero', slug: 'hero', descripcion: null, camposMetadata: ['cta'], icono: null, orden: 0 },
     ContenidoSeccion: { empresaId: 1n, tipoSeccionId: 2n, campos: { titulo: 'Hero', subtitulo: null, descripcion: null, icono: null, imagen: null }, metadata: { cta: 'Cotizar' }, orden: 0, mostrar: true },
-    Menu: { empresaId: 1n, grupo: 'Productos', destino: { tipo: 'producto', id: 1n }, ruta: '/productos', icono: null, mostrar: true, orden: 0, cargarSubmenu: 'activo' },
+    Menu: { empresaId: 1n, grupo: 'Producto', destino: { tipo: 'producto', id: 1n }, ruta: '/productos', icono: null, mostrar: true, orden: 0, cargarSubmenu: 'activo' },
     MenuItem: { menuId: 2n, ruta: '/correas', orden: 0 },
     FooterElemento: { empresaId: 1n, tipo: 'producto', destino: { tipo: 'producto', id: 1n }, titulo: 'Productos', enlace: '/productos', icono: null, orden: 0, mostrar: true },
     ConfiguracionSitio: { empresaId: null, clave: 'titulo', valor: 'Correas Center', tipo: 'texto', descripcion: null, grupo: null, activo: null },
@@ -82,7 +82,7 @@ export function entorno(cls: string) {
       llamadas.push({ operacion: 'crear', args: [datos, escritura] })
       const Ctor = actual.constructor
       actual = cls === 'ConfiguracionSitio' ? new Ctor({ ...datos, id: 99, creadoEn: escritura.cuando, actualizadoEn: escritura.cuando }) :
-        new Ctor({ ...datos, ...(cls === 'ContenidoSeccion' ? { orden: Orden.create(1) } : {}), id: 99n, estado: 'activo', fechas: { creadoEn: escritura.cuando, actualizadoEn: escritura.cuando, eliminadoEn: null }, ...(cls === 'Menu' ? { items: [] } : {}) })
+        new Ctor({ ...datos, ...(cls === 'ContenidoSeccion' ? { orden: Orden.create(1) } : {}), ...(cls === 'Menu' ? { orden: Orden.create(1) } : {}), id: 99n, estado: 'activo', fechas: { creadoEn: escritura.cuando, actualizadoEn: escritura.cuando, eliminadoEn: null }, ...(cls==='Menu' ? { items: [] } : {}) })
       return clonar(actual)
     },
     guardar: async (e: any, version: any, escritura: any) => {
@@ -96,8 +96,6 @@ export function entorno(cls: string) {
       return clonar(actual)
     },
   }
-  return {
-    repo, auth, reloj, tipos, menus, secciones, fuentes, llamadas, permisos, opciones,
-    get actual() { return actual }, tipo, menu
-  }
+  return { repo, auth, reloj, tipos, menus, secciones, fuentes, llamadas, permisos, opciones,
+    get actual() { return actual }, tipo, menu }
 }
