@@ -1,0 +1,5 @@
+.cms-section-form > fieldset > div { display: grid; gap: 8px; align-content: start; }
+.cms-form fieldset.cms-section-metadata { grid-column: 1 / -1; grid-template-columns: 1fr; padding: 16px; border: 1px solid var(--cms-border); border-radius: 10px; }
+.cms-section-metadata legend { padding: 0 6px; font-size: 13px; font-weight: 650; }
+.cms-section-metadata input { border-radius: 18px; }
+.cms-section-form .cms-check { flex-direction: row; align-items: center; }

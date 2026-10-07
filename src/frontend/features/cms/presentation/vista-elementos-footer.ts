@@ -1,0 +1,10 @@
+import type { CrearFooterElemento, EditarFooterElemento } from '../api/tipos-elementos-footer'
+import { elementos_footerApi } from '../api/cliente-elementos-footer'
+import type { ConfiguracionVistaCms } from './listado-cms'
+export const vistaFooterElemento: ConfiguracionVistaCms = {
+ recurso: 'elementos_footer', ruta: 'elementos-footer', titulo: 'Elementos del footer',
+ crear: [{"clave": "empresaId", "etiqueta": "Empresa (ID)", "tipo": "id", "ayuda": "ID de la empresa registrada."}, {"clave": "tipo", "etiqueta": "Tipo", "tipo": "select", "opciones": ["producto", "industria", "servicio", "red_social"], "inicial": "red_social"}, {"clave": "destino.tipo", "etiqueta": "Tipo de destino", "tipo": "select", "opciones": ["producto", "industria", "servicio"], "inicial": "producto"}, {"clave": "destino.id", "etiqueta": "Destino (ID)", "tipo": "id", "nullable": true, "ayuda": "ID del producto, industria o servicio. Vacío cuando no hay destino."}, {"clave": "titulo", "etiqueta": "Título", "tipo": "texto", "nullable": true}, {"clave": "enlace", "etiqueta": "Enlace", "tipo": "texto", "nullable": true}, {"clave": "icono", "etiqueta": "Icono", "tipo": "texto", "nullable": true}, {"clave": "orden", "etiqueta": "Orden", "tipo": "numero"}, {"clave": "mostrar", "etiqueta": "Visible", "tipo": "booleano"}],
+ editar: [{"clave": "destino.tipo", "etiqueta": "Tipo de destino", "tipo": "select", "opciones": ["producto", "industria", "servicio"], "inicial": "producto"}, {"clave": "destino.id", "etiqueta": "Destino (ID)", "tipo": "id", "nullable": true, "ayuda": "ID del producto, industria o servicio. Vacío cuando no hay destino."}, {"clave": "titulo", "etiqueta": "Título", "tipo": "texto", "nullable": true}, {"clave": "enlace", "etiqueta": "Enlace", "tipo": "texto", "nullable": true}, {"clave": "icono", "etiqueta": "Icono", "tipo": "texto", "nullable": true}, {"clave": "mostrar", "etiqueta": "Visible", "tipo": "booleano"}],
+ filtros: ["empresaId"],
+ api: { ...elementos_footerApi, crear: datos => elementos_footerApi.crear(datos as CrearFooterElemento), editar: (id, version, datos) => elementos_footerApi.editar(id, version, datos as EditarFooterElemento) },
+}

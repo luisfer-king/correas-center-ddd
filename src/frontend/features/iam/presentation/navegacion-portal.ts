@@ -1,3 +1,5 @@
+// CMS: integración explícita y navegación central v2
+import type { CapacidadesCms } from '../../cms/api/modelos-cms'
 import type { CapacidadesCatalogo } from '../../catalog/api/tipos-catalogo';
 import type { CapacidadesCrm } from '../../commercial/api/cliente-crm';
 import type { CapacidadesRoles } from '../api/tipos-iam';
@@ -6,6 +8,7 @@ export type AccesoPortal =
     | { contexto: 'iam'; permiso: keyof CapacidadesRoles }
     | { contexto: 'crm'; recurso: keyof CapacidadesCrm['recursos'] }
     | { contexto: 'catalogo'; recurso: keyof CapacidadesCatalogo['recursos'] }
+    | { contexto: 'cms'; recurso: keyof CapacidadesCms['recursos'] }
 export interface EnlacePortal { etiqueta: string; ruta: string; acceso?: AccesoPortal }
 export interface GrupoPortal { id: string; titulo: string; enlaces: readonly EnlacePortal[] }
 
@@ -43,18 +46,32 @@ export const gruposPortal: readonly GrupoPortal[] = [
         ]
     },
     {
+        id: 'cms', titulo: 'CMS', enlaces: [
+            { etiqueta: 'Tipos de sección', ruta: '/portal/cms/tipos-seccion', acceso: { contexto: 'cms', recurso: 'tipos_seccion' } },
+            { etiqueta: 'Secciones', ruta: '/portal/cms/contenidos-seccion', acceso: { contexto: 'cms', recurso: 'contenidos_seccion' } },
+            { etiqueta: 'Menús', ruta: '/portal/cms/menus', acceso: { contexto: 'cms', recurso: 'menus' } },
+            { etiqueta: 'Ítems de menú', ruta: '/portal/cms/items-menu', acceso: { contexto: 'cms', recurso: 'items_menu' } },
+            { etiqueta: 'Footer', ruta: '/portal/cms/elementos-footer', acceso: { contexto: 'cms', recurso: 'elementos_footer' } },
+            { etiqueta: 'Configuración', ruta: '/portal/cms/configuracion-sitio', acceso: { contexto: 'cms', recurso: 'configuracion_sitio' } },
+            { etiqueta: 'Wizard', ruta: '/portal/cms/pasos-wizard', acceso: { contexto: 'cms', recurso: 'pasos_wizard' } },
+            { etiqueta: 'Registros', ruta: '/portal/cms/registros-cms', acceso: { contexto: 'cms', recurso: 'registros_cms' } },
+            { etiqueta: 'Contenidos de registro', ruta: '/portal/cms/contenidos-registro', acceso: { contexto: 'cms', recurso: 'contenidos_registro' } },
+        ]
+    },
+    {
         id: 'cuenta', titulo: 'Mi cuenta', enlaces: [
             { etiqueta: 'Mi perfil y seguridad', ruta: '/portal/mi-perfil' },
         ]
     },
 ]
 
-export function gruposPermitidos(iam: CapacidadesRoles | null, crm: CapacidadesCrm | null, catalogo: CapacidadesCatalogo | null): GrupoPortal[] {
+export function gruposPermitidos(iam: CapacidadesRoles | null, crm: CapacidadesCrm | null, catalogo: CapacidadesCatalogo | null, cms?: CapacidadesCms | null): GrupoPortal[] {
     return gruposPortal.map(grupo => ({
         ...grupo, enlaces: grupo.enlaces.filter(({ acceso }) => {
             if (!acceso) return true
             if (acceso.contexto === 'iam') return iam?.[acceso.permiso] === true
             if (acceso.contexto === 'crm') return crm?.recursos[acceso.recurso]?.leer === true
+            if (acceso.contexto === 'cms') return cms?.recursos[acceso.recurso]?.leer === true
             return catalogo?.recursos[acceso.recurso]?.leer === true
         })
     })).filter(grupo => grupo.enlaces.length > 0)

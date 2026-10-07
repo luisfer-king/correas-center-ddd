@@ -1,6 +1,6 @@
+import { exportarEdicion, imagenBase64 } from './exportar-edicion'
 import { useEffect, useId, useRef, useState } from 'react'
 import { solicitarApi } from '../api/cliente-http'
-import { exportarEdicion, imagenBase64 } from './exportar-edicion'
 import { quitarFondoConectado, rectanguloRecorte } from './operaciones-imagen'
 
 const limite = 8 * 1024 * 1024

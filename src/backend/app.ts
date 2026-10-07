@@ -1,3 +1,5 @@
+import { componerCms, type CasosCms } from './contexts/content-management-system/infrastructure/componer-cms.js';
+import { registrarRutasCms } from './contexts/content-management-system/presentation/registrar-rutas-cms.js';
 import cookie from "@fastify/cookie";
 import rateLimit from "@fastify/rate-limit";
 import swagger from "@fastify/swagger";
@@ -12,7 +14,7 @@ import { crearClienteIam } from './contexts/identity-access-management/infrastru
 import { registrarRutasIam } from './contexts/identity-access-management/presentation/registrar-rutas-iam.js';
 import type { SeguridadIam } from './contexts/identity-access-management/presentation/seguridad-http.js';
 
-export async function createApp(pruebas?: { casos: CasosIam; config: SeguridadIam; crm?: CasosCrm; catalogo?: CasosCatalogo }) {
+export async function createApp(pruebas?: { casos: CasosIam; config: SeguridadIam; crm?: CasosCrm; catalogo?: CasosCatalogo; cms?: CasosCms }) {
   const app = Fastify({ logger: { redact: ['req.headers.cookie', 'req.headers.authorization',
     'req.body.password', 'res.headers.set-cookie'] }, trustProxy: false });
   const origen = process.env.PORTAL_ORIGIN ?? 'http://localhost:5173';
@@ -59,6 +61,10 @@ export async function createApp(pruebas?: { casos: CasosIam; config: SeguridadIa
     registrarRutasCrm(scope, pruebas?.crm ?? componerCrm(db!), casos, config));
   if (db || pruebas?.catalogo) await app.register(async (scope) =>
     registrarRutasCatalogo(scope, pruebas?.catalogo ?? componerCatalogo(db!), casos, config));
+
+  // CMS: registro integrado por entrega 4
+  if (db || pruebas?.cms) await app.register(async (scope) =>
+    registrarRutasCms(scope, pruebas?.cms ?? componerCms(db!), casos, config));
 
   app.get("/api/health", {
     schema: {

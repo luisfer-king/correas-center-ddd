@@ -1,0 +1,5 @@
+import * as S from './esquemas-cms.js'
+
+export const crearConfiguracionSitioSchema = S.objetoCms({ empresaId: S.nullableCms(S.idSchemaCms), clave: S.textoObligatorioSchemaCms, valor: S.textoNullableSchemaCms, tipo: S.textoNullableSchemaCms, descripcion: S.textoNullableSchemaCms, grupo: S.textoNullableSchemaCms, activo: S.nullableCms({ type: 'boolean' }) })
+export const editarConfiguracionSitioSchema = S.objetoCms({ version: S.nullableCms(S.versionSchemaCms), valor: S.textoNullableSchemaCms, tipo: S.textoNullableSchemaCms, descripcion: S.textoNullableSchemaCms, grupo: S.textoNullableSchemaCms })
+export const salidaConfiguracionSitioSchema = S.objetoCms({ id: { type: 'integer', minimum: 1 }, empresaId: S.nullableCms(S.idSchemaCms), clave: S.textoObligatorioSchemaCms, valor: S.textoNullableSchemaCms, tipo: S.textoNullableSchemaCms, descripcion: S.textoNullableSchemaCms, grupo: S.textoNullableSchemaCms, activo: S.nullableCms({ type: 'boolean' }), creadoEn: S.nullableCms(S.versionSchemaCms), actualizadoEn: S.nullableCms(S.versionSchemaCms) })
