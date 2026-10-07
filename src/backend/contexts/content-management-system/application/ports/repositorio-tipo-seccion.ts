@@ -8,7 +8,7 @@ export type ConsultaTiposSeccion = Readonly<{
   desplazamiento?: number
 }>
 
-export type NuevaTipoSeccion = Omit<ConstructorParameters<typeof TipoSeccion>[0], 'id' | 'fechas' | 'estado'>
+export type NuevaTipoSeccion = Omit<ConstructorParameters<typeof TipoSeccion>[0], 'id' | 'fechas' | 'estado' | 'orden'> & { orden: ConstructorParameters<typeof TipoSeccion>[0]['orden'] | null }
 
 export type EscrituraTipoSeccion = Readonly<{
   actorId: string

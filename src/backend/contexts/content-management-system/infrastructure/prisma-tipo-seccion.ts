@@ -1,3 +1,4 @@
+import { Orden } from '../../../shared/domain/value-objects.js'
 import { TipoSeccion as EntidadTipoSeccion } from '../domain/tipo-seccion.js'
 import type { PrismaClient } from '../../../generated/prisma/client.js'
 import type { RepositorioTiposSeccion, ConsultaTiposSeccion, NuevaTipoSeccion, EscrituraTipoSeccion } from '../application/ports/repositorio-tipo-seccion.js'
@@ -44,7 +45,14 @@ export class PrismaTiposSeccion implements RepositorioTiposSeccion {
   async crear(datos: NuevaTipoSeccion, contexto: EscrituraTipoSeccion): Promise<TipoSeccion> {
     return transaccionCms(this.db, async tx => {
       await gestionarCms(tx, contexto, 'tipos-seccion')
-      const e = new EntidadTipoSeccion({ ...datos, id: 1n, estado: 'activo', fechas: { creadoEn: contexto.cuando, actualizadoEn: contexto.cuando, eliminadoEn: null } })
+      let orden = datos.orden
+      if (orden === null) {
+        const maximo = await tx.tipoSeccion.aggregate({ where: { estado: { not: 'eliminado' }, eliminadoEn: null }, _max: { orden: true } })
+        const siguiente = maximo._max.orden === null ? 0 : maximo._max.orden + 1
+        if (siguiente > 2147483647) throw new Error('Orden automático inválido; asigna un orden manual')
+        orden = Orden.create(siguiente)
+      }
+      const e = new EntidadTipoSeccion({ ...datos, orden, id: 1n, estado: 'activo', fechas: { creadoEn: contexto.cuando, actualizadoEn: contexto.cuando, eliminadoEn: null } })
       const fila = await tx.tipoSeccion.create({ data: datosTipoSeccion(e) })
       const resultado = mapearTipoSeccion(fila)
       await auditarCms(tx, contexto, 'tipos-seccion', 'tipo_seccion', fila.id, null, resultado)

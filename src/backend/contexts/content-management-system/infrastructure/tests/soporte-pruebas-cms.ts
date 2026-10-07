@@ -25,7 +25,7 @@ export function entorno(recurso: string) {
   const consultas: { modelo: string; metodo: string; args: any }[] = []
   const opciones = { permiso: true, fallarAuditoria: false, fallarCambio: false }
   function coincide(fila: Fila, where: Fila = {}): boolean {
-    return Object.entries(where).every(([key, value]) => value === undefined || (fila[key] instanceof Date && value instanceof Date
+    return Object.entries(where).every(([key, value]) => value === undefined || (value !== null && typeof value === 'object' && 'not' in value ? fila[key] !== value.not : fila[key] instanceof Date && value instanceof Date
       ? fila[key].getTime() === value.getTime() : fila[key] === value))
   }
   function resultado(key: string, fila: Fila | undefined, args: any): Fila | null {
@@ -50,6 +50,7 @@ export function entorno(recurso: string) {
         filas = filas.slice(args.skip??0, args.take===undefined?undefined:(args.skip??0)+args.take)
         return filas.map(x => resultado(key,x,args))
       },
+      aggregate: async (args: any) => { consultas.push({ modelo: key, metodo: 'aggregate', args }); const filas = tablas[key].filter(x => coincide(x, args.where)); return { _max: { orden: filas.length ? Math.max(...filas.map(x => x.orden)) : null } } },
       create: async (args: any) => { consultas.push({ modelo: key, metodo: 'create', args }); const fila = { ...structuredClone(args.data), id: key==='configuracionSitio'?99:99n }; tablas[key].push(fila); return resultado(key,fila,args) },
       updateMany: async (args: any) => { consultas.push({ modelo: key, metodo: 'updateMany', args }); if (opciones.fallarCambio) return { count: 0 }; const filas = tablas[key].filter(x => coincide(x,args.where)); for (const fila of filas) Object.assign(fila,structuredClone(args.data)); return { count: filas.length } },
     }
