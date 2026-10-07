@@ -3,6 +3,7 @@ import type { PrismaClient } from '../../../generated/prisma/client.js'
 import type { RepositorioContenidosSeccion, ConsultaContenidosSeccion, NuevaContenidoSeccion, EscrituraContenidoSeccion } from '../application/ports/repositorio-contenido-seccion.js'
 import { mapearContenidoSeccion } from './mappers/contenido-seccion.js'
 import type { ContenidoSeccion } from '../domain/contenido-seccion.js'
+import { Orden } from '../../../shared/domain/value-objects.js'
 import { idCMS } from '../domain/cms-values.js'
 import { transaccionCms, gestionarCms, paginaCms, cambioCms, mismoCms, auditarCms, filtroEstadoCms, jsonObjetoCms } from './operaciones-cms.js'
 import { validarContenidoSeccion } from './reglas-cms.js'
@@ -27,7 +28,7 @@ function datosContenidoSeccion(e: ContenidoSeccion) {
 }
 
 export class PrismaContenidosSeccion implements RepositorioContenidosSeccion {
-  constructor(private readonly db: PrismaClient) {}
+  constructor(private readonly db: PrismaClient) { }
 
   async listar(consulta: ConsultaContenidosSeccion): Promise<readonly ContenidoSeccion[]> {
     if (consulta.empresaId !== undefined) idCMS(consulta.empresaId)
@@ -45,7 +46,11 @@ export class PrismaContenidosSeccion implements RepositorioContenidosSeccion {
   async crear(datos: NuevaContenidoSeccion, contexto: EscrituraContenidoSeccion): Promise<ContenidoSeccion> {
     return transaccionCms(this.db, async tx => {
       await gestionarCms(tx, contexto, 'contenidos-seccion')
-      const e = new EntidadContenidoSeccion({ ...datos, id: 1n, estado: 'activo', fechas: { creadoEn: contexto.cuando, actualizadoEn: contexto.cuando, eliminadoEn: null } })
+      // La secuencia es por tipo, compartida entre empresas. Incluye inactivos; omite bajas lógicas.
+      const maximo = await tx.contenidoSeccion.aggregate({ where: { tipoSeccionId: datos.tipoSeccionId, eliminadoEn: null }, _max: { orden: true } })
+      const siguiente = Math.max(0, maximo._max.orden ?? 0) + 1
+      if (siguiente > 2147483647) throw new Error('Orden automático fuera de rango')
+      const e = new EntidadContenidoSeccion({ ...datos, orden: Orden.create(siguiente), id: 1n, estado: 'activo', fechas: { creadoEn: contexto.cuando, actualizadoEn: contexto.cuando, eliminadoEn: null } })
       await validarContenidoSeccion(tx, e)
       const fila = await tx.contenidoSeccion.create({ data: datosContenidoSeccion(e) })
       const resultado = mapearContenidoSeccion(fila)

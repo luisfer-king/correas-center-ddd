@@ -34,31 +34,37 @@ export function entorno(recurso: string) {
     if (key === 'menu' && args.include?.relMenuItem) copia.relMenuItem = tablas.menuItem.filter(x => x.menuId === fila.id).map(x => structuredClone(x))
     return copia
   }
-  const tx: Record<string, any> = { perfil: { findFirst: async (args: any) => {
-    consultas.push({ modelo: 'perfil', metodo: 'findFirst', args }); return opciones.permiso ? { id: actor } : null
-  } }, $executeRaw: async (_sql: unknown, ...valores: unknown[]) => {
-    if (opciones.fallarAuditoria) throw new Error('Fallo auditoría')
-    auditorias.push(valores); return 1
-  } }
+  const tx: Record<string, any> = {
+    perfil: {
+      findFirst: async (args: any) => {
+        consultas.push({ modelo: 'perfil', metodo: 'findFirst', args }); return opciones.permiso ? { id: actor } : null
+      }
+    }, $executeRaw: async (_sql: unknown, ...valores: unknown[]) => {
+      if (opciones.fallarAuditoria) throw new Error('Fallo auditoría')
+      auditorias.push(valores); return 1
+    }
+  }
   for (const key of Object.keys(tablas)) {
     tx[key] = {
       findUnique: async (args: any) => { consultas.push({ modelo: key, metodo: 'findUnique', args }); return resultado(key, tablas[key].find(x => coincide(x, args.where)), args) },
       findFirst: async (args: any) => { consultas.push({ modelo: key, metodo: 'findFirst', args }); return resultado(key, tablas[key].find(x => coincide(x, args.where)), args) },
       findMany: async (args: any) => {
         consultas.push({ modelo: key, metodo: 'findMany', args })
-        let filas = tablas[key].filter(x => coincide(x, args.where)).sort((a,b) => (a.orden??0)-(b.orden??0) || (a.id<b.id?-1:1))
-        filas = filas.slice(args.skip??0, args.take===undefined?undefined:(args.skip??0)+args.take)
-        return filas.map(x => resultado(key,x,args))
+        let filas = tablas[key].filter(x => coincide(x, args.where)).sort((a, b) => (a.orden ?? 0) - (b.orden ?? 0) || (a.id < b.id ? -1 : 1))
+        filas = filas.slice(args.skip ?? 0, args.take === undefined ? undefined : (args.skip ?? 0) + args.take)
+        return filas.map(x => resultado(key, x, args))
       },
       aggregate: async (args: any) => { consultas.push({ modelo: key, metodo: 'aggregate', args }); const filas = tablas[key].filter(x => coincide(x, args.where)); return { _max: { orden: filas.length ? Math.max(...filas.map(x => x.orden)) : null } } },
-      create: async (args: any) => { consultas.push({ modelo: key, metodo: 'create', args }); const fila = { ...structuredClone(args.data), id: key==='configuracionSitio'?99:99n }; tablas[key].push(fila); return resultado(key,fila,args) },
-      updateMany: async (args: any) => { consultas.push({ modelo: key, metodo: 'updateMany', args }); if (opciones.fallarCambio) return { count: 0 }; const filas = tablas[key].filter(x => coincide(x,args.where)); for (const fila of filas) Object.assign(fila,structuredClone(args.data)); return { count: filas.length } },
+      create: async (args: any) => { consultas.push({ modelo: key, metodo: 'create', args }); const fila = { ...structuredClone(args.data), id: key === 'configuracionSitio' ? 99 : 99n }; tablas[key].push(fila); return resultado(key, fila, args) },
+      updateMany: async (args: any) => { consultas.push({ modelo: key, metodo: 'updateMany', args }); if (opciones.fallarCambio) return { count: 0 }; const filas = tablas[key].filter(x => coincide(x, args.where)); for (const fila of filas) Object.assign(fila, structuredClone(args.data)); return { count: filas.length } },
     }
   }
-  const db = { ...tx, $transaction: async (fn: (t: unknown) => Promise<unknown>, opcionesTx: unknown) => {
-    consultas.push({ modelo: '$transaction', metodo: 'begin', args: opcionesTx })
-    const anteriores = structuredClone(tablas), prevAuditoria = [...auditorias]
-    try { return await fn(tx) } catch (error) { tablas=anteriores; auditorias=prevAuditoria; throw error }
-  } } as unknown as PrismaClient
+  const db = {
+    ...tx, $transaction: async (fn: (t: unknown) => Promise<unknown>, opcionesTx: unknown) => {
+      consultas.push({ modelo: '$transaction', metodo: 'begin', args: opcionesTx })
+      const anteriores = structuredClone(tablas), prevAuditoria = [...auditorias]
+      try { return await fn(tx) } catch (error) { tablas = anteriores; auditorias = prevAuditoria; throw error }
+    }
+  } as unknown as PrismaClient
   return { db, opciones, consultas, get auditorias() { return auditorias }, get tablas() { return tablas }, fila: () => structuredClone(tablas[recurso].find(x => x.id === fixtures[recurso].id)!) }
 }

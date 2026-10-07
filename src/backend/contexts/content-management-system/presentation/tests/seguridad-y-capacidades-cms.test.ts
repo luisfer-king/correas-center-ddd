@@ -12,7 +12,7 @@ test('CMS: capacidades, OpenAPI y aislamiento de hooks', async t => {
   assert.ok(env.auditorias.at(-1)?.includes('portal_cms'))
   assert.equal((await app.inject('/api/health')).statusCode, 200)
   const spec = app.swagger()
-  assert.equal(Object.keys(spec.paths ?? {}).filter(p => p.startsWith('/api/portal/cms')).length, 57)
+  assert.equal(Object.keys(spec.paths ?? {}).filter(p => p.startsWith('/api/portal/cms')).length, 58)
 })
 test('CMS: sesión inválida produce 401', async t => {
   const { app } = await servidorCms(); t.after(() => app.close())

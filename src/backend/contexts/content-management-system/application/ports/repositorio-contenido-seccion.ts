@@ -10,7 +10,7 @@ export type ConsultaContenidosSeccion = Readonly<{
   desplazamiento?: number
 }>
 
-export type NuevaContenidoSeccion = Omit<ConstructorParameters<typeof ContenidoSeccion>[0], 'id' | 'fechas' | 'estado'>
+export type NuevaContenidoSeccion = Omit<ConstructorParameters<typeof ContenidoSeccion>[0], 'id' | 'fechas' | 'estado' | 'orden'> & { orden?: ContenidoSeccion['orden'] | null }
 
 export type EscrituraContenidoSeccion = Readonly<{
   actorId: string

@@ -1,3 +1,4 @@
+import { rutasImagenesCms } from './rutas-imagenes-cms.js'
 import type { FastifyInstance } from 'fastify'
 import type { CasosCms } from '../infrastructure/componer-cms.js'
 import type { SeguridadIam } from '../../identity-access-management/presentation/seguridad-http.js'
@@ -20,6 +21,8 @@ import * as S from './esquemas-cms.js'
 /** Registrar en un scope de Fastify propio para mantener aislados los hooks y errores. */
 export async function registrarRutasCms(app: FastifyInstance, casos: CasosCms, iam: SesionCms, config: SeguridadIam): Promise<void> {
   registrarErroresCms(app)
+  rutasImagenesCms(app, casos, iam, config)
+  await app.register(async app => {
   seguridadHttpCms(app, iam, config)
   const capacidades = S.objetoCms({ verEliminados: { type: 'boolean' }, recursos: S.objetoCms(Object.fromEntries(recursosCms.map(r => [r, S.objetoCms({ leer: { type: 'boolean' }, gestionar: { type: 'boolean' } })]))) })
   app.get('/api/portal/cms/capacidades', { schema: { tags: ['CMS'], summary: 'Consultar capacidades CMS', security: [{ cookieAuth: [] }], response: { 200: capacidades, ...S.erroresSchemaCms } } }, async req => {
@@ -35,4 +38,5 @@ export async function registrarRutasCms(app: FastifyInstance, casos: CasosCms, i
   rutasPasosWizard(app, casos)
   rutasRegistrosCMS(app, casos)
   rutasContenidosRegistro(app, casos)
+  })
 }
