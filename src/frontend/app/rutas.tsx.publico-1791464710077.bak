@@ -1,4 +1,3 @@
-import { VistaPublica } from '../features/publico/presentation/entrada-publica'
 // CMS: integración explícita y navegación central v2
 import { PortalCms } from '../features/cms/presentation/portal-cms'
 import { InicioCms } from '../features/cms/presentation/inicio-cms'
@@ -37,19 +36,11 @@ import { PortalProtegido } from '../features/iam/presentation/portal-protegido'
 import { ProveedorSesion } from '../features/iam/presentation/sesion-portal'
 import { TemaPortal } from '../features/iam/presentation/tema-portal'
 import { VistaMiPerfil } from '../features/iam/presentation/vista-mi-perfil'
+import { PortadaTemporal } from './portada-temporal'
+
 export function Rutas() {
   return <BrowserRouter><Routes>
-    {/* // CMS público: vista inicial v1 */}
-    <Route path="/" element={<VistaPublica />} />
-    <Route path="/products" element={<VistaPublica />} />
-    <Route path="/products/:slug" element={<VistaPublica />} />
-    <Route path="/products/:slug/:categoria" element={<VistaPublica />} />
-    <Route path="/applications" element={<VistaPublica />} />
-    <Route path="/applications/:slug" element={<VistaPublica />} />
-    <Route path="/services" element={<VistaPublica />} />
-    <Route path="/services/:slug" element={<VistaPublica />} />
-    <Route path="/contact" element={<VistaPublica />} />
-    <Route path="/about" element={<VistaPublica />} />
+    <Route path="/" element={<PortadaTemporal />} />
     <Route path="/portal" element={<TemaPortal><ProveedorSesion><Outlet /></ProveedorSesion></TemaPortal>}>
       <Route path="acceso" element={<AccesoPortal />} />
       <Route element={<PortalProtegido />}>
