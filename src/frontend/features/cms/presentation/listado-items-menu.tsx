@@ -1,3 +1,2 @@
-import { ListadoCms } from './listado-cms'
-import { vistaMenuItem } from './vista-items-menu'
-export function ListadoMenuItem() { return <ListadoCms configuracion={vistaMenuItem} /> }
+import { Navigate } from 'react-router-dom'
+export function ListadoMenuItem(){return <Navigate to="/portal/cms/menus" replace/>}

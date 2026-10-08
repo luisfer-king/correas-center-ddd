@@ -5,7 +5,7 @@ import { InicioCms } from '../features/cms/presentation/inicio-cms'
 import { ListadoTipoSeccion } from '../features/cms/presentation/listado-tipos-seccion'
 import { ListadoContenidoSeccion } from '../features/cms/presentation/listado-contenidos-seccion'
 import { ListadoMenu } from '../features/cms/presentation/listado-menus'
-import { ListadoMenuItem } from '../features/cms/presentation/listado-items-menu'
+
 import { ListadoFooterElemento } from '../features/cms/presentation/listado-elementos-footer'
 import { ListadoConfiguracionSitio } from '../features/cms/presentation/listado-configuracion-sitio'
 import { ListadoPasoWizard } from '../features/cms/presentation/listado-pasos-wizard'
@@ -60,7 +60,7 @@ export function Rutas() {
             <Route path="cms/tipos-seccion" element={<ListadoTipoSeccion />} />
             <Route path="cms/contenidos-seccion" element={<ListadoContenidoSeccion />} />
             <Route path="cms/menus" element={<ListadoMenu />} />
-            <Route path="cms/items-menu" element={<ListadoMenuItem />} />
+            
             <Route path="cms/elementos-footer" element={<ListadoFooterElemento />} />
             <Route path="cms/configuracion-sitio" element={<ListadoConfiguracionSitio />} />
             <Route path="cms/pasos-wizard" element={<ListadoPasoWizard />} />

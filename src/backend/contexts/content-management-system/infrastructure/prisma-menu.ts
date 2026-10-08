@@ -84,7 +84,7 @@ export class PrismaMenus implements RepositorioMenus {
       const items = entidad.itemsOrdenados
       if (items.length !== anterior.relMenuItem.length || anterior.relMenuItem.some(fila => {
         const item = items.find(x => x.id === fila.id)
-        return !item || item.menuId !== fila.menuId || item.ruta.value !== fila.ruta ||
+        return !item || item.menuId !== fila.menuId || item.ruta.value !== fila.ruta || item.nombre !== fila.nombre || !mismoCms(item.categoriaId,fila.categoriaId) ||
           item.orden.value !== fila.orden || item.estado !== fila.estado ||
           !mismoCms(item.creadoEn, fila.creadoEn) || !mismoCms(item.actualizadoEn, fila.actualizadoEn) ||
           !mismoCms(item.eliminadoEn, fila.eliminadoEn)

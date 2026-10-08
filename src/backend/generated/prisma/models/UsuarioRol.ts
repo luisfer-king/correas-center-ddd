@@ -208,8 +208,8 @@ export type UsuarioRolWhereInput = {
   rolId?: Prisma.BigIntFilter<"UsuarioRol"> | bigint | number
   creadoEn?: Prisma.DateTimeFilter<"UsuarioRol"> | Date | string
   estado?: Prisma.EnumEstadoAsignacionFilter<"UsuarioRol"> | $Enums.EstadoAsignacion
-  perfil?: Prisma.XOR<Prisma.PerfilScalarRelationFilter, Prisma.PerfilWhereInput>
   rol?: Prisma.XOR<Prisma.RolScalarRelationFilter, Prisma.RolWhereInput>
+  perfil?: Prisma.XOR<Prisma.PerfilScalarRelationFilter, Prisma.PerfilWhereInput>
 }
 
 export type UsuarioRolOrderByWithRelationInput = {
@@ -217,8 +217,8 @@ export type UsuarioRolOrderByWithRelationInput = {
   rolId?: Prisma.SortOrder
   creadoEn?: Prisma.SortOrder
   estado?: Prisma.SortOrder
-  perfil?: Prisma.PerfilOrderByWithRelationInput
   rol?: Prisma.RolOrderByWithRelationInput
+  perfil?: Prisma.PerfilOrderByWithRelationInput
 }
 
 export type UsuarioRolWhereUniqueInput = Prisma.AtLeast<{
@@ -230,8 +230,8 @@ export type UsuarioRolWhereUniqueInput = Prisma.AtLeast<{
   rolId?: Prisma.BigIntFilter<"UsuarioRol"> | bigint | number
   creadoEn?: Prisma.DateTimeFilter<"UsuarioRol"> | Date | string
   estado?: Prisma.EnumEstadoAsignacionFilter<"UsuarioRol"> | $Enums.EstadoAsignacion
-  perfil?: Prisma.XOR<Prisma.PerfilScalarRelationFilter, Prisma.PerfilWhereInput>
   rol?: Prisma.XOR<Prisma.RolScalarRelationFilter, Prisma.RolWhereInput>
+  perfil?: Prisma.XOR<Prisma.PerfilScalarRelationFilter, Prisma.PerfilWhereInput>
 }, "usuarioId_rolId">
 
 export type UsuarioRolOrderByWithAggregationInput = {
@@ -259,8 +259,8 @@ export type UsuarioRolScalarWhereWithAggregatesInput = {
 export type UsuarioRolCreateInput = {
   creadoEn?: Date | string
   estado?: $Enums.EstadoAsignacion
-  perfil: Prisma.PerfilCreateNestedOneWithoutRelUsuarioRolInput
   rol: Prisma.RolCreateNestedOneWithoutRelUsuarioRolInput
+  perfil: Prisma.PerfilCreateNestedOneWithoutRelUsuarioRolInput
 }
 
 export type UsuarioRolUncheckedCreateInput = {
@@ -273,8 +273,8 @@ export type UsuarioRolUncheckedCreateInput = {
 export type UsuarioRolUpdateInput = {
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   estado?: Prisma.EnumEstadoAsignacionFieldUpdateOperationsInput | $Enums.EstadoAsignacion
-  perfil?: Prisma.PerfilUpdateOneRequiredWithoutRelUsuarioRolNestedInput
   rol?: Prisma.RolUpdateOneRequiredWithoutRelUsuarioRolNestedInput
+  perfil?: Prisma.PerfilUpdateOneRequiredWithoutRelUsuarioRolNestedInput
 }
 
 export type UsuarioRolUncheckedUpdateInput = {
@@ -572,8 +572,8 @@ export type UsuarioRolSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   rolId?: boolean
   creadoEn?: boolean
   estado?: boolean
-  perfil?: boolean | Prisma.PerfilDefaultArgs<ExtArgs>
   rol?: boolean | Prisma.RolDefaultArgs<ExtArgs>
+  perfil?: boolean | Prisma.PerfilDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["usuarioRol"]>
 
 export type UsuarioRolSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -581,8 +581,8 @@ export type UsuarioRolSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   rolId?: boolean
   creadoEn?: boolean
   estado?: boolean
-  perfil?: boolean | Prisma.PerfilDefaultArgs<ExtArgs>
   rol?: boolean | Prisma.RolDefaultArgs<ExtArgs>
+  perfil?: boolean | Prisma.PerfilDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["usuarioRol"]>
 
 export type UsuarioRolSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -590,8 +590,8 @@ export type UsuarioRolSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   rolId?: boolean
   creadoEn?: boolean
   estado?: boolean
-  perfil?: boolean | Prisma.PerfilDefaultArgs<ExtArgs>
   rol?: boolean | Prisma.RolDefaultArgs<ExtArgs>
+  perfil?: boolean | Prisma.PerfilDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["usuarioRol"]>
 
 export type UsuarioRolSelectScalar = {
@@ -603,23 +603,23 @@ export type UsuarioRolSelectScalar = {
 
 export type UsuarioRolOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"usuarioId" | "rolId" | "creadoEn" | "estado", ExtArgs["result"]["usuarioRol"]>
 export type UsuarioRolInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  perfil?: boolean | Prisma.PerfilDefaultArgs<ExtArgs>
   rol?: boolean | Prisma.RolDefaultArgs<ExtArgs>
+  perfil?: boolean | Prisma.PerfilDefaultArgs<ExtArgs>
 }
 export type UsuarioRolIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  perfil?: boolean | Prisma.PerfilDefaultArgs<ExtArgs>
   rol?: boolean | Prisma.RolDefaultArgs<ExtArgs>
+  perfil?: boolean | Prisma.PerfilDefaultArgs<ExtArgs>
 }
 export type UsuarioRolIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  perfil?: boolean | Prisma.PerfilDefaultArgs<ExtArgs>
   rol?: boolean | Prisma.RolDefaultArgs<ExtArgs>
+  perfil?: boolean | Prisma.PerfilDefaultArgs<ExtArgs>
 }
 
 export type $UsuarioRolPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "UsuarioRol"
   objects: {
-    perfil: Prisma.$PerfilPayload<ExtArgs>
     rol: Prisma.$RolPayload<ExtArgs>
+    perfil: Prisma.$PerfilPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     usuarioId: string
@@ -1020,8 +1020,8 @@ readonly fields: UsuarioRolFieldRefs;
  */
 export interface Prisma__UsuarioRolClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  perfil<T extends Prisma.PerfilDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PerfilDefaultArgs<ExtArgs>>): Prisma.Prisma__PerfilClient<runtime.Types.Result.GetResult<Prisma.$PerfilPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   rol<T extends Prisma.RolDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RolDefaultArgs<ExtArgs>>): Prisma.Prisma__RolClient<runtime.Types.Result.GetResult<Prisma.$RolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  perfil<T extends Prisma.PerfilDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PerfilDefaultArgs<ExtArgs>>): Prisma.Prisma__PerfilClient<runtime.Types.Result.GetResult<Prisma.$PerfilPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

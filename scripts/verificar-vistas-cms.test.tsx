@@ -1,7 +1,4 @@
 import React from 'react'
-// El proceso SSR de Node puede usar JSX clásico si el tsconfig raíz es solo backend.
-// Proporciona el runtime sin cambiar la configuración de la aplicación.
-Object.defineProperty(globalThis, 'React', { value: React, configurable: true })
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { renderToString } from 'react-dom/server'
@@ -13,6 +10,7 @@ import { vistaTipoSeccion } from '../src/frontend/features/cms/presentation/vist
 import { vistaMenu } from '../src/frontend/features/cms/presentation/vista-menus'
 import { gruposPortalCms } from '../src/frontend/features/cms/presentation/grupo-portal-cms'
 import type { CapacidadesCms, RecursoCms } from '../src/frontend/features/cms/api/modelos-cms'
+Object.assign(globalThis,{React})
 const recursos: RecursoCms[] = ['tipos_seccion','contenidos_seccion','metadata_seccion','menus','items_menu','elementos_footer','configuracion_sitio','pasos_wizard','registros_cms','contenidos_registro']
 function capacidades(leer: boolean, gestionar: boolean): CapacidadesCms { return {verEliminados:false,recursos:Object.fromEntries(recursos.map(r=>[r,{leer,gestionar}])) as CapacidadesCms['recursos']} }
 function mostrar(c: CapacidadesCms) { return renderToString(<MemoryRouter><ProveedorCapacidadesCms datos={c}><ListadoCms configuracion={vistaTipoSeccion} /></ProveedorCapacidadesCms></MemoryRouter>) }

@@ -14,7 +14,7 @@ for (const [recurso, modelo] of recursos) test(`HTTP acciones ${recurso}`, async
     assert.equal(r.statusCode, 200, r.body)
     return r.json()
   }
-  await t.test('reordenar', async () => assert.equal((await cambiar('reordenar', { orden: 4 })).orden, 4))
+  await t.test('reordenar', async () => { const orden = recurso === 'items-menu' ? 1 : 4; assert.equal((await cambiar('reordenar', { orden })).orden, orden) })
   if (['contenidos-seccion','menus','elementos-footer'].includes(recurso)) {
     await t.test('visibilidad', async () => assert.equal((await cambiar('visibilidad', { mostrar: false })).mostrar, false))
   }

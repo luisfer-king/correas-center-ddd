@@ -288,8 +288,8 @@ export type CategoriaWhereInput = {
   eliminadoEn?: Prisma.DateTimeNullableFilter<"Categoria"> | Date | string | null
   creadoEn?: Prisma.DateTimeFilter<"Categoria"> | Date | string
   actualizadoEn?: Prisma.DateTimeFilter<"Categoria"> | Date | string
-  producto?: Prisma.XOR<Prisma.ProductoScalarRelationFilter, Prisma.ProductoWhereInput>
   relCategoriaAtributo?: Prisma.CategoriaAtributoListRelationFilter
+  producto?: Prisma.XOR<Prisma.ProductoScalarRelationFilter, Prisma.ProductoWhereInput>
 }
 
 export type CategoriaOrderByWithRelationInput = {
@@ -306,8 +306,8 @@ export type CategoriaOrderByWithRelationInput = {
   eliminadoEn?: Prisma.SortOrderInput | Prisma.SortOrder
   creadoEn?: Prisma.SortOrder
   actualizadoEn?: Prisma.SortOrder
-  producto?: Prisma.ProductoOrderByWithRelationInput
   relCategoriaAtributo?: Prisma.CategoriaAtributoOrderByRelationAggregateInput
+  producto?: Prisma.ProductoOrderByWithRelationInput
 }
 
 export type CategoriaWhereUniqueInput = Prisma.AtLeast<{
@@ -327,8 +327,8 @@ export type CategoriaWhereUniqueInput = Prisma.AtLeast<{
   eliminadoEn?: Prisma.DateTimeNullableFilter<"Categoria"> | Date | string | null
   creadoEn?: Prisma.DateTimeFilter<"Categoria"> | Date | string
   actualizadoEn?: Prisma.DateTimeFilter<"Categoria"> | Date | string
-  producto?: Prisma.XOR<Prisma.ProductoScalarRelationFilter, Prisma.ProductoWhereInput>
   relCategoriaAtributo?: Prisma.CategoriaAtributoListRelationFilter
+  producto?: Prisma.XOR<Prisma.ProductoScalarRelationFilter, Prisma.ProductoWhereInput>
 }, "id" | "slug">
 
 export type CategoriaOrderByWithAggregationInput = {
@@ -384,8 +384,8 @@ export type CategoriaCreateInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  producto: Prisma.ProductoCreateNestedOneWithoutRelCategoriaInput
   relCategoriaAtributo?: Prisma.CategoriaAtributoCreateNestedManyWithoutCategoriaInput
+  producto: Prisma.ProductoCreateNestedOneWithoutRelCategoriaInput
 }
 
 export type CategoriaUncheckedCreateInput = {
@@ -418,8 +418,8 @@ export type CategoriaUpdateInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  producto?: Prisma.ProductoUpdateOneRequiredWithoutRelCategoriaNestedInput
   relCategoriaAtributo?: Prisma.CategoriaAtributoUpdateManyWithoutCategoriaNestedInput
+  producto?: Prisma.ProductoUpdateOneRequiredWithoutRelCategoriaNestedInput
 }
 
 export type CategoriaUncheckedUpdateInput = {
@@ -881,8 +881,8 @@ export type CategoriaSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   eliminadoEn?: boolean
   creadoEn?: boolean
   actualizadoEn?: boolean
-  producto?: boolean | Prisma.ProductoDefaultArgs<ExtArgs>
   relCategoriaAtributo?: boolean | Prisma.Categoria$relCategoriaAtributoArgs<ExtArgs>
+  producto?: boolean | Prisma.ProductoDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.CategoriaCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["categoria"]>
 
@@ -938,8 +938,8 @@ export type CategoriaSelectScalar = {
 
 export type CategoriaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "productoId" | "nombre" | "slug" | "imagen" | "descripcion" | "descripcionCorta" | "uso" | "orden" | "estado" | "eliminadoEn" | "creadoEn" | "actualizadoEn", ExtArgs["result"]["categoria"]>
 export type CategoriaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  producto?: boolean | Prisma.ProductoDefaultArgs<ExtArgs>
   relCategoriaAtributo?: boolean | Prisma.Categoria$relCategoriaAtributoArgs<ExtArgs>
+  producto?: boolean | Prisma.ProductoDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.CategoriaCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CategoriaIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -952,8 +952,8 @@ export type CategoriaIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
 export type $CategoriaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Categoria"
   objects: {
-    producto: Prisma.$ProductoPayload<ExtArgs>
     relCategoriaAtributo: Prisma.$CategoriaAtributoPayload<ExtArgs>[]
+    producto: Prisma.$ProductoPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: bigint
@@ -1363,8 +1363,8 @@ readonly fields: CategoriaFieldRefs;
  */
 export interface Prisma__CategoriaClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  producto<T extends Prisma.ProductoDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductoDefaultArgs<ExtArgs>>): Prisma.Prisma__ProductoClient<runtime.Types.Result.GetResult<Prisma.$ProductoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   relCategoriaAtributo<T extends Prisma.Categoria$relCategoriaAtributoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Categoria$relCategoriaAtributoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CategoriaAtributoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  producto<T extends Prisma.ProductoDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductoDefaultArgs<ExtArgs>>): Prisma.Prisma__ProductoClient<runtime.Types.Result.GetResult<Prisma.$ProductoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

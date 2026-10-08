@@ -212,8 +212,8 @@ export type RolPermisoWhereInput = {
   permisoId?: Prisma.BigIntFilter<"RolPermiso"> | bigint | number
   creadoEn?: Prisma.DateTimeFilter<"RolPermiso"> | Date | string
   estado?: Prisma.EnumEstadoAsignacionFilter<"RolPermiso"> | $Enums.EstadoAsignacion
-  rol?: Prisma.XOR<Prisma.RolScalarRelationFilter, Prisma.RolWhereInput>
   permiso?: Prisma.XOR<Prisma.PermisoScalarRelationFilter, Prisma.PermisoWhereInput>
+  rol?: Prisma.XOR<Prisma.RolScalarRelationFilter, Prisma.RolWhereInput>
 }
 
 export type RolPermisoOrderByWithRelationInput = {
@@ -221,8 +221,8 @@ export type RolPermisoOrderByWithRelationInput = {
   permisoId?: Prisma.SortOrder
   creadoEn?: Prisma.SortOrder
   estado?: Prisma.SortOrder
-  rol?: Prisma.RolOrderByWithRelationInput
   permiso?: Prisma.PermisoOrderByWithRelationInput
+  rol?: Prisma.RolOrderByWithRelationInput
 }
 
 export type RolPermisoWhereUniqueInput = Prisma.AtLeast<{
@@ -234,8 +234,8 @@ export type RolPermisoWhereUniqueInput = Prisma.AtLeast<{
   permisoId?: Prisma.BigIntFilter<"RolPermiso"> | bigint | number
   creadoEn?: Prisma.DateTimeFilter<"RolPermiso"> | Date | string
   estado?: Prisma.EnumEstadoAsignacionFilter<"RolPermiso"> | $Enums.EstadoAsignacion
-  rol?: Prisma.XOR<Prisma.RolScalarRelationFilter, Prisma.RolWhereInput>
   permiso?: Prisma.XOR<Prisma.PermisoScalarRelationFilter, Prisma.PermisoWhereInput>
+  rol?: Prisma.XOR<Prisma.RolScalarRelationFilter, Prisma.RolWhereInput>
 }, "rolId_permisoId">
 
 export type RolPermisoOrderByWithAggregationInput = {
@@ -263,8 +263,8 @@ export type RolPermisoScalarWhereWithAggregatesInput = {
 export type RolPermisoCreateInput = {
   creadoEn?: Date | string
   estado?: $Enums.EstadoAsignacion
-  rol: Prisma.RolCreateNestedOneWithoutRelRolPermisoInput
   permiso: Prisma.PermisoCreateNestedOneWithoutRelRolPermisoInput
+  rol: Prisma.RolCreateNestedOneWithoutRelRolPermisoInput
 }
 
 export type RolPermisoUncheckedCreateInput = {
@@ -277,8 +277,8 @@ export type RolPermisoUncheckedCreateInput = {
 export type RolPermisoUpdateInput = {
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   estado?: Prisma.EnumEstadoAsignacionFieldUpdateOperationsInput | $Enums.EstadoAsignacion
-  rol?: Prisma.RolUpdateOneRequiredWithoutRelRolPermisoNestedInput
   permiso?: Prisma.PermisoUpdateOneRequiredWithoutRelRolPermisoNestedInput
+  rol?: Prisma.RolUpdateOneRequiredWithoutRelRolPermisoNestedInput
 }
 
 export type RolPermisoUncheckedUpdateInput = {
@@ -582,8 +582,8 @@ export type RolPermisoSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   permisoId?: boolean
   creadoEn?: boolean
   estado?: boolean
-  rol?: boolean | Prisma.RolDefaultArgs<ExtArgs>
   permiso?: boolean | Prisma.PermisoDefaultArgs<ExtArgs>
+  rol?: boolean | Prisma.RolDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["rolPermiso"]>
 
 export type RolPermisoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -591,8 +591,8 @@ export type RolPermisoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   permisoId?: boolean
   creadoEn?: boolean
   estado?: boolean
-  rol?: boolean | Prisma.RolDefaultArgs<ExtArgs>
   permiso?: boolean | Prisma.PermisoDefaultArgs<ExtArgs>
+  rol?: boolean | Prisma.RolDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["rolPermiso"]>
 
 export type RolPermisoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -600,8 +600,8 @@ export type RolPermisoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   permisoId?: boolean
   creadoEn?: boolean
   estado?: boolean
-  rol?: boolean | Prisma.RolDefaultArgs<ExtArgs>
   permiso?: boolean | Prisma.PermisoDefaultArgs<ExtArgs>
+  rol?: boolean | Prisma.RolDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["rolPermiso"]>
 
 export type RolPermisoSelectScalar = {
@@ -613,23 +613,23 @@ export type RolPermisoSelectScalar = {
 
 export type RolPermisoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"rolId" | "permisoId" | "creadoEn" | "estado", ExtArgs["result"]["rolPermiso"]>
 export type RolPermisoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  rol?: boolean | Prisma.RolDefaultArgs<ExtArgs>
   permiso?: boolean | Prisma.PermisoDefaultArgs<ExtArgs>
+  rol?: boolean | Prisma.RolDefaultArgs<ExtArgs>
 }
 export type RolPermisoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  rol?: boolean | Prisma.RolDefaultArgs<ExtArgs>
   permiso?: boolean | Prisma.PermisoDefaultArgs<ExtArgs>
+  rol?: boolean | Prisma.RolDefaultArgs<ExtArgs>
 }
 export type RolPermisoIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  rol?: boolean | Prisma.RolDefaultArgs<ExtArgs>
   permiso?: boolean | Prisma.PermisoDefaultArgs<ExtArgs>
+  rol?: boolean | Prisma.RolDefaultArgs<ExtArgs>
 }
 
 export type $RolPermisoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "RolPermiso"
   objects: {
-    rol: Prisma.$RolPayload<ExtArgs>
     permiso: Prisma.$PermisoPayload<ExtArgs>
+    rol: Prisma.$RolPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     rolId: bigint
@@ -1030,8 +1030,8 @@ readonly fields: RolPermisoFieldRefs;
  */
 export interface Prisma__RolPermisoClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  rol<T extends Prisma.RolDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RolDefaultArgs<ExtArgs>>): Prisma.Prisma__RolClient<runtime.Types.Result.GetResult<Prisma.$RolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   permiso<T extends Prisma.PermisoDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PermisoDefaultArgs<ExtArgs>>): Prisma.Prisma__PermisoClient<runtime.Types.Result.GetResult<Prisma.$PermisoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  rol<T extends Prisma.RolDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RolDefaultArgs<ExtArgs>>): Prisma.Prisma__RolClient<runtime.Types.Result.GetResult<Prisma.$RolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

@@ -264,9 +264,9 @@ export type ProductoWhereInput = {
   eliminadoEn?: Prisma.DateTimeNullableFilter<"Producto"> | Date | string | null
   creadoEn?: Prisma.DateTimeFilter<"Producto"> | Date | string
   actualizadoEn?: Prisma.DateTimeFilter<"Producto"> | Date | string
-  empresa?: Prisma.XOR<Prisma.EmpresaScalarRelationFilter, Prisma.EmpresaWhereInput>
   relCategoria?: Prisma.CategoriaListRelationFilter
   relProductoMarca?: Prisma.ProductoMarcaListRelationFilter
+  empresa?: Prisma.XOR<Prisma.EmpresaScalarRelationFilter, Prisma.EmpresaWhereInput>
 }
 
 export type ProductoOrderByWithRelationInput = {
@@ -280,9 +280,9 @@ export type ProductoOrderByWithRelationInput = {
   eliminadoEn?: Prisma.SortOrderInput | Prisma.SortOrder
   creadoEn?: Prisma.SortOrder
   actualizadoEn?: Prisma.SortOrder
-  empresa?: Prisma.EmpresaOrderByWithRelationInput
   relCategoria?: Prisma.CategoriaOrderByRelationAggregateInput
   relProductoMarca?: Prisma.ProductoMarcaOrderByRelationAggregateInput
+  empresa?: Prisma.EmpresaOrderByWithRelationInput
 }
 
 export type ProductoWhereUniqueInput = Prisma.AtLeast<{
@@ -299,9 +299,9 @@ export type ProductoWhereUniqueInput = Prisma.AtLeast<{
   eliminadoEn?: Prisma.DateTimeNullableFilter<"Producto"> | Date | string | null
   creadoEn?: Prisma.DateTimeFilter<"Producto"> | Date | string
   actualizadoEn?: Prisma.DateTimeFilter<"Producto"> | Date | string
-  empresa?: Prisma.XOR<Prisma.EmpresaScalarRelationFilter, Prisma.EmpresaWhereInput>
   relCategoria?: Prisma.CategoriaListRelationFilter
   relProductoMarca?: Prisma.ProductoMarcaListRelationFilter
+  empresa?: Prisma.XOR<Prisma.EmpresaScalarRelationFilter, Prisma.EmpresaWhereInput>
 }, "id" | "slug">
 
 export type ProductoOrderByWithAggregationInput = {
@@ -348,9 +348,9 @@ export type ProductoCreateInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  empresa: Prisma.EmpresaCreateNestedOneWithoutRelProductoInput
   relCategoria?: Prisma.CategoriaCreateNestedManyWithoutProductoInput
   relProductoMarca?: Prisma.ProductoMarcaCreateNestedManyWithoutProductoInput
+  empresa: Prisma.EmpresaCreateNestedOneWithoutRelProductoInput
 }
 
 export type ProductoUncheckedCreateInput = {
@@ -378,9 +378,9 @@ export type ProductoUpdateInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  empresa?: Prisma.EmpresaUpdateOneRequiredWithoutRelProductoNestedInput
   relCategoria?: Prisma.CategoriaUpdateManyWithoutProductoNestedInput
   relProductoMarca?: Prisma.ProductoMarcaUpdateManyWithoutProductoNestedInput
+  empresa?: Prisma.EmpresaUpdateOneRequiredWithoutRelProductoNestedInput
 }
 
 export type ProductoUncheckedUpdateInput = {
@@ -652,8 +652,8 @@ export type ProductoCreateWithoutRelCategoriaInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  empresa: Prisma.EmpresaCreateNestedOneWithoutRelProductoInput
   relProductoMarca?: Prisma.ProductoMarcaCreateNestedManyWithoutProductoInput
+  empresa: Prisma.EmpresaCreateNestedOneWithoutRelProductoInput
 }
 
 export type ProductoUncheckedCreateWithoutRelCategoriaInput = {
@@ -696,8 +696,8 @@ export type ProductoUpdateWithoutRelCategoriaInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  empresa?: Prisma.EmpresaUpdateOneRequiredWithoutRelProductoNestedInput
   relProductoMarca?: Prisma.ProductoMarcaUpdateManyWithoutProductoNestedInput
+  empresa?: Prisma.EmpresaUpdateOneRequiredWithoutRelProductoNestedInput
 }
 
 export type ProductoUncheckedUpdateWithoutRelCategoriaInput = {
@@ -724,8 +724,8 @@ export type ProductoCreateWithoutRelProductoMarcaInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  empresa: Prisma.EmpresaCreateNestedOneWithoutRelProductoInput
   relCategoria?: Prisma.CategoriaCreateNestedManyWithoutProductoInput
+  empresa: Prisma.EmpresaCreateNestedOneWithoutRelProductoInput
 }
 
 export type ProductoUncheckedCreateWithoutRelProductoMarcaInput = {
@@ -768,8 +768,8 @@ export type ProductoUpdateWithoutRelProductoMarcaInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  empresa?: Prisma.EmpresaUpdateOneRequiredWithoutRelProductoNestedInput
   relCategoria?: Prisma.CategoriaUpdateManyWithoutProductoNestedInput
+  empresa?: Prisma.EmpresaUpdateOneRequiredWithoutRelProductoNestedInput
 }
 
 export type ProductoUncheckedUpdateWithoutRelProductoMarcaInput = {
@@ -889,9 +889,9 @@ export type ProductoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   eliminadoEn?: boolean
   creadoEn?: boolean
   actualizadoEn?: boolean
-  empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   relCategoria?: boolean | Prisma.Producto$relCategoriaArgs<ExtArgs>
   relProductoMarca?: boolean | Prisma.Producto$relProductoMarcaArgs<ExtArgs>
+  empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ProductoCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["producto"]>
 
@@ -938,9 +938,9 @@ export type ProductoSelectScalar = {
 
 export type ProductoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "empresaId" | "nombre" | "slug" | "imagen" | "orden" | "estado" | "eliminadoEn" | "creadoEn" | "actualizadoEn", ExtArgs["result"]["producto"]>
 export type ProductoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   relCategoria?: boolean | Prisma.Producto$relCategoriaArgs<ExtArgs>
   relProductoMarca?: boolean | Prisma.Producto$relProductoMarcaArgs<ExtArgs>
+  empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ProductoCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProductoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -953,9 +953,9 @@ export type ProductoIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
 export type $ProductoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Producto"
   objects: {
-    empresa: Prisma.$EmpresaPayload<ExtArgs>
     relCategoria: Prisma.$CategoriaPayload<ExtArgs>[]
     relProductoMarca: Prisma.$ProductoMarcaPayload<ExtArgs>[]
+    empresa: Prisma.$EmpresaPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: bigint
@@ -1362,9 +1362,9 @@ readonly fields: ProductoFieldRefs;
  */
 export interface Prisma__ProductoClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  empresa<T extends Prisma.EmpresaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EmpresaDefaultArgs<ExtArgs>>): Prisma.Prisma__EmpresaClient<runtime.Types.Result.GetResult<Prisma.$EmpresaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   relCategoria<T extends Prisma.Producto$relCategoriaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Producto$relCategoriaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CategoriaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   relProductoMarca<T extends Prisma.Producto$relProductoMarcaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Producto$relProductoMarcaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductoMarcaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  empresa<T extends Prisma.EmpresaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EmpresaDefaultArgs<ExtArgs>>): Prisma.Prisma__EmpresaClient<runtime.Types.Result.GetResult<Prisma.$EmpresaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

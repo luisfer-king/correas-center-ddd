@@ -1,5 +1,5 @@
-import type { MenuItem } from '../../domain/menu-item.js'
 import type { EstadoCMS } from '../../domain/cms-values.js'
+import type { MenuItem } from '../../domain/menu-item.js'
 
 export type ConsultaItemsMenu = Readonly<{
   estado?: EstadoCMS
@@ -9,11 +9,12 @@ export type ConsultaItemsMenu = Readonly<{
   desplazamiento?: number
 }>
 
-export type NuevaMenuItem = Omit<ConstructorParameters<typeof MenuItem>[0], 'id' | 'fechas' | 'estado'>
+export type NuevaMenuItem = Omit<ConstructorParameters<typeof MenuItem>[0], 'id' | 'fechas' | 'estado' | 'ruta' | 'orden' | 'categoriaId'> & { categoriaId: bigint; ruta?: MenuItem['ruta']; orden?: MenuItem['orden'] }
 
 export type EscrituraMenuItem = Readonly<{
   actorId: string
   cuando: Date
+  recalcularRuta?: boolean
   ipAddress?: string | null
   userAgent?: string | null
 }>

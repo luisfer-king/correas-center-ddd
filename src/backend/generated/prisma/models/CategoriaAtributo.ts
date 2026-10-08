@@ -256,8 +256,8 @@ export type CategoriaAtributoWhereInput = {
   estado?: Prisma.EnumEstadoFilter<"CategoriaAtributo"> | $Enums.Estado
   creadoEn?: Prisma.DateTimeFilter<"CategoriaAtributo"> | Date | string
   actualizadoEn?: Prisma.DateTimeFilter<"CategoriaAtributo"> | Date | string
-  categoria?: Prisma.XOR<Prisma.CategoriaScalarRelationFilter, Prisma.CategoriaWhereInput>
   atributoTecnico?: Prisma.XOR<Prisma.AtributoTecnicoScalarRelationFilter, Prisma.AtributoTecnicoWhereInput>
+  categoria?: Prisma.XOR<Prisma.CategoriaScalarRelationFilter, Prisma.CategoriaWhereInput>
 }
 
 export type CategoriaAtributoOrderByWithRelationInput = {
@@ -269,8 +269,8 @@ export type CategoriaAtributoOrderByWithRelationInput = {
   estado?: Prisma.SortOrder
   creadoEn?: Prisma.SortOrder
   actualizadoEn?: Prisma.SortOrder
-  categoria?: Prisma.CategoriaOrderByWithRelationInput
   atributoTecnico?: Prisma.AtributoTecnicoOrderByWithRelationInput
+  categoria?: Prisma.CategoriaOrderByWithRelationInput
 }
 
 export type CategoriaAtributoWhereUniqueInput = Prisma.AtLeast<{
@@ -285,8 +285,8 @@ export type CategoriaAtributoWhereUniqueInput = Prisma.AtLeast<{
   estado?: Prisma.EnumEstadoFilter<"CategoriaAtributo"> | $Enums.Estado
   creadoEn?: Prisma.DateTimeFilter<"CategoriaAtributo"> | Date | string
   actualizadoEn?: Prisma.DateTimeFilter<"CategoriaAtributo"> | Date | string
-  categoria?: Prisma.XOR<Prisma.CategoriaScalarRelationFilter, Prisma.CategoriaWhereInput>
   atributoTecnico?: Prisma.XOR<Prisma.AtributoTecnicoScalarRelationFilter, Prisma.AtributoTecnicoWhereInput>
+  categoria?: Prisma.XOR<Prisma.CategoriaScalarRelationFilter, Prisma.CategoriaWhereInput>
 }, "id">
 
 export type CategoriaAtributoOrderByWithAggregationInput = {
@@ -326,8 +326,8 @@ export type CategoriaAtributoCreateInput = {
   estado?: $Enums.Estado
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  categoria: Prisma.CategoriaCreateNestedOneWithoutRelCategoriaAtributoInput
   atributoTecnico: Prisma.AtributoTecnicoCreateNestedOneWithoutRelCategoriaAtributoInput
+  categoria: Prisma.CategoriaCreateNestedOneWithoutRelCategoriaAtributoInput
 }
 
 export type CategoriaAtributoUncheckedCreateInput = {
@@ -348,8 +348,8 @@ export type CategoriaAtributoUpdateInput = {
   estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  categoria?: Prisma.CategoriaUpdateOneRequiredWithoutRelCategoriaAtributoNestedInput
   atributoTecnico?: Prisma.AtributoTecnicoUpdateOneRequiredWithoutRelCategoriaAtributoNestedInput
+  categoria?: Prisma.CategoriaUpdateOneRequiredWithoutRelCategoriaAtributoNestedInput
 }
 
 export type CategoriaAtributoUncheckedUpdateInput = {
@@ -734,8 +734,8 @@ export type CategoriaAtributoSelect<ExtArgs extends runtime.Types.Extensions.Int
   estado?: boolean
   creadoEn?: boolean
   actualizadoEn?: boolean
-  categoria?: boolean | Prisma.CategoriaDefaultArgs<ExtArgs>
   atributoTecnico?: boolean | Prisma.AtributoTecnicoDefaultArgs<ExtArgs>
+  categoria?: boolean | Prisma.CategoriaDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["categoriaAtributo"]>
 
 export type CategoriaAtributoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -747,8 +747,8 @@ export type CategoriaAtributoSelectCreateManyAndReturn<ExtArgs extends runtime.T
   estado?: boolean
   creadoEn?: boolean
   actualizadoEn?: boolean
-  categoria?: boolean | Prisma.CategoriaDefaultArgs<ExtArgs>
   atributoTecnico?: boolean | Prisma.AtributoTecnicoDefaultArgs<ExtArgs>
+  categoria?: boolean | Prisma.CategoriaDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["categoriaAtributo"]>
 
 export type CategoriaAtributoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -760,8 +760,8 @@ export type CategoriaAtributoSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   estado?: boolean
   creadoEn?: boolean
   actualizadoEn?: boolean
-  categoria?: boolean | Prisma.CategoriaDefaultArgs<ExtArgs>
   atributoTecnico?: boolean | Prisma.AtributoTecnicoDefaultArgs<ExtArgs>
+  categoria?: boolean | Prisma.CategoriaDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["categoriaAtributo"]>
 
 export type CategoriaAtributoSelectScalar = {
@@ -777,23 +777,23 @@ export type CategoriaAtributoSelectScalar = {
 
 export type CategoriaAtributoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "categoriaId" | "atributoId" | "valorPersonalizado" | "orden" | "estado" | "creadoEn" | "actualizadoEn", ExtArgs["result"]["categoriaAtributo"]>
 export type CategoriaAtributoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  categoria?: boolean | Prisma.CategoriaDefaultArgs<ExtArgs>
   atributoTecnico?: boolean | Prisma.AtributoTecnicoDefaultArgs<ExtArgs>
+  categoria?: boolean | Prisma.CategoriaDefaultArgs<ExtArgs>
 }
 export type CategoriaAtributoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  categoria?: boolean | Prisma.CategoriaDefaultArgs<ExtArgs>
   atributoTecnico?: boolean | Prisma.AtributoTecnicoDefaultArgs<ExtArgs>
+  categoria?: boolean | Prisma.CategoriaDefaultArgs<ExtArgs>
 }
 export type CategoriaAtributoIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  categoria?: boolean | Prisma.CategoriaDefaultArgs<ExtArgs>
   atributoTecnico?: boolean | Prisma.AtributoTecnicoDefaultArgs<ExtArgs>
+  categoria?: boolean | Prisma.CategoriaDefaultArgs<ExtArgs>
 }
 
 export type $CategoriaAtributoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "CategoriaAtributo"
   objects: {
-    categoria: Prisma.$CategoriaPayload<ExtArgs>
     atributoTecnico: Prisma.$AtributoTecnicoPayload<ExtArgs>
+    categoria: Prisma.$CategoriaPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: bigint
@@ -1198,8 +1198,8 @@ readonly fields: CategoriaAtributoFieldRefs;
  */
 export interface Prisma__CategoriaAtributoClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  categoria<T extends Prisma.CategoriaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CategoriaDefaultArgs<ExtArgs>>): Prisma.Prisma__CategoriaClient<runtime.Types.Result.GetResult<Prisma.$CategoriaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   atributoTecnico<T extends Prisma.AtributoTecnicoDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AtributoTecnicoDefaultArgs<ExtArgs>>): Prisma.Prisma__AtributoTecnicoClient<runtime.Types.Result.GetResult<Prisma.$AtributoTecnicoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  categoria<T extends Prisma.CategoriaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CategoriaDefaultArgs<ExtArgs>>): Prisma.Prisma__CategoriaClient<runtime.Types.Result.GetResult<Prisma.$CategoriaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

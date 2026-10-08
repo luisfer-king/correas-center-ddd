@@ -300,8 +300,8 @@ export type MenuWhereInput = {
   creadoEn?: Prisma.DateTimeFilter<"Menu"> | Date | string
   actualizadoEn?: Prisma.DateTimeFilter<"Menu"> | Date | string
   cargarSubmenu?: Prisma.StringNullableFilter<"Menu"> | string | null
-  empresa?: Prisma.XOR<Prisma.EmpresaScalarRelationFilter, Prisma.EmpresaWhereInput>
   relMenuItem?: Prisma.MenuItemListRelationFilter
+  empresa?: Prisma.XOR<Prisma.EmpresaScalarRelationFilter, Prisma.EmpresaWhereInput>
 }
 
 export type MenuOrderByWithRelationInput = {
@@ -319,8 +319,8 @@ export type MenuOrderByWithRelationInput = {
   creadoEn?: Prisma.SortOrder
   actualizadoEn?: Prisma.SortOrder
   cargarSubmenu?: Prisma.SortOrderInput | Prisma.SortOrder
-  empresa?: Prisma.EmpresaOrderByWithRelationInput
   relMenuItem?: Prisma.MenuItemOrderByRelationAggregateInput
+  empresa?: Prisma.EmpresaOrderByWithRelationInput
 }
 
 export type MenuWhereUniqueInput = Prisma.AtLeast<{
@@ -341,8 +341,8 @@ export type MenuWhereUniqueInput = Prisma.AtLeast<{
   creadoEn?: Prisma.DateTimeFilter<"Menu"> | Date | string
   actualizadoEn?: Prisma.DateTimeFilter<"Menu"> | Date | string
   cargarSubmenu?: Prisma.StringNullableFilter<"Menu"> | string | null
-  empresa?: Prisma.XOR<Prisma.EmpresaScalarRelationFilter, Prisma.EmpresaWhereInput>
   relMenuItem?: Prisma.MenuItemListRelationFilter
+  empresa?: Prisma.XOR<Prisma.EmpresaScalarRelationFilter, Prisma.EmpresaWhereInput>
 }, "id">
 
 export type MenuOrderByWithAggregationInput = {
@@ -401,8 +401,8 @@ export type MenuCreateInput = {
   creadoEn?: Date | string
   actualizadoEn?: Date | string
   cargarSubmenu?: string | null
-  empresa: Prisma.EmpresaCreateNestedOneWithoutRelMenuInput
   relMenuItem?: Prisma.MenuItemCreateNestedManyWithoutMenuInput
+  empresa: Prisma.EmpresaCreateNestedOneWithoutRelMenuInput
 }
 
 export type MenuUncheckedCreateInput = {
@@ -437,8 +437,8 @@ export type MenuUpdateInput = {
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cargarSubmenu?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  empresa?: Prisma.EmpresaUpdateOneRequiredWithoutRelMenuNestedInput
   relMenuItem?: Prisma.MenuItemUpdateManyWithoutMenuNestedInput
+  empresa?: Prisma.EmpresaUpdateOneRequiredWithoutRelMenuNestedInput
 }
 
 export type MenuUncheckedUpdateInput = {
@@ -921,8 +921,8 @@ export type MenuSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   creadoEn?: boolean
   actualizadoEn?: boolean
   cargarSubmenu?: boolean
-  empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   relMenuItem?: boolean | Prisma.Menu$relMenuItemArgs<ExtArgs>
+  empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.MenuCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["menu"]>
 
@@ -981,8 +981,8 @@ export type MenuSelectScalar = {
 
 export type MenuOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "empresaId" | "grupo" | "tipoRegistro" | "registroId" | "ruta" | "icono" | "mostrar" | "orden" | "estado" | "eliminadoEn" | "creadoEn" | "actualizadoEn" | "cargarSubmenu", ExtArgs["result"]["menu"]>
 export type MenuInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   relMenuItem?: boolean | Prisma.Menu$relMenuItemArgs<ExtArgs>
+  empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.MenuCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MenuIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -995,8 +995,8 @@ export type MenuIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $MenuPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Menu"
   objects: {
-    empresa: Prisma.$EmpresaPayload<ExtArgs>
     relMenuItem: Prisma.$MenuItemPayload<ExtArgs>[]
+    empresa: Prisma.$EmpresaPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: bigint
@@ -1407,8 +1407,8 @@ readonly fields: MenuFieldRefs;
  */
 export interface Prisma__MenuClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  empresa<T extends Prisma.EmpresaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EmpresaDefaultArgs<ExtArgs>>): Prisma.Prisma__EmpresaClient<runtime.Types.Result.GetResult<Prisma.$EmpresaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   relMenuItem<T extends Prisma.Menu$relMenuItemArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Menu$relMenuItemArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MenuItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  empresa<T extends Prisma.EmpresaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EmpresaDefaultArgs<ExtArgs>>): Prisma.Prisma__EmpresaClient<runtime.Types.Result.GetResult<Prisma.$EmpresaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
