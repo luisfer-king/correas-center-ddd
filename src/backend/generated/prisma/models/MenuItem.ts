@@ -29,18 +29,22 @@ export type AggregateMenuItem = {
 export type MenuItemAvgAggregateOutputType = {
   id: number | null
   menuId: number | null
+  categoriaId: number | null
   orden: number | null
 }
 
 export type MenuItemSumAggregateOutputType = {
   id: bigint | null
   menuId: bigint | null
+  categoriaId: bigint | null
   orden: number | null
 }
 
 export type MenuItemMinAggregateOutputType = {
   id: bigint | null
   menuId: bigint | null
+  nombre: string | null
+  categoriaId: bigint | null
   ruta: string | null
   orden: number | null
   estado: $Enums.Estado | null
@@ -52,6 +56,8 @@ export type MenuItemMinAggregateOutputType = {
 export type MenuItemMaxAggregateOutputType = {
   id: bigint | null
   menuId: bigint | null
+  nombre: string | null
+  categoriaId: bigint | null
   ruta: string | null
   orden: number | null
   estado: $Enums.Estado | null
@@ -63,6 +69,8 @@ export type MenuItemMaxAggregateOutputType = {
 export type MenuItemCountAggregateOutputType = {
   id: number
   menuId: number
+  nombre: number
+  categoriaId: number
   ruta: number
   orden: number
   estado: number
@@ -76,18 +84,22 @@ export type MenuItemCountAggregateOutputType = {
 export type MenuItemAvgAggregateInputType = {
   id?: true
   menuId?: true
+  categoriaId?: true
   orden?: true
 }
 
 export type MenuItemSumAggregateInputType = {
   id?: true
   menuId?: true
+  categoriaId?: true
   orden?: true
 }
 
 export type MenuItemMinAggregateInputType = {
   id?: true
   menuId?: true
+  nombre?: true
+  categoriaId?: true
   ruta?: true
   orden?: true
   estado?: true
@@ -99,6 +111,8 @@ export type MenuItemMinAggregateInputType = {
 export type MenuItemMaxAggregateInputType = {
   id?: true
   menuId?: true
+  nombre?: true
+  categoriaId?: true
   ruta?: true
   orden?: true
   estado?: true
@@ -110,6 +124,8 @@ export type MenuItemMaxAggregateInputType = {
 export type MenuItemCountAggregateInputType = {
   id?: true
   menuId?: true
+  nombre?: true
+  categoriaId?: true
   ruta?: true
   orden?: true
   estado?: true
@@ -208,6 +224,8 @@ export type MenuItemGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 export type MenuItemGroupByOutputType = {
   id: bigint
   menuId: bigint
+  nombre: string
+  categoriaId: bigint | null
   ruta: string
   orden: number
   estado: $Enums.Estado
@@ -242,6 +260,8 @@ export type MenuItemWhereInput = {
   NOT?: Prisma.MenuItemWhereInput | Prisma.MenuItemWhereInput[]
   id?: Prisma.BigIntFilter<"MenuItem"> | bigint | number
   menuId?: Prisma.BigIntFilter<"MenuItem"> | bigint | number
+  nombre?: Prisma.StringFilter<"MenuItem"> | string
+  categoriaId?: Prisma.BigIntNullableFilter<"MenuItem"> | bigint | number | null
   ruta?: Prisma.StringFilter<"MenuItem"> | string
   orden?: Prisma.IntFilter<"MenuItem"> | number
   estado?: Prisma.EnumEstadoFilter<"MenuItem"> | $Enums.Estado
@@ -254,6 +274,8 @@ export type MenuItemWhereInput = {
 export type MenuItemOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   menuId?: Prisma.SortOrder
+  nombre?: Prisma.SortOrder
+  categoriaId?: Prisma.SortOrderInput | Prisma.SortOrder
   ruta?: Prisma.SortOrder
   orden?: Prisma.SortOrder
   estado?: Prisma.SortOrder
@@ -269,6 +291,8 @@ export type MenuItemWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.MenuItemWhereInput[]
   NOT?: Prisma.MenuItemWhereInput | Prisma.MenuItemWhereInput[]
   menuId?: Prisma.BigIntFilter<"MenuItem"> | bigint | number
+  nombre?: Prisma.StringFilter<"MenuItem"> | string
+  categoriaId?: Prisma.BigIntNullableFilter<"MenuItem"> | bigint | number | null
   ruta?: Prisma.StringFilter<"MenuItem"> | string
   orden?: Prisma.IntFilter<"MenuItem"> | number
   estado?: Prisma.EnumEstadoFilter<"MenuItem"> | $Enums.Estado
@@ -281,6 +305,8 @@ export type MenuItemWhereUniqueInput = Prisma.AtLeast<{
 export type MenuItemOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   menuId?: Prisma.SortOrder
+  nombre?: Prisma.SortOrder
+  categoriaId?: Prisma.SortOrderInput | Prisma.SortOrder
   ruta?: Prisma.SortOrder
   orden?: Prisma.SortOrder
   estado?: Prisma.SortOrder
@@ -300,6 +326,8 @@ export type MenuItemScalarWhereWithAggregatesInput = {
   NOT?: Prisma.MenuItemScalarWhereWithAggregatesInput | Prisma.MenuItemScalarWhereWithAggregatesInput[]
   id?: Prisma.BigIntWithAggregatesFilter<"MenuItem"> | bigint | number
   menuId?: Prisma.BigIntWithAggregatesFilter<"MenuItem"> | bigint | number
+  nombre?: Prisma.StringWithAggregatesFilter<"MenuItem"> | string
+  categoriaId?: Prisma.BigIntNullableWithAggregatesFilter<"MenuItem"> | bigint | number | null
   ruta?: Prisma.StringWithAggregatesFilter<"MenuItem"> | string
   orden?: Prisma.IntWithAggregatesFilter<"MenuItem"> | number
   estado?: Prisma.EnumEstadoWithAggregatesFilter<"MenuItem"> | $Enums.Estado
@@ -310,6 +338,8 @@ export type MenuItemScalarWhereWithAggregatesInput = {
 
 export type MenuItemCreateInput = {
   id?: bigint | number
+  nombre: string
+  categoriaId?: bigint | number | null
   ruta: string
   orden?: number
   estado?: $Enums.Estado
@@ -322,6 +352,8 @@ export type MenuItemCreateInput = {
 export type MenuItemUncheckedCreateInput = {
   id?: bigint | number
   menuId: bigint | number
+  nombre: string
+  categoriaId?: bigint | number | null
   ruta: string
   orden?: number
   estado?: $Enums.Estado
@@ -332,6 +364,8 @@ export type MenuItemUncheckedCreateInput = {
 
 export type MenuItemUpdateInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  categoriaId?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   ruta?: Prisma.StringFieldUpdateOperationsInput | string
   orden?: Prisma.IntFieldUpdateOperationsInput | number
   estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
@@ -344,6 +378,8 @@ export type MenuItemUpdateInput = {
 export type MenuItemUncheckedUpdateInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   menuId?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  categoriaId?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   ruta?: Prisma.StringFieldUpdateOperationsInput | string
   orden?: Prisma.IntFieldUpdateOperationsInput | number
   estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
@@ -355,6 +391,8 @@ export type MenuItemUncheckedUpdateInput = {
 export type MenuItemCreateManyInput = {
   id?: bigint | number
   menuId: bigint | number
+  nombre: string
+  categoriaId?: bigint | number | null
   ruta: string
   orden?: number
   estado?: $Enums.Estado
@@ -365,6 +403,8 @@ export type MenuItemCreateManyInput = {
 
 export type MenuItemUpdateManyMutationInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  categoriaId?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   ruta?: Prisma.StringFieldUpdateOperationsInput | string
   orden?: Prisma.IntFieldUpdateOperationsInput | number
   estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
@@ -376,6 +416,8 @@ export type MenuItemUpdateManyMutationInput = {
 export type MenuItemUncheckedUpdateManyInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   menuId?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  categoriaId?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   ruta?: Prisma.StringFieldUpdateOperationsInput | string
   orden?: Prisma.IntFieldUpdateOperationsInput | number
   estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
@@ -397,6 +439,8 @@ export type MenuItemOrderByRelationAggregateInput = {
 export type MenuItemCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   menuId?: Prisma.SortOrder
+  nombre?: Prisma.SortOrder
+  categoriaId?: Prisma.SortOrder
   ruta?: Prisma.SortOrder
   orden?: Prisma.SortOrder
   estado?: Prisma.SortOrder
@@ -408,12 +452,15 @@ export type MenuItemCountOrderByAggregateInput = {
 export type MenuItemAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   menuId?: Prisma.SortOrder
+  categoriaId?: Prisma.SortOrder
   orden?: Prisma.SortOrder
 }
 
 export type MenuItemMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   menuId?: Prisma.SortOrder
+  nombre?: Prisma.SortOrder
+  categoriaId?: Prisma.SortOrder
   ruta?: Prisma.SortOrder
   orden?: Prisma.SortOrder
   estado?: Prisma.SortOrder
@@ -425,6 +472,8 @@ export type MenuItemMaxOrderByAggregateInput = {
 export type MenuItemMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   menuId?: Prisma.SortOrder
+  nombre?: Prisma.SortOrder
+  categoriaId?: Prisma.SortOrder
   ruta?: Prisma.SortOrder
   orden?: Prisma.SortOrder
   estado?: Prisma.SortOrder
@@ -436,6 +485,7 @@ export type MenuItemMinOrderByAggregateInput = {
 export type MenuItemSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   menuId?: Prisma.SortOrder
+  categoriaId?: Prisma.SortOrder
   orden?: Prisma.SortOrder
 }
 
@@ -481,8 +531,18 @@ export type MenuItemUncheckedUpdateManyWithoutMenuNestedInput = {
   deleteMany?: Prisma.MenuItemScalarWhereInput | Prisma.MenuItemScalarWhereInput[]
 }
 
+export type NullableBigIntFieldUpdateOperationsInput = {
+  set?: bigint | number | null
+  increment?: bigint | number
+  decrement?: bigint | number
+  multiply?: bigint | number
+  divide?: bigint | number
+}
+
 export type MenuItemCreateWithoutMenuInput = {
   id?: bigint | number
+  nombre: string
+  categoriaId?: bigint | number | null
   ruta: string
   orden?: number
   estado?: $Enums.Estado
@@ -493,6 +553,8 @@ export type MenuItemCreateWithoutMenuInput = {
 
 export type MenuItemUncheckedCreateWithoutMenuInput = {
   id?: bigint | number
+  nombre: string
+  categoriaId?: bigint | number | null
   ruta: string
   orden?: number
   estado?: $Enums.Estado
@@ -533,6 +595,8 @@ export type MenuItemScalarWhereInput = {
   NOT?: Prisma.MenuItemScalarWhereInput | Prisma.MenuItemScalarWhereInput[]
   id?: Prisma.BigIntFilter<"MenuItem"> | bigint | number
   menuId?: Prisma.BigIntFilter<"MenuItem"> | bigint | number
+  nombre?: Prisma.StringFilter<"MenuItem"> | string
+  categoriaId?: Prisma.BigIntNullableFilter<"MenuItem"> | bigint | number | null
   ruta?: Prisma.StringFilter<"MenuItem"> | string
   orden?: Prisma.IntFilter<"MenuItem"> | number
   estado?: Prisma.EnumEstadoFilter<"MenuItem"> | $Enums.Estado
@@ -543,6 +607,8 @@ export type MenuItemScalarWhereInput = {
 
 export type MenuItemCreateManyMenuInput = {
   id?: bigint | number
+  nombre: string
+  categoriaId?: bigint | number | null
   ruta: string
   orden?: number
   estado?: $Enums.Estado
@@ -553,6 +619,8 @@ export type MenuItemCreateManyMenuInput = {
 
 export type MenuItemUpdateWithoutMenuInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  categoriaId?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   ruta?: Prisma.StringFieldUpdateOperationsInput | string
   orden?: Prisma.IntFieldUpdateOperationsInput | number
   estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
@@ -563,6 +631,8 @@ export type MenuItemUpdateWithoutMenuInput = {
 
 export type MenuItemUncheckedUpdateWithoutMenuInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  categoriaId?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   ruta?: Prisma.StringFieldUpdateOperationsInput | string
   orden?: Prisma.IntFieldUpdateOperationsInput | number
   estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
@@ -573,6 +643,8 @@ export type MenuItemUncheckedUpdateWithoutMenuInput = {
 
 export type MenuItemUncheckedUpdateManyWithoutMenuInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  categoriaId?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   ruta?: Prisma.StringFieldUpdateOperationsInput | string
   orden?: Prisma.IntFieldUpdateOperationsInput | number
   estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
@@ -586,6 +658,8 @@ export type MenuItemUncheckedUpdateManyWithoutMenuInput = {
 export type MenuItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   menuId?: boolean
+  nombre?: boolean
+  categoriaId?: boolean
   ruta?: boolean
   orden?: boolean
   estado?: boolean
@@ -598,6 +672,8 @@ export type MenuItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
 export type MenuItemSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   menuId?: boolean
+  nombre?: boolean
+  categoriaId?: boolean
   ruta?: boolean
   orden?: boolean
   estado?: boolean
@@ -610,6 +686,8 @@ export type MenuItemSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type MenuItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   menuId?: boolean
+  nombre?: boolean
+  categoriaId?: boolean
   ruta?: boolean
   orden?: boolean
   estado?: boolean
@@ -622,6 +700,8 @@ export type MenuItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type MenuItemSelectScalar = {
   id?: boolean
   menuId?: boolean
+  nombre?: boolean
+  categoriaId?: boolean
   ruta?: boolean
   orden?: boolean
   estado?: boolean
@@ -630,7 +710,7 @@ export type MenuItemSelectScalar = {
   actualizadoEn?: boolean
 }
 
-export type MenuItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "menuId" | "ruta" | "orden" | "estado" | "eliminadoEn" | "creadoEn" | "actualizadoEn", ExtArgs["result"]["menuItem"]>
+export type MenuItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "menuId" | "nombre" | "categoriaId" | "ruta" | "orden" | "estado" | "eliminadoEn" | "creadoEn" | "actualizadoEn", ExtArgs["result"]["menuItem"]>
 export type MenuItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   menu?: boolean | Prisma.MenuDefaultArgs<ExtArgs>
 }
@@ -649,6 +729,8 @@ export type $MenuItemPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: bigint
     menuId: bigint
+    nombre: string
+    categoriaId: bigint | null
     ruta: string
     orden: number
     estado: $Enums.Estado
@@ -1081,6 +1163,8 @@ export interface Prisma__MenuItemClient<T, Null = never, ExtArgs extends runtime
 export interface MenuItemFieldRefs {
   readonly id: Prisma.FieldRef<"MenuItem", 'BigInt'>
   readonly menuId: Prisma.FieldRef<"MenuItem", 'BigInt'>
+  readonly nombre: Prisma.FieldRef<"MenuItem", 'String'>
+  readonly categoriaId: Prisma.FieldRef<"MenuItem", 'BigInt'>
   readonly ruta: Prisma.FieldRef<"MenuItem", 'String'>
   readonly orden: Prisma.FieldRef<"MenuItem", 'Int'>
   readonly estado: Prisma.FieldRef<"MenuItem", 'Estado'>

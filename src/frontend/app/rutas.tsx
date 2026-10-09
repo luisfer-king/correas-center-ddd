@@ -1,10 +1,11 @@
+import { VistaPublica } from '../features/publico/presentation/entrada-publica'
 // CMS: integración explícita y navegación central v2
 import { PortalCms } from '../features/cms/presentation/portal-cms'
 import { InicioCms } from '../features/cms/presentation/inicio-cms'
 import { ListadoTipoSeccion } from '../features/cms/presentation/listado-tipos-seccion'
 import { ListadoContenidoSeccion } from '../features/cms/presentation/listado-contenidos-seccion'
 import { ListadoMenu } from '../features/cms/presentation/listado-menus'
-import { ListadoMenuItem } from '../features/cms/presentation/listado-items-menu'
+
 import { ListadoFooterElemento } from '../features/cms/presentation/listado-elementos-footer'
 import { ListadoConfiguracionSitio } from '../features/cms/presentation/listado-configuracion-sitio'
 import { ListadoPasoWizard } from '../features/cms/presentation/listado-pasos-wizard'
@@ -36,11 +37,19 @@ import { PortalProtegido } from '../features/iam/presentation/portal-protegido'
 import { ProveedorSesion } from '../features/iam/presentation/sesion-portal'
 import { TemaPortal } from '../features/iam/presentation/tema-portal'
 import { VistaMiPerfil } from '../features/iam/presentation/vista-mi-perfil'
-import { PortadaTemporal } from './portada-temporal'
-
 export function Rutas() {
   return <BrowserRouter><Routes>
-    <Route path="/" element={<PortadaTemporal />} />
+    {/* // CMS público: vista inicial v1 */}
+    <Route path="/" element={<VistaPublica />} />
+    <Route path="/products" element={<VistaPublica />} />
+    <Route path="/products/:slug" element={<VistaPublica />} />
+    <Route path="/products/:slug/:categoria" element={<VistaPublica />} />
+    <Route path="/applications" element={<VistaPublica />} />
+    <Route path="/applications/:slug" element={<VistaPublica />} />
+    <Route path="/services" element={<VistaPublica />} />
+    <Route path="/services/:slug" element={<VistaPublica />} />
+    <Route path="/contact" element={<VistaPublica />} />
+    <Route path="/about" element={<VistaPublica />} />
     <Route path="/portal" element={<TemaPortal><ProveedorSesion><Outlet /></ProveedorSesion></TemaPortal>}>
       <Route path="acceso" element={<AccesoPortal />} />
       <Route element={<PortalProtegido />}>
@@ -51,7 +60,7 @@ export function Rutas() {
             <Route path="cms/tipos-seccion" element={<ListadoTipoSeccion />} />
             <Route path="cms/contenidos-seccion" element={<ListadoContenidoSeccion />} />
             <Route path="cms/menus" element={<ListadoMenu />} />
-            <Route path="cms/items-menu" element={<ListadoMenuItem />} />
+            
             <Route path="cms/elementos-footer" element={<ListadoFooterElemento />} />
             <Route path="cms/configuracion-sitio" element={<ListadoConfiguracionSitio />} />
             <Route path="cms/pasos-wizard" element={<ListadoPasoWizard />} />

@@ -22,7 +22,7 @@ export function entrada(cls: string): any {
     TipoSeccion: { nombre: 'Hero', slug: 'hero', descripcion: null, camposMetadata: ['cta'], icono: null, orden: 0 },
     ContenidoSeccion: { empresaId: 1n, tipoSeccionId: 2n, campos: { titulo: 'Hero', subtitulo: null, descripcion: null, icono: null, imagen: null }, metadata: { cta: 'Cotizar' }, orden: 0, mostrar: true },
     Menu: { empresaId: 1n, grupo: 'Producto', destino: { tipo: 'producto', id: 1n }, ruta: '/productos', icono: null, mostrar: true, orden: 0, cargarSubmenu: 'activo' },
-    MenuItem: { menuId: 2n, ruta: '/correas', orden: 0 },
+    MenuItem: { menuId: 2n,nombre:'Correas en V',categoriaId:1n, ruta: '/correas', orden: 1 },
     FooterElemento: { empresaId: 1n, tipo: 'producto', destino: { tipo: 'producto', id: 1n }, titulo: 'Productos', enlace: '/productos', icono: null, orden: 0, mostrar: true },
     ConfiguracionSitio: { empresaId: null, clave: 'titulo', valor: 'Correas Center', tipo: 'texto', descripcion: null, grupo: null, activo: null },
     PasoWizard: { empresaId: 1n, identificador: 'producto', titulo: 'Producto', descripcion: 'Selecciona', fuenteDatos: 'productos', campoFiltro: 'nombre', orden: 0 },
@@ -52,7 +52,7 @@ function clonar(e: any): any {
   if (e instanceof TipoSeccion) return new TipoSeccion({ ...comun, nombre: e.nombre, slug: e.slug, descripcion: e.descripcion, icono: e.icono, orden: e.orden, camposMetadata: e.clavesMetadata } as ConstructorParameters<typeof TipoSeccion>[0])
   if (e instanceof ContenidoSeccion) return new ContenidoSeccion({ ...comun, empresaId: e.empresaId, tipoSeccionId: e.tipoSeccionId, campos: e.campos, metadata: e.metadata, orden: e.orden, mostrar: e.mostrar } as ConstructorParameters<typeof ContenidoSeccion>[0])
   if (e instanceof Menu) return new Menu({ ...comun, empresaId: e.empresaId, grupo: e.grupo, destino: e.destino, ruta: e.ruta, icono: e.icono, mostrar: e.mostrar, orden: e.orden, cargarSubmenu: e.cargarSubmenu, items: e.itemsOrdenados.map(clonar) } as ConstructorParameters<typeof Menu>[0])
-  if (e instanceof MenuItem) return new MenuItem({ ...comun, menuId: e.menuId, ruta: e.ruta, orden: e.orden } as ConstructorParameters<typeof MenuItem>[0])
+  if (e instanceof MenuItem) return new MenuItem({ ...comun, menuId: e.menuId, nombre:e.nombre,categoriaId:e.categoriaId,ruta: e.ruta, orden: e.orden } as ConstructorParameters<typeof MenuItem>[0])
   if (e instanceof FooterElemento) return new FooterElemento({ ...comun, empresaId: e.empresaId, tipo: e.tipo, destino: e.destino, titulo: e.titulo, enlace: e.enlace, icono: e.icono, orden: e.orden, mostrar: e.mostrar } as ConstructorParameters<typeof FooterElemento>[0])
   if (e instanceof ConfiguracionSitio) return new ConfiguracionSitio({ ...comun, empresaId: e.empresaId, clave: e.clave, valor: e.valor, tipo: e.tipo, descripcion: e.descripcion, grupo: e.grupo, activo: e.activo } as ConstructorParameters<typeof ConfiguracionSitio>[0])
   if (e instanceof PasoWizard) return new PasoWizard({ ...comun, empresaId: e.empresaId, identificador: e.identificador, titulo: e.titulo, descripcion: e.descripcion, fuenteDatos: e.fuenteDatos, campoFiltro: e.campoFiltro, orden: e.orden } as ConstructorParameters<typeof PasoWizard>[0])
@@ -82,7 +82,7 @@ export function entorno(cls: string) {
       llamadas.push({ operacion: 'crear', args: [datos, escritura] })
       const Ctor = actual.constructor
       actual = cls === 'ConfiguracionSitio' ? new Ctor({ ...datos, id: 99, creadoEn: escritura.cuando, actualizadoEn: escritura.cuando }) :
-        new Ctor({ ...datos, ...(cls === 'ContenidoSeccion' ? { orden: Orden.create(1) } : {}), ...(cls === 'Menu' ? { orden: Orden.create(1) } : {}), id: 99n, estado: 'activo', fechas: { creadoEn: escritura.cuando, actualizadoEn: escritura.cuando, eliminadoEn: null }, ...(cls==='Menu' ? { items: [] } : {}) })
+        new Ctor({ ...datos, ...(cls === 'ContenidoSeccion' ? { orden: Orden.create(1) } : {}), ...(cls === 'Menu' ? { orden: Orden.create(1) } : {}), ...(cls === 'MenuItem' ? {orden:Orden.create(1),ruta:RutaInterna.create('/products/correas-industriales/correas-en-v/')} : {}), id: 99n, estado: 'activo', fechas: { creadoEn: escritura.cuando, actualizadoEn: escritura.cuando, eliminadoEn: null }, ...(cls==='Menu' ? { items: [] } : {}) })
       return clonar(actual)
     },
     guardar: async (e: any, version: any, escritura: any) => {

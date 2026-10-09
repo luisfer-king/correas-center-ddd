@@ -399,6 +399,8 @@ export type MenuScalarFieldEnum = (typeof MenuScalarFieldEnum)[keyof typeof Menu
 export const MenuItemScalarFieldEnum = {
   id: 'id',
   menuId: 'menuId',
+  nombre: 'nombre',
+  categoriaId: 'categoriaId',
   ruta: 'ruta',
   orden: 'orden',
   estado: 'estado',

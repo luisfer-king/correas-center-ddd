@@ -10,7 +10,7 @@ export function entorno(recurso: string) {
     tipoSeccion: { id: 2n, nombre: 'texto', slug: 'texto', descripcion: null, camposMetadata: ['cta'], icono: null, orden: 0, estado: 'activo', eliminadoEn: null, creadoEn: antes, actualizadoEn: antes },
     contenidoSeccion: { id: 2n, empresaId: 1n, tipoSeccionId: 1n, titulo: null, subtitulo: null, descripcion: null, icono: null, imagen: null, metadata: { cta: 'Cotizar' }, orden: 0, mostrar: true, estado: 'activo', eliminadoEn: null, creadoEn: antes, actualizadoEn: antes },
     menu: { id: 2n, empresaId: 1n, grupo: 'Producto', tipoRegistro: 'producto', registroId: 1n, ruta: '/productos', icono: null, mostrar: true, orden: 0, estado: 'activo', eliminadoEn: null, creadoEn: antes, actualizadoEn: antes, cargarSubmenu: null },
-    menuItem: { id: 2n, menuId: 1n, ruta: '/productos', orden: 0, estado: 'activo', eliminadoEn: null, creadoEn: antes, actualizadoEn: antes },
+    menuItem: { id: 2n, menuId: 1n, nombre:'Correas en V', categoriaId:1n, ruta: '/productos', orden: 1, estado: 'activo', eliminadoEn: null, creadoEn: antes, actualizadoEn: antes },
     footerElemento: { id: 2n, empresaId: 1n, tipo: 'producto', tipoRegistro: null, registroId: null, titulo: null, url: null, icono: null, orden: 0, mostrar: true, estado: 'activo', eliminadoEn: null, creadoEn: antes, actualizadoEn: antes },
     configuracionSitio: { id: 2, empresaId: null, clave: 'texto', valor: null, tipo: null, descripcion: null, grupo: null, activo: null, creadoEn: antes, actualizadoEn: antes },
     pasoWizard: { id: 2n, empresaId: 1n, identificador: 'texto', titulo: 'texto', descripcion: 'texto', fuenteDatos: 'texto', campoFiltro: null, orden: 0, estado: 'activo', eliminadoEn: null, creadoEn: antes, actualizadoEn: antes },
@@ -18,8 +18,9 @@ export function entorno(recurso: string) {
     contenidoRegistro: { id: 2n, empresaId: 1n, registroId: 1n, titulo: null, subtitulo: null, descripcion: null, icono: null, stats: null, orden: 0, estado: 'activo', eliminadoEn: null, creadoEn: antes, actualizadoEn: antes },
   }
   let tablas: Record<string, Fila[]> = Object.fromEntries(Object.entries(fixtures).map(([key, value]) => [key, [structuredClone(value)]]))
+  tablas.categoria=[{id:1n,productoId:1n,nombre:'Correas en V',slug:'correas-en-v',estado:'activo',eliminadoEn:null}]
   tablas.empresa = [{ id: 1n, estado: 'activo', eliminadoEn: null }]
-  for (const key of ['producto', 'industria', 'servicio']) tablas[key] = [{ id: 1n, empresaId: 1n, estado: 'activo', eliminadoEn: null }]
+  for (const key of ['producto', 'industria', 'servicio']) tablas[key] = [{ id: 1n, empresaId: 1n, nombre:'Correas Industriales',slug:'correas-industriales',estado: 'activo', eliminadoEn: null }]
   for (const key of ['tipoSeccion', 'registroCMS', 'menu']) tablas[key].push({ ...structuredClone(fixtures[key]), id: 1n })
   let auditorias: unknown[][] = []
   const consultas: { modelo: string; metodo: string; args: any }[] = []

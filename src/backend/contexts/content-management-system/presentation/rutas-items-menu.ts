@@ -21,13 +21,13 @@ export function rutasItemsMenu(app: FastifyInstance, casos: CasosCms): void {
     return leerHttpCms(casos, req, 'items_menu', async () => salidaMenuItem(await recurso.obtener.ejecutar(ctx.actorId, id)), req.params.id)
   })
   app.post(base, { schema: { ...comun, summary: 'Crear MenuItem', body: crearMenuItemSchema, response: { 201: salidaMenuItemSchema, ...S.erroresSchemaCms } } }, async (req, reply) => {
-    const entrada = entradaHttpCms<DatosCrear>(cuerpoHttpCms(req), ["menuId"])
+    const entrada = entradaHttpCms<DatosCrear>(cuerpoHttpCms(req), ["menuId", "categoriaId"])
     const registro = await recurso.crear.ejecutar(contextoHttpCms(req), entrada)
     return reply.code(201).send(salidaMenuItem(registro))
   })
   app.patch<{ Params: { id: string } }>(`${base}/:id`, { schema: { ...comun, summary: 'Editar MenuItem', params: S.paramsSchemaCms, body: editarMenuItemSchema, response: { 200: salidaMenuItemSchema, ...S.erroresSchemaCms } } }, async req => {
     const body = cuerpoHttpCms(req), version = versionHttpCms(body.version)
-    return salidaMenuItem(await recurso.editar.ejecutar(contextoHttpCms(req), idHttpCms(req.params.id), version, entradaHttpCms<DatosEditar>(body, [])))
+    return salidaMenuItem(await recurso.editar.ejecutar(contextoHttpCms(req), idHttpCms(req.params.id), version, entradaHttpCms<DatosEditar>(body, body.categoriaId === undefined ? [] : ["categoriaId"])))
   })
   app.patch<{ Params: { id: string } }>(`${base}/:id/activar`, { schema: { ...comun, summary: 'activar MenuItem', params: S.paramsSchemaCms, body: S.objetoCms({ version: S.versionSchemaCms }), response: { 200: salidaMenuItemSchema, ...S.erroresSchemaCms } } }, async req => {
     const body = cuerpoHttpCms(req), version = versionHttpCms(body.version)
@@ -41,7 +41,7 @@ export function rutasItemsMenu(app: FastifyInstance, casos: CasosCms): void {
     const body = cuerpoHttpCms(req), version = versionHttpCms(body.version)
     return salidaMenuItem(await recurso.inactivar.ejecutar(contextoHttpCms(req), idHttpCms(req.params.id), version))
   })
-  app.patch<{ Params: { id: string } }>(`${base}/:id/reordenar`, { schema: { ...comun, summary: 'reordenar MenuItem', params: S.paramsSchemaCms, body: S.objetoCms({ version: S.versionSchemaCms, orden: S.ordenSchemaCms }), response: { 200: salidaMenuItemSchema, ...S.erroresSchemaCms } } }, async req => {
+  app.patch<{ Params: { id: string } }>(`${base}/:id/reordenar`, { schema: { ...comun, summary: 'reordenar MenuItem', params: S.paramsSchemaCms, body: S.objetoCms({ version: S.versionSchemaCms, orden: { ...S.ordenSchemaCms, minimum: 1 } }), response: { 200: salidaMenuItemSchema, ...S.erroresSchemaCms } } }, async req => {
     const body = cuerpoHttpCms(req), version = versionHttpCms(body.version)
     return salidaMenuItem(await recurso.reordenar.ejecutar(contextoHttpCms(req), idHttpCms(req.params.id), version, body.orden as number))
   })

@@ -155,7 +155,7 @@ test('MenuItem: versión obsoleta impide guardar', async () => {
 
 test('MenuItem: creación inválida se rechaza antes de persistir', async () => {
   const env = entorno('MenuItem'); const caso = new CrearMenuItem(env.repo as unknown as ConstructorParameters<typeof CrearMenuItem>[0], env.auth as unknown as ConstructorParameters<typeof CrearMenuItem>[1], env.reloj as unknown as ConstructorParameters<typeof CrearMenuItem>[2], env.menus as unknown as ConstructorParameters<typeof CrearMenuItem>[3])
-  await assert.rejects(caso.ejecutar(contexto, { ...entrada('MenuItem'), ruta: 'javascript:alert(1)' }))
+  await assert.rejects(caso.ejecutar(contexto, { ...entrada('MenuItem'), nombre: '   ' }))
   assert.equal(env.llamadas.filter(x => x.operacion === 'crear').length, 0)
 })
 
@@ -178,6 +178,6 @@ test('ítems: escritura avanza tras la versión del menú padre', async () => {
   const env = entorno('MenuItem'); env.menu.reordenar(env.menu.orden, despues)
   const caso = new EditarMenuItem(env.repo as unknown as RepositorioItemsMenu, env.auth, env.reloj,
     env.menus as unknown as ConstructorParameters<typeof EditarMenuItem>[3])
-  await caso.ejecutar(contexto, 2n, antes, { ruta: '/otra-ruta' })
+  await caso.ejecutar(contexto, 2n, antes, { nombre: 'Otro nombre' })
   assert.equal(env.llamadas.find(x => x.operacion === 'guardar')?.args[2].cuando.getTime(), despues.getTime()+1)
 })

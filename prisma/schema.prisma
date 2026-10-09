@@ -1,8 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client"
   output   = "../src/backend/generated/prisma"
@@ -13,61 +8,7 @@ datasource db {
   schemas  = ["auth", "public"]
 }
 
-enum Estado {
-  activo
-  inactivo
-  eliminado
-
-  @@map("enum_estado")
-  @@schema("public")
-}
-
-enum EstadoAsignacion {
-  activo
-  inactivo
-
-  @@map("enum_estado_asignacion")
-  @@schema("public")
-}
-
-enum EstadoContacto {
-  nuevo
-  respondido
-  archivado
-
-  @@map("enum_estado_contacto")
-  @@schema("public")
-}
-
-enum EstadoSuscriptor {
-  activo
-  inactivo
-  desuscrito
-
-  @@map("enum_estado_suscriptor")
-  @@schema("public")
-}
-
-// Los valores con tilde requieren @map. Ver nota de Prisma v7 en README.
-enum AccionAuditoria {
-  Lectura
-  Creacion    @map("Creación")
-  Edicion     @map("Edición")
-  Eliminacion @map("Eliminación")
-
-  @@map("enum_accion_auditoria")
-  @@schema("public")
-}
-
-enum EstadoLead {
-  nuevo
-  calificado
-  descartado
-
-  @@map("enum_estado_lead")
-  @@schema("public")
-}
-
+/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
 model Usuario {
   id                String   @id @default(uuid()) @db.Uuid
   email             String?  @unique @db.VarChar
@@ -87,19 +28,19 @@ model Empresa {
   eliminadoEn           DateTime?            @map("eliminado_en") @db.Timestamptz(6)
   creadoEn              DateTime             @default(now()) @map("creado_en") @db.Timestamptz(6)
   actualizadoEn         DateTime             @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
-  relSucursal           Sucursal[]
-  relProducto           Producto[]
-  relIndustria          Industria[]
-  relServicio           Servicio[]
-  relContenidoSeccion   ContenidoSeccion[]
-  relContenidoRegistro  ContenidoRegistro[]
-  relMenu               Menu[]
-  relFooterElemento     FooterElemento[]
-  relPasoWizard         PasoWizard[]
-  relContactoEntrante   ContactoEntrante[]
-  relSuscriptor         Suscriptor[]
   relConfiguracionSitio ConfiguracionSitio[]
+  relContactoEntrante   ContactoEntrante[]
+  relContenidoSeccion   ContenidoSeccion[]
+  relFooterElemento     FooterElemento[]
+  relIndustria          Industria[]
   relLead               Lead[]
+  relMenu               Menu[]
+  relPasoWizard         PasoWizard[]
+  relProducto           Producto[]
+  relContenidoRegistro  ContenidoRegistro[]
+  relServicio           Servicio[]
+  relSucursal           Sucursal[]
+  relSuscriptor         Suscriptor[]
 
   @@map("empresas")
   @@schema("public")
@@ -113,7 +54,7 @@ model Sucursal {
   telefono       String    @db.VarChar
   email          String?   @db.VarChar
   horarios       String?   @db.VarChar
-  mapaIncrustado String?   @map("mapa_incrustado") @db.Text
+  mapaIncrustado String?   @map("mapa_incrustado")
   latitud        Decimal?  @db.Decimal
   longitud       Decimal?  @db.Decimal
   esPrincipal    Boolean   @default(false) @map("es_principal")
@@ -140,9 +81,9 @@ model Producto {
   eliminadoEn      DateTime?       @map("eliminado_en") @db.Timestamptz(6)
   creadoEn         DateTime        @default(now()) @map("creado_en") @db.Timestamptz(6)
   actualizadoEn    DateTime        @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
-  empresa          Empresa         @relation(fields: [empresaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   relCategoria     Categoria[]
   relProductoMarca ProductoMarca[]
+  empresa          Empresa         @relation(fields: [empresaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@index([empresaId, estado, orden])
   @@map("productos")
@@ -155,16 +96,16 @@ model Categoria {
   nombre               String              @db.VarChar
   slug                 String              @unique @db.VarChar
   imagen               String?             @db.VarChar
-  descripcion          String?             @db.Text
-  descripcionCorta     String?             @map("descripcion_corta") @db.Text
+  descripcion          String?
+  descripcionCorta     String?             @map("descripcion_corta")
   uso                  String?             @db.VarChar
   orden                Int                 @default(0)
   estado               Estado              @default(activo)
   eliminadoEn          DateTime?           @map("eliminado_en") @db.Timestamptz(6)
   creadoEn             DateTime            @default(now()) @map("creado_en") @db.Timestamptz(6)
   actualizadoEn        DateTime            @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
-  producto             Producto            @relation(fields: [productoId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   relCategoriaAtributo CategoriaAtributo[]
+  producto             Producto            @relation(fields: [productoId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@index([productoId, estado, orden])
   @@map("categorias")
@@ -195,8 +136,8 @@ model ProductoMarca {
   creadoEn      DateTime @default(now()) @map("creado_en") @db.Timestamptz(6)
   actualizadoEn DateTime @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
   orden         Int?
-  producto      Producto @relation(fields: [productoId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   marca         Marca    @relation(fields: [marcaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  producto      Producto @relation(fields: [productoId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@index([productoId, estado, orden])
   @@map("producto_marca")
@@ -207,7 +148,7 @@ model TipoAtributo {
   id                   BigInt            @id @default(autoincrement())
   nombre               String            @unique @db.VarChar
   slug                 String            @unique @db.VarChar
-  descripcion          String?           @db.Text
+  descripcion          String?
   permiteDescripcion   Boolean           @default(false) @map("permite_descripcion")
   permiteValorNumerico Boolean           @default(false) @map("permite_valor_numerico")
   permiteUnidadMedida  Boolean           @default(false) @map("permite_unidad_medida")
@@ -227,7 +168,7 @@ model AtributoTecnico {
   id                   BigInt              @id @default(autoincrement())
   tipoAtributoId       BigInt              @map("tipo_atributo_id")
   nombre               String              @db.VarChar
-  descripcion          String?             @db.Text
+  descripcion          String?
   valorNumerico        Decimal?            @map("valor_numerico") @db.Decimal
   unidadMedida         String?             @map("unidad_medida") @db.VarChar
   orden                Int                 @default(0)
@@ -252,8 +193,8 @@ model CategoriaAtributo {
   estado             Estado          @default(activo)
   creadoEn           DateTime        @default(now()) @map("creado_en") @db.Timestamptz(6)
   actualizadoEn      DateTime        @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
-  categoria          Categoria       @relation(fields: [categoriaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   atributoTecnico    AtributoTecnico @relation(fields: [atributoId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  categoria          Categoria       @relation(fields: [categoriaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@index([categoriaId, estado, orden])
   @@map("categoria_atributo")
@@ -271,8 +212,8 @@ model Industria {
   eliminadoEn            DateTime?             @map("eliminado_en") @db.Timestamptz(6)
   creadoEn               DateTime              @default(now()) @map("creado_en") @db.Timestamptz(6)
   actualizadoEn          DateTime              @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
-  empresa                Empresa               @relation(fields: [empresaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   relIndustriaAsignacion IndustriaAsignacion[]
+  empresa                Empresa               @relation(fields: [empresaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@index([empresaId, estado, orden])
   @@map("industrias")
@@ -283,7 +224,7 @@ model Servicio {
   id            BigInt    @id @default(autoincrement())
   empresaId     BigInt    @map("empresa_id")
   nombre        String    @db.VarChar
-  descripcion   String?   @db.Text
+  descripcion   String?
   imagen        String?   @db.VarChar
   orden         Int       @default(0)
   estado        Estado    @default(activo)
@@ -317,7 +258,7 @@ model TipoSeccion {
   id                  BigInt             @id @default(autoincrement())
   nombre              String             @unique @db.VarChar
   slug                String             @unique @db.VarChar
-  descripcion         String?            @db.Text
+  descripcion         String?
   camposMetadata      Json               @default("[]") @map("campos_metadata")
   icono               String?            @db.VarChar
   orden               Int                @default(0)
@@ -337,7 +278,7 @@ model ContenidoSeccion {
   tipoSeccionId BigInt      @map("tipo_seccion_id")
   titulo        String?     @db.VarChar
   subtitulo     String?     @db.VarChar
-  descripcion   String?     @db.Text
+  descripcion   String?
   icono         String?     @db.VarChar
   imagen        String?     @db.VarChar
   metadata      Json        @default("{}")
@@ -359,7 +300,7 @@ model RegistroCMS {
   id                   BigInt              @id @default(autoincrement())
   identificador        String              @unique @db.VarChar
   nombre               String              @db.VarChar
-  descripcion          String?             @db.Text
+  descripcion          String?
   orden                Int                 @default(0)
   estado               Estado              @default(activo)
   eliminadoEn          DateTime?           @map("eliminado_en") @db.Timestamptz(6)
@@ -377,7 +318,7 @@ model ContenidoRegistro {
   registroId    BigInt      @map("registro_id")
   titulo        String?     @db.VarChar
   subtitulo     String?     @db.VarChar
-  descripcion   String?     @db.Text
+  descripcion   String?
   icono         String?     @db.VarChar
   stats         String?     @db.VarChar
   orden         Int         @default(0)
@@ -407,9 +348,9 @@ model Menu {
   eliminadoEn   DateTime?  @map("eliminado_en") @db.Timestamptz(6)
   creadoEn      DateTime   @default(now()) @map("creado_en") @db.Timestamptz(6)
   actualizadoEn DateTime   @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
-  cargarSubmenu String?    @default("activo") @map("cargar_submenu") @db.Text
-  empresa       Empresa    @relation(fields: [empresaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  cargarSubmenu String?    @default("activo") @map("cargar_submenu")
   relMenuItem   MenuItem[]
+  empresa       Empresa    @relation(fields: [empresaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@index([empresaId, estado, mostrar, orden])
   @@map("menus")
@@ -419,12 +360,14 @@ model Menu {
 model MenuItem {
   id            BigInt    @id @default(autoincrement())
   menuId        BigInt    @map("menu_id")
+  nombre        String    @db.VarChar(255)
+  categoriaId   BigInt?   @map("categoria_id")
   ruta          String    @db.VarChar
-  orden         Int       @default(0)
+  orden         Int       @default(1)
   estado        Estado    @default(activo)
   eliminadoEn   DateTime? @map("eliminado_en") @db.Timestamptz(6)
   creadoEn      DateTime  @default(now()) @map("creado_en") @db.Timestamptz(6)
-  actualizadoEn DateTime  @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  actualizadoEn DateTime  @default(now()) @updatedAt @map("actualizado_en")
   menu          Menu      @relation(fields: [menuId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@index([menuId, estado, orden])
@@ -481,7 +424,7 @@ model ContactoEntrante {
   empresaDeclarada   String?        @map("empresa") @db.VarChar
   telefono           String         @db.VarChar
   email              String         @db.VarChar
-  mensaje            String         @db.Text
+  mensaje            String
   estado             EstadoContacto @default(nuevo)
   eliminadoEn        DateTime?      @map("eliminado_en") @db.Timestamptz(6)
   creadoEn           DateTime       @default(now()) @map("creado_en") @db.Timestamptz(6)
@@ -522,10 +465,10 @@ model Perfil {
   actualizadoEn      DateTime          @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
   email              String?           @db.VarChar
   emailVerifiedAt    DateTime?         @map("email_verified_at") @db.Timestamptz(6)
-  usuario            Usuario           @relation(fields: [id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  relUsuarioRol      UsuarioRol[]
   relEventoAuditoria EventoAuditoria[]
   relLeadResponsable Lead[]
+  usuario            Usuario           @relation(fields: [id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  relUsuarioRol      UsuarioRol[]
 
   @@map("perfiles")
   @@schema("public")
@@ -535,7 +478,7 @@ model Rol {
   id            BigInt       @id @default(autoincrement())
   nombre        String       @unique @db.VarChar
   slug          String       @unique @db.VarChar
-  descripcion   String?      @db.Text
+  descripcion   String?
   esSistema     Boolean      @default(false) @map("es_sistema")
   estado        Estado       @default(activo)
   eliminadoEn   DateTime?    @map("eliminado_en") @db.Timestamptz(6)
@@ -553,7 +496,7 @@ model Permiso {
   nombre        String       @unique @db.VarChar
   slug          String       @unique @db.VarChar
   grupo         String       @db.VarChar
-  descripcion   String?      @db.Text
+  descripcion   String?
   estado        Estado       @default(activo)
   eliminadoEn   DateTime?    @map("eliminado_en") @db.Timestamptz(6)
   creadoEn      DateTime     @default(now()) @map("creado_en") @db.Timestamptz(6)
@@ -565,12 +508,12 @@ model Permiso {
 }
 
 model RolPermiso {
-  rolId     BigInt   @map("rol_id")
-  permisoId BigInt   @map("permiso_id")
-  creadoEn  DateTime @default(now()) @map("creado_en") @db.Timestamptz(6)
+  rolId     BigInt           @map("rol_id")
+  permisoId BigInt           @map("permiso_id")
+  creadoEn  DateTime         @default(now()) @map("creado_en") @db.Timestamptz(6)
   estado    EstadoAsignacion @default(activo)
-  rol       Rol      @relation(fields: [rolId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  permiso   Permiso  @relation(fields: [permisoId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  permiso   Permiso          @relation(fields: [permisoId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  rol       Rol              @relation(fields: [rolId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([rolId, permisoId])
   @@index([permisoId])
@@ -579,12 +522,12 @@ model RolPermiso {
 }
 
 model UsuarioRol {
-  usuarioId String   @map("usuario_id") @db.Uuid
-  rolId     BigInt   @map("rol_id")
-  creadoEn  DateTime @default(now()) @map("creado_en") @db.Timestamptz(6)
+  usuarioId String           @map("usuario_id") @db.Uuid
+  rolId     BigInt           @map("rol_id")
+  creadoEn  DateTime         @default(now()) @map("creado_en") @db.Timestamptz(6)
   estado    EstadoAsignacion @default(activo)
-  perfil    Perfil   @relation(fields: [usuarioId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  rol       Rol      @relation(fields: [rolId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  rol       Rol              @relation(fields: [rolId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  perfil    Perfil           @relation(fields: [usuarioId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([usuarioId, rolId])
   @@index([rolId])
@@ -601,7 +544,7 @@ model EventoAuditoria {
   datosAnteriores Json?           @map("datos_anteriores")
   datosNuevos     Json?           @map("datos_nuevos")
   ipAddress       String?         @map("ip_address") @db.VarChar
-  userAgent       String?         @map("user_agent") @db.Text
+  userAgent       String?         @map("user_agent")
   metadata        Json?           @default("{}")
   creadoEn        DateTime        @default(now()) @map("creado_en") @db.Timestamptz(6)
   perfil          Perfil?         @relation(fields: [usuarioId], references: [id], onDelete: NoAction, onUpdate: NoAction)
@@ -614,9 +557,9 @@ model ConfiguracionSitio {
   id            Int       @id @default(autoincrement())
   empresaId     BigInt?   @map("empresa_id")
   clave         String    @db.VarChar
-  valor         String?   @db.Text
+  valor         String?
   tipo          String?   @default("texto") @db.VarChar
-  descripcion   String?   @db.Text
+  descripcion   String?
   grupo         String?   @db.VarChar
   activo        Boolean?  @default(true)
   creadoEn      DateTime? @default(now()) @map("creado_en") @db.Timestamptz(6)
@@ -627,7 +570,6 @@ model ConfiguracionSitio {
   @@schema("public")
 }
 
-// Tabla local nueva. Solo se almacena una huella opaca del token, nunca el JWT.
 model Sesion {
   id            String    @id @default(uuid()) @db.Uuid
   usuarioId     String    @map("usuario_id") @db.Uuid
@@ -645,7 +587,6 @@ model Sesion {
   @@schema("public")
 }
 
-// Tabla local nueva: propuesta de identidad UUID y estados del dominio CRM.
 model Lead {
   id            String            @id @default(uuid()) @db.Uuid
   empresaId     BigInt            @map("empresa_id")
@@ -655,12 +596,66 @@ model Lead {
   creadoEn      DateTime          @default(now()) @map("creado_en") @db.Timestamptz(6)
   actualizadoEn DateTime          @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
   eliminadoEn   DateTime?         @map("eliminado_en") @db.Timestamptz(6)
-  empresa       Empresa           @relation(fields: [empresaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   contacto      ContactoEntrante? @relation(fields: [contactoId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  empresa       Empresa           @relation(fields: [empresaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   responsable   Perfil?           @relation(fields: [responsableId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@index([empresaId, estado])
   @@index([responsableId, estado])
   @@map("leads")
+  @@schema("public")
+}
+
+enum Estado {
+  activo
+  inactivo
+  eliminado
+
+  @@map("enum_estado")
+  @@schema("public")
+}
+
+enum EstadoAsignacion {
+  activo
+  inactivo
+
+  @@map("enum_estado_asignacion")
+  @@schema("public")
+}
+
+enum EstadoContacto {
+  nuevo
+  respondido
+  archivado
+
+  @@map("enum_estado_contacto")
+  @@schema("public")
+}
+
+enum EstadoSuscriptor {
+  activo
+  inactivo
+  desuscrito
+
+  @@map("enum_estado_suscriptor")
+  @@schema("public")
+}
+
+enum AccionAuditoria {
+  Lectura
+  Creacion    @map("Creación")
+  Edicion     @map("Edición")
+  Eliminacion @map("Eliminación")
+
+  @@map("enum_accion_auditoria")
+  @@schema("public")
+}
+
+enum EstadoLead {
+  nuevo
+  calificado
+  descartado
+
+  @@map("enum_estado_lead")
   @@schema("public")
 }
