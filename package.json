@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev:frontend": "vite",
+    "dev:frontend": "node scripts/iniciar-frontend.mjs",
     "dev:backend": "node --watch --import tsx src/backend/main.ts",
     "typecheck": "tsc -b && tsc -p tsconfig.backend.json",
     "build": "pnpm typecheck && vite build",

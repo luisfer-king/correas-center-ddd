@@ -82,7 +82,7 @@ export function entorno(cls: string) {
       llamadas.push({ operacion: 'crear', args: [datos, escritura] })
       const Ctor = actual.constructor
       actual = cls === 'ConfiguracionSitio' ? new Ctor({ ...datos, id: 99, creadoEn: escritura.cuando, actualizadoEn: escritura.cuando }) :
-        new Ctor({ ...datos, ...(cls === 'ContenidoSeccion' ? { orden: Orden.create(1) } : {}), ...(cls === 'Menu' || cls === 'FooterElemento' || cls === 'RegistroCMS' || cls === 'ContenidoRegistro' ? { orden: Orden.create(1) } : {}), ...(cls === 'MenuItem' ? {orden:Orden.create(1),ruta:RutaInterna.create('/products/correas-industriales/correas-en-v/')} : {}), id: 99n, estado: 'activo', fechas: { creadoEn: escritura.cuando, actualizadoEn: escritura.cuando, eliminadoEn: null }, ...(cls==='Menu' ? { items: [] } : {}) })
+        new Ctor({ ...datos, ...(cls === 'ContenidoSeccion' ? { orden: Orden.create(1) } : {}), ...(cls === 'Menu' || cls === 'FooterElemento' || cls === 'RegistroCMS' || cls === 'ContenidoRegistro' || cls === 'PasoWizard' ? { orden: Orden.create(1) } : {}), ...(cls === 'MenuItem' ? {orden:Orden.create(1),ruta:RutaInterna.create('/products/correas-industriales/correas-en-v/')} : {}), id: 99n, estado: 'activo', fechas: { creadoEn: escritura.cuando, actualizadoEn: escritura.cuando, eliminadoEn: null }, ...(cls==='Menu' ? { items: [] } : {}) })
       return clonar(actual)
     },
     guardar: async (e: any, version: any, escritura: any) => {
