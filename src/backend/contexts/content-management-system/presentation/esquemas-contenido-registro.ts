@@ -1,5 +1,8 @@
 import * as S from './esquemas-cms.js'
-
-export const crearContenidoRegistroSchema = S.objetoCms({ empresaId: S.idSchemaCms, registroId: S.idSchemaCms, campos: S.objetoCms({ titulo: S.textoNullableSchemaCms, subtitulo: S.textoNullableSchemaCms, descripcion: S.textoNullableSchemaCms, icono: S.textoNullableSchemaCms, stats: S.textoNullableSchemaCms }), orden: S.ordenSchemaCms })
-export const editarContenidoRegistroSchema = S.objetoCms({ version: S.versionSchemaCms, campos: S.objetoCms({ titulo: S.textoNullableSchemaCms, subtitulo: S.textoNullableSchemaCms, descripcion: S.textoNullableSchemaCms, icono: S.textoNullableSchemaCms, stats: S.textoNullableSchemaCms }) })
-export const salidaContenidoRegistroSchema = S.objetoCms({ id: S.idSchemaCms, empresaId: S.idSchemaCms, registroId: S.idSchemaCms, campos: S.objetoCms({ titulo: S.textoNullableSchemaCms, subtitulo: S.textoNullableSchemaCms, descripcion: S.textoNullableSchemaCms, icono: S.textoNullableSchemaCms, stats: S.textoNullableSchemaCms }), orden: S.ordenSchemaCms, estado: S.estadoSchemaCms, creadoEn: S.versionSchemaCms, actualizadoEn: S.versionSchemaCms, eliminadoEn: S.nullableCms(S.versionSchemaCms) })
+const camposBase=S.objetoCms({titulo:S.textoNullableSchemaCms,descripcion:S.textoNullableSchemaCms,icono:S.textoNullableSchemaCms})
+const camposEntrada={...camposBase,properties:{...camposBase.properties,subtitulo:S.textoNullableSchemaCms}}
+const camposSalida=S.objetoCms({...camposBase.properties,subtitulo:S.textoNullableSchemaCms})
+const crear=S.objetoCms({empresaId:S.idSchemaCms,registroId:S.idSchemaCms,campos:camposEntrada})
+export const crearContenidoRegistroSchema={...crear,properties:{...crear.properties,orden:S.ordenSchemaCms}}
+export const editarContenidoRegistroSchema=S.objetoCms({version:S.versionSchemaCms,campos:camposEntrada})
+export const salidaContenidoRegistroSchema=S.objetoCms({id:S.idSchemaCms,empresaId:S.idSchemaCms,registroId:S.idSchemaCms,campos:camposSalida,orden:S.ordenSchemaCms,estado:S.estadoSchemaCms,creadoEn:S.versionSchemaCms,actualizadoEn:S.versionSchemaCms,eliminadoEn:S.nullableCms(S.versionSchemaCms)})

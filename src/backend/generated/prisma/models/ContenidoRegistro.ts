@@ -48,7 +48,6 @@ export type ContenidoRegistroMinAggregateOutputType = {
   subtitulo: string | null
   descripcion: string | null
   icono: string | null
-  stats: string | null
   orden: number | null
   estado: $Enums.Estado | null
   eliminadoEn: Date | null
@@ -64,7 +63,6 @@ export type ContenidoRegistroMaxAggregateOutputType = {
   subtitulo: string | null
   descripcion: string | null
   icono: string | null
-  stats: string | null
   orden: number | null
   estado: $Enums.Estado | null
   eliminadoEn: Date | null
@@ -80,7 +78,6 @@ export type ContenidoRegistroCountAggregateOutputType = {
   subtitulo: number
   descripcion: number
   icono: number
-  stats: number
   orden: number
   estado: number
   eliminadoEn: number
@@ -112,7 +109,6 @@ export type ContenidoRegistroMinAggregateInputType = {
   subtitulo?: true
   descripcion?: true
   icono?: true
-  stats?: true
   orden?: true
   estado?: true
   eliminadoEn?: true
@@ -128,7 +124,6 @@ export type ContenidoRegistroMaxAggregateInputType = {
   subtitulo?: true
   descripcion?: true
   icono?: true
-  stats?: true
   orden?: true
   estado?: true
   eliminadoEn?: true
@@ -144,7 +139,6 @@ export type ContenidoRegistroCountAggregateInputType = {
   subtitulo?: true
   descripcion?: true
   icono?: true
-  stats?: true
   orden?: true
   estado?: true
   eliminadoEn?: true
@@ -247,7 +241,6 @@ export type ContenidoRegistroGroupByOutputType = {
   subtitulo: string | null
   descripcion: string | null
   icono: string | null
-  stats: string | null
   orden: number
   estado: $Enums.Estado
   eliminadoEn: Date | null
@@ -286,7 +279,6 @@ export type ContenidoRegistroWhereInput = {
   subtitulo?: Prisma.StringNullableFilter<"ContenidoRegistro"> | string | null
   descripcion?: Prisma.StringNullableFilter<"ContenidoRegistro"> | string | null
   icono?: Prisma.StringNullableFilter<"ContenidoRegistro"> | string | null
-  stats?: Prisma.StringNullableFilter<"ContenidoRegistro"> | string | null
   orden?: Prisma.IntFilter<"ContenidoRegistro"> | number
   estado?: Prisma.EnumEstadoFilter<"ContenidoRegistro"> | $Enums.Estado
   eliminadoEn?: Prisma.DateTimeNullableFilter<"ContenidoRegistro"> | Date | string | null
@@ -304,7 +296,6 @@ export type ContenidoRegistroOrderByWithRelationInput = {
   subtitulo?: Prisma.SortOrderInput | Prisma.SortOrder
   descripcion?: Prisma.SortOrderInput | Prisma.SortOrder
   icono?: Prisma.SortOrderInput | Prisma.SortOrder
-  stats?: Prisma.SortOrderInput | Prisma.SortOrder
   orden?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   eliminadoEn?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -325,7 +316,6 @@ export type ContenidoRegistroWhereUniqueInput = Prisma.AtLeast<{
   subtitulo?: Prisma.StringNullableFilter<"ContenidoRegistro"> | string | null
   descripcion?: Prisma.StringNullableFilter<"ContenidoRegistro"> | string | null
   icono?: Prisma.StringNullableFilter<"ContenidoRegistro"> | string | null
-  stats?: Prisma.StringNullableFilter<"ContenidoRegistro"> | string | null
   orden?: Prisma.IntFilter<"ContenidoRegistro"> | number
   estado?: Prisma.EnumEstadoFilter<"ContenidoRegistro"> | $Enums.Estado
   eliminadoEn?: Prisma.DateTimeNullableFilter<"ContenidoRegistro"> | Date | string | null
@@ -343,7 +333,6 @@ export type ContenidoRegistroOrderByWithAggregationInput = {
   subtitulo?: Prisma.SortOrderInput | Prisma.SortOrder
   descripcion?: Prisma.SortOrderInput | Prisma.SortOrder
   icono?: Prisma.SortOrderInput | Prisma.SortOrder
-  stats?: Prisma.SortOrderInput | Prisma.SortOrder
   orden?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   eliminadoEn?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -367,7 +356,6 @@ export type ContenidoRegistroScalarWhereWithAggregatesInput = {
   subtitulo?: Prisma.StringNullableWithAggregatesFilter<"ContenidoRegistro"> | string | null
   descripcion?: Prisma.StringNullableWithAggregatesFilter<"ContenidoRegistro"> | string | null
   icono?: Prisma.StringNullableWithAggregatesFilter<"ContenidoRegistro"> | string | null
-  stats?: Prisma.StringNullableWithAggregatesFilter<"ContenidoRegistro"> | string | null
   orden?: Prisma.IntWithAggregatesFilter<"ContenidoRegistro"> | number
   estado?: Prisma.EnumEstadoWithAggregatesFilter<"ContenidoRegistro"> | $Enums.Estado
   eliminadoEn?: Prisma.DateTimeNullableWithAggregatesFilter<"ContenidoRegistro"> | Date | string | null
@@ -381,7 +369,6 @@ export type ContenidoRegistroCreateInput = {
   subtitulo?: string | null
   descripcion?: string | null
   icono?: string | null
-  stats?: string | null
   orden?: number
   estado?: $Enums.Estado
   eliminadoEn?: Date | string | null
@@ -399,7 +386,6 @@ export type ContenidoRegistroUncheckedCreateInput = {
   subtitulo?: string | null
   descripcion?: string | null
   icono?: string | null
-  stats?: string | null
   orden?: number
   estado?: $Enums.Estado
   eliminadoEn?: Date | string | null
@@ -413,7 +399,6 @@ export type ContenidoRegistroUpdateInput = {
   subtitulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icono?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stats?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orden?: Prisma.IntFieldUpdateOperationsInput | number
   estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -431,7 +416,6 @@ export type ContenidoRegistroUncheckedUpdateInput = {
   subtitulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icono?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stats?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orden?: Prisma.IntFieldUpdateOperationsInput | number
   estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -447,7 +431,6 @@ export type ContenidoRegistroCreateManyInput = {
   subtitulo?: string | null
   descripcion?: string | null
   icono?: string | null
-  stats?: string | null
   orden?: number
   estado?: $Enums.Estado
   eliminadoEn?: Date | string | null
@@ -461,7 +444,6 @@ export type ContenidoRegistroUpdateManyMutationInput = {
   subtitulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icono?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stats?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orden?: Prisma.IntFieldUpdateOperationsInput | number
   estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -477,7 +459,6 @@ export type ContenidoRegistroUncheckedUpdateManyInput = {
   subtitulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icono?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stats?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orden?: Prisma.IntFieldUpdateOperationsInput | number
   estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -503,7 +484,6 @@ export type ContenidoRegistroCountOrderByAggregateInput = {
   subtitulo?: Prisma.SortOrder
   descripcion?: Prisma.SortOrder
   icono?: Prisma.SortOrder
-  stats?: Prisma.SortOrder
   orden?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   eliminadoEn?: Prisma.SortOrder
@@ -526,7 +506,6 @@ export type ContenidoRegistroMaxOrderByAggregateInput = {
   subtitulo?: Prisma.SortOrder
   descripcion?: Prisma.SortOrder
   icono?: Prisma.SortOrder
-  stats?: Prisma.SortOrder
   orden?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   eliminadoEn?: Prisma.SortOrder
@@ -542,7 +521,6 @@ export type ContenidoRegistroMinOrderByAggregateInput = {
   subtitulo?: Prisma.SortOrder
   descripcion?: Prisma.SortOrder
   icono?: Prisma.SortOrder
-  stats?: Prisma.SortOrder
   orden?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   eliminadoEn?: Prisma.SortOrder
@@ -647,7 +625,6 @@ export type ContenidoRegistroCreateWithoutEmpresaInput = {
   subtitulo?: string | null
   descripcion?: string | null
   icono?: string | null
-  stats?: string | null
   orden?: number
   estado?: $Enums.Estado
   eliminadoEn?: Date | string | null
@@ -663,7 +640,6 @@ export type ContenidoRegistroUncheckedCreateWithoutEmpresaInput = {
   subtitulo?: string | null
   descripcion?: string | null
   icono?: string | null
-  stats?: string | null
   orden?: number
   estado?: $Enums.Estado
   eliminadoEn?: Date | string | null
@@ -708,7 +684,6 @@ export type ContenidoRegistroScalarWhereInput = {
   subtitulo?: Prisma.StringNullableFilter<"ContenidoRegistro"> | string | null
   descripcion?: Prisma.StringNullableFilter<"ContenidoRegistro"> | string | null
   icono?: Prisma.StringNullableFilter<"ContenidoRegistro"> | string | null
-  stats?: Prisma.StringNullableFilter<"ContenidoRegistro"> | string | null
   orden?: Prisma.IntFilter<"ContenidoRegistro"> | number
   estado?: Prisma.EnumEstadoFilter<"ContenidoRegistro"> | $Enums.Estado
   eliminadoEn?: Prisma.DateTimeNullableFilter<"ContenidoRegistro"> | Date | string | null
@@ -722,7 +697,6 @@ export type ContenidoRegistroCreateWithoutRegistroInput = {
   subtitulo?: string | null
   descripcion?: string | null
   icono?: string | null
-  stats?: string | null
   orden?: number
   estado?: $Enums.Estado
   eliminadoEn?: Date | string | null
@@ -738,7 +712,6 @@ export type ContenidoRegistroUncheckedCreateWithoutRegistroInput = {
   subtitulo?: string | null
   descripcion?: string | null
   icono?: string | null
-  stats?: string | null
   orden?: number
   estado?: $Enums.Estado
   eliminadoEn?: Date | string | null
@@ -779,7 +752,6 @@ export type ContenidoRegistroCreateManyEmpresaInput = {
   subtitulo?: string | null
   descripcion?: string | null
   icono?: string | null
-  stats?: string | null
   orden?: number
   estado?: $Enums.Estado
   eliminadoEn?: Date | string | null
@@ -793,7 +765,6 @@ export type ContenidoRegistroUpdateWithoutEmpresaInput = {
   subtitulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icono?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stats?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orden?: Prisma.IntFieldUpdateOperationsInput | number
   estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -809,7 +780,6 @@ export type ContenidoRegistroUncheckedUpdateWithoutEmpresaInput = {
   subtitulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icono?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stats?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orden?: Prisma.IntFieldUpdateOperationsInput | number
   estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -824,7 +794,6 @@ export type ContenidoRegistroUncheckedUpdateManyWithoutEmpresaInput = {
   subtitulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icono?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stats?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orden?: Prisma.IntFieldUpdateOperationsInput | number
   estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -839,7 +808,6 @@ export type ContenidoRegistroCreateManyRegistroInput = {
   subtitulo?: string | null
   descripcion?: string | null
   icono?: string | null
-  stats?: string | null
   orden?: number
   estado?: $Enums.Estado
   eliminadoEn?: Date | string | null
@@ -853,7 +821,6 @@ export type ContenidoRegistroUpdateWithoutRegistroInput = {
   subtitulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icono?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stats?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orden?: Prisma.IntFieldUpdateOperationsInput | number
   estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -869,7 +836,6 @@ export type ContenidoRegistroUncheckedUpdateWithoutRegistroInput = {
   subtitulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icono?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stats?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orden?: Prisma.IntFieldUpdateOperationsInput | number
   estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -884,7 +850,6 @@ export type ContenidoRegistroUncheckedUpdateManyWithoutRegistroInput = {
   subtitulo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icono?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stats?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orden?: Prisma.IntFieldUpdateOperationsInput | number
   estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -902,7 +867,6 @@ export type ContenidoRegistroSelect<ExtArgs extends runtime.Types.Extensions.Int
   subtitulo?: boolean
   descripcion?: boolean
   icono?: boolean
-  stats?: boolean
   orden?: boolean
   estado?: boolean
   eliminadoEn?: boolean
@@ -920,7 +884,6 @@ export type ContenidoRegistroSelectCreateManyAndReturn<ExtArgs extends runtime.T
   subtitulo?: boolean
   descripcion?: boolean
   icono?: boolean
-  stats?: boolean
   orden?: boolean
   estado?: boolean
   eliminadoEn?: boolean
@@ -938,7 +901,6 @@ export type ContenidoRegistroSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   subtitulo?: boolean
   descripcion?: boolean
   icono?: boolean
-  stats?: boolean
   orden?: boolean
   estado?: boolean
   eliminadoEn?: boolean
@@ -956,7 +918,6 @@ export type ContenidoRegistroSelectScalar = {
   subtitulo?: boolean
   descripcion?: boolean
   icono?: boolean
-  stats?: boolean
   orden?: boolean
   estado?: boolean
   eliminadoEn?: boolean
@@ -964,7 +925,7 @@ export type ContenidoRegistroSelectScalar = {
   actualizadoEn?: boolean
 }
 
-export type ContenidoRegistroOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "empresaId" | "registroId" | "titulo" | "subtitulo" | "descripcion" | "icono" | "stats" | "orden" | "estado" | "eliminadoEn" | "creadoEn" | "actualizadoEn", ExtArgs["result"]["contenidoRegistro"]>
+export type ContenidoRegistroOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "empresaId" | "registroId" | "titulo" | "subtitulo" | "descripcion" | "icono" | "orden" | "estado" | "eliminadoEn" | "creadoEn" | "actualizadoEn", ExtArgs["result"]["contenidoRegistro"]>
 export type ContenidoRegistroInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   registro?: boolean | Prisma.RegistroCMSDefaultArgs<ExtArgs>
@@ -992,7 +953,6 @@ export type $ContenidoRegistroPayload<ExtArgs extends runtime.Types.Extensions.I
     subtitulo: string | null
     descripcion: string | null
     icono: string | null
-    stats: string | null
     orden: number
     estado: $Enums.Estado
     eliminadoEn: Date | null
@@ -1430,7 +1390,6 @@ export interface ContenidoRegistroFieldRefs {
   readonly subtitulo: Prisma.FieldRef<"ContenidoRegistro", 'String'>
   readonly descripcion: Prisma.FieldRef<"ContenidoRegistro", 'String'>
   readonly icono: Prisma.FieldRef<"ContenidoRegistro", 'String'>
-  readonly stats: Prisma.FieldRef<"ContenidoRegistro", 'String'>
   readonly orden: Prisma.FieldRef<"ContenidoRegistro", 'Int'>
   readonly estado: Prisma.FieldRef<"ContenidoRegistro", 'Estado'>
   readonly eliminadoEn: Prisma.FieldRef<"ContenidoRegistro", 'DateTime'>

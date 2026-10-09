@@ -155,7 +155,7 @@ test('ContenidoRegistro: versión obsoleta impide guardar', async () => {
 
 test('ContenidoRegistro: creación inválida se rechaza antes de persistir', async () => {
   const env = entorno('ContenidoRegistro'); const caso = new CrearContenidoRegistro(env.repo as unknown as ConstructorParameters<typeof CrearContenidoRegistro>[0], env.auth as unknown as ConstructorParameters<typeof CrearContenidoRegistro>[1], env.reloj as unknown as ConstructorParameters<typeof CrearContenidoRegistro>[2])
-  await assert.rejects(caso.ejecutar(contexto, { ...entrada('ContenidoRegistro'), campos: { titulo: 7, subtitulo: null, descripcion: null, icono: null, stats: null } }))
+  await assert.rejects(caso.ejecutar(contexto, { ...entrada('ContenidoRegistro'), campos: { titulo: 7, subtitulo: null, descripcion: null, icono: null } }))
   assert.equal(env.llamadas.filter(x => x.operacion === 'crear').length, 0)
 })
 
