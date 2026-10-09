@@ -38,7 +38,6 @@ export function mapearFooterElemento(fila: FilaFooterElemento): FooterElemento {
   const tipo = tipoFooter(fila.tipo)
   const destino = fila.tipoRegistro === null || fila.registroId === null ? null : destinoCMS(tipoDestino(fila.tipoRegistro), fila.registroId)
   if (destino !== null && (tipo === 'red_social' || destino.tipo !== tipo)) throw new Error('Destino no corresponde al tipo de footer')
-  if (tipo === 'red_social' && fila.url === null) throw new Error('Red social sin enlace')
   return new FooterElemento({
     id: fila.id,
     empresaId: fila.empresaId,

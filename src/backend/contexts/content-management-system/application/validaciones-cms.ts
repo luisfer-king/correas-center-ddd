@@ -33,7 +33,6 @@ export function footerCms(tipo: TipoFooter, destino: DestinoCMS | null, enlace: 
   tipoFooterCms(tipo)
   const nuevoDestino = destino === null ? null : destinoEntradaCms(destino)
   if (nuevoDestino !== null && (tipo === 'red_social' || tipo !== nuevoDestino.tipo)) throw new Error('Destino no corresponde al tipo de footer')
-  if (tipo === 'red_social' && enlace === null) throw new Error('Red social sin enlace')
   return { destino: nuevoDestino, enlace: enlace === null ? null : enlaceCMS(textoCms(enlace, 'Enlace')) }
 }
 /** Fuentes y filtros definidos por la composición; no se ejecutan identificadores como SQL. */

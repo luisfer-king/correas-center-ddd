@@ -1,4 +1,6 @@
 import type { RegistroBaseCms, IdCms, DestinoCms } from './modelos-cms'
-export type CrearFooterElemento = { empresaId: IdCms; tipo: 'producto' | 'industria' | 'servicio' | 'red_social'; destino: DestinoCms | null; titulo: string | null; enlace: string | null; icono: string | null; orden: number; mostrar: boolean }
-export type EditarFooterElemento = Pick<CrearFooterElemento, 'destino' | 'titulo' | 'enlace' | 'icono' | 'mostrar'>
-export type FooterElementoDto = RegistroBaseCms & CrearFooterElemento & { id: string; estado: 'activo' | 'inactivo' | 'eliminado'; creadoEn: string; actualizadoEn: string; eliminadoEn: string | null }
+export type TipoFooterFormulario = 'producto' | 'industria' | 'servicio' | 'red_social'
+type CamposFooter = { destino?: DestinoCms | null; titulo?: string | null; enlace?: string | null; icono?: string | null; mostrar: boolean }
+export type CrearFooterElemento = CamposFooter & { empresaId: IdCms; tipo: TipoFooterFormulario }
+export type EditarFooterElemento = CamposFooter
+export type FooterElementoDto = RegistroBaseCms & { id: string; empresaId: IdCms; tipo: TipoFooterFormulario; destino: DestinoCms | null; titulo: string | null; enlace: string | null; icono: string | null; orden: number; mostrar: boolean; estado: 'activo'|'inactivo'|'eliminado'; creadoEn: string; actualizadoEn: string; eliminadoEn: string | null }
