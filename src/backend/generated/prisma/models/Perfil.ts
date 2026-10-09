@@ -222,10 +222,10 @@ export type PerfilWhereInput = {
   actualizadoEn?: Prisma.DateTimeFilter<"Perfil"> | Date | string
   email?: Prisma.StringNullableFilter<"Perfil"> | string | null
   emailVerifiedAt?: Prisma.DateTimeNullableFilter<"Perfil"> | Date | string | null
-  usuario?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
-  relUsuarioRol?: Prisma.UsuarioRolListRelationFilter
   relEventoAuditoria?: Prisma.EventoAuditoriaListRelationFilter
   relLeadResponsable?: Prisma.LeadListRelationFilter
+  usuario?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
+  relUsuarioRol?: Prisma.UsuarioRolListRelationFilter
 }
 
 export type PerfilOrderByWithRelationInput = {
@@ -239,10 +239,10 @@ export type PerfilOrderByWithRelationInput = {
   actualizadoEn?: Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   emailVerifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
-  usuario?: Prisma.UsuarioOrderByWithRelationInput
-  relUsuarioRol?: Prisma.UsuarioRolOrderByRelationAggregateInput
   relEventoAuditoria?: Prisma.EventoAuditoriaOrderByRelationAggregateInput
   relLeadResponsable?: Prisma.LeadOrderByRelationAggregateInput
+  usuario?: Prisma.UsuarioOrderByWithRelationInput
+  relUsuarioRol?: Prisma.UsuarioRolOrderByRelationAggregateInput
 }
 
 export type PerfilWhereUniqueInput = Prisma.AtLeast<{
@@ -259,10 +259,10 @@ export type PerfilWhereUniqueInput = Prisma.AtLeast<{
   actualizadoEn?: Prisma.DateTimeFilter<"Perfil"> | Date | string
   email?: Prisma.StringNullableFilter<"Perfil"> | string | null
   emailVerifiedAt?: Prisma.DateTimeNullableFilter<"Perfil"> | Date | string | null
-  usuario?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
-  relUsuarioRol?: Prisma.UsuarioRolListRelationFilter
   relEventoAuditoria?: Prisma.EventoAuditoriaListRelationFilter
   relLeadResponsable?: Prisma.LeadListRelationFilter
+  usuario?: Prisma.XOR<Prisma.UsuarioScalarRelationFilter, Prisma.UsuarioWhereInput>
+  relUsuarioRol?: Prisma.UsuarioRolListRelationFilter
 }, "id">
 
 export type PerfilOrderByWithAggregationInput = {
@@ -307,10 +307,10 @@ export type PerfilCreateInput = {
   actualizadoEn?: Date | string
   email?: string | null
   emailVerifiedAt?: Date | string | null
-  usuario: Prisma.UsuarioCreateNestedOneWithoutRelPerfilInput
-  relUsuarioRol?: Prisma.UsuarioRolCreateNestedManyWithoutPerfilInput
   relEventoAuditoria?: Prisma.EventoAuditoriaCreateNestedManyWithoutPerfilInput
   relLeadResponsable?: Prisma.LeadCreateNestedManyWithoutResponsableInput
+  usuario: Prisma.UsuarioCreateNestedOneWithoutRelPerfilInput
+  relUsuarioRol?: Prisma.UsuarioRolCreateNestedManyWithoutPerfilInput
 }
 
 export type PerfilUncheckedCreateInput = {
@@ -324,9 +324,9 @@ export type PerfilUncheckedCreateInput = {
   actualizadoEn?: Date | string
   email?: string | null
   emailVerifiedAt?: Date | string | null
-  relUsuarioRol?: Prisma.UsuarioRolUncheckedCreateNestedManyWithoutPerfilInput
   relEventoAuditoria?: Prisma.EventoAuditoriaUncheckedCreateNestedManyWithoutPerfilInput
   relLeadResponsable?: Prisma.LeadUncheckedCreateNestedManyWithoutResponsableInput
+  relUsuarioRol?: Prisma.UsuarioRolUncheckedCreateNestedManyWithoutPerfilInput
 }
 
 export type PerfilUpdateInput = {
@@ -339,10 +339,10 @@ export type PerfilUpdateInput = {
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usuario?: Prisma.UsuarioUpdateOneRequiredWithoutRelPerfilNestedInput
-  relUsuarioRol?: Prisma.UsuarioRolUpdateManyWithoutPerfilNestedInput
   relEventoAuditoria?: Prisma.EventoAuditoriaUpdateManyWithoutPerfilNestedInput
   relLeadResponsable?: Prisma.LeadUpdateManyWithoutResponsableNestedInput
+  usuario?: Prisma.UsuarioUpdateOneRequiredWithoutRelPerfilNestedInput
+  relUsuarioRol?: Prisma.UsuarioRolUpdateManyWithoutPerfilNestedInput
 }
 
 export type PerfilUncheckedUpdateInput = {
@@ -356,9 +356,9 @@ export type PerfilUncheckedUpdateInput = {
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  relUsuarioRol?: Prisma.UsuarioRolUncheckedUpdateManyWithoutPerfilNestedInput
   relEventoAuditoria?: Prisma.EventoAuditoriaUncheckedUpdateManyWithoutPerfilNestedInput
   relLeadResponsable?: Prisma.LeadUncheckedUpdateManyWithoutResponsableNestedInput
+  relUsuarioRol?: Prisma.UsuarioRolUncheckedUpdateManyWithoutPerfilNestedInput
 }
 
 export type PerfilCreateManyInput = {
@@ -536,9 +536,9 @@ export type PerfilCreateWithoutUsuarioInput = {
   actualizadoEn?: Date | string
   email?: string | null
   emailVerifiedAt?: Date | string | null
-  relUsuarioRol?: Prisma.UsuarioRolCreateNestedManyWithoutPerfilInput
   relEventoAuditoria?: Prisma.EventoAuditoriaCreateNestedManyWithoutPerfilInput
   relLeadResponsable?: Prisma.LeadCreateNestedManyWithoutResponsableInput
+  relUsuarioRol?: Prisma.UsuarioRolCreateNestedManyWithoutPerfilInput
 }
 
 export type PerfilUncheckedCreateWithoutUsuarioInput = {
@@ -551,9 +551,9 @@ export type PerfilUncheckedCreateWithoutUsuarioInput = {
   actualizadoEn?: Date | string
   email?: string | null
   emailVerifiedAt?: Date | string | null
-  relUsuarioRol?: Prisma.UsuarioRolUncheckedCreateNestedManyWithoutPerfilInput
   relEventoAuditoria?: Prisma.EventoAuditoriaUncheckedCreateNestedManyWithoutPerfilInput
   relLeadResponsable?: Prisma.LeadUncheckedCreateNestedManyWithoutResponsableInput
+  relUsuarioRol?: Prisma.UsuarioRolUncheckedCreateNestedManyWithoutPerfilInput
 }
 
 export type PerfilCreateOrConnectWithoutUsuarioInput = {
@@ -582,9 +582,9 @@ export type PerfilUpdateWithoutUsuarioInput = {
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  relUsuarioRol?: Prisma.UsuarioRolUpdateManyWithoutPerfilNestedInput
   relEventoAuditoria?: Prisma.EventoAuditoriaUpdateManyWithoutPerfilNestedInput
   relLeadResponsable?: Prisma.LeadUpdateManyWithoutResponsableNestedInput
+  relUsuarioRol?: Prisma.UsuarioRolUpdateManyWithoutPerfilNestedInput
 }
 
 export type PerfilUncheckedUpdateWithoutUsuarioInput = {
@@ -597,9 +597,9 @@ export type PerfilUncheckedUpdateWithoutUsuarioInput = {
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  relUsuarioRol?: Prisma.UsuarioRolUncheckedUpdateManyWithoutPerfilNestedInput
   relEventoAuditoria?: Prisma.EventoAuditoriaUncheckedUpdateManyWithoutPerfilNestedInput
   relLeadResponsable?: Prisma.LeadUncheckedUpdateManyWithoutResponsableNestedInput
+  relUsuarioRol?: Prisma.UsuarioRolUncheckedUpdateManyWithoutPerfilNestedInput
 }
 
 export type PerfilCreateWithoutRelUsuarioRolInput = {
@@ -612,9 +612,9 @@ export type PerfilCreateWithoutRelUsuarioRolInput = {
   actualizadoEn?: Date | string
   email?: string | null
   emailVerifiedAt?: Date | string | null
-  usuario: Prisma.UsuarioCreateNestedOneWithoutRelPerfilInput
   relEventoAuditoria?: Prisma.EventoAuditoriaCreateNestedManyWithoutPerfilInput
   relLeadResponsable?: Prisma.LeadCreateNestedManyWithoutResponsableInput
+  usuario: Prisma.UsuarioCreateNestedOneWithoutRelPerfilInput
 }
 
 export type PerfilUncheckedCreateWithoutRelUsuarioRolInput = {
@@ -658,9 +658,9 @@ export type PerfilUpdateWithoutRelUsuarioRolInput = {
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  usuario?: Prisma.UsuarioUpdateOneRequiredWithoutRelPerfilNestedInput
   relEventoAuditoria?: Prisma.EventoAuditoriaUpdateManyWithoutPerfilNestedInput
   relLeadResponsable?: Prisma.LeadUpdateManyWithoutResponsableNestedInput
+  usuario?: Prisma.UsuarioUpdateOneRequiredWithoutRelPerfilNestedInput
 }
 
 export type PerfilUncheckedUpdateWithoutRelUsuarioRolInput = {
@@ -688,9 +688,9 @@ export type PerfilCreateWithoutRelEventoAuditoriaInput = {
   actualizadoEn?: Date | string
   email?: string | null
   emailVerifiedAt?: Date | string | null
+  relLeadResponsable?: Prisma.LeadCreateNestedManyWithoutResponsableInput
   usuario: Prisma.UsuarioCreateNestedOneWithoutRelPerfilInput
   relUsuarioRol?: Prisma.UsuarioRolCreateNestedManyWithoutPerfilInput
-  relLeadResponsable?: Prisma.LeadCreateNestedManyWithoutResponsableInput
 }
 
 export type PerfilUncheckedCreateWithoutRelEventoAuditoriaInput = {
@@ -704,8 +704,8 @@ export type PerfilUncheckedCreateWithoutRelEventoAuditoriaInput = {
   actualizadoEn?: Date | string
   email?: string | null
   emailVerifiedAt?: Date | string | null
-  relUsuarioRol?: Prisma.UsuarioRolUncheckedCreateNestedManyWithoutPerfilInput
   relLeadResponsable?: Prisma.LeadUncheckedCreateNestedManyWithoutResponsableInput
+  relUsuarioRol?: Prisma.UsuarioRolUncheckedCreateNestedManyWithoutPerfilInput
 }
 
 export type PerfilCreateOrConnectWithoutRelEventoAuditoriaInput = {
@@ -734,9 +734,9 @@ export type PerfilUpdateWithoutRelEventoAuditoriaInput = {
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  relLeadResponsable?: Prisma.LeadUpdateManyWithoutResponsableNestedInput
   usuario?: Prisma.UsuarioUpdateOneRequiredWithoutRelPerfilNestedInput
   relUsuarioRol?: Prisma.UsuarioRolUpdateManyWithoutPerfilNestedInput
-  relLeadResponsable?: Prisma.LeadUpdateManyWithoutResponsableNestedInput
 }
 
 export type PerfilUncheckedUpdateWithoutRelEventoAuditoriaInput = {
@@ -750,8 +750,8 @@ export type PerfilUncheckedUpdateWithoutRelEventoAuditoriaInput = {
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  relUsuarioRol?: Prisma.UsuarioRolUncheckedUpdateManyWithoutPerfilNestedInput
   relLeadResponsable?: Prisma.LeadUncheckedUpdateManyWithoutResponsableNestedInput
+  relUsuarioRol?: Prisma.UsuarioRolUncheckedUpdateManyWithoutPerfilNestedInput
 }
 
 export type PerfilCreateWithoutRelLeadResponsableInput = {
@@ -764,9 +764,9 @@ export type PerfilCreateWithoutRelLeadResponsableInput = {
   actualizadoEn?: Date | string
   email?: string | null
   emailVerifiedAt?: Date | string | null
+  relEventoAuditoria?: Prisma.EventoAuditoriaCreateNestedManyWithoutPerfilInput
   usuario: Prisma.UsuarioCreateNestedOneWithoutRelPerfilInput
   relUsuarioRol?: Prisma.UsuarioRolCreateNestedManyWithoutPerfilInput
-  relEventoAuditoria?: Prisma.EventoAuditoriaCreateNestedManyWithoutPerfilInput
 }
 
 export type PerfilUncheckedCreateWithoutRelLeadResponsableInput = {
@@ -780,8 +780,8 @@ export type PerfilUncheckedCreateWithoutRelLeadResponsableInput = {
   actualizadoEn?: Date | string
   email?: string | null
   emailVerifiedAt?: Date | string | null
-  relUsuarioRol?: Prisma.UsuarioRolUncheckedCreateNestedManyWithoutPerfilInput
   relEventoAuditoria?: Prisma.EventoAuditoriaUncheckedCreateNestedManyWithoutPerfilInput
+  relUsuarioRol?: Prisma.UsuarioRolUncheckedCreateNestedManyWithoutPerfilInput
 }
 
 export type PerfilCreateOrConnectWithoutRelLeadResponsableInput = {
@@ -810,9 +810,9 @@ export type PerfilUpdateWithoutRelLeadResponsableInput = {
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  relEventoAuditoria?: Prisma.EventoAuditoriaUpdateManyWithoutPerfilNestedInput
   usuario?: Prisma.UsuarioUpdateOneRequiredWithoutRelPerfilNestedInput
   relUsuarioRol?: Prisma.UsuarioRolUpdateManyWithoutPerfilNestedInput
-  relEventoAuditoria?: Prisma.EventoAuditoriaUpdateManyWithoutPerfilNestedInput
 }
 
 export type PerfilUncheckedUpdateWithoutRelLeadResponsableInput = {
@@ -826,8 +826,8 @@ export type PerfilUncheckedUpdateWithoutRelLeadResponsableInput = {
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  relUsuarioRol?: Prisma.UsuarioRolUncheckedUpdateManyWithoutPerfilNestedInput
   relEventoAuditoria?: Prisma.EventoAuditoriaUncheckedUpdateManyWithoutPerfilNestedInput
+  relUsuarioRol?: Prisma.UsuarioRolUncheckedUpdateManyWithoutPerfilNestedInput
 }
 
 
@@ -836,15 +836,15 @@ export type PerfilUncheckedUpdateWithoutRelLeadResponsableInput = {
  */
 
 export type PerfilCountOutputType = {
-  relUsuarioRol: number
   relEventoAuditoria: number
   relLeadResponsable: number
+  relUsuarioRol: number
 }
 
 export type PerfilCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  relUsuarioRol?: boolean | PerfilCountOutputTypeCountRelUsuarioRolArgs
   relEventoAuditoria?: boolean | PerfilCountOutputTypeCountRelEventoAuditoriaArgs
   relLeadResponsable?: boolean | PerfilCountOutputTypeCountRelLeadResponsableArgs
+  relUsuarioRol?: boolean | PerfilCountOutputTypeCountRelUsuarioRolArgs
 }
 
 /**
@@ -855,13 +855,6 @@ export type PerfilCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exten
    * Select specific fields to fetch from the PerfilCountOutputType
    */
   select?: Prisma.PerfilCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * PerfilCountOutputType without action
- */
-export type PerfilCountOutputTypeCountRelUsuarioRolArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.UsuarioRolWhereInput
 }
 
 /**
@@ -878,6 +871,13 @@ export type PerfilCountOutputTypeCountRelLeadResponsableArgs<ExtArgs extends run
   where?: Prisma.LeadWhereInput
 }
 
+/**
+ * PerfilCountOutputType without action
+ */
+export type PerfilCountOutputTypeCountRelUsuarioRolArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UsuarioRolWhereInput
+}
+
 
 export type PerfilSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -890,10 +890,10 @@ export type PerfilSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   actualizadoEn?: boolean
   email?: boolean
   emailVerifiedAt?: boolean
-  usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
-  relUsuarioRol?: boolean | Prisma.Perfil$relUsuarioRolArgs<ExtArgs>
   relEventoAuditoria?: boolean | Prisma.Perfil$relEventoAuditoriaArgs<ExtArgs>
   relLeadResponsable?: boolean | Prisma.Perfil$relLeadResponsableArgs<ExtArgs>
+  usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
+  relUsuarioRol?: boolean | Prisma.Perfil$relUsuarioRolArgs<ExtArgs>
   _count?: boolean | Prisma.PerfilCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["perfil"]>
 
@@ -940,10 +940,10 @@ export type PerfilSelectScalar = {
 
 export type PerfilOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nombreCompleto" | "telefono" | "avatarUrl" | "estado" | "eliminadoEn" | "creadoEn" | "actualizadoEn" | "email" | "emailVerifiedAt", ExtArgs["result"]["perfil"]>
 export type PerfilInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
-  relUsuarioRol?: boolean | Prisma.Perfil$relUsuarioRolArgs<ExtArgs>
   relEventoAuditoria?: boolean | Prisma.Perfil$relEventoAuditoriaArgs<ExtArgs>
   relLeadResponsable?: boolean | Prisma.Perfil$relLeadResponsableArgs<ExtArgs>
+  usuario?: boolean | Prisma.UsuarioDefaultArgs<ExtArgs>
+  relUsuarioRol?: boolean | Prisma.Perfil$relUsuarioRolArgs<ExtArgs>
   _count?: boolean | Prisma.PerfilCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PerfilIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -956,10 +956,10 @@ export type PerfilIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
 export type $PerfilPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Perfil"
   objects: {
-    usuario: Prisma.$UsuarioPayload<ExtArgs>
-    relUsuarioRol: Prisma.$UsuarioRolPayload<ExtArgs>[]
     relEventoAuditoria: Prisma.$EventoAuditoriaPayload<ExtArgs>[]
     relLeadResponsable: Prisma.$LeadPayload<ExtArgs>[]
+    usuario: Prisma.$UsuarioPayload<ExtArgs>
+    relUsuarioRol: Prisma.$UsuarioRolPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1366,10 +1366,10 @@ readonly fields: PerfilFieldRefs;
  */
 export interface Prisma__PerfilClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  usuario<T extends Prisma.UsuarioDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UsuarioDefaultArgs<ExtArgs>>): Prisma.Prisma__UsuarioClient<runtime.Types.Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  relUsuarioRol<T extends Prisma.Perfil$relUsuarioRolArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Perfil$relUsuarioRolArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UsuarioRolPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   relEventoAuditoria<T extends Prisma.Perfil$relEventoAuditoriaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Perfil$relEventoAuditoriaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventoAuditoriaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   relLeadResponsable<T extends Prisma.Perfil$relLeadResponsableArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Perfil$relLeadResponsableArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  usuario<T extends Prisma.UsuarioDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UsuarioDefaultArgs<ExtArgs>>): Prisma.Prisma__UsuarioClient<runtime.Types.Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  relUsuarioRol<T extends Prisma.Perfil$relUsuarioRolArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Perfil$relUsuarioRolArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UsuarioRolPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1810,30 +1810,6 @@ export type PerfilDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * Perfil.relUsuarioRol
- */
-export type Perfil$relUsuarioRolArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the UsuarioRol
-   */
-  select?: Prisma.UsuarioRolSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the UsuarioRol
-   */
-  omit?: Prisma.UsuarioRolOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UsuarioRolInclude<ExtArgs> | null
-  where?: Prisma.UsuarioRolWhereInput
-  orderBy?: Prisma.UsuarioRolOrderByWithRelationInput | Prisma.UsuarioRolOrderByWithRelationInput[]
-  cursor?: Prisma.UsuarioRolWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.UsuarioRolScalarFieldEnum | Prisma.UsuarioRolScalarFieldEnum[]
-}
-
-/**
  * Perfil.relEventoAuditoria
  */
 export type Perfil$relEventoAuditoriaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1879,6 +1855,30 @@ export type Perfil$relLeadResponsableArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.LeadScalarFieldEnum | Prisma.LeadScalarFieldEnum[]
+}
+
+/**
+ * Perfil.relUsuarioRol
+ */
+export type Perfil$relUsuarioRolArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UsuarioRol
+   */
+  select?: Prisma.UsuarioRolSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UsuarioRol
+   */
+  omit?: Prisma.UsuarioRolOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UsuarioRolInclude<ExtArgs> | null
+  where?: Prisma.UsuarioRolWhereInput
+  orderBy?: Prisma.UsuarioRolOrderByWithRelationInput | Prisma.UsuarioRolOrderByWithRelationInput[]
+  cursor?: Prisma.UsuarioRolWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UsuarioRolScalarFieldEnum | Prisma.UsuarioRolScalarFieldEnum[]
 }
 
 /**

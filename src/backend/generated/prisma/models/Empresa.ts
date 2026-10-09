@@ -232,19 +232,19 @@ export type EmpresaWhereInput = {
   eliminadoEn?: Prisma.DateTimeNullableFilter<"Empresa"> | Date | string | null
   creadoEn?: Prisma.DateTimeFilter<"Empresa"> | Date | string
   actualizadoEn?: Prisma.DateTimeFilter<"Empresa"> | Date | string
-  relSucursal?: Prisma.SucursalListRelationFilter
-  relProducto?: Prisma.ProductoListRelationFilter
-  relIndustria?: Prisma.IndustriaListRelationFilter
-  relServicio?: Prisma.ServicioListRelationFilter
-  relContenidoSeccion?: Prisma.ContenidoSeccionListRelationFilter
-  relContenidoRegistro?: Prisma.ContenidoRegistroListRelationFilter
-  relMenu?: Prisma.MenuListRelationFilter
-  relFooterElemento?: Prisma.FooterElementoListRelationFilter
-  relPasoWizard?: Prisma.PasoWizardListRelationFilter
-  relContactoEntrante?: Prisma.ContactoEntranteListRelationFilter
-  relSuscriptor?: Prisma.SuscriptorListRelationFilter
   relConfiguracionSitio?: Prisma.ConfiguracionSitioListRelationFilter
+  relContactoEntrante?: Prisma.ContactoEntranteListRelationFilter
+  relContenidoSeccion?: Prisma.ContenidoSeccionListRelationFilter
+  relFooterElemento?: Prisma.FooterElementoListRelationFilter
+  relIndustria?: Prisma.IndustriaListRelationFilter
   relLead?: Prisma.LeadListRelationFilter
+  relMenu?: Prisma.MenuListRelationFilter
+  relPasoWizard?: Prisma.PasoWizardListRelationFilter
+  relProducto?: Prisma.ProductoListRelationFilter
+  relContenidoRegistro?: Prisma.ContenidoRegistroListRelationFilter
+  relServicio?: Prisma.ServicioListRelationFilter
+  relSucursal?: Prisma.SucursalListRelationFilter
+  relSuscriptor?: Prisma.SuscriptorListRelationFilter
 }
 
 export type EmpresaOrderByWithRelationInput = {
@@ -255,19 +255,19 @@ export type EmpresaOrderByWithRelationInput = {
   eliminadoEn?: Prisma.SortOrderInput | Prisma.SortOrder
   creadoEn?: Prisma.SortOrder
   actualizadoEn?: Prisma.SortOrder
-  relSucursal?: Prisma.SucursalOrderByRelationAggregateInput
-  relProducto?: Prisma.ProductoOrderByRelationAggregateInput
-  relIndustria?: Prisma.IndustriaOrderByRelationAggregateInput
-  relServicio?: Prisma.ServicioOrderByRelationAggregateInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionOrderByRelationAggregateInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroOrderByRelationAggregateInput
-  relMenu?: Prisma.MenuOrderByRelationAggregateInput
-  relFooterElemento?: Prisma.FooterElementoOrderByRelationAggregateInput
-  relPasoWizard?: Prisma.PasoWizardOrderByRelationAggregateInput
-  relContactoEntrante?: Prisma.ContactoEntranteOrderByRelationAggregateInput
-  relSuscriptor?: Prisma.SuscriptorOrderByRelationAggregateInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioOrderByRelationAggregateInput
+  relContactoEntrante?: Prisma.ContactoEntranteOrderByRelationAggregateInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionOrderByRelationAggregateInput
+  relFooterElemento?: Prisma.FooterElementoOrderByRelationAggregateInput
+  relIndustria?: Prisma.IndustriaOrderByRelationAggregateInput
   relLead?: Prisma.LeadOrderByRelationAggregateInput
+  relMenu?: Prisma.MenuOrderByRelationAggregateInput
+  relPasoWizard?: Prisma.PasoWizardOrderByRelationAggregateInput
+  relProducto?: Prisma.ProductoOrderByRelationAggregateInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroOrderByRelationAggregateInput
+  relServicio?: Prisma.ServicioOrderByRelationAggregateInput
+  relSucursal?: Prisma.SucursalOrderByRelationAggregateInput
+  relSuscriptor?: Prisma.SuscriptorOrderByRelationAggregateInput
 }
 
 export type EmpresaWhereUniqueInput = Prisma.AtLeast<{
@@ -281,19 +281,19 @@ export type EmpresaWhereUniqueInput = Prisma.AtLeast<{
   eliminadoEn?: Prisma.DateTimeNullableFilter<"Empresa"> | Date | string | null
   creadoEn?: Prisma.DateTimeFilter<"Empresa"> | Date | string
   actualizadoEn?: Prisma.DateTimeFilter<"Empresa"> | Date | string
-  relSucursal?: Prisma.SucursalListRelationFilter
-  relProducto?: Prisma.ProductoListRelationFilter
-  relIndustria?: Prisma.IndustriaListRelationFilter
-  relServicio?: Prisma.ServicioListRelationFilter
-  relContenidoSeccion?: Prisma.ContenidoSeccionListRelationFilter
-  relContenidoRegistro?: Prisma.ContenidoRegistroListRelationFilter
-  relMenu?: Prisma.MenuListRelationFilter
-  relFooterElemento?: Prisma.FooterElementoListRelationFilter
-  relPasoWizard?: Prisma.PasoWizardListRelationFilter
-  relContactoEntrante?: Prisma.ContactoEntranteListRelationFilter
-  relSuscriptor?: Prisma.SuscriptorListRelationFilter
   relConfiguracionSitio?: Prisma.ConfiguracionSitioListRelationFilter
+  relContactoEntrante?: Prisma.ContactoEntranteListRelationFilter
+  relContenidoSeccion?: Prisma.ContenidoSeccionListRelationFilter
+  relFooterElemento?: Prisma.FooterElementoListRelationFilter
+  relIndustria?: Prisma.IndustriaListRelationFilter
   relLead?: Prisma.LeadListRelationFilter
+  relMenu?: Prisma.MenuListRelationFilter
+  relPasoWizard?: Prisma.PasoWizardListRelationFilter
+  relProducto?: Prisma.ProductoListRelationFilter
+  relContenidoRegistro?: Prisma.ContenidoRegistroListRelationFilter
+  relServicio?: Prisma.ServicioListRelationFilter
+  relSucursal?: Prisma.SucursalListRelationFilter
+  relSuscriptor?: Prisma.SuscriptorListRelationFilter
 }, "id">
 
 export type EmpresaOrderByWithAggregationInput = {
@@ -332,19 +332,19 @@ export type EmpresaCreateInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  relSucursal?: Prisma.SucursalCreateNestedManyWithoutEmpresaInput
-  relProducto?: Prisma.ProductoCreateNestedManyWithoutEmpresaInput
-  relIndustria?: Prisma.IndustriaCreateNestedManyWithoutEmpresaInput
-  relServicio?: Prisma.ServicioCreateNestedManyWithoutEmpresaInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionCreateNestedManyWithoutEmpresaInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroCreateNestedManyWithoutEmpresaInput
-  relMenu?: Prisma.MenuCreateNestedManyWithoutEmpresaInput
-  relFooterElemento?: Prisma.FooterElementoCreateNestedManyWithoutEmpresaInput
-  relPasoWizard?: Prisma.PasoWizardCreateNestedManyWithoutEmpresaInput
-  relContactoEntrante?: Prisma.ContactoEntranteCreateNestedManyWithoutEmpresaPropietariaInput
-  relSuscriptor?: Prisma.SuscriptorCreateNestedManyWithoutEmpresaInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioCreateNestedManyWithoutEmpresaInput
+  relContactoEntrante?: Prisma.ContactoEntranteCreateNestedManyWithoutEmpresaPropietariaInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionCreateNestedManyWithoutEmpresaInput
+  relFooterElemento?: Prisma.FooterElementoCreateNestedManyWithoutEmpresaInput
+  relIndustria?: Prisma.IndustriaCreateNestedManyWithoutEmpresaInput
   relLead?: Prisma.LeadCreateNestedManyWithoutEmpresaInput
+  relMenu?: Prisma.MenuCreateNestedManyWithoutEmpresaInput
+  relPasoWizard?: Prisma.PasoWizardCreateNestedManyWithoutEmpresaInput
+  relProducto?: Prisma.ProductoCreateNestedManyWithoutEmpresaInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroCreateNestedManyWithoutEmpresaInput
+  relServicio?: Prisma.ServicioCreateNestedManyWithoutEmpresaInput
+  relSucursal?: Prisma.SucursalCreateNestedManyWithoutEmpresaInput
+  relSuscriptor?: Prisma.SuscriptorCreateNestedManyWithoutEmpresaInput
 }
 
 export type EmpresaUncheckedCreateInput = {
@@ -355,19 +355,19 @@ export type EmpresaUncheckedCreateInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  relSucursal?: Prisma.SucursalUncheckedCreateNestedManyWithoutEmpresaInput
-  relProducto?: Prisma.ProductoUncheckedCreateNestedManyWithoutEmpresaInput
-  relIndustria?: Prisma.IndustriaUncheckedCreateNestedManyWithoutEmpresaInput
-  relServicio?: Prisma.ServicioUncheckedCreateNestedManyWithoutEmpresaInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedCreateNestedManyWithoutEmpresaInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedCreateNestedManyWithoutEmpresaInput
-  relMenu?: Prisma.MenuUncheckedCreateNestedManyWithoutEmpresaInput
-  relFooterElemento?: Prisma.FooterElementoUncheckedCreateNestedManyWithoutEmpresaInput
-  relPasoWizard?: Prisma.PasoWizardUncheckedCreateNestedManyWithoutEmpresaInput
-  relContactoEntrante?: Prisma.ContactoEntranteUncheckedCreateNestedManyWithoutEmpresaPropietariaInput
-  relSuscriptor?: Prisma.SuscriptorUncheckedCreateNestedManyWithoutEmpresaInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUncheckedCreateNestedManyWithoutEmpresaInput
+  relContactoEntrante?: Prisma.ContactoEntranteUncheckedCreateNestedManyWithoutEmpresaPropietariaInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedCreateNestedManyWithoutEmpresaInput
+  relFooterElemento?: Prisma.FooterElementoUncheckedCreateNestedManyWithoutEmpresaInput
+  relIndustria?: Prisma.IndustriaUncheckedCreateNestedManyWithoutEmpresaInput
   relLead?: Prisma.LeadUncheckedCreateNestedManyWithoutEmpresaInput
+  relMenu?: Prisma.MenuUncheckedCreateNestedManyWithoutEmpresaInput
+  relPasoWizard?: Prisma.PasoWizardUncheckedCreateNestedManyWithoutEmpresaInput
+  relProducto?: Prisma.ProductoUncheckedCreateNestedManyWithoutEmpresaInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedCreateNestedManyWithoutEmpresaInput
+  relServicio?: Prisma.ServicioUncheckedCreateNestedManyWithoutEmpresaInput
+  relSucursal?: Prisma.SucursalUncheckedCreateNestedManyWithoutEmpresaInput
+  relSuscriptor?: Prisma.SuscriptorUncheckedCreateNestedManyWithoutEmpresaInput
 }
 
 export type EmpresaUpdateInput = {
@@ -378,19 +378,19 @@ export type EmpresaUpdateInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  relSucursal?: Prisma.SucursalUpdateManyWithoutEmpresaNestedInput
-  relProducto?: Prisma.ProductoUpdateManyWithoutEmpresaNestedInput
-  relIndustria?: Prisma.IndustriaUpdateManyWithoutEmpresaNestedInput
-  relServicio?: Prisma.ServicioUpdateManyWithoutEmpresaNestedInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUpdateManyWithoutEmpresaNestedInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUpdateManyWithoutEmpresaNestedInput
-  relMenu?: Prisma.MenuUpdateManyWithoutEmpresaNestedInput
-  relFooterElemento?: Prisma.FooterElementoUpdateManyWithoutEmpresaNestedInput
-  relPasoWizard?: Prisma.PasoWizardUpdateManyWithoutEmpresaNestedInput
-  relContactoEntrante?: Prisma.ContactoEntranteUpdateManyWithoutEmpresaPropietariaNestedInput
-  relSuscriptor?: Prisma.SuscriptorUpdateManyWithoutEmpresaNestedInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUpdateManyWithoutEmpresaNestedInput
+  relContactoEntrante?: Prisma.ContactoEntranteUpdateManyWithoutEmpresaPropietariaNestedInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUpdateManyWithoutEmpresaNestedInput
+  relFooterElemento?: Prisma.FooterElementoUpdateManyWithoutEmpresaNestedInput
+  relIndustria?: Prisma.IndustriaUpdateManyWithoutEmpresaNestedInput
   relLead?: Prisma.LeadUpdateManyWithoutEmpresaNestedInput
+  relMenu?: Prisma.MenuUpdateManyWithoutEmpresaNestedInput
+  relPasoWizard?: Prisma.PasoWizardUpdateManyWithoutEmpresaNestedInput
+  relProducto?: Prisma.ProductoUpdateManyWithoutEmpresaNestedInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUpdateManyWithoutEmpresaNestedInput
+  relServicio?: Prisma.ServicioUpdateManyWithoutEmpresaNestedInput
+  relSucursal?: Prisma.SucursalUpdateManyWithoutEmpresaNestedInput
+  relSuscriptor?: Prisma.SuscriptorUpdateManyWithoutEmpresaNestedInput
 }
 
 export type EmpresaUncheckedUpdateInput = {
@@ -401,19 +401,19 @@ export type EmpresaUncheckedUpdateInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  relSucursal?: Prisma.SucursalUncheckedUpdateManyWithoutEmpresaNestedInput
-  relProducto?: Prisma.ProductoUncheckedUpdateManyWithoutEmpresaNestedInput
-  relIndustria?: Prisma.IndustriaUncheckedUpdateManyWithoutEmpresaNestedInput
-  relServicio?: Prisma.ServicioUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedUpdateManyWithoutEmpresaNestedInput
-  relMenu?: Prisma.MenuUncheckedUpdateManyWithoutEmpresaNestedInput
-  relFooterElemento?: Prisma.FooterElementoUncheckedUpdateManyWithoutEmpresaNestedInput
-  relPasoWizard?: Prisma.PasoWizardUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContactoEntrante?: Prisma.ContactoEntranteUncheckedUpdateManyWithoutEmpresaPropietariaNestedInput
-  relSuscriptor?: Prisma.SuscriptorUncheckedUpdateManyWithoutEmpresaNestedInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUncheckedUpdateManyWithoutEmpresaNestedInput
+  relContactoEntrante?: Prisma.ContactoEntranteUncheckedUpdateManyWithoutEmpresaPropietariaNestedInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedUpdateManyWithoutEmpresaNestedInput
+  relFooterElemento?: Prisma.FooterElementoUncheckedUpdateManyWithoutEmpresaNestedInput
+  relIndustria?: Prisma.IndustriaUncheckedUpdateManyWithoutEmpresaNestedInput
   relLead?: Prisma.LeadUncheckedUpdateManyWithoutEmpresaNestedInput
+  relMenu?: Prisma.MenuUncheckedUpdateManyWithoutEmpresaNestedInput
+  relPasoWizard?: Prisma.PasoWizardUncheckedUpdateManyWithoutEmpresaNestedInput
+  relProducto?: Prisma.ProductoUncheckedUpdateManyWithoutEmpresaNestedInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedUpdateManyWithoutEmpresaNestedInput
+  relServicio?: Prisma.ServicioUncheckedUpdateManyWithoutEmpresaNestedInput
+  relSucursal?: Prisma.SucursalUncheckedUpdateManyWithoutEmpresaNestedInput
+  relSuscriptor?: Prisma.SuscriptorUncheckedUpdateManyWithoutEmpresaNestedInput
 }
 
 export type EmpresaCreateManyInput = {
@@ -706,18 +706,18 @@ export type EmpresaCreateWithoutRelSucursalInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  relProducto?: Prisma.ProductoCreateNestedManyWithoutEmpresaInput
-  relIndustria?: Prisma.IndustriaCreateNestedManyWithoutEmpresaInput
-  relServicio?: Prisma.ServicioCreateNestedManyWithoutEmpresaInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionCreateNestedManyWithoutEmpresaInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroCreateNestedManyWithoutEmpresaInput
-  relMenu?: Prisma.MenuCreateNestedManyWithoutEmpresaInput
-  relFooterElemento?: Prisma.FooterElementoCreateNestedManyWithoutEmpresaInput
-  relPasoWizard?: Prisma.PasoWizardCreateNestedManyWithoutEmpresaInput
-  relContactoEntrante?: Prisma.ContactoEntranteCreateNestedManyWithoutEmpresaPropietariaInput
-  relSuscriptor?: Prisma.SuscriptorCreateNestedManyWithoutEmpresaInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioCreateNestedManyWithoutEmpresaInput
+  relContactoEntrante?: Prisma.ContactoEntranteCreateNestedManyWithoutEmpresaPropietariaInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionCreateNestedManyWithoutEmpresaInput
+  relFooterElemento?: Prisma.FooterElementoCreateNestedManyWithoutEmpresaInput
+  relIndustria?: Prisma.IndustriaCreateNestedManyWithoutEmpresaInput
   relLead?: Prisma.LeadCreateNestedManyWithoutEmpresaInput
+  relMenu?: Prisma.MenuCreateNestedManyWithoutEmpresaInput
+  relPasoWizard?: Prisma.PasoWizardCreateNestedManyWithoutEmpresaInput
+  relProducto?: Prisma.ProductoCreateNestedManyWithoutEmpresaInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroCreateNestedManyWithoutEmpresaInput
+  relServicio?: Prisma.ServicioCreateNestedManyWithoutEmpresaInput
+  relSuscriptor?: Prisma.SuscriptorCreateNestedManyWithoutEmpresaInput
 }
 
 export type EmpresaUncheckedCreateWithoutRelSucursalInput = {
@@ -728,18 +728,18 @@ export type EmpresaUncheckedCreateWithoutRelSucursalInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  relProducto?: Prisma.ProductoUncheckedCreateNestedManyWithoutEmpresaInput
-  relIndustria?: Prisma.IndustriaUncheckedCreateNestedManyWithoutEmpresaInput
-  relServicio?: Prisma.ServicioUncheckedCreateNestedManyWithoutEmpresaInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedCreateNestedManyWithoutEmpresaInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedCreateNestedManyWithoutEmpresaInput
-  relMenu?: Prisma.MenuUncheckedCreateNestedManyWithoutEmpresaInput
-  relFooterElemento?: Prisma.FooterElementoUncheckedCreateNestedManyWithoutEmpresaInput
-  relPasoWizard?: Prisma.PasoWizardUncheckedCreateNestedManyWithoutEmpresaInput
-  relContactoEntrante?: Prisma.ContactoEntranteUncheckedCreateNestedManyWithoutEmpresaPropietariaInput
-  relSuscriptor?: Prisma.SuscriptorUncheckedCreateNestedManyWithoutEmpresaInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUncheckedCreateNestedManyWithoutEmpresaInput
+  relContactoEntrante?: Prisma.ContactoEntranteUncheckedCreateNestedManyWithoutEmpresaPropietariaInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedCreateNestedManyWithoutEmpresaInput
+  relFooterElemento?: Prisma.FooterElementoUncheckedCreateNestedManyWithoutEmpresaInput
+  relIndustria?: Prisma.IndustriaUncheckedCreateNestedManyWithoutEmpresaInput
   relLead?: Prisma.LeadUncheckedCreateNestedManyWithoutEmpresaInput
+  relMenu?: Prisma.MenuUncheckedCreateNestedManyWithoutEmpresaInput
+  relPasoWizard?: Prisma.PasoWizardUncheckedCreateNestedManyWithoutEmpresaInput
+  relProducto?: Prisma.ProductoUncheckedCreateNestedManyWithoutEmpresaInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedCreateNestedManyWithoutEmpresaInput
+  relServicio?: Prisma.ServicioUncheckedCreateNestedManyWithoutEmpresaInput
+  relSuscriptor?: Prisma.SuscriptorUncheckedCreateNestedManyWithoutEmpresaInput
 }
 
 export type EmpresaCreateOrConnectWithoutRelSucursalInput = {
@@ -766,18 +766,18 @@ export type EmpresaUpdateWithoutRelSucursalInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  relProducto?: Prisma.ProductoUpdateManyWithoutEmpresaNestedInput
-  relIndustria?: Prisma.IndustriaUpdateManyWithoutEmpresaNestedInput
-  relServicio?: Prisma.ServicioUpdateManyWithoutEmpresaNestedInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUpdateManyWithoutEmpresaNestedInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUpdateManyWithoutEmpresaNestedInput
-  relMenu?: Prisma.MenuUpdateManyWithoutEmpresaNestedInput
-  relFooterElemento?: Prisma.FooterElementoUpdateManyWithoutEmpresaNestedInput
-  relPasoWizard?: Prisma.PasoWizardUpdateManyWithoutEmpresaNestedInput
-  relContactoEntrante?: Prisma.ContactoEntranteUpdateManyWithoutEmpresaPropietariaNestedInput
-  relSuscriptor?: Prisma.SuscriptorUpdateManyWithoutEmpresaNestedInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUpdateManyWithoutEmpresaNestedInput
+  relContactoEntrante?: Prisma.ContactoEntranteUpdateManyWithoutEmpresaPropietariaNestedInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUpdateManyWithoutEmpresaNestedInput
+  relFooterElemento?: Prisma.FooterElementoUpdateManyWithoutEmpresaNestedInput
+  relIndustria?: Prisma.IndustriaUpdateManyWithoutEmpresaNestedInput
   relLead?: Prisma.LeadUpdateManyWithoutEmpresaNestedInput
+  relMenu?: Prisma.MenuUpdateManyWithoutEmpresaNestedInput
+  relPasoWizard?: Prisma.PasoWizardUpdateManyWithoutEmpresaNestedInput
+  relProducto?: Prisma.ProductoUpdateManyWithoutEmpresaNestedInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUpdateManyWithoutEmpresaNestedInput
+  relServicio?: Prisma.ServicioUpdateManyWithoutEmpresaNestedInput
+  relSuscriptor?: Prisma.SuscriptorUpdateManyWithoutEmpresaNestedInput
 }
 
 export type EmpresaUncheckedUpdateWithoutRelSucursalInput = {
@@ -788,18 +788,18 @@ export type EmpresaUncheckedUpdateWithoutRelSucursalInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  relProducto?: Prisma.ProductoUncheckedUpdateManyWithoutEmpresaNestedInput
-  relIndustria?: Prisma.IndustriaUncheckedUpdateManyWithoutEmpresaNestedInput
-  relServicio?: Prisma.ServicioUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedUpdateManyWithoutEmpresaNestedInput
-  relMenu?: Prisma.MenuUncheckedUpdateManyWithoutEmpresaNestedInput
-  relFooterElemento?: Prisma.FooterElementoUncheckedUpdateManyWithoutEmpresaNestedInput
-  relPasoWizard?: Prisma.PasoWizardUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContactoEntrante?: Prisma.ContactoEntranteUncheckedUpdateManyWithoutEmpresaPropietariaNestedInput
-  relSuscriptor?: Prisma.SuscriptorUncheckedUpdateManyWithoutEmpresaNestedInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUncheckedUpdateManyWithoutEmpresaNestedInput
+  relContactoEntrante?: Prisma.ContactoEntranteUncheckedUpdateManyWithoutEmpresaPropietariaNestedInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedUpdateManyWithoutEmpresaNestedInput
+  relFooterElemento?: Prisma.FooterElementoUncheckedUpdateManyWithoutEmpresaNestedInput
+  relIndustria?: Prisma.IndustriaUncheckedUpdateManyWithoutEmpresaNestedInput
   relLead?: Prisma.LeadUncheckedUpdateManyWithoutEmpresaNestedInput
+  relMenu?: Prisma.MenuUncheckedUpdateManyWithoutEmpresaNestedInput
+  relPasoWizard?: Prisma.PasoWizardUncheckedUpdateManyWithoutEmpresaNestedInput
+  relProducto?: Prisma.ProductoUncheckedUpdateManyWithoutEmpresaNestedInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedUpdateManyWithoutEmpresaNestedInput
+  relServicio?: Prisma.ServicioUncheckedUpdateManyWithoutEmpresaNestedInput
+  relSuscriptor?: Prisma.SuscriptorUncheckedUpdateManyWithoutEmpresaNestedInput
 }
 
 export type EmpresaCreateWithoutRelProductoInput = {
@@ -810,18 +810,18 @@ export type EmpresaCreateWithoutRelProductoInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  relSucursal?: Prisma.SucursalCreateNestedManyWithoutEmpresaInput
-  relIndustria?: Prisma.IndustriaCreateNestedManyWithoutEmpresaInput
-  relServicio?: Prisma.ServicioCreateNestedManyWithoutEmpresaInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionCreateNestedManyWithoutEmpresaInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroCreateNestedManyWithoutEmpresaInput
-  relMenu?: Prisma.MenuCreateNestedManyWithoutEmpresaInput
-  relFooterElemento?: Prisma.FooterElementoCreateNestedManyWithoutEmpresaInput
-  relPasoWizard?: Prisma.PasoWizardCreateNestedManyWithoutEmpresaInput
-  relContactoEntrante?: Prisma.ContactoEntranteCreateNestedManyWithoutEmpresaPropietariaInput
-  relSuscriptor?: Prisma.SuscriptorCreateNestedManyWithoutEmpresaInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioCreateNestedManyWithoutEmpresaInput
+  relContactoEntrante?: Prisma.ContactoEntranteCreateNestedManyWithoutEmpresaPropietariaInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionCreateNestedManyWithoutEmpresaInput
+  relFooterElemento?: Prisma.FooterElementoCreateNestedManyWithoutEmpresaInput
+  relIndustria?: Prisma.IndustriaCreateNestedManyWithoutEmpresaInput
   relLead?: Prisma.LeadCreateNestedManyWithoutEmpresaInput
+  relMenu?: Prisma.MenuCreateNestedManyWithoutEmpresaInput
+  relPasoWizard?: Prisma.PasoWizardCreateNestedManyWithoutEmpresaInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroCreateNestedManyWithoutEmpresaInput
+  relServicio?: Prisma.ServicioCreateNestedManyWithoutEmpresaInput
+  relSucursal?: Prisma.SucursalCreateNestedManyWithoutEmpresaInput
+  relSuscriptor?: Prisma.SuscriptorCreateNestedManyWithoutEmpresaInput
 }
 
 export type EmpresaUncheckedCreateWithoutRelProductoInput = {
@@ -832,18 +832,18 @@ export type EmpresaUncheckedCreateWithoutRelProductoInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  relSucursal?: Prisma.SucursalUncheckedCreateNestedManyWithoutEmpresaInput
-  relIndustria?: Prisma.IndustriaUncheckedCreateNestedManyWithoutEmpresaInput
-  relServicio?: Prisma.ServicioUncheckedCreateNestedManyWithoutEmpresaInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedCreateNestedManyWithoutEmpresaInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedCreateNestedManyWithoutEmpresaInput
-  relMenu?: Prisma.MenuUncheckedCreateNestedManyWithoutEmpresaInput
-  relFooterElemento?: Prisma.FooterElementoUncheckedCreateNestedManyWithoutEmpresaInput
-  relPasoWizard?: Prisma.PasoWizardUncheckedCreateNestedManyWithoutEmpresaInput
-  relContactoEntrante?: Prisma.ContactoEntranteUncheckedCreateNestedManyWithoutEmpresaPropietariaInput
-  relSuscriptor?: Prisma.SuscriptorUncheckedCreateNestedManyWithoutEmpresaInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUncheckedCreateNestedManyWithoutEmpresaInput
+  relContactoEntrante?: Prisma.ContactoEntranteUncheckedCreateNestedManyWithoutEmpresaPropietariaInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedCreateNestedManyWithoutEmpresaInput
+  relFooterElemento?: Prisma.FooterElementoUncheckedCreateNestedManyWithoutEmpresaInput
+  relIndustria?: Prisma.IndustriaUncheckedCreateNestedManyWithoutEmpresaInput
   relLead?: Prisma.LeadUncheckedCreateNestedManyWithoutEmpresaInput
+  relMenu?: Prisma.MenuUncheckedCreateNestedManyWithoutEmpresaInput
+  relPasoWizard?: Prisma.PasoWizardUncheckedCreateNestedManyWithoutEmpresaInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedCreateNestedManyWithoutEmpresaInput
+  relServicio?: Prisma.ServicioUncheckedCreateNestedManyWithoutEmpresaInput
+  relSucursal?: Prisma.SucursalUncheckedCreateNestedManyWithoutEmpresaInput
+  relSuscriptor?: Prisma.SuscriptorUncheckedCreateNestedManyWithoutEmpresaInput
 }
 
 export type EmpresaCreateOrConnectWithoutRelProductoInput = {
@@ -870,18 +870,18 @@ export type EmpresaUpdateWithoutRelProductoInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  relSucursal?: Prisma.SucursalUpdateManyWithoutEmpresaNestedInput
-  relIndustria?: Prisma.IndustriaUpdateManyWithoutEmpresaNestedInput
-  relServicio?: Prisma.ServicioUpdateManyWithoutEmpresaNestedInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUpdateManyWithoutEmpresaNestedInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUpdateManyWithoutEmpresaNestedInput
-  relMenu?: Prisma.MenuUpdateManyWithoutEmpresaNestedInput
-  relFooterElemento?: Prisma.FooterElementoUpdateManyWithoutEmpresaNestedInput
-  relPasoWizard?: Prisma.PasoWizardUpdateManyWithoutEmpresaNestedInput
-  relContactoEntrante?: Prisma.ContactoEntranteUpdateManyWithoutEmpresaPropietariaNestedInput
-  relSuscriptor?: Prisma.SuscriptorUpdateManyWithoutEmpresaNestedInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUpdateManyWithoutEmpresaNestedInput
+  relContactoEntrante?: Prisma.ContactoEntranteUpdateManyWithoutEmpresaPropietariaNestedInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUpdateManyWithoutEmpresaNestedInput
+  relFooterElemento?: Prisma.FooterElementoUpdateManyWithoutEmpresaNestedInput
+  relIndustria?: Prisma.IndustriaUpdateManyWithoutEmpresaNestedInput
   relLead?: Prisma.LeadUpdateManyWithoutEmpresaNestedInput
+  relMenu?: Prisma.MenuUpdateManyWithoutEmpresaNestedInput
+  relPasoWizard?: Prisma.PasoWizardUpdateManyWithoutEmpresaNestedInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUpdateManyWithoutEmpresaNestedInput
+  relServicio?: Prisma.ServicioUpdateManyWithoutEmpresaNestedInput
+  relSucursal?: Prisma.SucursalUpdateManyWithoutEmpresaNestedInput
+  relSuscriptor?: Prisma.SuscriptorUpdateManyWithoutEmpresaNestedInput
 }
 
 export type EmpresaUncheckedUpdateWithoutRelProductoInput = {
@@ -892,18 +892,18 @@ export type EmpresaUncheckedUpdateWithoutRelProductoInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  relSucursal?: Prisma.SucursalUncheckedUpdateManyWithoutEmpresaNestedInput
-  relIndustria?: Prisma.IndustriaUncheckedUpdateManyWithoutEmpresaNestedInput
-  relServicio?: Prisma.ServicioUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedUpdateManyWithoutEmpresaNestedInput
-  relMenu?: Prisma.MenuUncheckedUpdateManyWithoutEmpresaNestedInput
-  relFooterElemento?: Prisma.FooterElementoUncheckedUpdateManyWithoutEmpresaNestedInput
-  relPasoWizard?: Prisma.PasoWizardUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContactoEntrante?: Prisma.ContactoEntranteUncheckedUpdateManyWithoutEmpresaPropietariaNestedInput
-  relSuscriptor?: Prisma.SuscriptorUncheckedUpdateManyWithoutEmpresaNestedInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUncheckedUpdateManyWithoutEmpresaNestedInput
+  relContactoEntrante?: Prisma.ContactoEntranteUncheckedUpdateManyWithoutEmpresaPropietariaNestedInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedUpdateManyWithoutEmpresaNestedInput
+  relFooterElemento?: Prisma.FooterElementoUncheckedUpdateManyWithoutEmpresaNestedInput
+  relIndustria?: Prisma.IndustriaUncheckedUpdateManyWithoutEmpresaNestedInput
   relLead?: Prisma.LeadUncheckedUpdateManyWithoutEmpresaNestedInput
+  relMenu?: Prisma.MenuUncheckedUpdateManyWithoutEmpresaNestedInput
+  relPasoWizard?: Prisma.PasoWizardUncheckedUpdateManyWithoutEmpresaNestedInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedUpdateManyWithoutEmpresaNestedInput
+  relServicio?: Prisma.ServicioUncheckedUpdateManyWithoutEmpresaNestedInput
+  relSucursal?: Prisma.SucursalUncheckedUpdateManyWithoutEmpresaNestedInput
+  relSuscriptor?: Prisma.SuscriptorUncheckedUpdateManyWithoutEmpresaNestedInput
 }
 
 export type EmpresaCreateWithoutRelIndustriaInput = {
@@ -914,18 +914,18 @@ export type EmpresaCreateWithoutRelIndustriaInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  relSucursal?: Prisma.SucursalCreateNestedManyWithoutEmpresaInput
-  relProducto?: Prisma.ProductoCreateNestedManyWithoutEmpresaInput
-  relServicio?: Prisma.ServicioCreateNestedManyWithoutEmpresaInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionCreateNestedManyWithoutEmpresaInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroCreateNestedManyWithoutEmpresaInput
-  relMenu?: Prisma.MenuCreateNestedManyWithoutEmpresaInput
-  relFooterElemento?: Prisma.FooterElementoCreateNestedManyWithoutEmpresaInput
-  relPasoWizard?: Prisma.PasoWizardCreateNestedManyWithoutEmpresaInput
-  relContactoEntrante?: Prisma.ContactoEntranteCreateNestedManyWithoutEmpresaPropietariaInput
-  relSuscriptor?: Prisma.SuscriptorCreateNestedManyWithoutEmpresaInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioCreateNestedManyWithoutEmpresaInput
+  relContactoEntrante?: Prisma.ContactoEntranteCreateNestedManyWithoutEmpresaPropietariaInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionCreateNestedManyWithoutEmpresaInput
+  relFooterElemento?: Prisma.FooterElementoCreateNestedManyWithoutEmpresaInput
   relLead?: Prisma.LeadCreateNestedManyWithoutEmpresaInput
+  relMenu?: Prisma.MenuCreateNestedManyWithoutEmpresaInput
+  relPasoWizard?: Prisma.PasoWizardCreateNestedManyWithoutEmpresaInput
+  relProducto?: Prisma.ProductoCreateNestedManyWithoutEmpresaInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroCreateNestedManyWithoutEmpresaInput
+  relServicio?: Prisma.ServicioCreateNestedManyWithoutEmpresaInput
+  relSucursal?: Prisma.SucursalCreateNestedManyWithoutEmpresaInput
+  relSuscriptor?: Prisma.SuscriptorCreateNestedManyWithoutEmpresaInput
 }
 
 export type EmpresaUncheckedCreateWithoutRelIndustriaInput = {
@@ -936,18 +936,18 @@ export type EmpresaUncheckedCreateWithoutRelIndustriaInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  relSucursal?: Prisma.SucursalUncheckedCreateNestedManyWithoutEmpresaInput
-  relProducto?: Prisma.ProductoUncheckedCreateNestedManyWithoutEmpresaInput
-  relServicio?: Prisma.ServicioUncheckedCreateNestedManyWithoutEmpresaInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedCreateNestedManyWithoutEmpresaInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedCreateNestedManyWithoutEmpresaInput
-  relMenu?: Prisma.MenuUncheckedCreateNestedManyWithoutEmpresaInput
-  relFooterElemento?: Prisma.FooterElementoUncheckedCreateNestedManyWithoutEmpresaInput
-  relPasoWizard?: Prisma.PasoWizardUncheckedCreateNestedManyWithoutEmpresaInput
-  relContactoEntrante?: Prisma.ContactoEntranteUncheckedCreateNestedManyWithoutEmpresaPropietariaInput
-  relSuscriptor?: Prisma.SuscriptorUncheckedCreateNestedManyWithoutEmpresaInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUncheckedCreateNestedManyWithoutEmpresaInput
+  relContactoEntrante?: Prisma.ContactoEntranteUncheckedCreateNestedManyWithoutEmpresaPropietariaInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedCreateNestedManyWithoutEmpresaInput
+  relFooterElemento?: Prisma.FooterElementoUncheckedCreateNestedManyWithoutEmpresaInput
   relLead?: Prisma.LeadUncheckedCreateNestedManyWithoutEmpresaInput
+  relMenu?: Prisma.MenuUncheckedCreateNestedManyWithoutEmpresaInput
+  relPasoWizard?: Prisma.PasoWizardUncheckedCreateNestedManyWithoutEmpresaInput
+  relProducto?: Prisma.ProductoUncheckedCreateNestedManyWithoutEmpresaInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedCreateNestedManyWithoutEmpresaInput
+  relServicio?: Prisma.ServicioUncheckedCreateNestedManyWithoutEmpresaInput
+  relSucursal?: Prisma.SucursalUncheckedCreateNestedManyWithoutEmpresaInput
+  relSuscriptor?: Prisma.SuscriptorUncheckedCreateNestedManyWithoutEmpresaInput
 }
 
 export type EmpresaCreateOrConnectWithoutRelIndustriaInput = {
@@ -974,18 +974,18 @@ export type EmpresaUpdateWithoutRelIndustriaInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  relSucursal?: Prisma.SucursalUpdateManyWithoutEmpresaNestedInput
-  relProducto?: Prisma.ProductoUpdateManyWithoutEmpresaNestedInput
-  relServicio?: Prisma.ServicioUpdateManyWithoutEmpresaNestedInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUpdateManyWithoutEmpresaNestedInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUpdateManyWithoutEmpresaNestedInput
-  relMenu?: Prisma.MenuUpdateManyWithoutEmpresaNestedInput
-  relFooterElemento?: Prisma.FooterElementoUpdateManyWithoutEmpresaNestedInput
-  relPasoWizard?: Prisma.PasoWizardUpdateManyWithoutEmpresaNestedInput
-  relContactoEntrante?: Prisma.ContactoEntranteUpdateManyWithoutEmpresaPropietariaNestedInput
-  relSuscriptor?: Prisma.SuscriptorUpdateManyWithoutEmpresaNestedInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUpdateManyWithoutEmpresaNestedInput
+  relContactoEntrante?: Prisma.ContactoEntranteUpdateManyWithoutEmpresaPropietariaNestedInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUpdateManyWithoutEmpresaNestedInput
+  relFooterElemento?: Prisma.FooterElementoUpdateManyWithoutEmpresaNestedInput
   relLead?: Prisma.LeadUpdateManyWithoutEmpresaNestedInput
+  relMenu?: Prisma.MenuUpdateManyWithoutEmpresaNestedInput
+  relPasoWizard?: Prisma.PasoWizardUpdateManyWithoutEmpresaNestedInput
+  relProducto?: Prisma.ProductoUpdateManyWithoutEmpresaNestedInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUpdateManyWithoutEmpresaNestedInput
+  relServicio?: Prisma.ServicioUpdateManyWithoutEmpresaNestedInput
+  relSucursal?: Prisma.SucursalUpdateManyWithoutEmpresaNestedInput
+  relSuscriptor?: Prisma.SuscriptorUpdateManyWithoutEmpresaNestedInput
 }
 
 export type EmpresaUncheckedUpdateWithoutRelIndustriaInput = {
@@ -996,18 +996,18 @@ export type EmpresaUncheckedUpdateWithoutRelIndustriaInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  relSucursal?: Prisma.SucursalUncheckedUpdateManyWithoutEmpresaNestedInput
-  relProducto?: Prisma.ProductoUncheckedUpdateManyWithoutEmpresaNestedInput
-  relServicio?: Prisma.ServicioUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedUpdateManyWithoutEmpresaNestedInput
-  relMenu?: Prisma.MenuUncheckedUpdateManyWithoutEmpresaNestedInput
-  relFooterElemento?: Prisma.FooterElementoUncheckedUpdateManyWithoutEmpresaNestedInput
-  relPasoWizard?: Prisma.PasoWizardUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContactoEntrante?: Prisma.ContactoEntranteUncheckedUpdateManyWithoutEmpresaPropietariaNestedInput
-  relSuscriptor?: Prisma.SuscriptorUncheckedUpdateManyWithoutEmpresaNestedInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUncheckedUpdateManyWithoutEmpresaNestedInput
+  relContactoEntrante?: Prisma.ContactoEntranteUncheckedUpdateManyWithoutEmpresaPropietariaNestedInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedUpdateManyWithoutEmpresaNestedInput
+  relFooterElemento?: Prisma.FooterElementoUncheckedUpdateManyWithoutEmpresaNestedInput
   relLead?: Prisma.LeadUncheckedUpdateManyWithoutEmpresaNestedInput
+  relMenu?: Prisma.MenuUncheckedUpdateManyWithoutEmpresaNestedInput
+  relPasoWizard?: Prisma.PasoWizardUncheckedUpdateManyWithoutEmpresaNestedInput
+  relProducto?: Prisma.ProductoUncheckedUpdateManyWithoutEmpresaNestedInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedUpdateManyWithoutEmpresaNestedInput
+  relServicio?: Prisma.ServicioUncheckedUpdateManyWithoutEmpresaNestedInput
+  relSucursal?: Prisma.SucursalUncheckedUpdateManyWithoutEmpresaNestedInput
+  relSuscriptor?: Prisma.SuscriptorUncheckedUpdateManyWithoutEmpresaNestedInput
 }
 
 export type EmpresaCreateWithoutRelServicioInput = {
@@ -1018,18 +1018,18 @@ export type EmpresaCreateWithoutRelServicioInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  relSucursal?: Prisma.SucursalCreateNestedManyWithoutEmpresaInput
-  relProducto?: Prisma.ProductoCreateNestedManyWithoutEmpresaInput
-  relIndustria?: Prisma.IndustriaCreateNestedManyWithoutEmpresaInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionCreateNestedManyWithoutEmpresaInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroCreateNestedManyWithoutEmpresaInput
-  relMenu?: Prisma.MenuCreateNestedManyWithoutEmpresaInput
-  relFooterElemento?: Prisma.FooterElementoCreateNestedManyWithoutEmpresaInput
-  relPasoWizard?: Prisma.PasoWizardCreateNestedManyWithoutEmpresaInput
-  relContactoEntrante?: Prisma.ContactoEntranteCreateNestedManyWithoutEmpresaPropietariaInput
-  relSuscriptor?: Prisma.SuscriptorCreateNestedManyWithoutEmpresaInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioCreateNestedManyWithoutEmpresaInput
+  relContactoEntrante?: Prisma.ContactoEntranteCreateNestedManyWithoutEmpresaPropietariaInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionCreateNestedManyWithoutEmpresaInput
+  relFooterElemento?: Prisma.FooterElementoCreateNestedManyWithoutEmpresaInput
+  relIndustria?: Prisma.IndustriaCreateNestedManyWithoutEmpresaInput
   relLead?: Prisma.LeadCreateNestedManyWithoutEmpresaInput
+  relMenu?: Prisma.MenuCreateNestedManyWithoutEmpresaInput
+  relPasoWizard?: Prisma.PasoWizardCreateNestedManyWithoutEmpresaInput
+  relProducto?: Prisma.ProductoCreateNestedManyWithoutEmpresaInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroCreateNestedManyWithoutEmpresaInput
+  relSucursal?: Prisma.SucursalCreateNestedManyWithoutEmpresaInput
+  relSuscriptor?: Prisma.SuscriptorCreateNestedManyWithoutEmpresaInput
 }
 
 export type EmpresaUncheckedCreateWithoutRelServicioInput = {
@@ -1040,18 +1040,18 @@ export type EmpresaUncheckedCreateWithoutRelServicioInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  relSucursal?: Prisma.SucursalUncheckedCreateNestedManyWithoutEmpresaInput
-  relProducto?: Prisma.ProductoUncheckedCreateNestedManyWithoutEmpresaInput
-  relIndustria?: Prisma.IndustriaUncheckedCreateNestedManyWithoutEmpresaInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedCreateNestedManyWithoutEmpresaInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedCreateNestedManyWithoutEmpresaInput
-  relMenu?: Prisma.MenuUncheckedCreateNestedManyWithoutEmpresaInput
-  relFooterElemento?: Prisma.FooterElementoUncheckedCreateNestedManyWithoutEmpresaInput
-  relPasoWizard?: Prisma.PasoWizardUncheckedCreateNestedManyWithoutEmpresaInput
-  relContactoEntrante?: Prisma.ContactoEntranteUncheckedCreateNestedManyWithoutEmpresaPropietariaInput
-  relSuscriptor?: Prisma.SuscriptorUncheckedCreateNestedManyWithoutEmpresaInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUncheckedCreateNestedManyWithoutEmpresaInput
+  relContactoEntrante?: Prisma.ContactoEntranteUncheckedCreateNestedManyWithoutEmpresaPropietariaInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedCreateNestedManyWithoutEmpresaInput
+  relFooterElemento?: Prisma.FooterElementoUncheckedCreateNestedManyWithoutEmpresaInput
+  relIndustria?: Prisma.IndustriaUncheckedCreateNestedManyWithoutEmpresaInput
   relLead?: Prisma.LeadUncheckedCreateNestedManyWithoutEmpresaInput
+  relMenu?: Prisma.MenuUncheckedCreateNestedManyWithoutEmpresaInput
+  relPasoWizard?: Prisma.PasoWizardUncheckedCreateNestedManyWithoutEmpresaInput
+  relProducto?: Prisma.ProductoUncheckedCreateNestedManyWithoutEmpresaInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedCreateNestedManyWithoutEmpresaInput
+  relSucursal?: Prisma.SucursalUncheckedCreateNestedManyWithoutEmpresaInput
+  relSuscriptor?: Prisma.SuscriptorUncheckedCreateNestedManyWithoutEmpresaInput
 }
 
 export type EmpresaCreateOrConnectWithoutRelServicioInput = {
@@ -1078,18 +1078,18 @@ export type EmpresaUpdateWithoutRelServicioInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  relSucursal?: Prisma.SucursalUpdateManyWithoutEmpresaNestedInput
-  relProducto?: Prisma.ProductoUpdateManyWithoutEmpresaNestedInput
-  relIndustria?: Prisma.IndustriaUpdateManyWithoutEmpresaNestedInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUpdateManyWithoutEmpresaNestedInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUpdateManyWithoutEmpresaNestedInput
-  relMenu?: Prisma.MenuUpdateManyWithoutEmpresaNestedInput
-  relFooterElemento?: Prisma.FooterElementoUpdateManyWithoutEmpresaNestedInput
-  relPasoWizard?: Prisma.PasoWizardUpdateManyWithoutEmpresaNestedInput
-  relContactoEntrante?: Prisma.ContactoEntranteUpdateManyWithoutEmpresaPropietariaNestedInput
-  relSuscriptor?: Prisma.SuscriptorUpdateManyWithoutEmpresaNestedInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUpdateManyWithoutEmpresaNestedInput
+  relContactoEntrante?: Prisma.ContactoEntranteUpdateManyWithoutEmpresaPropietariaNestedInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUpdateManyWithoutEmpresaNestedInput
+  relFooterElemento?: Prisma.FooterElementoUpdateManyWithoutEmpresaNestedInput
+  relIndustria?: Prisma.IndustriaUpdateManyWithoutEmpresaNestedInput
   relLead?: Prisma.LeadUpdateManyWithoutEmpresaNestedInput
+  relMenu?: Prisma.MenuUpdateManyWithoutEmpresaNestedInput
+  relPasoWizard?: Prisma.PasoWizardUpdateManyWithoutEmpresaNestedInput
+  relProducto?: Prisma.ProductoUpdateManyWithoutEmpresaNestedInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUpdateManyWithoutEmpresaNestedInput
+  relSucursal?: Prisma.SucursalUpdateManyWithoutEmpresaNestedInput
+  relSuscriptor?: Prisma.SuscriptorUpdateManyWithoutEmpresaNestedInput
 }
 
 export type EmpresaUncheckedUpdateWithoutRelServicioInput = {
@@ -1100,18 +1100,18 @@ export type EmpresaUncheckedUpdateWithoutRelServicioInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  relSucursal?: Prisma.SucursalUncheckedUpdateManyWithoutEmpresaNestedInput
-  relProducto?: Prisma.ProductoUncheckedUpdateManyWithoutEmpresaNestedInput
-  relIndustria?: Prisma.IndustriaUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedUpdateManyWithoutEmpresaNestedInput
-  relMenu?: Prisma.MenuUncheckedUpdateManyWithoutEmpresaNestedInput
-  relFooterElemento?: Prisma.FooterElementoUncheckedUpdateManyWithoutEmpresaNestedInput
-  relPasoWizard?: Prisma.PasoWizardUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContactoEntrante?: Prisma.ContactoEntranteUncheckedUpdateManyWithoutEmpresaPropietariaNestedInput
-  relSuscriptor?: Prisma.SuscriptorUncheckedUpdateManyWithoutEmpresaNestedInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUncheckedUpdateManyWithoutEmpresaNestedInput
+  relContactoEntrante?: Prisma.ContactoEntranteUncheckedUpdateManyWithoutEmpresaPropietariaNestedInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedUpdateManyWithoutEmpresaNestedInput
+  relFooterElemento?: Prisma.FooterElementoUncheckedUpdateManyWithoutEmpresaNestedInput
+  relIndustria?: Prisma.IndustriaUncheckedUpdateManyWithoutEmpresaNestedInput
   relLead?: Prisma.LeadUncheckedUpdateManyWithoutEmpresaNestedInput
+  relMenu?: Prisma.MenuUncheckedUpdateManyWithoutEmpresaNestedInput
+  relPasoWizard?: Prisma.PasoWizardUncheckedUpdateManyWithoutEmpresaNestedInput
+  relProducto?: Prisma.ProductoUncheckedUpdateManyWithoutEmpresaNestedInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedUpdateManyWithoutEmpresaNestedInput
+  relSucursal?: Prisma.SucursalUncheckedUpdateManyWithoutEmpresaNestedInput
+  relSuscriptor?: Prisma.SuscriptorUncheckedUpdateManyWithoutEmpresaNestedInput
 }
 
 export type EmpresaCreateWithoutRelContenidoSeccionInput = {
@@ -1122,18 +1122,18 @@ export type EmpresaCreateWithoutRelContenidoSeccionInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  relSucursal?: Prisma.SucursalCreateNestedManyWithoutEmpresaInput
-  relProducto?: Prisma.ProductoCreateNestedManyWithoutEmpresaInput
-  relIndustria?: Prisma.IndustriaCreateNestedManyWithoutEmpresaInput
-  relServicio?: Prisma.ServicioCreateNestedManyWithoutEmpresaInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroCreateNestedManyWithoutEmpresaInput
-  relMenu?: Prisma.MenuCreateNestedManyWithoutEmpresaInput
-  relFooterElemento?: Prisma.FooterElementoCreateNestedManyWithoutEmpresaInput
-  relPasoWizard?: Prisma.PasoWizardCreateNestedManyWithoutEmpresaInput
-  relContactoEntrante?: Prisma.ContactoEntranteCreateNestedManyWithoutEmpresaPropietariaInput
-  relSuscriptor?: Prisma.SuscriptorCreateNestedManyWithoutEmpresaInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioCreateNestedManyWithoutEmpresaInput
+  relContactoEntrante?: Prisma.ContactoEntranteCreateNestedManyWithoutEmpresaPropietariaInput
+  relFooterElemento?: Prisma.FooterElementoCreateNestedManyWithoutEmpresaInput
+  relIndustria?: Prisma.IndustriaCreateNestedManyWithoutEmpresaInput
   relLead?: Prisma.LeadCreateNestedManyWithoutEmpresaInput
+  relMenu?: Prisma.MenuCreateNestedManyWithoutEmpresaInput
+  relPasoWizard?: Prisma.PasoWizardCreateNestedManyWithoutEmpresaInput
+  relProducto?: Prisma.ProductoCreateNestedManyWithoutEmpresaInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroCreateNestedManyWithoutEmpresaInput
+  relServicio?: Prisma.ServicioCreateNestedManyWithoutEmpresaInput
+  relSucursal?: Prisma.SucursalCreateNestedManyWithoutEmpresaInput
+  relSuscriptor?: Prisma.SuscriptorCreateNestedManyWithoutEmpresaInput
 }
 
 export type EmpresaUncheckedCreateWithoutRelContenidoSeccionInput = {
@@ -1144,18 +1144,18 @@ export type EmpresaUncheckedCreateWithoutRelContenidoSeccionInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  relSucursal?: Prisma.SucursalUncheckedCreateNestedManyWithoutEmpresaInput
-  relProducto?: Prisma.ProductoUncheckedCreateNestedManyWithoutEmpresaInput
-  relIndustria?: Prisma.IndustriaUncheckedCreateNestedManyWithoutEmpresaInput
-  relServicio?: Prisma.ServicioUncheckedCreateNestedManyWithoutEmpresaInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedCreateNestedManyWithoutEmpresaInput
-  relMenu?: Prisma.MenuUncheckedCreateNestedManyWithoutEmpresaInput
-  relFooterElemento?: Prisma.FooterElementoUncheckedCreateNestedManyWithoutEmpresaInput
-  relPasoWizard?: Prisma.PasoWizardUncheckedCreateNestedManyWithoutEmpresaInput
-  relContactoEntrante?: Prisma.ContactoEntranteUncheckedCreateNestedManyWithoutEmpresaPropietariaInput
-  relSuscriptor?: Prisma.SuscriptorUncheckedCreateNestedManyWithoutEmpresaInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUncheckedCreateNestedManyWithoutEmpresaInput
+  relContactoEntrante?: Prisma.ContactoEntranteUncheckedCreateNestedManyWithoutEmpresaPropietariaInput
+  relFooterElemento?: Prisma.FooterElementoUncheckedCreateNestedManyWithoutEmpresaInput
+  relIndustria?: Prisma.IndustriaUncheckedCreateNestedManyWithoutEmpresaInput
   relLead?: Prisma.LeadUncheckedCreateNestedManyWithoutEmpresaInput
+  relMenu?: Prisma.MenuUncheckedCreateNestedManyWithoutEmpresaInput
+  relPasoWizard?: Prisma.PasoWizardUncheckedCreateNestedManyWithoutEmpresaInput
+  relProducto?: Prisma.ProductoUncheckedCreateNestedManyWithoutEmpresaInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedCreateNestedManyWithoutEmpresaInput
+  relServicio?: Prisma.ServicioUncheckedCreateNestedManyWithoutEmpresaInput
+  relSucursal?: Prisma.SucursalUncheckedCreateNestedManyWithoutEmpresaInput
+  relSuscriptor?: Prisma.SuscriptorUncheckedCreateNestedManyWithoutEmpresaInput
 }
 
 export type EmpresaCreateOrConnectWithoutRelContenidoSeccionInput = {
@@ -1182,18 +1182,18 @@ export type EmpresaUpdateWithoutRelContenidoSeccionInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  relSucursal?: Prisma.SucursalUpdateManyWithoutEmpresaNestedInput
-  relProducto?: Prisma.ProductoUpdateManyWithoutEmpresaNestedInput
-  relIndustria?: Prisma.IndustriaUpdateManyWithoutEmpresaNestedInput
-  relServicio?: Prisma.ServicioUpdateManyWithoutEmpresaNestedInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUpdateManyWithoutEmpresaNestedInput
-  relMenu?: Prisma.MenuUpdateManyWithoutEmpresaNestedInput
-  relFooterElemento?: Prisma.FooterElementoUpdateManyWithoutEmpresaNestedInput
-  relPasoWizard?: Prisma.PasoWizardUpdateManyWithoutEmpresaNestedInput
-  relContactoEntrante?: Prisma.ContactoEntranteUpdateManyWithoutEmpresaPropietariaNestedInput
-  relSuscriptor?: Prisma.SuscriptorUpdateManyWithoutEmpresaNestedInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUpdateManyWithoutEmpresaNestedInput
+  relContactoEntrante?: Prisma.ContactoEntranteUpdateManyWithoutEmpresaPropietariaNestedInput
+  relFooterElemento?: Prisma.FooterElementoUpdateManyWithoutEmpresaNestedInput
+  relIndustria?: Prisma.IndustriaUpdateManyWithoutEmpresaNestedInput
   relLead?: Prisma.LeadUpdateManyWithoutEmpresaNestedInput
+  relMenu?: Prisma.MenuUpdateManyWithoutEmpresaNestedInput
+  relPasoWizard?: Prisma.PasoWizardUpdateManyWithoutEmpresaNestedInput
+  relProducto?: Prisma.ProductoUpdateManyWithoutEmpresaNestedInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUpdateManyWithoutEmpresaNestedInput
+  relServicio?: Prisma.ServicioUpdateManyWithoutEmpresaNestedInput
+  relSucursal?: Prisma.SucursalUpdateManyWithoutEmpresaNestedInput
+  relSuscriptor?: Prisma.SuscriptorUpdateManyWithoutEmpresaNestedInput
 }
 
 export type EmpresaUncheckedUpdateWithoutRelContenidoSeccionInput = {
@@ -1204,18 +1204,18 @@ export type EmpresaUncheckedUpdateWithoutRelContenidoSeccionInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  relSucursal?: Prisma.SucursalUncheckedUpdateManyWithoutEmpresaNestedInput
-  relProducto?: Prisma.ProductoUncheckedUpdateManyWithoutEmpresaNestedInput
-  relIndustria?: Prisma.IndustriaUncheckedUpdateManyWithoutEmpresaNestedInput
-  relServicio?: Prisma.ServicioUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedUpdateManyWithoutEmpresaNestedInput
-  relMenu?: Prisma.MenuUncheckedUpdateManyWithoutEmpresaNestedInput
-  relFooterElemento?: Prisma.FooterElementoUncheckedUpdateManyWithoutEmpresaNestedInput
-  relPasoWizard?: Prisma.PasoWizardUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContactoEntrante?: Prisma.ContactoEntranteUncheckedUpdateManyWithoutEmpresaPropietariaNestedInput
-  relSuscriptor?: Prisma.SuscriptorUncheckedUpdateManyWithoutEmpresaNestedInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUncheckedUpdateManyWithoutEmpresaNestedInput
+  relContactoEntrante?: Prisma.ContactoEntranteUncheckedUpdateManyWithoutEmpresaPropietariaNestedInput
+  relFooterElemento?: Prisma.FooterElementoUncheckedUpdateManyWithoutEmpresaNestedInput
+  relIndustria?: Prisma.IndustriaUncheckedUpdateManyWithoutEmpresaNestedInput
   relLead?: Prisma.LeadUncheckedUpdateManyWithoutEmpresaNestedInput
+  relMenu?: Prisma.MenuUncheckedUpdateManyWithoutEmpresaNestedInput
+  relPasoWizard?: Prisma.PasoWizardUncheckedUpdateManyWithoutEmpresaNestedInput
+  relProducto?: Prisma.ProductoUncheckedUpdateManyWithoutEmpresaNestedInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedUpdateManyWithoutEmpresaNestedInput
+  relServicio?: Prisma.ServicioUncheckedUpdateManyWithoutEmpresaNestedInput
+  relSucursal?: Prisma.SucursalUncheckedUpdateManyWithoutEmpresaNestedInput
+  relSuscriptor?: Prisma.SuscriptorUncheckedUpdateManyWithoutEmpresaNestedInput
 }
 
 export type EmpresaCreateWithoutRelContenidoRegistroInput = {
@@ -1226,18 +1226,18 @@ export type EmpresaCreateWithoutRelContenidoRegistroInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  relSucursal?: Prisma.SucursalCreateNestedManyWithoutEmpresaInput
-  relProducto?: Prisma.ProductoCreateNestedManyWithoutEmpresaInput
-  relIndustria?: Prisma.IndustriaCreateNestedManyWithoutEmpresaInput
-  relServicio?: Prisma.ServicioCreateNestedManyWithoutEmpresaInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionCreateNestedManyWithoutEmpresaInput
-  relMenu?: Prisma.MenuCreateNestedManyWithoutEmpresaInput
-  relFooterElemento?: Prisma.FooterElementoCreateNestedManyWithoutEmpresaInput
-  relPasoWizard?: Prisma.PasoWizardCreateNestedManyWithoutEmpresaInput
-  relContactoEntrante?: Prisma.ContactoEntranteCreateNestedManyWithoutEmpresaPropietariaInput
-  relSuscriptor?: Prisma.SuscriptorCreateNestedManyWithoutEmpresaInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioCreateNestedManyWithoutEmpresaInput
+  relContactoEntrante?: Prisma.ContactoEntranteCreateNestedManyWithoutEmpresaPropietariaInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionCreateNestedManyWithoutEmpresaInput
+  relFooterElemento?: Prisma.FooterElementoCreateNestedManyWithoutEmpresaInput
+  relIndustria?: Prisma.IndustriaCreateNestedManyWithoutEmpresaInput
   relLead?: Prisma.LeadCreateNestedManyWithoutEmpresaInput
+  relMenu?: Prisma.MenuCreateNestedManyWithoutEmpresaInput
+  relPasoWizard?: Prisma.PasoWizardCreateNestedManyWithoutEmpresaInput
+  relProducto?: Prisma.ProductoCreateNestedManyWithoutEmpresaInput
+  relServicio?: Prisma.ServicioCreateNestedManyWithoutEmpresaInput
+  relSucursal?: Prisma.SucursalCreateNestedManyWithoutEmpresaInput
+  relSuscriptor?: Prisma.SuscriptorCreateNestedManyWithoutEmpresaInput
 }
 
 export type EmpresaUncheckedCreateWithoutRelContenidoRegistroInput = {
@@ -1248,18 +1248,18 @@ export type EmpresaUncheckedCreateWithoutRelContenidoRegistroInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  relSucursal?: Prisma.SucursalUncheckedCreateNestedManyWithoutEmpresaInput
-  relProducto?: Prisma.ProductoUncheckedCreateNestedManyWithoutEmpresaInput
-  relIndustria?: Prisma.IndustriaUncheckedCreateNestedManyWithoutEmpresaInput
-  relServicio?: Prisma.ServicioUncheckedCreateNestedManyWithoutEmpresaInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedCreateNestedManyWithoutEmpresaInput
-  relMenu?: Prisma.MenuUncheckedCreateNestedManyWithoutEmpresaInput
-  relFooterElemento?: Prisma.FooterElementoUncheckedCreateNestedManyWithoutEmpresaInput
-  relPasoWizard?: Prisma.PasoWizardUncheckedCreateNestedManyWithoutEmpresaInput
-  relContactoEntrante?: Prisma.ContactoEntranteUncheckedCreateNestedManyWithoutEmpresaPropietariaInput
-  relSuscriptor?: Prisma.SuscriptorUncheckedCreateNestedManyWithoutEmpresaInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUncheckedCreateNestedManyWithoutEmpresaInput
+  relContactoEntrante?: Prisma.ContactoEntranteUncheckedCreateNestedManyWithoutEmpresaPropietariaInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedCreateNestedManyWithoutEmpresaInput
+  relFooterElemento?: Prisma.FooterElementoUncheckedCreateNestedManyWithoutEmpresaInput
+  relIndustria?: Prisma.IndustriaUncheckedCreateNestedManyWithoutEmpresaInput
   relLead?: Prisma.LeadUncheckedCreateNestedManyWithoutEmpresaInput
+  relMenu?: Prisma.MenuUncheckedCreateNestedManyWithoutEmpresaInput
+  relPasoWizard?: Prisma.PasoWizardUncheckedCreateNestedManyWithoutEmpresaInput
+  relProducto?: Prisma.ProductoUncheckedCreateNestedManyWithoutEmpresaInput
+  relServicio?: Prisma.ServicioUncheckedCreateNestedManyWithoutEmpresaInput
+  relSucursal?: Prisma.SucursalUncheckedCreateNestedManyWithoutEmpresaInput
+  relSuscriptor?: Prisma.SuscriptorUncheckedCreateNestedManyWithoutEmpresaInput
 }
 
 export type EmpresaCreateOrConnectWithoutRelContenidoRegistroInput = {
@@ -1286,18 +1286,18 @@ export type EmpresaUpdateWithoutRelContenidoRegistroInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  relSucursal?: Prisma.SucursalUpdateManyWithoutEmpresaNestedInput
-  relProducto?: Prisma.ProductoUpdateManyWithoutEmpresaNestedInput
-  relIndustria?: Prisma.IndustriaUpdateManyWithoutEmpresaNestedInput
-  relServicio?: Prisma.ServicioUpdateManyWithoutEmpresaNestedInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUpdateManyWithoutEmpresaNestedInput
-  relMenu?: Prisma.MenuUpdateManyWithoutEmpresaNestedInput
-  relFooterElemento?: Prisma.FooterElementoUpdateManyWithoutEmpresaNestedInput
-  relPasoWizard?: Prisma.PasoWizardUpdateManyWithoutEmpresaNestedInput
-  relContactoEntrante?: Prisma.ContactoEntranteUpdateManyWithoutEmpresaPropietariaNestedInput
-  relSuscriptor?: Prisma.SuscriptorUpdateManyWithoutEmpresaNestedInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUpdateManyWithoutEmpresaNestedInput
+  relContactoEntrante?: Prisma.ContactoEntranteUpdateManyWithoutEmpresaPropietariaNestedInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUpdateManyWithoutEmpresaNestedInput
+  relFooterElemento?: Prisma.FooterElementoUpdateManyWithoutEmpresaNestedInput
+  relIndustria?: Prisma.IndustriaUpdateManyWithoutEmpresaNestedInput
   relLead?: Prisma.LeadUpdateManyWithoutEmpresaNestedInput
+  relMenu?: Prisma.MenuUpdateManyWithoutEmpresaNestedInput
+  relPasoWizard?: Prisma.PasoWizardUpdateManyWithoutEmpresaNestedInput
+  relProducto?: Prisma.ProductoUpdateManyWithoutEmpresaNestedInput
+  relServicio?: Prisma.ServicioUpdateManyWithoutEmpresaNestedInput
+  relSucursal?: Prisma.SucursalUpdateManyWithoutEmpresaNestedInput
+  relSuscriptor?: Prisma.SuscriptorUpdateManyWithoutEmpresaNestedInput
 }
 
 export type EmpresaUncheckedUpdateWithoutRelContenidoRegistroInput = {
@@ -1308,18 +1308,18 @@ export type EmpresaUncheckedUpdateWithoutRelContenidoRegistroInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  relSucursal?: Prisma.SucursalUncheckedUpdateManyWithoutEmpresaNestedInput
-  relProducto?: Prisma.ProductoUncheckedUpdateManyWithoutEmpresaNestedInput
-  relIndustria?: Prisma.IndustriaUncheckedUpdateManyWithoutEmpresaNestedInput
-  relServicio?: Prisma.ServicioUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedUpdateManyWithoutEmpresaNestedInput
-  relMenu?: Prisma.MenuUncheckedUpdateManyWithoutEmpresaNestedInput
-  relFooterElemento?: Prisma.FooterElementoUncheckedUpdateManyWithoutEmpresaNestedInput
-  relPasoWizard?: Prisma.PasoWizardUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContactoEntrante?: Prisma.ContactoEntranteUncheckedUpdateManyWithoutEmpresaPropietariaNestedInput
-  relSuscriptor?: Prisma.SuscriptorUncheckedUpdateManyWithoutEmpresaNestedInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUncheckedUpdateManyWithoutEmpresaNestedInput
+  relContactoEntrante?: Prisma.ContactoEntranteUncheckedUpdateManyWithoutEmpresaPropietariaNestedInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedUpdateManyWithoutEmpresaNestedInput
+  relFooterElemento?: Prisma.FooterElementoUncheckedUpdateManyWithoutEmpresaNestedInput
+  relIndustria?: Prisma.IndustriaUncheckedUpdateManyWithoutEmpresaNestedInput
   relLead?: Prisma.LeadUncheckedUpdateManyWithoutEmpresaNestedInput
+  relMenu?: Prisma.MenuUncheckedUpdateManyWithoutEmpresaNestedInput
+  relPasoWizard?: Prisma.PasoWizardUncheckedUpdateManyWithoutEmpresaNestedInput
+  relProducto?: Prisma.ProductoUncheckedUpdateManyWithoutEmpresaNestedInput
+  relServicio?: Prisma.ServicioUncheckedUpdateManyWithoutEmpresaNestedInput
+  relSucursal?: Prisma.SucursalUncheckedUpdateManyWithoutEmpresaNestedInput
+  relSuscriptor?: Prisma.SuscriptorUncheckedUpdateManyWithoutEmpresaNestedInput
 }
 
 export type EmpresaCreateWithoutRelMenuInput = {
@@ -1330,18 +1330,18 @@ export type EmpresaCreateWithoutRelMenuInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  relSucursal?: Prisma.SucursalCreateNestedManyWithoutEmpresaInput
-  relProducto?: Prisma.ProductoCreateNestedManyWithoutEmpresaInput
-  relIndustria?: Prisma.IndustriaCreateNestedManyWithoutEmpresaInput
-  relServicio?: Prisma.ServicioCreateNestedManyWithoutEmpresaInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionCreateNestedManyWithoutEmpresaInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroCreateNestedManyWithoutEmpresaInput
-  relFooterElemento?: Prisma.FooterElementoCreateNestedManyWithoutEmpresaInput
-  relPasoWizard?: Prisma.PasoWizardCreateNestedManyWithoutEmpresaInput
-  relContactoEntrante?: Prisma.ContactoEntranteCreateNestedManyWithoutEmpresaPropietariaInput
-  relSuscriptor?: Prisma.SuscriptorCreateNestedManyWithoutEmpresaInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioCreateNestedManyWithoutEmpresaInput
+  relContactoEntrante?: Prisma.ContactoEntranteCreateNestedManyWithoutEmpresaPropietariaInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionCreateNestedManyWithoutEmpresaInput
+  relFooterElemento?: Prisma.FooterElementoCreateNestedManyWithoutEmpresaInput
+  relIndustria?: Prisma.IndustriaCreateNestedManyWithoutEmpresaInput
   relLead?: Prisma.LeadCreateNestedManyWithoutEmpresaInput
+  relPasoWizard?: Prisma.PasoWizardCreateNestedManyWithoutEmpresaInput
+  relProducto?: Prisma.ProductoCreateNestedManyWithoutEmpresaInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroCreateNestedManyWithoutEmpresaInput
+  relServicio?: Prisma.ServicioCreateNestedManyWithoutEmpresaInput
+  relSucursal?: Prisma.SucursalCreateNestedManyWithoutEmpresaInput
+  relSuscriptor?: Prisma.SuscriptorCreateNestedManyWithoutEmpresaInput
 }
 
 export type EmpresaUncheckedCreateWithoutRelMenuInput = {
@@ -1352,18 +1352,18 @@ export type EmpresaUncheckedCreateWithoutRelMenuInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  relSucursal?: Prisma.SucursalUncheckedCreateNestedManyWithoutEmpresaInput
-  relProducto?: Prisma.ProductoUncheckedCreateNestedManyWithoutEmpresaInput
-  relIndustria?: Prisma.IndustriaUncheckedCreateNestedManyWithoutEmpresaInput
-  relServicio?: Prisma.ServicioUncheckedCreateNestedManyWithoutEmpresaInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedCreateNestedManyWithoutEmpresaInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedCreateNestedManyWithoutEmpresaInput
-  relFooterElemento?: Prisma.FooterElementoUncheckedCreateNestedManyWithoutEmpresaInput
-  relPasoWizard?: Prisma.PasoWizardUncheckedCreateNestedManyWithoutEmpresaInput
-  relContactoEntrante?: Prisma.ContactoEntranteUncheckedCreateNestedManyWithoutEmpresaPropietariaInput
-  relSuscriptor?: Prisma.SuscriptorUncheckedCreateNestedManyWithoutEmpresaInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUncheckedCreateNestedManyWithoutEmpresaInput
+  relContactoEntrante?: Prisma.ContactoEntranteUncheckedCreateNestedManyWithoutEmpresaPropietariaInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedCreateNestedManyWithoutEmpresaInput
+  relFooterElemento?: Prisma.FooterElementoUncheckedCreateNestedManyWithoutEmpresaInput
+  relIndustria?: Prisma.IndustriaUncheckedCreateNestedManyWithoutEmpresaInput
   relLead?: Prisma.LeadUncheckedCreateNestedManyWithoutEmpresaInput
+  relPasoWizard?: Prisma.PasoWizardUncheckedCreateNestedManyWithoutEmpresaInput
+  relProducto?: Prisma.ProductoUncheckedCreateNestedManyWithoutEmpresaInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedCreateNestedManyWithoutEmpresaInput
+  relServicio?: Prisma.ServicioUncheckedCreateNestedManyWithoutEmpresaInput
+  relSucursal?: Prisma.SucursalUncheckedCreateNestedManyWithoutEmpresaInput
+  relSuscriptor?: Prisma.SuscriptorUncheckedCreateNestedManyWithoutEmpresaInput
 }
 
 export type EmpresaCreateOrConnectWithoutRelMenuInput = {
@@ -1390,18 +1390,18 @@ export type EmpresaUpdateWithoutRelMenuInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  relSucursal?: Prisma.SucursalUpdateManyWithoutEmpresaNestedInput
-  relProducto?: Prisma.ProductoUpdateManyWithoutEmpresaNestedInput
-  relIndustria?: Prisma.IndustriaUpdateManyWithoutEmpresaNestedInput
-  relServicio?: Prisma.ServicioUpdateManyWithoutEmpresaNestedInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUpdateManyWithoutEmpresaNestedInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUpdateManyWithoutEmpresaNestedInput
-  relFooterElemento?: Prisma.FooterElementoUpdateManyWithoutEmpresaNestedInput
-  relPasoWizard?: Prisma.PasoWizardUpdateManyWithoutEmpresaNestedInput
-  relContactoEntrante?: Prisma.ContactoEntranteUpdateManyWithoutEmpresaPropietariaNestedInput
-  relSuscriptor?: Prisma.SuscriptorUpdateManyWithoutEmpresaNestedInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUpdateManyWithoutEmpresaNestedInput
+  relContactoEntrante?: Prisma.ContactoEntranteUpdateManyWithoutEmpresaPropietariaNestedInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUpdateManyWithoutEmpresaNestedInput
+  relFooterElemento?: Prisma.FooterElementoUpdateManyWithoutEmpresaNestedInput
+  relIndustria?: Prisma.IndustriaUpdateManyWithoutEmpresaNestedInput
   relLead?: Prisma.LeadUpdateManyWithoutEmpresaNestedInput
+  relPasoWizard?: Prisma.PasoWizardUpdateManyWithoutEmpresaNestedInput
+  relProducto?: Prisma.ProductoUpdateManyWithoutEmpresaNestedInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUpdateManyWithoutEmpresaNestedInput
+  relServicio?: Prisma.ServicioUpdateManyWithoutEmpresaNestedInput
+  relSucursal?: Prisma.SucursalUpdateManyWithoutEmpresaNestedInput
+  relSuscriptor?: Prisma.SuscriptorUpdateManyWithoutEmpresaNestedInput
 }
 
 export type EmpresaUncheckedUpdateWithoutRelMenuInput = {
@@ -1412,18 +1412,18 @@ export type EmpresaUncheckedUpdateWithoutRelMenuInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  relSucursal?: Prisma.SucursalUncheckedUpdateManyWithoutEmpresaNestedInput
-  relProducto?: Prisma.ProductoUncheckedUpdateManyWithoutEmpresaNestedInput
-  relIndustria?: Prisma.IndustriaUncheckedUpdateManyWithoutEmpresaNestedInput
-  relServicio?: Prisma.ServicioUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedUpdateManyWithoutEmpresaNestedInput
-  relFooterElemento?: Prisma.FooterElementoUncheckedUpdateManyWithoutEmpresaNestedInput
-  relPasoWizard?: Prisma.PasoWizardUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContactoEntrante?: Prisma.ContactoEntranteUncheckedUpdateManyWithoutEmpresaPropietariaNestedInput
-  relSuscriptor?: Prisma.SuscriptorUncheckedUpdateManyWithoutEmpresaNestedInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUncheckedUpdateManyWithoutEmpresaNestedInput
+  relContactoEntrante?: Prisma.ContactoEntranteUncheckedUpdateManyWithoutEmpresaPropietariaNestedInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedUpdateManyWithoutEmpresaNestedInput
+  relFooterElemento?: Prisma.FooterElementoUncheckedUpdateManyWithoutEmpresaNestedInput
+  relIndustria?: Prisma.IndustriaUncheckedUpdateManyWithoutEmpresaNestedInput
   relLead?: Prisma.LeadUncheckedUpdateManyWithoutEmpresaNestedInput
+  relPasoWizard?: Prisma.PasoWizardUncheckedUpdateManyWithoutEmpresaNestedInput
+  relProducto?: Prisma.ProductoUncheckedUpdateManyWithoutEmpresaNestedInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedUpdateManyWithoutEmpresaNestedInput
+  relServicio?: Prisma.ServicioUncheckedUpdateManyWithoutEmpresaNestedInput
+  relSucursal?: Prisma.SucursalUncheckedUpdateManyWithoutEmpresaNestedInput
+  relSuscriptor?: Prisma.SuscriptorUncheckedUpdateManyWithoutEmpresaNestedInput
 }
 
 export type EmpresaCreateWithoutRelFooterElementoInput = {
@@ -1434,18 +1434,18 @@ export type EmpresaCreateWithoutRelFooterElementoInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  relSucursal?: Prisma.SucursalCreateNestedManyWithoutEmpresaInput
-  relProducto?: Prisma.ProductoCreateNestedManyWithoutEmpresaInput
-  relIndustria?: Prisma.IndustriaCreateNestedManyWithoutEmpresaInput
-  relServicio?: Prisma.ServicioCreateNestedManyWithoutEmpresaInput
+  relConfiguracionSitio?: Prisma.ConfiguracionSitioCreateNestedManyWithoutEmpresaInput
+  relContactoEntrante?: Prisma.ContactoEntranteCreateNestedManyWithoutEmpresaPropietariaInput
   relContenidoSeccion?: Prisma.ContenidoSeccionCreateNestedManyWithoutEmpresaInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroCreateNestedManyWithoutEmpresaInput
+  relIndustria?: Prisma.IndustriaCreateNestedManyWithoutEmpresaInput
+  relLead?: Prisma.LeadCreateNestedManyWithoutEmpresaInput
   relMenu?: Prisma.MenuCreateNestedManyWithoutEmpresaInput
   relPasoWizard?: Prisma.PasoWizardCreateNestedManyWithoutEmpresaInput
-  relContactoEntrante?: Prisma.ContactoEntranteCreateNestedManyWithoutEmpresaPropietariaInput
+  relProducto?: Prisma.ProductoCreateNestedManyWithoutEmpresaInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroCreateNestedManyWithoutEmpresaInput
+  relServicio?: Prisma.ServicioCreateNestedManyWithoutEmpresaInput
+  relSucursal?: Prisma.SucursalCreateNestedManyWithoutEmpresaInput
   relSuscriptor?: Prisma.SuscriptorCreateNestedManyWithoutEmpresaInput
-  relConfiguracionSitio?: Prisma.ConfiguracionSitioCreateNestedManyWithoutEmpresaInput
-  relLead?: Prisma.LeadCreateNestedManyWithoutEmpresaInput
 }
 
 export type EmpresaUncheckedCreateWithoutRelFooterElementoInput = {
@@ -1456,18 +1456,18 @@ export type EmpresaUncheckedCreateWithoutRelFooterElementoInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  relSucursal?: Prisma.SucursalUncheckedCreateNestedManyWithoutEmpresaInput
-  relProducto?: Prisma.ProductoUncheckedCreateNestedManyWithoutEmpresaInput
-  relIndustria?: Prisma.IndustriaUncheckedCreateNestedManyWithoutEmpresaInput
-  relServicio?: Prisma.ServicioUncheckedCreateNestedManyWithoutEmpresaInput
+  relConfiguracionSitio?: Prisma.ConfiguracionSitioUncheckedCreateNestedManyWithoutEmpresaInput
+  relContactoEntrante?: Prisma.ContactoEntranteUncheckedCreateNestedManyWithoutEmpresaPropietariaInput
   relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedCreateNestedManyWithoutEmpresaInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedCreateNestedManyWithoutEmpresaInput
+  relIndustria?: Prisma.IndustriaUncheckedCreateNestedManyWithoutEmpresaInput
+  relLead?: Prisma.LeadUncheckedCreateNestedManyWithoutEmpresaInput
   relMenu?: Prisma.MenuUncheckedCreateNestedManyWithoutEmpresaInput
   relPasoWizard?: Prisma.PasoWizardUncheckedCreateNestedManyWithoutEmpresaInput
-  relContactoEntrante?: Prisma.ContactoEntranteUncheckedCreateNestedManyWithoutEmpresaPropietariaInput
+  relProducto?: Prisma.ProductoUncheckedCreateNestedManyWithoutEmpresaInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedCreateNestedManyWithoutEmpresaInput
+  relServicio?: Prisma.ServicioUncheckedCreateNestedManyWithoutEmpresaInput
+  relSucursal?: Prisma.SucursalUncheckedCreateNestedManyWithoutEmpresaInput
   relSuscriptor?: Prisma.SuscriptorUncheckedCreateNestedManyWithoutEmpresaInput
-  relConfiguracionSitio?: Prisma.ConfiguracionSitioUncheckedCreateNestedManyWithoutEmpresaInput
-  relLead?: Prisma.LeadUncheckedCreateNestedManyWithoutEmpresaInput
 }
 
 export type EmpresaCreateOrConnectWithoutRelFooterElementoInput = {
@@ -1494,18 +1494,18 @@ export type EmpresaUpdateWithoutRelFooterElementoInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  relSucursal?: Prisma.SucursalUpdateManyWithoutEmpresaNestedInput
-  relProducto?: Prisma.ProductoUpdateManyWithoutEmpresaNestedInput
-  relIndustria?: Prisma.IndustriaUpdateManyWithoutEmpresaNestedInput
-  relServicio?: Prisma.ServicioUpdateManyWithoutEmpresaNestedInput
+  relConfiguracionSitio?: Prisma.ConfiguracionSitioUpdateManyWithoutEmpresaNestedInput
+  relContactoEntrante?: Prisma.ContactoEntranteUpdateManyWithoutEmpresaPropietariaNestedInput
   relContenidoSeccion?: Prisma.ContenidoSeccionUpdateManyWithoutEmpresaNestedInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUpdateManyWithoutEmpresaNestedInput
+  relIndustria?: Prisma.IndustriaUpdateManyWithoutEmpresaNestedInput
+  relLead?: Prisma.LeadUpdateManyWithoutEmpresaNestedInput
   relMenu?: Prisma.MenuUpdateManyWithoutEmpresaNestedInput
   relPasoWizard?: Prisma.PasoWizardUpdateManyWithoutEmpresaNestedInput
-  relContactoEntrante?: Prisma.ContactoEntranteUpdateManyWithoutEmpresaPropietariaNestedInput
+  relProducto?: Prisma.ProductoUpdateManyWithoutEmpresaNestedInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUpdateManyWithoutEmpresaNestedInput
+  relServicio?: Prisma.ServicioUpdateManyWithoutEmpresaNestedInput
+  relSucursal?: Prisma.SucursalUpdateManyWithoutEmpresaNestedInput
   relSuscriptor?: Prisma.SuscriptorUpdateManyWithoutEmpresaNestedInput
-  relConfiguracionSitio?: Prisma.ConfiguracionSitioUpdateManyWithoutEmpresaNestedInput
-  relLead?: Prisma.LeadUpdateManyWithoutEmpresaNestedInput
 }
 
 export type EmpresaUncheckedUpdateWithoutRelFooterElementoInput = {
@@ -1516,18 +1516,18 @@ export type EmpresaUncheckedUpdateWithoutRelFooterElementoInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  relSucursal?: Prisma.SucursalUncheckedUpdateManyWithoutEmpresaNestedInput
-  relProducto?: Prisma.ProductoUncheckedUpdateManyWithoutEmpresaNestedInput
-  relIndustria?: Prisma.IndustriaUncheckedUpdateManyWithoutEmpresaNestedInput
-  relServicio?: Prisma.ServicioUncheckedUpdateManyWithoutEmpresaNestedInput
+  relConfiguracionSitio?: Prisma.ConfiguracionSitioUncheckedUpdateManyWithoutEmpresaNestedInput
+  relContactoEntrante?: Prisma.ContactoEntranteUncheckedUpdateManyWithoutEmpresaPropietariaNestedInput
   relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedUpdateManyWithoutEmpresaNestedInput
+  relIndustria?: Prisma.IndustriaUncheckedUpdateManyWithoutEmpresaNestedInput
+  relLead?: Prisma.LeadUncheckedUpdateManyWithoutEmpresaNestedInput
   relMenu?: Prisma.MenuUncheckedUpdateManyWithoutEmpresaNestedInput
   relPasoWizard?: Prisma.PasoWizardUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContactoEntrante?: Prisma.ContactoEntranteUncheckedUpdateManyWithoutEmpresaPropietariaNestedInput
+  relProducto?: Prisma.ProductoUncheckedUpdateManyWithoutEmpresaNestedInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedUpdateManyWithoutEmpresaNestedInput
+  relServicio?: Prisma.ServicioUncheckedUpdateManyWithoutEmpresaNestedInput
+  relSucursal?: Prisma.SucursalUncheckedUpdateManyWithoutEmpresaNestedInput
   relSuscriptor?: Prisma.SuscriptorUncheckedUpdateManyWithoutEmpresaNestedInput
-  relConfiguracionSitio?: Prisma.ConfiguracionSitioUncheckedUpdateManyWithoutEmpresaNestedInput
-  relLead?: Prisma.LeadUncheckedUpdateManyWithoutEmpresaNestedInput
 }
 
 export type EmpresaCreateWithoutRelPasoWizardInput = {
@@ -1538,18 +1538,18 @@ export type EmpresaCreateWithoutRelPasoWizardInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  relSucursal?: Prisma.SucursalCreateNestedManyWithoutEmpresaInput
-  relProducto?: Prisma.ProductoCreateNestedManyWithoutEmpresaInput
-  relIndustria?: Prisma.IndustriaCreateNestedManyWithoutEmpresaInput
-  relServicio?: Prisma.ServicioCreateNestedManyWithoutEmpresaInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionCreateNestedManyWithoutEmpresaInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroCreateNestedManyWithoutEmpresaInput
-  relMenu?: Prisma.MenuCreateNestedManyWithoutEmpresaInput
-  relFooterElemento?: Prisma.FooterElementoCreateNestedManyWithoutEmpresaInput
-  relContactoEntrante?: Prisma.ContactoEntranteCreateNestedManyWithoutEmpresaPropietariaInput
-  relSuscriptor?: Prisma.SuscriptorCreateNestedManyWithoutEmpresaInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioCreateNestedManyWithoutEmpresaInput
+  relContactoEntrante?: Prisma.ContactoEntranteCreateNestedManyWithoutEmpresaPropietariaInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionCreateNestedManyWithoutEmpresaInput
+  relFooterElemento?: Prisma.FooterElementoCreateNestedManyWithoutEmpresaInput
+  relIndustria?: Prisma.IndustriaCreateNestedManyWithoutEmpresaInput
   relLead?: Prisma.LeadCreateNestedManyWithoutEmpresaInput
+  relMenu?: Prisma.MenuCreateNestedManyWithoutEmpresaInput
+  relProducto?: Prisma.ProductoCreateNestedManyWithoutEmpresaInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroCreateNestedManyWithoutEmpresaInput
+  relServicio?: Prisma.ServicioCreateNestedManyWithoutEmpresaInput
+  relSucursal?: Prisma.SucursalCreateNestedManyWithoutEmpresaInput
+  relSuscriptor?: Prisma.SuscriptorCreateNestedManyWithoutEmpresaInput
 }
 
 export type EmpresaUncheckedCreateWithoutRelPasoWizardInput = {
@@ -1560,18 +1560,18 @@ export type EmpresaUncheckedCreateWithoutRelPasoWizardInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  relSucursal?: Prisma.SucursalUncheckedCreateNestedManyWithoutEmpresaInput
-  relProducto?: Prisma.ProductoUncheckedCreateNestedManyWithoutEmpresaInput
-  relIndustria?: Prisma.IndustriaUncheckedCreateNestedManyWithoutEmpresaInput
-  relServicio?: Prisma.ServicioUncheckedCreateNestedManyWithoutEmpresaInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedCreateNestedManyWithoutEmpresaInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedCreateNestedManyWithoutEmpresaInput
-  relMenu?: Prisma.MenuUncheckedCreateNestedManyWithoutEmpresaInput
-  relFooterElemento?: Prisma.FooterElementoUncheckedCreateNestedManyWithoutEmpresaInput
-  relContactoEntrante?: Prisma.ContactoEntranteUncheckedCreateNestedManyWithoutEmpresaPropietariaInput
-  relSuscriptor?: Prisma.SuscriptorUncheckedCreateNestedManyWithoutEmpresaInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUncheckedCreateNestedManyWithoutEmpresaInput
+  relContactoEntrante?: Prisma.ContactoEntranteUncheckedCreateNestedManyWithoutEmpresaPropietariaInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedCreateNestedManyWithoutEmpresaInput
+  relFooterElemento?: Prisma.FooterElementoUncheckedCreateNestedManyWithoutEmpresaInput
+  relIndustria?: Prisma.IndustriaUncheckedCreateNestedManyWithoutEmpresaInput
   relLead?: Prisma.LeadUncheckedCreateNestedManyWithoutEmpresaInput
+  relMenu?: Prisma.MenuUncheckedCreateNestedManyWithoutEmpresaInput
+  relProducto?: Prisma.ProductoUncheckedCreateNestedManyWithoutEmpresaInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedCreateNestedManyWithoutEmpresaInput
+  relServicio?: Prisma.ServicioUncheckedCreateNestedManyWithoutEmpresaInput
+  relSucursal?: Prisma.SucursalUncheckedCreateNestedManyWithoutEmpresaInput
+  relSuscriptor?: Prisma.SuscriptorUncheckedCreateNestedManyWithoutEmpresaInput
 }
 
 export type EmpresaCreateOrConnectWithoutRelPasoWizardInput = {
@@ -1598,18 +1598,18 @@ export type EmpresaUpdateWithoutRelPasoWizardInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  relSucursal?: Prisma.SucursalUpdateManyWithoutEmpresaNestedInput
-  relProducto?: Prisma.ProductoUpdateManyWithoutEmpresaNestedInput
-  relIndustria?: Prisma.IndustriaUpdateManyWithoutEmpresaNestedInput
-  relServicio?: Prisma.ServicioUpdateManyWithoutEmpresaNestedInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUpdateManyWithoutEmpresaNestedInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUpdateManyWithoutEmpresaNestedInput
-  relMenu?: Prisma.MenuUpdateManyWithoutEmpresaNestedInput
-  relFooterElemento?: Prisma.FooterElementoUpdateManyWithoutEmpresaNestedInput
-  relContactoEntrante?: Prisma.ContactoEntranteUpdateManyWithoutEmpresaPropietariaNestedInput
-  relSuscriptor?: Prisma.SuscriptorUpdateManyWithoutEmpresaNestedInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUpdateManyWithoutEmpresaNestedInput
+  relContactoEntrante?: Prisma.ContactoEntranteUpdateManyWithoutEmpresaPropietariaNestedInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUpdateManyWithoutEmpresaNestedInput
+  relFooterElemento?: Prisma.FooterElementoUpdateManyWithoutEmpresaNestedInput
+  relIndustria?: Prisma.IndustriaUpdateManyWithoutEmpresaNestedInput
   relLead?: Prisma.LeadUpdateManyWithoutEmpresaNestedInput
+  relMenu?: Prisma.MenuUpdateManyWithoutEmpresaNestedInput
+  relProducto?: Prisma.ProductoUpdateManyWithoutEmpresaNestedInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUpdateManyWithoutEmpresaNestedInput
+  relServicio?: Prisma.ServicioUpdateManyWithoutEmpresaNestedInput
+  relSucursal?: Prisma.SucursalUpdateManyWithoutEmpresaNestedInput
+  relSuscriptor?: Prisma.SuscriptorUpdateManyWithoutEmpresaNestedInput
 }
 
 export type EmpresaUncheckedUpdateWithoutRelPasoWizardInput = {
@@ -1620,18 +1620,18 @@ export type EmpresaUncheckedUpdateWithoutRelPasoWizardInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  relSucursal?: Prisma.SucursalUncheckedUpdateManyWithoutEmpresaNestedInput
-  relProducto?: Prisma.ProductoUncheckedUpdateManyWithoutEmpresaNestedInput
-  relIndustria?: Prisma.IndustriaUncheckedUpdateManyWithoutEmpresaNestedInput
-  relServicio?: Prisma.ServicioUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedUpdateManyWithoutEmpresaNestedInput
-  relMenu?: Prisma.MenuUncheckedUpdateManyWithoutEmpresaNestedInput
-  relFooterElemento?: Prisma.FooterElementoUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContactoEntrante?: Prisma.ContactoEntranteUncheckedUpdateManyWithoutEmpresaPropietariaNestedInput
-  relSuscriptor?: Prisma.SuscriptorUncheckedUpdateManyWithoutEmpresaNestedInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUncheckedUpdateManyWithoutEmpresaNestedInput
+  relContactoEntrante?: Prisma.ContactoEntranteUncheckedUpdateManyWithoutEmpresaPropietariaNestedInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedUpdateManyWithoutEmpresaNestedInput
+  relFooterElemento?: Prisma.FooterElementoUncheckedUpdateManyWithoutEmpresaNestedInput
+  relIndustria?: Prisma.IndustriaUncheckedUpdateManyWithoutEmpresaNestedInput
   relLead?: Prisma.LeadUncheckedUpdateManyWithoutEmpresaNestedInput
+  relMenu?: Prisma.MenuUncheckedUpdateManyWithoutEmpresaNestedInput
+  relProducto?: Prisma.ProductoUncheckedUpdateManyWithoutEmpresaNestedInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedUpdateManyWithoutEmpresaNestedInput
+  relServicio?: Prisma.ServicioUncheckedUpdateManyWithoutEmpresaNestedInput
+  relSucursal?: Prisma.SucursalUncheckedUpdateManyWithoutEmpresaNestedInput
+  relSuscriptor?: Prisma.SuscriptorUncheckedUpdateManyWithoutEmpresaNestedInput
 }
 
 export type EmpresaCreateWithoutRelContactoEntranteInput = {
@@ -1642,18 +1642,18 @@ export type EmpresaCreateWithoutRelContactoEntranteInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  relSucursal?: Prisma.SucursalCreateNestedManyWithoutEmpresaInput
-  relProducto?: Prisma.ProductoCreateNestedManyWithoutEmpresaInput
-  relIndustria?: Prisma.IndustriaCreateNestedManyWithoutEmpresaInput
-  relServicio?: Prisma.ServicioCreateNestedManyWithoutEmpresaInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionCreateNestedManyWithoutEmpresaInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroCreateNestedManyWithoutEmpresaInput
-  relMenu?: Prisma.MenuCreateNestedManyWithoutEmpresaInput
-  relFooterElemento?: Prisma.FooterElementoCreateNestedManyWithoutEmpresaInput
-  relPasoWizard?: Prisma.PasoWizardCreateNestedManyWithoutEmpresaInput
-  relSuscriptor?: Prisma.SuscriptorCreateNestedManyWithoutEmpresaInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioCreateNestedManyWithoutEmpresaInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionCreateNestedManyWithoutEmpresaInput
+  relFooterElemento?: Prisma.FooterElementoCreateNestedManyWithoutEmpresaInput
+  relIndustria?: Prisma.IndustriaCreateNestedManyWithoutEmpresaInput
   relLead?: Prisma.LeadCreateNestedManyWithoutEmpresaInput
+  relMenu?: Prisma.MenuCreateNestedManyWithoutEmpresaInput
+  relPasoWizard?: Prisma.PasoWizardCreateNestedManyWithoutEmpresaInput
+  relProducto?: Prisma.ProductoCreateNestedManyWithoutEmpresaInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroCreateNestedManyWithoutEmpresaInput
+  relServicio?: Prisma.ServicioCreateNestedManyWithoutEmpresaInput
+  relSucursal?: Prisma.SucursalCreateNestedManyWithoutEmpresaInput
+  relSuscriptor?: Prisma.SuscriptorCreateNestedManyWithoutEmpresaInput
 }
 
 export type EmpresaUncheckedCreateWithoutRelContactoEntranteInput = {
@@ -1664,18 +1664,18 @@ export type EmpresaUncheckedCreateWithoutRelContactoEntranteInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  relSucursal?: Prisma.SucursalUncheckedCreateNestedManyWithoutEmpresaInput
-  relProducto?: Prisma.ProductoUncheckedCreateNestedManyWithoutEmpresaInput
-  relIndustria?: Prisma.IndustriaUncheckedCreateNestedManyWithoutEmpresaInput
-  relServicio?: Prisma.ServicioUncheckedCreateNestedManyWithoutEmpresaInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedCreateNestedManyWithoutEmpresaInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedCreateNestedManyWithoutEmpresaInput
-  relMenu?: Prisma.MenuUncheckedCreateNestedManyWithoutEmpresaInput
-  relFooterElemento?: Prisma.FooterElementoUncheckedCreateNestedManyWithoutEmpresaInput
-  relPasoWizard?: Prisma.PasoWizardUncheckedCreateNestedManyWithoutEmpresaInput
-  relSuscriptor?: Prisma.SuscriptorUncheckedCreateNestedManyWithoutEmpresaInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUncheckedCreateNestedManyWithoutEmpresaInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedCreateNestedManyWithoutEmpresaInput
+  relFooterElemento?: Prisma.FooterElementoUncheckedCreateNestedManyWithoutEmpresaInput
+  relIndustria?: Prisma.IndustriaUncheckedCreateNestedManyWithoutEmpresaInput
   relLead?: Prisma.LeadUncheckedCreateNestedManyWithoutEmpresaInput
+  relMenu?: Prisma.MenuUncheckedCreateNestedManyWithoutEmpresaInput
+  relPasoWizard?: Prisma.PasoWizardUncheckedCreateNestedManyWithoutEmpresaInput
+  relProducto?: Prisma.ProductoUncheckedCreateNestedManyWithoutEmpresaInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedCreateNestedManyWithoutEmpresaInput
+  relServicio?: Prisma.ServicioUncheckedCreateNestedManyWithoutEmpresaInput
+  relSucursal?: Prisma.SucursalUncheckedCreateNestedManyWithoutEmpresaInput
+  relSuscriptor?: Prisma.SuscriptorUncheckedCreateNestedManyWithoutEmpresaInput
 }
 
 export type EmpresaCreateOrConnectWithoutRelContactoEntranteInput = {
@@ -1702,18 +1702,18 @@ export type EmpresaUpdateWithoutRelContactoEntranteInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  relSucursal?: Prisma.SucursalUpdateManyWithoutEmpresaNestedInput
-  relProducto?: Prisma.ProductoUpdateManyWithoutEmpresaNestedInput
-  relIndustria?: Prisma.IndustriaUpdateManyWithoutEmpresaNestedInput
-  relServicio?: Prisma.ServicioUpdateManyWithoutEmpresaNestedInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUpdateManyWithoutEmpresaNestedInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUpdateManyWithoutEmpresaNestedInput
-  relMenu?: Prisma.MenuUpdateManyWithoutEmpresaNestedInput
-  relFooterElemento?: Prisma.FooterElementoUpdateManyWithoutEmpresaNestedInput
-  relPasoWizard?: Prisma.PasoWizardUpdateManyWithoutEmpresaNestedInput
-  relSuscriptor?: Prisma.SuscriptorUpdateManyWithoutEmpresaNestedInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUpdateManyWithoutEmpresaNestedInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUpdateManyWithoutEmpresaNestedInput
+  relFooterElemento?: Prisma.FooterElementoUpdateManyWithoutEmpresaNestedInput
+  relIndustria?: Prisma.IndustriaUpdateManyWithoutEmpresaNestedInput
   relLead?: Prisma.LeadUpdateManyWithoutEmpresaNestedInput
+  relMenu?: Prisma.MenuUpdateManyWithoutEmpresaNestedInput
+  relPasoWizard?: Prisma.PasoWizardUpdateManyWithoutEmpresaNestedInput
+  relProducto?: Prisma.ProductoUpdateManyWithoutEmpresaNestedInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUpdateManyWithoutEmpresaNestedInput
+  relServicio?: Prisma.ServicioUpdateManyWithoutEmpresaNestedInput
+  relSucursal?: Prisma.SucursalUpdateManyWithoutEmpresaNestedInput
+  relSuscriptor?: Prisma.SuscriptorUpdateManyWithoutEmpresaNestedInput
 }
 
 export type EmpresaUncheckedUpdateWithoutRelContactoEntranteInput = {
@@ -1724,18 +1724,18 @@ export type EmpresaUncheckedUpdateWithoutRelContactoEntranteInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  relSucursal?: Prisma.SucursalUncheckedUpdateManyWithoutEmpresaNestedInput
-  relProducto?: Prisma.ProductoUncheckedUpdateManyWithoutEmpresaNestedInput
-  relIndustria?: Prisma.IndustriaUncheckedUpdateManyWithoutEmpresaNestedInput
-  relServicio?: Prisma.ServicioUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedUpdateManyWithoutEmpresaNestedInput
-  relMenu?: Prisma.MenuUncheckedUpdateManyWithoutEmpresaNestedInput
-  relFooterElemento?: Prisma.FooterElementoUncheckedUpdateManyWithoutEmpresaNestedInput
-  relPasoWizard?: Prisma.PasoWizardUncheckedUpdateManyWithoutEmpresaNestedInput
-  relSuscriptor?: Prisma.SuscriptorUncheckedUpdateManyWithoutEmpresaNestedInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUncheckedUpdateManyWithoutEmpresaNestedInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedUpdateManyWithoutEmpresaNestedInput
+  relFooterElemento?: Prisma.FooterElementoUncheckedUpdateManyWithoutEmpresaNestedInput
+  relIndustria?: Prisma.IndustriaUncheckedUpdateManyWithoutEmpresaNestedInput
   relLead?: Prisma.LeadUncheckedUpdateManyWithoutEmpresaNestedInput
+  relMenu?: Prisma.MenuUncheckedUpdateManyWithoutEmpresaNestedInput
+  relPasoWizard?: Prisma.PasoWizardUncheckedUpdateManyWithoutEmpresaNestedInput
+  relProducto?: Prisma.ProductoUncheckedUpdateManyWithoutEmpresaNestedInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedUpdateManyWithoutEmpresaNestedInput
+  relServicio?: Prisma.ServicioUncheckedUpdateManyWithoutEmpresaNestedInput
+  relSucursal?: Prisma.SucursalUncheckedUpdateManyWithoutEmpresaNestedInput
+  relSuscriptor?: Prisma.SuscriptorUncheckedUpdateManyWithoutEmpresaNestedInput
 }
 
 export type EmpresaCreateWithoutRelSuscriptorInput = {
@@ -1746,18 +1746,18 @@ export type EmpresaCreateWithoutRelSuscriptorInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  relSucursal?: Prisma.SucursalCreateNestedManyWithoutEmpresaInput
-  relProducto?: Prisma.ProductoCreateNestedManyWithoutEmpresaInput
-  relIndustria?: Prisma.IndustriaCreateNestedManyWithoutEmpresaInput
-  relServicio?: Prisma.ServicioCreateNestedManyWithoutEmpresaInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionCreateNestedManyWithoutEmpresaInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroCreateNestedManyWithoutEmpresaInput
-  relMenu?: Prisma.MenuCreateNestedManyWithoutEmpresaInput
-  relFooterElemento?: Prisma.FooterElementoCreateNestedManyWithoutEmpresaInput
-  relPasoWizard?: Prisma.PasoWizardCreateNestedManyWithoutEmpresaInput
-  relContactoEntrante?: Prisma.ContactoEntranteCreateNestedManyWithoutEmpresaPropietariaInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioCreateNestedManyWithoutEmpresaInput
+  relContactoEntrante?: Prisma.ContactoEntranteCreateNestedManyWithoutEmpresaPropietariaInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionCreateNestedManyWithoutEmpresaInput
+  relFooterElemento?: Prisma.FooterElementoCreateNestedManyWithoutEmpresaInput
+  relIndustria?: Prisma.IndustriaCreateNestedManyWithoutEmpresaInput
   relLead?: Prisma.LeadCreateNestedManyWithoutEmpresaInput
+  relMenu?: Prisma.MenuCreateNestedManyWithoutEmpresaInput
+  relPasoWizard?: Prisma.PasoWizardCreateNestedManyWithoutEmpresaInput
+  relProducto?: Prisma.ProductoCreateNestedManyWithoutEmpresaInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroCreateNestedManyWithoutEmpresaInput
+  relServicio?: Prisma.ServicioCreateNestedManyWithoutEmpresaInput
+  relSucursal?: Prisma.SucursalCreateNestedManyWithoutEmpresaInput
 }
 
 export type EmpresaUncheckedCreateWithoutRelSuscriptorInput = {
@@ -1768,18 +1768,18 @@ export type EmpresaUncheckedCreateWithoutRelSuscriptorInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  relSucursal?: Prisma.SucursalUncheckedCreateNestedManyWithoutEmpresaInput
-  relProducto?: Prisma.ProductoUncheckedCreateNestedManyWithoutEmpresaInput
-  relIndustria?: Prisma.IndustriaUncheckedCreateNestedManyWithoutEmpresaInput
-  relServicio?: Prisma.ServicioUncheckedCreateNestedManyWithoutEmpresaInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedCreateNestedManyWithoutEmpresaInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedCreateNestedManyWithoutEmpresaInput
-  relMenu?: Prisma.MenuUncheckedCreateNestedManyWithoutEmpresaInput
-  relFooterElemento?: Prisma.FooterElementoUncheckedCreateNestedManyWithoutEmpresaInput
-  relPasoWizard?: Prisma.PasoWizardUncheckedCreateNestedManyWithoutEmpresaInput
-  relContactoEntrante?: Prisma.ContactoEntranteUncheckedCreateNestedManyWithoutEmpresaPropietariaInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUncheckedCreateNestedManyWithoutEmpresaInput
+  relContactoEntrante?: Prisma.ContactoEntranteUncheckedCreateNestedManyWithoutEmpresaPropietariaInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedCreateNestedManyWithoutEmpresaInput
+  relFooterElemento?: Prisma.FooterElementoUncheckedCreateNestedManyWithoutEmpresaInput
+  relIndustria?: Prisma.IndustriaUncheckedCreateNestedManyWithoutEmpresaInput
   relLead?: Prisma.LeadUncheckedCreateNestedManyWithoutEmpresaInput
+  relMenu?: Prisma.MenuUncheckedCreateNestedManyWithoutEmpresaInput
+  relPasoWizard?: Prisma.PasoWizardUncheckedCreateNestedManyWithoutEmpresaInput
+  relProducto?: Prisma.ProductoUncheckedCreateNestedManyWithoutEmpresaInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedCreateNestedManyWithoutEmpresaInput
+  relServicio?: Prisma.ServicioUncheckedCreateNestedManyWithoutEmpresaInput
+  relSucursal?: Prisma.SucursalUncheckedCreateNestedManyWithoutEmpresaInput
 }
 
 export type EmpresaCreateOrConnectWithoutRelSuscriptorInput = {
@@ -1806,18 +1806,18 @@ export type EmpresaUpdateWithoutRelSuscriptorInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  relSucursal?: Prisma.SucursalUpdateManyWithoutEmpresaNestedInput
-  relProducto?: Prisma.ProductoUpdateManyWithoutEmpresaNestedInput
-  relIndustria?: Prisma.IndustriaUpdateManyWithoutEmpresaNestedInput
-  relServicio?: Prisma.ServicioUpdateManyWithoutEmpresaNestedInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUpdateManyWithoutEmpresaNestedInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUpdateManyWithoutEmpresaNestedInput
-  relMenu?: Prisma.MenuUpdateManyWithoutEmpresaNestedInput
-  relFooterElemento?: Prisma.FooterElementoUpdateManyWithoutEmpresaNestedInput
-  relPasoWizard?: Prisma.PasoWizardUpdateManyWithoutEmpresaNestedInput
-  relContactoEntrante?: Prisma.ContactoEntranteUpdateManyWithoutEmpresaPropietariaNestedInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUpdateManyWithoutEmpresaNestedInput
+  relContactoEntrante?: Prisma.ContactoEntranteUpdateManyWithoutEmpresaPropietariaNestedInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUpdateManyWithoutEmpresaNestedInput
+  relFooterElemento?: Prisma.FooterElementoUpdateManyWithoutEmpresaNestedInput
+  relIndustria?: Prisma.IndustriaUpdateManyWithoutEmpresaNestedInput
   relLead?: Prisma.LeadUpdateManyWithoutEmpresaNestedInput
+  relMenu?: Prisma.MenuUpdateManyWithoutEmpresaNestedInput
+  relPasoWizard?: Prisma.PasoWizardUpdateManyWithoutEmpresaNestedInput
+  relProducto?: Prisma.ProductoUpdateManyWithoutEmpresaNestedInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUpdateManyWithoutEmpresaNestedInput
+  relServicio?: Prisma.ServicioUpdateManyWithoutEmpresaNestedInput
+  relSucursal?: Prisma.SucursalUpdateManyWithoutEmpresaNestedInput
 }
 
 export type EmpresaUncheckedUpdateWithoutRelSuscriptorInput = {
@@ -1828,18 +1828,18 @@ export type EmpresaUncheckedUpdateWithoutRelSuscriptorInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  relSucursal?: Prisma.SucursalUncheckedUpdateManyWithoutEmpresaNestedInput
-  relProducto?: Prisma.ProductoUncheckedUpdateManyWithoutEmpresaNestedInput
-  relIndustria?: Prisma.IndustriaUncheckedUpdateManyWithoutEmpresaNestedInput
-  relServicio?: Prisma.ServicioUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedUpdateManyWithoutEmpresaNestedInput
-  relMenu?: Prisma.MenuUncheckedUpdateManyWithoutEmpresaNestedInput
-  relFooterElemento?: Prisma.FooterElementoUncheckedUpdateManyWithoutEmpresaNestedInput
-  relPasoWizard?: Prisma.PasoWizardUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContactoEntrante?: Prisma.ContactoEntranteUncheckedUpdateManyWithoutEmpresaPropietariaNestedInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUncheckedUpdateManyWithoutEmpresaNestedInput
+  relContactoEntrante?: Prisma.ContactoEntranteUncheckedUpdateManyWithoutEmpresaPropietariaNestedInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedUpdateManyWithoutEmpresaNestedInput
+  relFooterElemento?: Prisma.FooterElementoUncheckedUpdateManyWithoutEmpresaNestedInput
+  relIndustria?: Prisma.IndustriaUncheckedUpdateManyWithoutEmpresaNestedInput
   relLead?: Prisma.LeadUncheckedUpdateManyWithoutEmpresaNestedInput
+  relMenu?: Prisma.MenuUncheckedUpdateManyWithoutEmpresaNestedInput
+  relPasoWizard?: Prisma.PasoWizardUncheckedUpdateManyWithoutEmpresaNestedInput
+  relProducto?: Prisma.ProductoUncheckedUpdateManyWithoutEmpresaNestedInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedUpdateManyWithoutEmpresaNestedInput
+  relServicio?: Prisma.ServicioUncheckedUpdateManyWithoutEmpresaNestedInput
+  relSucursal?: Prisma.SucursalUncheckedUpdateManyWithoutEmpresaNestedInput
 }
 
 export type EmpresaCreateWithoutRelConfiguracionSitioInput = {
@@ -1850,18 +1850,18 @@ export type EmpresaCreateWithoutRelConfiguracionSitioInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  relSucursal?: Prisma.SucursalCreateNestedManyWithoutEmpresaInput
-  relProducto?: Prisma.ProductoCreateNestedManyWithoutEmpresaInput
-  relIndustria?: Prisma.IndustriaCreateNestedManyWithoutEmpresaInput
-  relServicio?: Prisma.ServicioCreateNestedManyWithoutEmpresaInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionCreateNestedManyWithoutEmpresaInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroCreateNestedManyWithoutEmpresaInput
-  relMenu?: Prisma.MenuCreateNestedManyWithoutEmpresaInput
-  relFooterElemento?: Prisma.FooterElementoCreateNestedManyWithoutEmpresaInput
-  relPasoWizard?: Prisma.PasoWizardCreateNestedManyWithoutEmpresaInput
   relContactoEntrante?: Prisma.ContactoEntranteCreateNestedManyWithoutEmpresaPropietariaInput
-  relSuscriptor?: Prisma.SuscriptorCreateNestedManyWithoutEmpresaInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionCreateNestedManyWithoutEmpresaInput
+  relFooterElemento?: Prisma.FooterElementoCreateNestedManyWithoutEmpresaInput
+  relIndustria?: Prisma.IndustriaCreateNestedManyWithoutEmpresaInput
   relLead?: Prisma.LeadCreateNestedManyWithoutEmpresaInput
+  relMenu?: Prisma.MenuCreateNestedManyWithoutEmpresaInput
+  relPasoWizard?: Prisma.PasoWizardCreateNestedManyWithoutEmpresaInput
+  relProducto?: Prisma.ProductoCreateNestedManyWithoutEmpresaInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroCreateNestedManyWithoutEmpresaInput
+  relServicio?: Prisma.ServicioCreateNestedManyWithoutEmpresaInput
+  relSucursal?: Prisma.SucursalCreateNestedManyWithoutEmpresaInput
+  relSuscriptor?: Prisma.SuscriptorCreateNestedManyWithoutEmpresaInput
 }
 
 export type EmpresaUncheckedCreateWithoutRelConfiguracionSitioInput = {
@@ -1872,18 +1872,18 @@ export type EmpresaUncheckedCreateWithoutRelConfiguracionSitioInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  relSucursal?: Prisma.SucursalUncheckedCreateNestedManyWithoutEmpresaInput
-  relProducto?: Prisma.ProductoUncheckedCreateNestedManyWithoutEmpresaInput
-  relIndustria?: Prisma.IndustriaUncheckedCreateNestedManyWithoutEmpresaInput
-  relServicio?: Prisma.ServicioUncheckedCreateNestedManyWithoutEmpresaInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedCreateNestedManyWithoutEmpresaInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedCreateNestedManyWithoutEmpresaInput
-  relMenu?: Prisma.MenuUncheckedCreateNestedManyWithoutEmpresaInput
-  relFooterElemento?: Prisma.FooterElementoUncheckedCreateNestedManyWithoutEmpresaInput
-  relPasoWizard?: Prisma.PasoWizardUncheckedCreateNestedManyWithoutEmpresaInput
   relContactoEntrante?: Prisma.ContactoEntranteUncheckedCreateNestedManyWithoutEmpresaPropietariaInput
-  relSuscriptor?: Prisma.SuscriptorUncheckedCreateNestedManyWithoutEmpresaInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedCreateNestedManyWithoutEmpresaInput
+  relFooterElemento?: Prisma.FooterElementoUncheckedCreateNestedManyWithoutEmpresaInput
+  relIndustria?: Prisma.IndustriaUncheckedCreateNestedManyWithoutEmpresaInput
   relLead?: Prisma.LeadUncheckedCreateNestedManyWithoutEmpresaInput
+  relMenu?: Prisma.MenuUncheckedCreateNestedManyWithoutEmpresaInput
+  relPasoWizard?: Prisma.PasoWizardUncheckedCreateNestedManyWithoutEmpresaInput
+  relProducto?: Prisma.ProductoUncheckedCreateNestedManyWithoutEmpresaInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedCreateNestedManyWithoutEmpresaInput
+  relServicio?: Prisma.ServicioUncheckedCreateNestedManyWithoutEmpresaInput
+  relSucursal?: Prisma.SucursalUncheckedCreateNestedManyWithoutEmpresaInput
+  relSuscriptor?: Prisma.SuscriptorUncheckedCreateNestedManyWithoutEmpresaInput
 }
 
 export type EmpresaCreateOrConnectWithoutRelConfiguracionSitioInput = {
@@ -1910,18 +1910,18 @@ export type EmpresaUpdateWithoutRelConfiguracionSitioInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  relSucursal?: Prisma.SucursalUpdateManyWithoutEmpresaNestedInput
-  relProducto?: Prisma.ProductoUpdateManyWithoutEmpresaNestedInput
-  relIndustria?: Prisma.IndustriaUpdateManyWithoutEmpresaNestedInput
-  relServicio?: Prisma.ServicioUpdateManyWithoutEmpresaNestedInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUpdateManyWithoutEmpresaNestedInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUpdateManyWithoutEmpresaNestedInput
-  relMenu?: Prisma.MenuUpdateManyWithoutEmpresaNestedInput
-  relFooterElemento?: Prisma.FooterElementoUpdateManyWithoutEmpresaNestedInput
-  relPasoWizard?: Prisma.PasoWizardUpdateManyWithoutEmpresaNestedInput
   relContactoEntrante?: Prisma.ContactoEntranteUpdateManyWithoutEmpresaPropietariaNestedInput
-  relSuscriptor?: Prisma.SuscriptorUpdateManyWithoutEmpresaNestedInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUpdateManyWithoutEmpresaNestedInput
+  relFooterElemento?: Prisma.FooterElementoUpdateManyWithoutEmpresaNestedInput
+  relIndustria?: Prisma.IndustriaUpdateManyWithoutEmpresaNestedInput
   relLead?: Prisma.LeadUpdateManyWithoutEmpresaNestedInput
+  relMenu?: Prisma.MenuUpdateManyWithoutEmpresaNestedInput
+  relPasoWizard?: Prisma.PasoWizardUpdateManyWithoutEmpresaNestedInput
+  relProducto?: Prisma.ProductoUpdateManyWithoutEmpresaNestedInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUpdateManyWithoutEmpresaNestedInput
+  relServicio?: Prisma.ServicioUpdateManyWithoutEmpresaNestedInput
+  relSucursal?: Prisma.SucursalUpdateManyWithoutEmpresaNestedInput
+  relSuscriptor?: Prisma.SuscriptorUpdateManyWithoutEmpresaNestedInput
 }
 
 export type EmpresaUncheckedUpdateWithoutRelConfiguracionSitioInput = {
@@ -1932,18 +1932,18 @@ export type EmpresaUncheckedUpdateWithoutRelConfiguracionSitioInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  relSucursal?: Prisma.SucursalUncheckedUpdateManyWithoutEmpresaNestedInput
-  relProducto?: Prisma.ProductoUncheckedUpdateManyWithoutEmpresaNestedInput
-  relIndustria?: Prisma.IndustriaUncheckedUpdateManyWithoutEmpresaNestedInput
-  relServicio?: Prisma.ServicioUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedUpdateManyWithoutEmpresaNestedInput
-  relMenu?: Prisma.MenuUncheckedUpdateManyWithoutEmpresaNestedInput
-  relFooterElemento?: Prisma.FooterElementoUncheckedUpdateManyWithoutEmpresaNestedInput
-  relPasoWizard?: Prisma.PasoWizardUncheckedUpdateManyWithoutEmpresaNestedInput
   relContactoEntrante?: Prisma.ContactoEntranteUncheckedUpdateManyWithoutEmpresaPropietariaNestedInput
-  relSuscriptor?: Prisma.SuscriptorUncheckedUpdateManyWithoutEmpresaNestedInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedUpdateManyWithoutEmpresaNestedInput
+  relFooterElemento?: Prisma.FooterElementoUncheckedUpdateManyWithoutEmpresaNestedInput
+  relIndustria?: Prisma.IndustriaUncheckedUpdateManyWithoutEmpresaNestedInput
   relLead?: Prisma.LeadUncheckedUpdateManyWithoutEmpresaNestedInput
+  relMenu?: Prisma.MenuUncheckedUpdateManyWithoutEmpresaNestedInput
+  relPasoWizard?: Prisma.PasoWizardUncheckedUpdateManyWithoutEmpresaNestedInput
+  relProducto?: Prisma.ProductoUncheckedUpdateManyWithoutEmpresaNestedInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedUpdateManyWithoutEmpresaNestedInput
+  relServicio?: Prisma.ServicioUncheckedUpdateManyWithoutEmpresaNestedInput
+  relSucursal?: Prisma.SucursalUncheckedUpdateManyWithoutEmpresaNestedInput
+  relSuscriptor?: Prisma.SuscriptorUncheckedUpdateManyWithoutEmpresaNestedInput
 }
 
 export type EmpresaCreateWithoutRelLeadInput = {
@@ -1954,18 +1954,18 @@ export type EmpresaCreateWithoutRelLeadInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  relSucursal?: Prisma.SucursalCreateNestedManyWithoutEmpresaInput
-  relProducto?: Prisma.ProductoCreateNestedManyWithoutEmpresaInput
-  relIndustria?: Prisma.IndustriaCreateNestedManyWithoutEmpresaInput
-  relServicio?: Prisma.ServicioCreateNestedManyWithoutEmpresaInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionCreateNestedManyWithoutEmpresaInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroCreateNestedManyWithoutEmpresaInput
-  relMenu?: Prisma.MenuCreateNestedManyWithoutEmpresaInput
-  relFooterElemento?: Prisma.FooterElementoCreateNestedManyWithoutEmpresaInput
-  relPasoWizard?: Prisma.PasoWizardCreateNestedManyWithoutEmpresaInput
-  relContactoEntrante?: Prisma.ContactoEntranteCreateNestedManyWithoutEmpresaPropietariaInput
-  relSuscriptor?: Prisma.SuscriptorCreateNestedManyWithoutEmpresaInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioCreateNestedManyWithoutEmpresaInput
+  relContactoEntrante?: Prisma.ContactoEntranteCreateNestedManyWithoutEmpresaPropietariaInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionCreateNestedManyWithoutEmpresaInput
+  relFooterElemento?: Prisma.FooterElementoCreateNestedManyWithoutEmpresaInput
+  relIndustria?: Prisma.IndustriaCreateNestedManyWithoutEmpresaInput
+  relMenu?: Prisma.MenuCreateNestedManyWithoutEmpresaInput
+  relPasoWizard?: Prisma.PasoWizardCreateNestedManyWithoutEmpresaInput
+  relProducto?: Prisma.ProductoCreateNestedManyWithoutEmpresaInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroCreateNestedManyWithoutEmpresaInput
+  relServicio?: Prisma.ServicioCreateNestedManyWithoutEmpresaInput
+  relSucursal?: Prisma.SucursalCreateNestedManyWithoutEmpresaInput
+  relSuscriptor?: Prisma.SuscriptorCreateNestedManyWithoutEmpresaInput
 }
 
 export type EmpresaUncheckedCreateWithoutRelLeadInput = {
@@ -1976,18 +1976,18 @@ export type EmpresaUncheckedCreateWithoutRelLeadInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  relSucursal?: Prisma.SucursalUncheckedCreateNestedManyWithoutEmpresaInput
-  relProducto?: Prisma.ProductoUncheckedCreateNestedManyWithoutEmpresaInput
-  relIndustria?: Prisma.IndustriaUncheckedCreateNestedManyWithoutEmpresaInput
-  relServicio?: Prisma.ServicioUncheckedCreateNestedManyWithoutEmpresaInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedCreateNestedManyWithoutEmpresaInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedCreateNestedManyWithoutEmpresaInput
-  relMenu?: Prisma.MenuUncheckedCreateNestedManyWithoutEmpresaInput
-  relFooterElemento?: Prisma.FooterElementoUncheckedCreateNestedManyWithoutEmpresaInput
-  relPasoWizard?: Prisma.PasoWizardUncheckedCreateNestedManyWithoutEmpresaInput
-  relContactoEntrante?: Prisma.ContactoEntranteUncheckedCreateNestedManyWithoutEmpresaPropietariaInput
-  relSuscriptor?: Prisma.SuscriptorUncheckedCreateNestedManyWithoutEmpresaInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUncheckedCreateNestedManyWithoutEmpresaInput
+  relContactoEntrante?: Prisma.ContactoEntranteUncheckedCreateNestedManyWithoutEmpresaPropietariaInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedCreateNestedManyWithoutEmpresaInput
+  relFooterElemento?: Prisma.FooterElementoUncheckedCreateNestedManyWithoutEmpresaInput
+  relIndustria?: Prisma.IndustriaUncheckedCreateNestedManyWithoutEmpresaInput
+  relMenu?: Prisma.MenuUncheckedCreateNestedManyWithoutEmpresaInput
+  relPasoWizard?: Prisma.PasoWizardUncheckedCreateNestedManyWithoutEmpresaInput
+  relProducto?: Prisma.ProductoUncheckedCreateNestedManyWithoutEmpresaInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedCreateNestedManyWithoutEmpresaInput
+  relServicio?: Prisma.ServicioUncheckedCreateNestedManyWithoutEmpresaInput
+  relSucursal?: Prisma.SucursalUncheckedCreateNestedManyWithoutEmpresaInput
+  relSuscriptor?: Prisma.SuscriptorUncheckedCreateNestedManyWithoutEmpresaInput
 }
 
 export type EmpresaCreateOrConnectWithoutRelLeadInput = {
@@ -2014,18 +2014,18 @@ export type EmpresaUpdateWithoutRelLeadInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  relSucursal?: Prisma.SucursalUpdateManyWithoutEmpresaNestedInput
-  relProducto?: Prisma.ProductoUpdateManyWithoutEmpresaNestedInput
-  relIndustria?: Prisma.IndustriaUpdateManyWithoutEmpresaNestedInput
-  relServicio?: Prisma.ServicioUpdateManyWithoutEmpresaNestedInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUpdateManyWithoutEmpresaNestedInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUpdateManyWithoutEmpresaNestedInput
-  relMenu?: Prisma.MenuUpdateManyWithoutEmpresaNestedInput
-  relFooterElemento?: Prisma.FooterElementoUpdateManyWithoutEmpresaNestedInput
-  relPasoWizard?: Prisma.PasoWizardUpdateManyWithoutEmpresaNestedInput
-  relContactoEntrante?: Prisma.ContactoEntranteUpdateManyWithoutEmpresaPropietariaNestedInput
-  relSuscriptor?: Prisma.SuscriptorUpdateManyWithoutEmpresaNestedInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUpdateManyWithoutEmpresaNestedInput
+  relContactoEntrante?: Prisma.ContactoEntranteUpdateManyWithoutEmpresaPropietariaNestedInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUpdateManyWithoutEmpresaNestedInput
+  relFooterElemento?: Prisma.FooterElementoUpdateManyWithoutEmpresaNestedInput
+  relIndustria?: Prisma.IndustriaUpdateManyWithoutEmpresaNestedInput
+  relMenu?: Prisma.MenuUpdateManyWithoutEmpresaNestedInput
+  relPasoWizard?: Prisma.PasoWizardUpdateManyWithoutEmpresaNestedInput
+  relProducto?: Prisma.ProductoUpdateManyWithoutEmpresaNestedInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUpdateManyWithoutEmpresaNestedInput
+  relServicio?: Prisma.ServicioUpdateManyWithoutEmpresaNestedInput
+  relSucursal?: Prisma.SucursalUpdateManyWithoutEmpresaNestedInput
+  relSuscriptor?: Prisma.SuscriptorUpdateManyWithoutEmpresaNestedInput
 }
 
 export type EmpresaUncheckedUpdateWithoutRelLeadInput = {
@@ -2036,18 +2036,18 @@ export type EmpresaUncheckedUpdateWithoutRelLeadInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  relSucursal?: Prisma.SucursalUncheckedUpdateManyWithoutEmpresaNestedInput
-  relProducto?: Prisma.ProductoUncheckedUpdateManyWithoutEmpresaNestedInput
-  relIndustria?: Prisma.IndustriaUncheckedUpdateManyWithoutEmpresaNestedInput
-  relServicio?: Prisma.ServicioUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedUpdateManyWithoutEmpresaNestedInput
-  relMenu?: Prisma.MenuUncheckedUpdateManyWithoutEmpresaNestedInput
-  relFooterElemento?: Prisma.FooterElementoUncheckedUpdateManyWithoutEmpresaNestedInput
-  relPasoWizard?: Prisma.PasoWizardUncheckedUpdateManyWithoutEmpresaNestedInput
-  relContactoEntrante?: Prisma.ContactoEntranteUncheckedUpdateManyWithoutEmpresaPropietariaNestedInput
-  relSuscriptor?: Prisma.SuscriptorUncheckedUpdateManyWithoutEmpresaNestedInput
   relConfiguracionSitio?: Prisma.ConfiguracionSitioUncheckedUpdateManyWithoutEmpresaNestedInput
+  relContactoEntrante?: Prisma.ContactoEntranteUncheckedUpdateManyWithoutEmpresaPropietariaNestedInput
+  relContenidoSeccion?: Prisma.ContenidoSeccionUncheckedUpdateManyWithoutEmpresaNestedInput
+  relFooterElemento?: Prisma.FooterElementoUncheckedUpdateManyWithoutEmpresaNestedInput
+  relIndustria?: Prisma.IndustriaUncheckedUpdateManyWithoutEmpresaNestedInput
+  relMenu?: Prisma.MenuUncheckedUpdateManyWithoutEmpresaNestedInput
+  relPasoWizard?: Prisma.PasoWizardUncheckedUpdateManyWithoutEmpresaNestedInput
+  relProducto?: Prisma.ProductoUncheckedUpdateManyWithoutEmpresaNestedInput
+  relContenidoRegistro?: Prisma.ContenidoRegistroUncheckedUpdateManyWithoutEmpresaNestedInput
+  relServicio?: Prisma.ServicioUncheckedUpdateManyWithoutEmpresaNestedInput
+  relSucursal?: Prisma.SucursalUncheckedUpdateManyWithoutEmpresaNestedInput
+  relSuscriptor?: Prisma.SuscriptorUncheckedUpdateManyWithoutEmpresaNestedInput
 }
 
 
@@ -2056,35 +2056,35 @@ export type EmpresaUncheckedUpdateWithoutRelLeadInput = {
  */
 
 export type EmpresaCountOutputType = {
-  relSucursal: number
-  relProducto: number
-  relIndustria: number
-  relServicio: number
-  relContenidoSeccion: number
-  relContenidoRegistro: number
-  relMenu: number
-  relFooterElemento: number
-  relPasoWizard: number
-  relContactoEntrante: number
-  relSuscriptor: number
   relConfiguracionSitio: number
+  relContactoEntrante: number
+  relContenidoSeccion: number
+  relFooterElemento: number
+  relIndustria: number
   relLead: number
+  relMenu: number
+  relPasoWizard: number
+  relProducto: number
+  relContenidoRegistro: number
+  relServicio: number
+  relSucursal: number
+  relSuscriptor: number
 }
 
 export type EmpresaCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  relSucursal?: boolean | EmpresaCountOutputTypeCountRelSucursalArgs
-  relProducto?: boolean | EmpresaCountOutputTypeCountRelProductoArgs
-  relIndustria?: boolean | EmpresaCountOutputTypeCountRelIndustriaArgs
-  relServicio?: boolean | EmpresaCountOutputTypeCountRelServicioArgs
-  relContenidoSeccion?: boolean | EmpresaCountOutputTypeCountRelContenidoSeccionArgs
-  relContenidoRegistro?: boolean | EmpresaCountOutputTypeCountRelContenidoRegistroArgs
-  relMenu?: boolean | EmpresaCountOutputTypeCountRelMenuArgs
-  relFooterElemento?: boolean | EmpresaCountOutputTypeCountRelFooterElementoArgs
-  relPasoWizard?: boolean | EmpresaCountOutputTypeCountRelPasoWizardArgs
-  relContactoEntrante?: boolean | EmpresaCountOutputTypeCountRelContactoEntranteArgs
-  relSuscriptor?: boolean | EmpresaCountOutputTypeCountRelSuscriptorArgs
   relConfiguracionSitio?: boolean | EmpresaCountOutputTypeCountRelConfiguracionSitioArgs
+  relContactoEntrante?: boolean | EmpresaCountOutputTypeCountRelContactoEntranteArgs
+  relContenidoSeccion?: boolean | EmpresaCountOutputTypeCountRelContenidoSeccionArgs
+  relFooterElemento?: boolean | EmpresaCountOutputTypeCountRelFooterElementoArgs
+  relIndustria?: boolean | EmpresaCountOutputTypeCountRelIndustriaArgs
   relLead?: boolean | EmpresaCountOutputTypeCountRelLeadArgs
+  relMenu?: boolean | EmpresaCountOutputTypeCountRelMenuArgs
+  relPasoWizard?: boolean | EmpresaCountOutputTypeCountRelPasoWizardArgs
+  relProducto?: boolean | EmpresaCountOutputTypeCountRelProductoArgs
+  relContenidoRegistro?: boolean | EmpresaCountOutputTypeCountRelContenidoRegistroArgs
+  relServicio?: boolean | EmpresaCountOutputTypeCountRelServicioArgs
+  relSucursal?: boolean | EmpresaCountOutputTypeCountRelSucursalArgs
+  relSuscriptor?: boolean | EmpresaCountOutputTypeCountRelSuscriptorArgs
 }
 
 /**
@@ -2100,64 +2100,8 @@ export type EmpresaCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exte
 /**
  * EmpresaCountOutputType without action
  */
-export type EmpresaCountOutputTypeCountRelSucursalArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.SucursalWhereInput
-}
-
-/**
- * EmpresaCountOutputType without action
- */
-export type EmpresaCountOutputTypeCountRelProductoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ProductoWhereInput
-}
-
-/**
- * EmpresaCountOutputType without action
- */
-export type EmpresaCountOutputTypeCountRelIndustriaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.IndustriaWhereInput
-}
-
-/**
- * EmpresaCountOutputType without action
- */
-export type EmpresaCountOutputTypeCountRelServicioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ServicioWhereInput
-}
-
-/**
- * EmpresaCountOutputType without action
- */
-export type EmpresaCountOutputTypeCountRelContenidoSeccionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ContenidoSeccionWhereInput
-}
-
-/**
- * EmpresaCountOutputType without action
- */
-export type EmpresaCountOutputTypeCountRelContenidoRegistroArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ContenidoRegistroWhereInput
-}
-
-/**
- * EmpresaCountOutputType without action
- */
-export type EmpresaCountOutputTypeCountRelMenuArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.MenuWhereInput
-}
-
-/**
- * EmpresaCountOutputType without action
- */
-export type EmpresaCountOutputTypeCountRelFooterElementoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.FooterElementoWhereInput
-}
-
-/**
- * EmpresaCountOutputType without action
- */
-export type EmpresaCountOutputTypeCountRelPasoWizardArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.PasoWizardWhereInput
+export type EmpresaCountOutputTypeCountRelConfiguracionSitioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ConfiguracionSitioWhereInput
 }
 
 /**
@@ -2170,15 +2114,22 @@ export type EmpresaCountOutputTypeCountRelContactoEntranteArgs<ExtArgs extends r
 /**
  * EmpresaCountOutputType without action
  */
-export type EmpresaCountOutputTypeCountRelSuscriptorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.SuscriptorWhereInput
+export type EmpresaCountOutputTypeCountRelContenidoSeccionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ContenidoSeccionWhereInput
 }
 
 /**
  * EmpresaCountOutputType without action
  */
-export type EmpresaCountOutputTypeCountRelConfiguracionSitioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ConfiguracionSitioWhereInput
+export type EmpresaCountOutputTypeCountRelFooterElementoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FooterElementoWhereInput
+}
+
+/**
+ * EmpresaCountOutputType without action
+ */
+export type EmpresaCountOutputTypeCountRelIndustriaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.IndustriaWhereInput
 }
 
 /**
@@ -2186,6 +2137,55 @@ export type EmpresaCountOutputTypeCountRelConfiguracionSitioArgs<ExtArgs extends
  */
 export type EmpresaCountOutputTypeCountRelLeadArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.LeadWhereInput
+}
+
+/**
+ * EmpresaCountOutputType without action
+ */
+export type EmpresaCountOutputTypeCountRelMenuArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MenuWhereInput
+}
+
+/**
+ * EmpresaCountOutputType without action
+ */
+export type EmpresaCountOutputTypeCountRelPasoWizardArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PasoWizardWhereInput
+}
+
+/**
+ * EmpresaCountOutputType without action
+ */
+export type EmpresaCountOutputTypeCountRelProductoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProductoWhereInput
+}
+
+/**
+ * EmpresaCountOutputType without action
+ */
+export type EmpresaCountOutputTypeCountRelContenidoRegistroArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ContenidoRegistroWhereInput
+}
+
+/**
+ * EmpresaCountOutputType without action
+ */
+export type EmpresaCountOutputTypeCountRelServicioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ServicioWhereInput
+}
+
+/**
+ * EmpresaCountOutputType without action
+ */
+export type EmpresaCountOutputTypeCountRelSucursalArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SucursalWhereInput
+}
+
+/**
+ * EmpresaCountOutputType without action
+ */
+export type EmpresaCountOutputTypeCountRelSuscriptorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SuscriptorWhereInput
 }
 
 
@@ -2197,19 +2197,19 @@ export type EmpresaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   eliminadoEn?: boolean
   creadoEn?: boolean
   actualizadoEn?: boolean
-  relSucursal?: boolean | Prisma.Empresa$relSucursalArgs<ExtArgs>
-  relProducto?: boolean | Prisma.Empresa$relProductoArgs<ExtArgs>
-  relIndustria?: boolean | Prisma.Empresa$relIndustriaArgs<ExtArgs>
-  relServicio?: boolean | Prisma.Empresa$relServicioArgs<ExtArgs>
-  relContenidoSeccion?: boolean | Prisma.Empresa$relContenidoSeccionArgs<ExtArgs>
-  relContenidoRegistro?: boolean | Prisma.Empresa$relContenidoRegistroArgs<ExtArgs>
-  relMenu?: boolean | Prisma.Empresa$relMenuArgs<ExtArgs>
-  relFooterElemento?: boolean | Prisma.Empresa$relFooterElementoArgs<ExtArgs>
-  relPasoWizard?: boolean | Prisma.Empresa$relPasoWizardArgs<ExtArgs>
-  relContactoEntrante?: boolean | Prisma.Empresa$relContactoEntranteArgs<ExtArgs>
-  relSuscriptor?: boolean | Prisma.Empresa$relSuscriptorArgs<ExtArgs>
   relConfiguracionSitio?: boolean | Prisma.Empresa$relConfiguracionSitioArgs<ExtArgs>
+  relContactoEntrante?: boolean | Prisma.Empresa$relContactoEntranteArgs<ExtArgs>
+  relContenidoSeccion?: boolean | Prisma.Empresa$relContenidoSeccionArgs<ExtArgs>
+  relFooterElemento?: boolean | Prisma.Empresa$relFooterElementoArgs<ExtArgs>
+  relIndustria?: boolean | Prisma.Empresa$relIndustriaArgs<ExtArgs>
   relLead?: boolean | Prisma.Empresa$relLeadArgs<ExtArgs>
+  relMenu?: boolean | Prisma.Empresa$relMenuArgs<ExtArgs>
+  relPasoWizard?: boolean | Prisma.Empresa$relPasoWizardArgs<ExtArgs>
+  relProducto?: boolean | Prisma.Empresa$relProductoArgs<ExtArgs>
+  relContenidoRegistro?: boolean | Prisma.Empresa$relContenidoRegistroArgs<ExtArgs>
+  relServicio?: boolean | Prisma.Empresa$relServicioArgs<ExtArgs>
+  relSucursal?: boolean | Prisma.Empresa$relSucursalArgs<ExtArgs>
+  relSuscriptor?: boolean | Prisma.Empresa$relSuscriptorArgs<ExtArgs>
   _count?: boolean | Prisma.EmpresaCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["empresa"]>
 
@@ -2245,19 +2245,19 @@ export type EmpresaSelectScalar = {
 
 export type EmpresaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nombre" | "logo" | "estado" | "eliminadoEn" | "creadoEn" | "actualizadoEn", ExtArgs["result"]["empresa"]>
 export type EmpresaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  relSucursal?: boolean | Prisma.Empresa$relSucursalArgs<ExtArgs>
-  relProducto?: boolean | Prisma.Empresa$relProductoArgs<ExtArgs>
-  relIndustria?: boolean | Prisma.Empresa$relIndustriaArgs<ExtArgs>
-  relServicio?: boolean | Prisma.Empresa$relServicioArgs<ExtArgs>
-  relContenidoSeccion?: boolean | Prisma.Empresa$relContenidoSeccionArgs<ExtArgs>
-  relContenidoRegistro?: boolean | Prisma.Empresa$relContenidoRegistroArgs<ExtArgs>
-  relMenu?: boolean | Prisma.Empresa$relMenuArgs<ExtArgs>
-  relFooterElemento?: boolean | Prisma.Empresa$relFooterElementoArgs<ExtArgs>
-  relPasoWizard?: boolean | Prisma.Empresa$relPasoWizardArgs<ExtArgs>
-  relContactoEntrante?: boolean | Prisma.Empresa$relContactoEntranteArgs<ExtArgs>
-  relSuscriptor?: boolean | Prisma.Empresa$relSuscriptorArgs<ExtArgs>
   relConfiguracionSitio?: boolean | Prisma.Empresa$relConfiguracionSitioArgs<ExtArgs>
+  relContactoEntrante?: boolean | Prisma.Empresa$relContactoEntranteArgs<ExtArgs>
+  relContenidoSeccion?: boolean | Prisma.Empresa$relContenidoSeccionArgs<ExtArgs>
+  relFooterElemento?: boolean | Prisma.Empresa$relFooterElementoArgs<ExtArgs>
+  relIndustria?: boolean | Prisma.Empresa$relIndustriaArgs<ExtArgs>
   relLead?: boolean | Prisma.Empresa$relLeadArgs<ExtArgs>
+  relMenu?: boolean | Prisma.Empresa$relMenuArgs<ExtArgs>
+  relPasoWizard?: boolean | Prisma.Empresa$relPasoWizardArgs<ExtArgs>
+  relProducto?: boolean | Prisma.Empresa$relProductoArgs<ExtArgs>
+  relContenidoRegistro?: boolean | Prisma.Empresa$relContenidoRegistroArgs<ExtArgs>
+  relServicio?: boolean | Prisma.Empresa$relServicioArgs<ExtArgs>
+  relSucursal?: boolean | Prisma.Empresa$relSucursalArgs<ExtArgs>
+  relSuscriptor?: boolean | Prisma.Empresa$relSuscriptorArgs<ExtArgs>
   _count?: boolean | Prisma.EmpresaCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EmpresaIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -2266,19 +2266,19 @@ export type EmpresaIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type $EmpresaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Empresa"
   objects: {
-    relSucursal: Prisma.$SucursalPayload<ExtArgs>[]
-    relProducto: Prisma.$ProductoPayload<ExtArgs>[]
-    relIndustria: Prisma.$IndustriaPayload<ExtArgs>[]
-    relServicio: Prisma.$ServicioPayload<ExtArgs>[]
-    relContenidoSeccion: Prisma.$ContenidoSeccionPayload<ExtArgs>[]
-    relContenidoRegistro: Prisma.$ContenidoRegistroPayload<ExtArgs>[]
-    relMenu: Prisma.$MenuPayload<ExtArgs>[]
-    relFooterElemento: Prisma.$FooterElementoPayload<ExtArgs>[]
-    relPasoWizard: Prisma.$PasoWizardPayload<ExtArgs>[]
-    relContactoEntrante: Prisma.$ContactoEntrantePayload<ExtArgs>[]
-    relSuscriptor: Prisma.$SuscriptorPayload<ExtArgs>[]
     relConfiguracionSitio: Prisma.$ConfiguracionSitioPayload<ExtArgs>[]
+    relContactoEntrante: Prisma.$ContactoEntrantePayload<ExtArgs>[]
+    relContenidoSeccion: Prisma.$ContenidoSeccionPayload<ExtArgs>[]
+    relFooterElemento: Prisma.$FooterElementoPayload<ExtArgs>[]
+    relIndustria: Prisma.$IndustriaPayload<ExtArgs>[]
     relLead: Prisma.$LeadPayload<ExtArgs>[]
+    relMenu: Prisma.$MenuPayload<ExtArgs>[]
+    relPasoWizard: Prisma.$PasoWizardPayload<ExtArgs>[]
+    relProducto: Prisma.$ProductoPayload<ExtArgs>[]
+    relContenidoRegistro: Prisma.$ContenidoRegistroPayload<ExtArgs>[]
+    relServicio: Prisma.$ServicioPayload<ExtArgs>[]
+    relSucursal: Prisma.$SucursalPayload<ExtArgs>[]
+    relSuscriptor: Prisma.$SuscriptorPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: bigint
@@ -2682,19 +2682,19 @@ readonly fields: EmpresaFieldRefs;
  */
 export interface Prisma__EmpresaClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  relSucursal<T extends Prisma.Empresa$relSucursalArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Empresa$relSucursalArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SucursalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  relProducto<T extends Prisma.Empresa$relProductoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Empresa$relProductoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  relIndustria<T extends Prisma.Empresa$relIndustriaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Empresa$relIndustriaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IndustriaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  relServicio<T extends Prisma.Empresa$relServicioArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Empresa$relServicioArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServicioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  relContenidoSeccion<T extends Prisma.Empresa$relContenidoSeccionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Empresa$relContenidoSeccionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContenidoSeccionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  relContenidoRegistro<T extends Prisma.Empresa$relContenidoRegistroArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Empresa$relContenidoRegistroArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContenidoRegistroPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  relMenu<T extends Prisma.Empresa$relMenuArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Empresa$relMenuArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MenuPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  relFooterElemento<T extends Prisma.Empresa$relFooterElementoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Empresa$relFooterElementoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FooterElementoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  relPasoWizard<T extends Prisma.Empresa$relPasoWizardArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Empresa$relPasoWizardArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PasoWizardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  relContactoEntrante<T extends Prisma.Empresa$relContactoEntranteArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Empresa$relContactoEntranteArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContactoEntrantePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  relSuscriptor<T extends Prisma.Empresa$relSuscriptorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Empresa$relSuscriptorArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SuscriptorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   relConfiguracionSitio<T extends Prisma.Empresa$relConfiguracionSitioArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Empresa$relConfiguracionSitioArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConfiguracionSitioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  relContactoEntrante<T extends Prisma.Empresa$relContactoEntranteArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Empresa$relContactoEntranteArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContactoEntrantePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  relContenidoSeccion<T extends Prisma.Empresa$relContenidoSeccionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Empresa$relContenidoSeccionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContenidoSeccionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  relFooterElemento<T extends Prisma.Empresa$relFooterElementoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Empresa$relFooterElementoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FooterElementoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  relIndustria<T extends Prisma.Empresa$relIndustriaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Empresa$relIndustriaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IndustriaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   relLead<T extends Prisma.Empresa$relLeadArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Empresa$relLeadArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  relMenu<T extends Prisma.Empresa$relMenuArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Empresa$relMenuArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MenuPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  relPasoWizard<T extends Prisma.Empresa$relPasoWizardArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Empresa$relPasoWizardArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PasoWizardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  relProducto<T extends Prisma.Empresa$relProductoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Empresa$relProductoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  relContenidoRegistro<T extends Prisma.Empresa$relContenidoRegistroArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Empresa$relContenidoRegistroArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContenidoRegistroPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  relServicio<T extends Prisma.Empresa$relServicioArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Empresa$relServicioArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServicioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  relSucursal<T extends Prisma.Empresa$relSucursalArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Empresa$relSucursalArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SucursalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  relSuscriptor<T extends Prisma.Empresa$relSuscriptorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Empresa$relSuscriptorArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SuscriptorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3124,219 +3124,27 @@ export type EmpresaDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
- * Empresa.relSucursal
+ * Empresa.relConfiguracionSitio
  */
-export type Empresa$relSucursalArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Empresa$relConfiguracionSitioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Sucursal
+   * Select specific fields to fetch from the ConfiguracionSitio
    */
-  select?: Prisma.SucursalSelect<ExtArgs> | null
+  select?: Prisma.ConfiguracionSitioSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Sucursal
+   * Omit specific fields from the ConfiguracionSitio
    */
-  omit?: Prisma.SucursalOmit<ExtArgs> | null
+  omit?: Prisma.ConfiguracionSitioOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.SucursalInclude<ExtArgs> | null
-  where?: Prisma.SucursalWhereInput
-  orderBy?: Prisma.SucursalOrderByWithRelationInput | Prisma.SucursalOrderByWithRelationInput[]
-  cursor?: Prisma.SucursalWhereUniqueInput
+  include?: Prisma.ConfiguracionSitioInclude<ExtArgs> | null
+  where?: Prisma.ConfiguracionSitioWhereInput
+  orderBy?: Prisma.ConfiguracionSitioOrderByWithRelationInput | Prisma.ConfiguracionSitioOrderByWithRelationInput[]
+  cursor?: Prisma.ConfiguracionSitioWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.SucursalScalarFieldEnum | Prisma.SucursalScalarFieldEnum[]
-}
-
-/**
- * Empresa.relProducto
- */
-export type Empresa$relProductoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Producto
-   */
-  select?: Prisma.ProductoSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Producto
-   */
-  omit?: Prisma.ProductoOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ProductoInclude<ExtArgs> | null
-  where?: Prisma.ProductoWhereInput
-  orderBy?: Prisma.ProductoOrderByWithRelationInput | Prisma.ProductoOrderByWithRelationInput[]
-  cursor?: Prisma.ProductoWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ProductoScalarFieldEnum | Prisma.ProductoScalarFieldEnum[]
-}
-
-/**
- * Empresa.relIndustria
- */
-export type Empresa$relIndustriaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Industria
-   */
-  select?: Prisma.IndustriaSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Industria
-   */
-  omit?: Prisma.IndustriaOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.IndustriaInclude<ExtArgs> | null
-  where?: Prisma.IndustriaWhereInput
-  orderBy?: Prisma.IndustriaOrderByWithRelationInput | Prisma.IndustriaOrderByWithRelationInput[]
-  cursor?: Prisma.IndustriaWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.IndustriaScalarFieldEnum | Prisma.IndustriaScalarFieldEnum[]
-}
-
-/**
- * Empresa.relServicio
- */
-export type Empresa$relServicioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Servicio
-   */
-  select?: Prisma.ServicioSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Servicio
-   */
-  omit?: Prisma.ServicioOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ServicioInclude<ExtArgs> | null
-  where?: Prisma.ServicioWhereInput
-  orderBy?: Prisma.ServicioOrderByWithRelationInput | Prisma.ServicioOrderByWithRelationInput[]
-  cursor?: Prisma.ServicioWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ServicioScalarFieldEnum | Prisma.ServicioScalarFieldEnum[]
-}
-
-/**
- * Empresa.relContenidoSeccion
- */
-export type Empresa$relContenidoSeccionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ContenidoSeccion
-   */
-  select?: Prisma.ContenidoSeccionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ContenidoSeccion
-   */
-  omit?: Prisma.ContenidoSeccionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ContenidoSeccionInclude<ExtArgs> | null
-  where?: Prisma.ContenidoSeccionWhereInput
-  orderBy?: Prisma.ContenidoSeccionOrderByWithRelationInput | Prisma.ContenidoSeccionOrderByWithRelationInput[]
-  cursor?: Prisma.ContenidoSeccionWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ContenidoSeccionScalarFieldEnum | Prisma.ContenidoSeccionScalarFieldEnum[]
-}
-
-/**
- * Empresa.relContenidoRegistro
- */
-export type Empresa$relContenidoRegistroArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ContenidoRegistro
-   */
-  select?: Prisma.ContenidoRegistroSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ContenidoRegistro
-   */
-  omit?: Prisma.ContenidoRegistroOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ContenidoRegistroInclude<ExtArgs> | null
-  where?: Prisma.ContenidoRegistroWhereInput
-  orderBy?: Prisma.ContenidoRegistroOrderByWithRelationInput | Prisma.ContenidoRegistroOrderByWithRelationInput[]
-  cursor?: Prisma.ContenidoRegistroWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ContenidoRegistroScalarFieldEnum | Prisma.ContenidoRegistroScalarFieldEnum[]
-}
-
-/**
- * Empresa.relMenu
- */
-export type Empresa$relMenuArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Menu
-   */
-  select?: Prisma.MenuSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Menu
-   */
-  omit?: Prisma.MenuOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.MenuInclude<ExtArgs> | null
-  where?: Prisma.MenuWhereInput
-  orderBy?: Prisma.MenuOrderByWithRelationInput | Prisma.MenuOrderByWithRelationInput[]
-  cursor?: Prisma.MenuWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.MenuScalarFieldEnum | Prisma.MenuScalarFieldEnum[]
-}
-
-/**
- * Empresa.relFooterElemento
- */
-export type Empresa$relFooterElementoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the FooterElemento
-   */
-  select?: Prisma.FooterElementoSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the FooterElemento
-   */
-  omit?: Prisma.FooterElementoOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.FooterElementoInclude<ExtArgs> | null
-  where?: Prisma.FooterElementoWhereInput
-  orderBy?: Prisma.FooterElementoOrderByWithRelationInput | Prisma.FooterElementoOrderByWithRelationInput[]
-  cursor?: Prisma.FooterElementoWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.FooterElementoScalarFieldEnum | Prisma.FooterElementoScalarFieldEnum[]
-}
-
-/**
- * Empresa.relPasoWizard
- */
-export type Empresa$relPasoWizardArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the PasoWizard
-   */
-  select?: Prisma.PasoWizardSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the PasoWizard
-   */
-  omit?: Prisma.PasoWizardOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PasoWizardInclude<ExtArgs> | null
-  where?: Prisma.PasoWizardWhereInput
-  orderBy?: Prisma.PasoWizardOrderByWithRelationInput | Prisma.PasoWizardOrderByWithRelationInput[]
-  cursor?: Prisma.PasoWizardWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.PasoWizardScalarFieldEnum | Prisma.PasoWizardScalarFieldEnum[]
+  distinct?: Prisma.ConfiguracionSitioScalarFieldEnum | Prisma.ConfiguracionSitioScalarFieldEnum[]
 }
 
 /**
@@ -3364,51 +3172,75 @@ export type Empresa$relContactoEntranteArgs<ExtArgs extends runtime.Types.Extens
 }
 
 /**
- * Empresa.relSuscriptor
+ * Empresa.relContenidoSeccion
  */
-export type Empresa$relSuscriptorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Empresa$relContenidoSeccionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Suscriptor
+   * Select specific fields to fetch from the ContenidoSeccion
    */
-  select?: Prisma.SuscriptorSelect<ExtArgs> | null
+  select?: Prisma.ContenidoSeccionSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Suscriptor
+   * Omit specific fields from the ContenidoSeccion
    */
-  omit?: Prisma.SuscriptorOmit<ExtArgs> | null
+  omit?: Prisma.ContenidoSeccionOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.SuscriptorInclude<ExtArgs> | null
-  where?: Prisma.SuscriptorWhereInput
-  orderBy?: Prisma.SuscriptorOrderByWithRelationInput | Prisma.SuscriptorOrderByWithRelationInput[]
-  cursor?: Prisma.SuscriptorWhereUniqueInput
+  include?: Prisma.ContenidoSeccionInclude<ExtArgs> | null
+  where?: Prisma.ContenidoSeccionWhereInput
+  orderBy?: Prisma.ContenidoSeccionOrderByWithRelationInput | Prisma.ContenidoSeccionOrderByWithRelationInput[]
+  cursor?: Prisma.ContenidoSeccionWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.SuscriptorScalarFieldEnum | Prisma.SuscriptorScalarFieldEnum[]
+  distinct?: Prisma.ContenidoSeccionScalarFieldEnum | Prisma.ContenidoSeccionScalarFieldEnum[]
 }
 
 /**
- * Empresa.relConfiguracionSitio
+ * Empresa.relFooterElemento
  */
-export type Empresa$relConfiguracionSitioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Empresa$relFooterElementoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ConfiguracionSitio
+   * Select specific fields to fetch from the FooterElemento
    */
-  select?: Prisma.ConfiguracionSitioSelect<ExtArgs> | null
+  select?: Prisma.FooterElementoSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the ConfiguracionSitio
+   * Omit specific fields from the FooterElemento
    */
-  omit?: Prisma.ConfiguracionSitioOmit<ExtArgs> | null
+  omit?: Prisma.FooterElementoOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ConfiguracionSitioInclude<ExtArgs> | null
-  where?: Prisma.ConfiguracionSitioWhereInput
-  orderBy?: Prisma.ConfiguracionSitioOrderByWithRelationInput | Prisma.ConfiguracionSitioOrderByWithRelationInput[]
-  cursor?: Prisma.ConfiguracionSitioWhereUniqueInput
+  include?: Prisma.FooterElementoInclude<ExtArgs> | null
+  where?: Prisma.FooterElementoWhereInput
+  orderBy?: Prisma.FooterElementoOrderByWithRelationInput | Prisma.FooterElementoOrderByWithRelationInput[]
+  cursor?: Prisma.FooterElementoWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.ConfiguracionSitioScalarFieldEnum | Prisma.ConfiguracionSitioScalarFieldEnum[]
+  distinct?: Prisma.FooterElementoScalarFieldEnum | Prisma.FooterElementoScalarFieldEnum[]
+}
+
+/**
+ * Empresa.relIndustria
+ */
+export type Empresa$relIndustriaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Industria
+   */
+  select?: Prisma.IndustriaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Industria
+   */
+  omit?: Prisma.IndustriaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.IndustriaInclude<ExtArgs> | null
+  where?: Prisma.IndustriaWhereInput
+  orderBy?: Prisma.IndustriaOrderByWithRelationInput | Prisma.IndustriaOrderByWithRelationInput[]
+  cursor?: Prisma.IndustriaWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.IndustriaScalarFieldEnum | Prisma.IndustriaScalarFieldEnum[]
 }
 
 /**
@@ -3433,6 +3265,174 @@ export type Empresa$relLeadArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.LeadScalarFieldEnum | Prisma.LeadScalarFieldEnum[]
+}
+
+/**
+ * Empresa.relMenu
+ */
+export type Empresa$relMenuArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Menu
+   */
+  select?: Prisma.MenuSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Menu
+   */
+  omit?: Prisma.MenuOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MenuInclude<ExtArgs> | null
+  where?: Prisma.MenuWhereInput
+  orderBy?: Prisma.MenuOrderByWithRelationInput | Prisma.MenuOrderByWithRelationInput[]
+  cursor?: Prisma.MenuWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MenuScalarFieldEnum | Prisma.MenuScalarFieldEnum[]
+}
+
+/**
+ * Empresa.relPasoWizard
+ */
+export type Empresa$relPasoWizardArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PasoWizard
+   */
+  select?: Prisma.PasoWizardSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PasoWizard
+   */
+  omit?: Prisma.PasoWizardOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PasoWizardInclude<ExtArgs> | null
+  where?: Prisma.PasoWizardWhereInput
+  orderBy?: Prisma.PasoWizardOrderByWithRelationInput | Prisma.PasoWizardOrderByWithRelationInput[]
+  cursor?: Prisma.PasoWizardWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PasoWizardScalarFieldEnum | Prisma.PasoWizardScalarFieldEnum[]
+}
+
+/**
+ * Empresa.relProducto
+ */
+export type Empresa$relProductoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Producto
+   */
+  select?: Prisma.ProductoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Producto
+   */
+  omit?: Prisma.ProductoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProductoInclude<ExtArgs> | null
+  where?: Prisma.ProductoWhereInput
+  orderBy?: Prisma.ProductoOrderByWithRelationInput | Prisma.ProductoOrderByWithRelationInput[]
+  cursor?: Prisma.ProductoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProductoScalarFieldEnum | Prisma.ProductoScalarFieldEnum[]
+}
+
+/**
+ * Empresa.relContenidoRegistro
+ */
+export type Empresa$relContenidoRegistroArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ContenidoRegistro
+   */
+  select?: Prisma.ContenidoRegistroSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ContenidoRegistro
+   */
+  omit?: Prisma.ContenidoRegistroOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContenidoRegistroInclude<ExtArgs> | null
+  where?: Prisma.ContenidoRegistroWhereInput
+  orderBy?: Prisma.ContenidoRegistroOrderByWithRelationInput | Prisma.ContenidoRegistroOrderByWithRelationInput[]
+  cursor?: Prisma.ContenidoRegistroWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ContenidoRegistroScalarFieldEnum | Prisma.ContenidoRegistroScalarFieldEnum[]
+}
+
+/**
+ * Empresa.relServicio
+ */
+export type Empresa$relServicioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Servicio
+   */
+  select?: Prisma.ServicioSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Servicio
+   */
+  omit?: Prisma.ServicioOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ServicioInclude<ExtArgs> | null
+  where?: Prisma.ServicioWhereInput
+  orderBy?: Prisma.ServicioOrderByWithRelationInput | Prisma.ServicioOrderByWithRelationInput[]
+  cursor?: Prisma.ServicioWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ServicioScalarFieldEnum | Prisma.ServicioScalarFieldEnum[]
+}
+
+/**
+ * Empresa.relSucursal
+ */
+export type Empresa$relSucursalArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Sucursal
+   */
+  select?: Prisma.SucursalSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Sucursal
+   */
+  omit?: Prisma.SucursalOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SucursalInclude<ExtArgs> | null
+  where?: Prisma.SucursalWhereInput
+  orderBy?: Prisma.SucursalOrderByWithRelationInput | Prisma.SucursalOrderByWithRelationInput[]
+  cursor?: Prisma.SucursalWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SucursalScalarFieldEnum | Prisma.SucursalScalarFieldEnum[]
+}
+
+/**
+ * Empresa.relSuscriptor
+ */
+export type Empresa$relSuscriptorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Suscriptor
+   */
+  select?: Prisma.SuscriptorSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Suscriptor
+   */
+  omit?: Prisma.SuscriptorOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SuscriptorInclude<ExtArgs> | null
+  where?: Prisma.SuscriptorWhereInput
+  orderBy?: Prisma.SuscriptorOrderByWithRelationInput | Prisma.SuscriptorOrderByWithRelationInput[]
+  cursor?: Prisma.SuscriptorWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SuscriptorScalarFieldEnum | Prisma.SuscriptorScalarFieldEnum[]
 }
 
 /**

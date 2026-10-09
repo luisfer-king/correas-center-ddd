@@ -19,7 +19,7 @@ export * as $Enums from './enums.js'
 export * from './enums.js';
 /**
  * Model Usuario
- * 
+ * This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
  */
 export type Usuario = Prisma.UsuarioModel
 /**

@@ -7,6 +7,8 @@ import { RutaInterna } from '../../domain/cms-values.js'
 export type FilaMenuItem = Readonly<{
   id: bigint
   menuId: bigint
+  nombre: string
+  categoriaId: bigint | null
   ruta: string
   orden: number
   estado: EstadoCMS
@@ -19,6 +21,8 @@ export function mapearMenuItem(fila: FilaMenuItem): MenuItem {
   return new MenuItem({
     id: fila.id,
     menuId: fila.menuId,
+    nombre: fila.nombre,
+    categoriaId: fila.categoriaId,
     ruta: RutaInterna.create(fila.ruta),
     orden: Orden.create(fila.orden),
     estado: fila.estado,

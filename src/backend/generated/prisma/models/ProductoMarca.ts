@@ -244,8 +244,8 @@ export type ProductoMarcaWhereInput = {
   creadoEn?: Prisma.DateTimeFilter<"ProductoMarca"> | Date | string
   actualizadoEn?: Prisma.DateTimeFilter<"ProductoMarca"> | Date | string
   orden?: Prisma.IntNullableFilter<"ProductoMarca"> | number | null
-  producto?: Prisma.XOR<Prisma.ProductoScalarRelationFilter, Prisma.ProductoWhereInput>
   marca?: Prisma.XOR<Prisma.MarcaScalarRelationFilter, Prisma.MarcaWhereInput>
+  producto?: Prisma.XOR<Prisma.ProductoScalarRelationFilter, Prisma.ProductoWhereInput>
 }
 
 export type ProductoMarcaOrderByWithRelationInput = {
@@ -256,8 +256,8 @@ export type ProductoMarcaOrderByWithRelationInput = {
   creadoEn?: Prisma.SortOrder
   actualizadoEn?: Prisma.SortOrder
   orden?: Prisma.SortOrderInput | Prisma.SortOrder
-  producto?: Prisma.ProductoOrderByWithRelationInput
   marca?: Prisma.MarcaOrderByWithRelationInput
+  producto?: Prisma.ProductoOrderByWithRelationInput
 }
 
 export type ProductoMarcaWhereUniqueInput = Prisma.AtLeast<{
@@ -271,8 +271,8 @@ export type ProductoMarcaWhereUniqueInput = Prisma.AtLeast<{
   creadoEn?: Prisma.DateTimeFilter<"ProductoMarca"> | Date | string
   actualizadoEn?: Prisma.DateTimeFilter<"ProductoMarca"> | Date | string
   orden?: Prisma.IntNullableFilter<"ProductoMarca"> | number | null
-  producto?: Prisma.XOR<Prisma.ProductoScalarRelationFilter, Prisma.ProductoWhereInput>
   marca?: Prisma.XOR<Prisma.MarcaScalarRelationFilter, Prisma.MarcaWhereInput>
+  producto?: Prisma.XOR<Prisma.ProductoScalarRelationFilter, Prisma.ProductoWhereInput>
 }, "id">
 
 export type ProductoMarcaOrderByWithAggregationInput = {
@@ -309,8 +309,8 @@ export type ProductoMarcaCreateInput = {
   creadoEn?: Date | string
   actualizadoEn?: Date | string
   orden?: number | null
-  producto: Prisma.ProductoCreateNestedOneWithoutRelProductoMarcaInput
   marca: Prisma.MarcaCreateNestedOneWithoutRelProductoMarcaInput
+  producto: Prisma.ProductoCreateNestedOneWithoutRelProductoMarcaInput
 }
 
 export type ProductoMarcaUncheckedCreateInput = {
@@ -329,8 +329,8 @@ export type ProductoMarcaUpdateInput = {
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   orden?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  producto?: Prisma.ProductoUpdateOneRequiredWithoutRelProductoMarcaNestedInput
   marca?: Prisma.MarcaUpdateOneRequiredWithoutRelProductoMarcaNestedInput
+  producto?: Prisma.ProductoUpdateOneRequiredWithoutRelProductoMarcaNestedInput
 }
 
 export type ProductoMarcaUncheckedUpdateInput = {
@@ -700,8 +700,8 @@ export type ProductoMarcaSelect<ExtArgs extends runtime.Types.Extensions.Interna
   creadoEn?: boolean
   actualizadoEn?: boolean
   orden?: boolean
-  producto?: boolean | Prisma.ProductoDefaultArgs<ExtArgs>
   marca?: boolean | Prisma.MarcaDefaultArgs<ExtArgs>
+  producto?: boolean | Prisma.ProductoDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["productoMarca"]>
 
 export type ProductoMarcaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -712,8 +712,8 @@ export type ProductoMarcaSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   creadoEn?: boolean
   actualizadoEn?: boolean
   orden?: boolean
-  producto?: boolean | Prisma.ProductoDefaultArgs<ExtArgs>
   marca?: boolean | Prisma.MarcaDefaultArgs<ExtArgs>
+  producto?: boolean | Prisma.ProductoDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["productoMarca"]>
 
 export type ProductoMarcaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -724,8 +724,8 @@ export type ProductoMarcaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   creadoEn?: boolean
   actualizadoEn?: boolean
   orden?: boolean
-  producto?: boolean | Prisma.ProductoDefaultArgs<ExtArgs>
   marca?: boolean | Prisma.MarcaDefaultArgs<ExtArgs>
+  producto?: boolean | Prisma.ProductoDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["productoMarca"]>
 
 export type ProductoMarcaSelectScalar = {
@@ -740,23 +740,23 @@ export type ProductoMarcaSelectScalar = {
 
 export type ProductoMarcaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "productoId" | "marcaId" | "estado" | "creadoEn" | "actualizadoEn" | "orden", ExtArgs["result"]["productoMarca"]>
 export type ProductoMarcaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  producto?: boolean | Prisma.ProductoDefaultArgs<ExtArgs>
   marca?: boolean | Prisma.MarcaDefaultArgs<ExtArgs>
+  producto?: boolean | Prisma.ProductoDefaultArgs<ExtArgs>
 }
 export type ProductoMarcaIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  producto?: boolean | Prisma.ProductoDefaultArgs<ExtArgs>
   marca?: boolean | Prisma.MarcaDefaultArgs<ExtArgs>
+  producto?: boolean | Prisma.ProductoDefaultArgs<ExtArgs>
 }
 export type ProductoMarcaIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  producto?: boolean | Prisma.ProductoDefaultArgs<ExtArgs>
   marca?: boolean | Prisma.MarcaDefaultArgs<ExtArgs>
+  producto?: boolean | Prisma.ProductoDefaultArgs<ExtArgs>
 }
 
 export type $ProductoMarcaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ProductoMarca"
   objects: {
-    producto: Prisma.$ProductoPayload<ExtArgs>
     marca: Prisma.$MarcaPayload<ExtArgs>
+    producto: Prisma.$ProductoPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: bigint
@@ -1160,8 +1160,8 @@ readonly fields: ProductoMarcaFieldRefs;
  */
 export interface Prisma__ProductoMarcaClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  producto<T extends Prisma.ProductoDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductoDefaultArgs<ExtArgs>>): Prisma.Prisma__ProductoClient<runtime.Types.Result.GetResult<Prisma.$ProductoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   marca<T extends Prisma.MarcaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MarcaDefaultArgs<ExtArgs>>): Prisma.Prisma__MarcaClient<runtime.Types.Result.GetResult<Prisma.$MarcaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  producto<T extends Prisma.ProductoDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductoDefaultArgs<ExtArgs>>): Prisma.Prisma__ProductoClient<runtime.Types.Result.GetResult<Prisma.$ProductoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

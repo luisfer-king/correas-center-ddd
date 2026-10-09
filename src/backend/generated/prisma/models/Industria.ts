@@ -264,8 +264,8 @@ export type IndustriaWhereInput = {
   eliminadoEn?: Prisma.DateTimeNullableFilter<"Industria"> | Date | string | null
   creadoEn?: Prisma.DateTimeFilter<"Industria"> | Date | string
   actualizadoEn?: Prisma.DateTimeFilter<"Industria"> | Date | string
-  empresa?: Prisma.XOR<Prisma.EmpresaScalarRelationFilter, Prisma.EmpresaWhereInput>
   relIndustriaAsignacion?: Prisma.IndustriaAsignacionListRelationFilter
+  empresa?: Prisma.XOR<Prisma.EmpresaScalarRelationFilter, Prisma.EmpresaWhereInput>
 }
 
 export type IndustriaOrderByWithRelationInput = {
@@ -279,8 +279,8 @@ export type IndustriaOrderByWithRelationInput = {
   eliminadoEn?: Prisma.SortOrderInput | Prisma.SortOrder
   creadoEn?: Prisma.SortOrder
   actualizadoEn?: Prisma.SortOrder
-  empresa?: Prisma.EmpresaOrderByWithRelationInput
   relIndustriaAsignacion?: Prisma.IndustriaAsignacionOrderByRelationAggregateInput
+  empresa?: Prisma.EmpresaOrderByWithRelationInput
 }
 
 export type IndustriaWhereUniqueInput = Prisma.AtLeast<{
@@ -297,8 +297,8 @@ export type IndustriaWhereUniqueInput = Prisma.AtLeast<{
   eliminadoEn?: Prisma.DateTimeNullableFilter<"Industria"> | Date | string | null
   creadoEn?: Prisma.DateTimeFilter<"Industria"> | Date | string
   actualizadoEn?: Prisma.DateTimeFilter<"Industria"> | Date | string
-  empresa?: Prisma.XOR<Prisma.EmpresaScalarRelationFilter, Prisma.EmpresaWhereInput>
   relIndustriaAsignacion?: Prisma.IndustriaAsignacionListRelationFilter
+  empresa?: Prisma.XOR<Prisma.EmpresaScalarRelationFilter, Prisma.EmpresaWhereInput>
 }, "id" | "slug">
 
 export type IndustriaOrderByWithAggregationInput = {
@@ -345,8 +345,8 @@ export type IndustriaCreateInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
-  empresa: Prisma.EmpresaCreateNestedOneWithoutRelIndustriaInput
   relIndustriaAsignacion?: Prisma.IndustriaAsignacionCreateNestedManyWithoutIndustriaInput
+  empresa: Prisma.EmpresaCreateNestedOneWithoutRelIndustriaInput
 }
 
 export type IndustriaUncheckedCreateInput = {
@@ -373,8 +373,8 @@ export type IndustriaUpdateInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  empresa?: Prisma.EmpresaUpdateOneRequiredWithoutRelIndustriaNestedInput
   relIndustriaAsignacion?: Prisma.IndustriaAsignacionUpdateManyWithoutIndustriaNestedInput
+  empresa?: Prisma.EmpresaUpdateOneRequiredWithoutRelIndustriaNestedInput
 }
 
 export type IndustriaUncheckedUpdateInput = {
@@ -779,8 +779,8 @@ export type IndustriaSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   eliminadoEn?: boolean
   creadoEn?: boolean
   actualizadoEn?: boolean
-  empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   relIndustriaAsignacion?: boolean | Prisma.Industria$relIndustriaAsignacionArgs<ExtArgs>
+  empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.IndustriaCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["industria"]>
 
@@ -827,8 +827,8 @@ export type IndustriaSelectScalar = {
 
 export type IndustriaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "empresaId" | "nombre" | "slug" | "imagen" | "orden" | "estado" | "eliminadoEn" | "creadoEn" | "actualizadoEn", ExtArgs["result"]["industria"]>
 export type IndustriaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   relIndustriaAsignacion?: boolean | Prisma.Industria$relIndustriaAsignacionArgs<ExtArgs>
+  empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.IndustriaCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type IndustriaIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -841,8 +841,8 @@ export type IndustriaIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
 export type $IndustriaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Industria"
   objects: {
-    empresa: Prisma.$EmpresaPayload<ExtArgs>
     relIndustriaAsignacion: Prisma.$IndustriaAsignacionPayload<ExtArgs>[]
+    empresa: Prisma.$EmpresaPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: bigint
@@ -1249,8 +1249,8 @@ readonly fields: IndustriaFieldRefs;
  */
 export interface Prisma__IndustriaClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  empresa<T extends Prisma.EmpresaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EmpresaDefaultArgs<ExtArgs>>): Prisma.Prisma__EmpresaClient<runtime.Types.Result.GetResult<Prisma.$EmpresaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   relIndustriaAsignacion<T extends Prisma.Industria$relIndustriaAsignacionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Industria$relIndustriaAsignacionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IndustriaAsignacionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  empresa<T extends Prisma.EmpresaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EmpresaDefaultArgs<ExtArgs>>): Prisma.Prisma__EmpresaClient<runtime.Types.Result.GetResult<Prisma.$EmpresaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

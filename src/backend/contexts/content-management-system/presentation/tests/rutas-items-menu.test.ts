@@ -1,13 +1,17 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { servidorCms, lectura, escritura, antes, actor } from './soporte-http-cms.js'
 import { entrada } from '../../application/tests/soporte-pruebas-cms.js'
+import { actor, antes, escritura, lectura, servidorCms } from './soporte-http-cms.js'
 
 test('HTTP items-menu', async t => {
   const { app, env } = await servidorCms('menuItem'); t.after(() => app.close())
   const base = '/api/portal/cms/items-menu'
-  const datosCrear = JSON.parse(JSON.stringify(entrada('MenuItem'), (_k, v) => typeof v === 'bigint' ? v.toString() : v))
-  const datosEditar = Object.fromEntries(["ruta"].map(clave => [clave, datosCrear[clave]]))
+  const datosCrearOriginal = JSON.parse(JSON.stringify(entrada('MenuItem'), (_k, v) => typeof v === 'bigint' ? v.toString() : v))
+  const datosCrear = { menuId: datosCrearOriginal.menuId, nombre: datosCrearOriginal.nombre, categoriaId: datosCrearOriginal.categoriaId }
+  const datosEditar = {
+  nombre: datosCrear.nombre,
+  categoriaId: datosCrear.categoriaId,
+}
 
   await t.test('sesión requerida antes de validar cuerpo o acceder a datos', async () => {
     assert.equal((await app.inject({ method: 'GET', url: base })).statusCode, 401)
@@ -18,12 +22,12 @@ test('HTTP items-menu', async t => {
     const r = await app.inject({ method: 'GET', url: base, headers: lectura })
     assert.equal(r.statusCode, 200, r.body)
     assert.ok(Array.isArray(r.json()))
-    assert.equal(env.auditorias.length, n+1)
+    assert.equal(env.auditorias.length, n + 1)
     assert.ok(env.auditorias.at(-1)?.includes('Lectura'))
     assert.ok(env.auditorias.at(-1)?.includes('prueba-http-cms'))
   })
   await t.test('consulta individual convierte identidad y fecha a JSON', async () => {
-    const r = await app.inject({ method: 'GET', url: base+'/2', headers: lectura })
+    const r = await app.inject({ method: 'GET', url: base + '/2', headers: lectura })
     assert.equal(r.statusCode, 200, r.body)
     assert.equal(r.json().id, '2')
     assert.equal(r.json().actualizadoEn, antes.toISOString())
@@ -44,13 +48,13 @@ test('HTTP items-menu', async t => {
     assert.ok(env.auditorias.at(-1)?.includes('Creación'))
   })
   await t.test('editar exige versión y rechaza versión obsoleta', async () => {
-    const missing = await app.inject({ method: 'PATCH', url: base+'/2', headers: escritura, payload: datosEditar })
+    const missing = await app.inject({ method: 'PATCH', url: base + '/2', headers: escritura, payload: datosEditar })
     assert.equal(missing.statusCode, 400, missing.body)
-    const conflict = await app.inject({ method: 'PATCH', url: base+'/2', headers: escritura, payload: { ...datosEditar, version: '2026-01-01T00:00:00.000Z' } })
+    const conflict = await app.inject({ method: 'PATCH', url: base + '/2', headers: escritura, payload: { ...datosEditar, version: '2026-01-01T00:00:00.000Z' } })
     assert.equal(conflict.statusCode, 409, conflict.body)
   })
   await t.test('editar devuelve datos y audita dentro de la escritura', async () => {
-    const r = await app.inject({ method: 'PATCH', url: base+'/2', headers: escritura, payload: { ...datosEditar, version: env.fila().actualizadoEn.toISOString() } })
+    const r = await app.inject({ method: 'PATCH', url: base + '/2', headers: escritura, payload: { ...datosEditar, version: env.fila().actualizadoEn.toISOString() } })
     assert.equal(r.statusCode, 200, r.body)
     assert.ok(env.auditorias.at(-1)?.includes('Edición'))
   })
@@ -61,9 +65,9 @@ test('HTTP items-menu', async t => {
     assert.equal(env.auditorias.length, n); env.opciones.permiso = true
   })
   await t.test('ID fuera de rango y filtro desconocido se rechazan', async () => {
-    assert.equal((await app.inject({ method: 'GET', url: base+'/9999999999999999999', headers: lectura })).statusCode, 400)
-    assert.equal((await app.inject({ method: 'GET', url: base+'?extra=1', headers: lectura })).statusCode, 400)
-    assert.equal((await app.inject({ method: 'GET', url: base+'?limite=0', headers: lectura })).statusCode, 400)
+    assert.equal((await app.inject({ method: 'GET', url: base + '/9999999999999999999', headers: lectura })).statusCode, 400)
+    assert.equal((await app.inject({ method: 'GET', url: base + '?extra=1', headers: lectura })).statusCode, 400)
+    assert.equal((await app.inject({ method: 'GET', url: base + '?limite=0', headers: lectura })).statusCode, 400)
   })
   await t.test('auditoría de lectura fallida bloquea la respuesta', async () => {
     env.opciones.fallarAuditoria = true

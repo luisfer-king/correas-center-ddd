@@ -244,8 +244,8 @@ export type LeadWhereInput = {
   creadoEn?: Prisma.DateTimeFilter<"Lead"> | Date | string
   actualizadoEn?: Prisma.DateTimeFilter<"Lead"> | Date | string
   eliminadoEn?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
-  empresa?: Prisma.XOR<Prisma.EmpresaScalarRelationFilter, Prisma.EmpresaWhereInput>
   contacto?: Prisma.XOR<Prisma.ContactoEntranteNullableScalarRelationFilter, Prisma.ContactoEntranteWhereInput> | null
+  empresa?: Prisma.XOR<Prisma.EmpresaScalarRelationFilter, Prisma.EmpresaWhereInput>
   responsable?: Prisma.XOR<Prisma.PerfilNullableScalarRelationFilter, Prisma.PerfilWhereInput> | null
 }
 
@@ -258,8 +258,8 @@ export type LeadOrderByWithRelationInput = {
   creadoEn?: Prisma.SortOrder
   actualizadoEn?: Prisma.SortOrder
   eliminadoEn?: Prisma.SortOrderInput | Prisma.SortOrder
-  empresa?: Prisma.EmpresaOrderByWithRelationInput
   contacto?: Prisma.ContactoEntranteOrderByWithRelationInput
+  empresa?: Prisma.EmpresaOrderByWithRelationInput
   responsable?: Prisma.PerfilOrderByWithRelationInput
 }
 
@@ -275,8 +275,8 @@ export type LeadWhereUniqueInput = Prisma.AtLeast<{
   creadoEn?: Prisma.DateTimeFilter<"Lead"> | Date | string
   actualizadoEn?: Prisma.DateTimeFilter<"Lead"> | Date | string
   eliminadoEn?: Prisma.DateTimeNullableFilter<"Lead"> | Date | string | null
-  empresa?: Prisma.XOR<Prisma.EmpresaScalarRelationFilter, Prisma.EmpresaWhereInput>
   contacto?: Prisma.XOR<Prisma.ContactoEntranteNullableScalarRelationFilter, Prisma.ContactoEntranteWhereInput> | null
+  empresa?: Prisma.XOR<Prisma.EmpresaScalarRelationFilter, Prisma.EmpresaWhereInput>
   responsable?: Prisma.XOR<Prisma.PerfilNullableScalarRelationFilter, Prisma.PerfilWhereInput> | null
 }, "id" | "contactoId">
 
@@ -316,8 +316,8 @@ export type LeadCreateInput = {
   creadoEn?: Date | string
   actualizadoEn?: Date | string
   eliminadoEn?: Date | string | null
-  empresa: Prisma.EmpresaCreateNestedOneWithoutRelLeadInput
   contacto?: Prisma.ContactoEntranteCreateNestedOneWithoutRelLeadInput
+  empresa: Prisma.EmpresaCreateNestedOneWithoutRelLeadInput
   responsable?: Prisma.PerfilCreateNestedOneWithoutRelLeadResponsableInput
 }
 
@@ -338,8 +338,8 @@ export type LeadUpdateInput = {
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  empresa?: Prisma.EmpresaUpdateOneRequiredWithoutRelLeadNestedInput
   contacto?: Prisma.ContactoEntranteUpdateOneWithoutRelLeadNestedInput
+  empresa?: Prisma.EmpresaUpdateOneRequiredWithoutRelLeadNestedInput
   responsable?: Prisma.PerfilUpdateOneWithoutRelLeadResponsableNestedInput
 }
 
@@ -684,8 +684,8 @@ export type LeadCreateWithoutResponsableInput = {
   creadoEn?: Date | string
   actualizadoEn?: Date | string
   eliminadoEn?: Date | string | null
-  empresa: Prisma.EmpresaCreateNestedOneWithoutRelLeadInput
   contacto?: Prisma.ContactoEntranteCreateNestedOneWithoutRelLeadInput
+  empresa: Prisma.EmpresaCreateNestedOneWithoutRelLeadInput
 }
 
 export type LeadUncheckedCreateWithoutResponsableInput = {
@@ -780,8 +780,8 @@ export type LeadUpdateWithoutResponsableInput = {
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  empresa?: Prisma.EmpresaUpdateOneRequiredWithoutRelLeadNestedInput
   contacto?: Prisma.ContactoEntranteUpdateOneWithoutRelLeadNestedInput
+  empresa?: Prisma.EmpresaUpdateOneRequiredWithoutRelLeadNestedInput
 }
 
 export type LeadUncheckedUpdateWithoutResponsableInput = {
@@ -815,8 +815,8 @@ export type LeadSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   creadoEn?: boolean
   actualizadoEn?: boolean
   eliminadoEn?: boolean
-  empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   contacto?: boolean | Prisma.Lead$contactoArgs<ExtArgs>
+  empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   responsable?: boolean | Prisma.Lead$responsableArgs<ExtArgs>
 }, ExtArgs["result"]["lead"]>
 
@@ -829,8 +829,8 @@ export type LeadSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   creadoEn?: boolean
   actualizadoEn?: boolean
   eliminadoEn?: boolean
-  empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   contacto?: boolean | Prisma.Lead$contactoArgs<ExtArgs>
+  empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   responsable?: boolean | Prisma.Lead$responsableArgs<ExtArgs>
 }, ExtArgs["result"]["lead"]>
 
@@ -843,8 +843,8 @@ export type LeadSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   creadoEn?: boolean
   actualizadoEn?: boolean
   eliminadoEn?: boolean
-  empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   contacto?: boolean | Prisma.Lead$contactoArgs<ExtArgs>
+  empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   responsable?: boolean | Prisma.Lead$responsableArgs<ExtArgs>
 }, ExtArgs["result"]["lead"]>
 
@@ -861,26 +861,26 @@ export type LeadSelectScalar = {
 
 export type LeadOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "empresaId" | "contactoId" | "responsableId" | "estado" | "creadoEn" | "actualizadoEn" | "eliminadoEn", ExtArgs["result"]["lead"]>
 export type LeadInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   contacto?: boolean | Prisma.Lead$contactoArgs<ExtArgs>
+  empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   responsable?: boolean | Prisma.Lead$responsableArgs<ExtArgs>
 }
 export type LeadIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   contacto?: boolean | Prisma.Lead$contactoArgs<ExtArgs>
+  empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   responsable?: boolean | Prisma.Lead$responsableArgs<ExtArgs>
 }
 export type LeadIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   contacto?: boolean | Prisma.Lead$contactoArgs<ExtArgs>
+  empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   responsable?: boolean | Prisma.Lead$responsableArgs<ExtArgs>
 }
 
 export type $LeadPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Lead"
   objects: {
-    empresa: Prisma.$EmpresaPayload<ExtArgs>
     contacto: Prisma.$ContactoEntrantePayload<ExtArgs> | null
+    empresa: Prisma.$EmpresaPayload<ExtArgs>
     responsable: Prisma.$PerfilPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1286,8 +1286,8 @@ readonly fields: LeadFieldRefs;
  */
 export interface Prisma__LeadClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  empresa<T extends Prisma.EmpresaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EmpresaDefaultArgs<ExtArgs>>): Prisma.Prisma__EmpresaClient<runtime.Types.Result.GetResult<Prisma.$EmpresaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   contacto<T extends Prisma.Lead$contactoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$contactoArgs<ExtArgs>>): Prisma.Prisma__ContactoEntranteClient<runtime.Types.Result.GetResult<Prisma.$ContactoEntrantePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  empresa<T extends Prisma.EmpresaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EmpresaDefaultArgs<ExtArgs>>): Prisma.Prisma__EmpresaClient<runtime.Types.Result.GetResult<Prisma.$EmpresaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   responsable<T extends Prisma.Lead$responsableArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Lead$responsableArgs<ExtArgs>>): Prisma.Prisma__PerfilClient<runtime.Types.Result.GetResult<Prisma.$PerfilPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.

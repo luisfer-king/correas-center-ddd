@@ -51,7 +51,7 @@ test('footer: valida correspondencia de destino y seguridad del enlace', () => {
 })
 test('menú: proyección oculta ítems eliminados y conserva el agregado original', () => {
   const env = entorno('Menu'); const menu = env.actual
-  const item = new MenuItem({ id: 7n, menuId: menu.id, ruta: RutaInterna.create('/correas'), orden: Orden.create(0), estado: 'eliminado',
+  const item = new MenuItem({ nombre:'Correas', categoriaId:1n,id: 7n, menuId: menu.id, ruta: RutaInterna.create('/correas'), orden: Orden.create(0), estado: 'eliminado',
     fechas: { creadoEn: antes, actualizadoEn: despues, eliminadoEn: despues } })
   // Reconstruir la fixture con un ítem histórico.
   const agregado = new menu.constructor({ id: menu.id, empresaId: menu.empresaId, grupo: menu.grupo, destino: menu.destino, ruta: menu.ruta,

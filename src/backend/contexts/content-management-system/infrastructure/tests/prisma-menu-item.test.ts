@@ -49,7 +49,7 @@ test('items-menu: el resultado CAS cero impide auditoría', async () => {
 
 function datosParaCrear(env: ReturnType<typeof entorno>) {
   const e = mapearMenuItem(env.fila() as Parameters<typeof mapearMenuItem>[0])
-  return { menuId: e.menuId, ruta: e.ruta, orden: e.orden }
+  return { menuId:e.menuId,nombre:e.nombre,categoriaId:e.categoriaId!,ruta:e.ruta,orden:e.orden }
 }
 
 test('items-menu: crear genera ID, fecha y auditoría', async () => {

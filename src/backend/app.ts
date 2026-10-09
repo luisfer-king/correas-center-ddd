@@ -1,3 +1,5 @@
+import { componerCmsPublico, empresaPublicaDesdeEntorno } from './contexts/content-management-system/infrastructure/componer-cms-publico.js'
+import { registrarRutasPublicasCms } from './contexts/content-management-system/presentation/registrar-rutas-publicas-cms.js'
 import { componerCms, type CasosCms } from './contexts/content-management-system/infrastructure/componer-cms.js';
 import { registrarRutasCms } from './contexts/content-management-system/presentation/registrar-rutas-cms.js';
 import cookie from "@fastify/cookie";
@@ -80,5 +82,7 @@ export async function createApp(pruebas?: { casos: CasosIam; config: SeguridadIa
     },
   }, async () => ({ status: "ok" }));
 
+  // CMS público: vista inicial v1
+  if (db) registrarRutasPublicasCms(app, componerCmsPublico(db), empresaPublicaDesdeEntorno());
   return app;
 }
