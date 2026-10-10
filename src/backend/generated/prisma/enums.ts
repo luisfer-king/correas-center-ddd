@@ -61,3 +61,12 @@ export const EstadoLead = {
 } as const
 
 export type EstadoLead = (typeof EstadoLead)[keyof typeof EstadoLead]
+
+
+export const TipoDatoAtributo = {
+  texto: 'texto',
+  numero: 'numero',
+  booleano: 'booleano'
+} as const
+
+export type TipoDatoAtributo = (typeof TipoDatoAtributo)[keyof typeof TipoDatoAtributo]

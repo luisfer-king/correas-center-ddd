@@ -85,6 +85,8 @@ model Producto {
   relProductoMarca ProductoMarca[]
   empresa          Empresa         @relation(fields: [empresaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
+  relPlantillaGama PlantillaGamaProducto?
+
   @@index([empresaId, estado, orden])
   @@map("productos")
   @@schema("public")
@@ -107,6 +109,9 @@ model Categoria {
   relCategoriaAtributo CategoriaAtributo[]
   producto             Producto            @relation(fields: [productoId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
+  gama GamaCategoria?
+
+  @@unique([id, productoId], map: "categorias_id_producto_gama_key")
   @@index([productoId, estado, orden])
   @@map("categorias")
   @@schema("public")
@@ -179,22 +184,29 @@ model AtributoTecnico {
   tipoAtributo         TipoAtributo        @relation(fields: [tipoAtributoId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   relCategoriaAtributo CategoriaAtributo[]
 
+  tipoDato     TipoDatoAtributo @default(numero) @map("tipo_dato")
+  columnasGama ColumnaGama[]
+
+  @@unique([id, tipoDato], map: "atributos_tecnico_id_tipo_dato_key")
   @@index([tipoAtributoId, estado])
   @@map("atributos_tecnico")
   @@schema("public")
 }
 
 model CategoriaAtributo {
-  id                 BigInt          @id @default(autoincrement())
-  categoriaId        BigInt          @map("categoria_id")
-  atributoId         BigInt          @map("atributo_id")
-  valorPersonalizado Decimal?        @map("valor_personalizado") @db.Decimal
-  orden              Int             @default(0)
-  estado             Estado          @default(activo)
-  creadoEn           DateTime        @default(now()) @map("creado_en") @db.Timestamptz(6)
-  actualizadoEn      DateTime        @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
-  atributoTecnico    AtributoTecnico @relation(fields: [atributoId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  categoria          Categoria       @relation(fields: [categoriaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id                 BigInt           @id @default(autoincrement())
+  categoriaId        BigInt           @map("categoria_id")
+  atributoId         BigInt           @map("atributo_id")
+  tipoDato           TipoDatoAtributo @default(numero) @map("tipo_dato")
+  valorTexto         String?          @map("valor_texto")
+  valorBooleano      Boolean?         @map("valor_booleano")
+  valorPersonalizado Decimal?         @map("valor_personalizado") @db.Decimal
+  orden              Int              @default(0)
+  estado             Estado           @default(activo)
+  creadoEn           DateTime         @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn      DateTime         @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  atributoTecnico    AtributoTecnico  @relation(fields: [atributoId, tipoDato], references: [id, tipoDato], onDelete: NoAction, onUpdate: Cascade)
+  categoria          Categoria        @relation(fields: [categoriaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@index([categoriaId, estado, orden])
   @@map("categoria_atributo")
@@ -656,5 +668,160 @@ enum EstadoLead {
   descartado
 
   @@map("enum_estado_lead")
+  @@schema("public")
+}
+
+// Modelo aditivo de gamas. Los CHECK e índices parciales se mantienen en migration.sql.
+enum TipoDatoAtributo {
+  texto
+  numero
+  booleano
+
+  @@map("enum_tipo_dato_atributo")
+  @@schema("public")
+}
+
+model GamaCategoria {
+  id                 BigInt                  @id @default(autoincrement())
+  categoriaId        BigInt                  @unique @map("categoria_id")
+  productoId         BigInt                  @map("producto_id")
+  titulo             String                  @db.VarChar(255)
+  descripcion        String?
+  imagen             String?                 @db.VarChar(2048)
+  gamaOrigenId       BigInt?                 @map("gama_origen_id")
+  estado             Estado                  @default(activo)
+  eliminadoEn        DateTime?               @map("eliminado_en") @db.Timestamptz(6)
+  creadoEn           DateTime                @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn      DateTime                @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  categoria          Categoria               @relation(fields: [categoriaId, productoId], references: [id, productoId], onDelete: NoAction, onUpdate: NoAction)
+  origen             GamaCategoria?          @relation("OrigenGama", fields: [gamaOrigenId, productoId], references: [id, productoId], onDelete: NoAction, onUpdate: NoAction)
+  copias             GamaCategoria[]         @relation("OrigenGama")
+  referenciaProducto PlantillaGamaProducto[]
+  gruposColumnas     GrupoColumnaGama[]
+  columnas           ColumnaGama[]
+  gruposFilas        GrupoFilaGama[]
+  filas              FilaGama[]
+
+  @@unique([categoriaId, productoId])
+  @@unique([id, productoId])
+  @@index([productoId, estado])
+  @@map("gamas_categoria")
+  @@schema("public")
+}
+
+model PlantillaGamaProducto {
+  productoId    BigInt        @id @map("producto_id")
+  gamaId        BigInt        @map("gama_id")
+  creadoEn      DateTime      @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn DateTime      @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  producto      Producto      @relation(fields: [productoId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  gama          GamaCategoria @relation(fields: [gamaId, productoId], references: [id, productoId], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("plantillas_gama_producto")
+  @@schema("public")
+}
+
+model GrupoColumnaGama {
+  id            BigInt        @id @default(autoincrement())
+  gamaId        BigInt        @map("gama_id")
+  codigo        String        @db.VarChar(80)
+  nombre        String        @db.VarChar(255)
+  orden         Int
+  estado        Estado        @default(activo)
+  eliminadoEn   DateTime?     @map("eliminado_en") @db.Timestamptz(6)
+  creadoEn      DateTime      @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn DateTime      @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  gama          GamaCategoria @relation(fields: [gamaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  columnas      ColumnaGama[]
+
+  @@unique([id, gamaId])
+  @@index([gamaId, estado, orden])
+  @@map("grupos_columnas_gama")
+  @@schema("public")
+}
+
+model GrupoFilaGama {
+  id            BigInt        @id @default(autoincrement())
+  gamaId        BigInt        @map("gama_id")
+  codigo        String        @db.VarChar(80)
+  nombre        String        @db.VarChar(255)
+  orden         Int
+  estado        Estado        @default(activo)
+  eliminadoEn   DateTime?     @map("eliminado_en") @db.Timestamptz(6)
+  creadoEn      DateTime      @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn DateTime      @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  gama          GamaCategoria @relation(fields: [gamaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  filas         FilaGama[]
+
+  @@unique([id, gamaId])
+  @@index([gamaId, estado, orden])
+  @@map("grupos_filas_gama")
+  @@schema("public")
+}
+
+model ColumnaGama {
+  id            BigInt            @id @default(autoincrement())
+  gamaId        BigInt            @map("gama_id")
+  atributoId    BigInt            @map("atributo_id")
+  tipoDato      TipoDatoAtributo  @map("tipo_dato")
+  grupoId       BigInt?           @map("grupo_id")
+  etiqueta      String?           @db.VarChar(255)
+  unidadMedida  String?           @map("unidad_medida") @db.VarChar(80)
+  orden         Int
+  estado        Estado            @default(activo)
+  eliminadoEn   DateTime?         @map("eliminado_en") @db.Timestamptz(6)
+  creadoEn      DateTime          @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn DateTime          @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  gama          GamaCategoria     @relation(fields: [gamaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  atributo      AtributoTecnico   @relation(fields: [atributoId, tipoDato], references: [id, tipoDato], onDelete: NoAction, onUpdate: Cascade)
+  grupo         GrupoColumnaGama? @relation(fields: [grupoId, gamaId], references: [id, gamaId], onDelete: NoAction, onUpdate: NoAction)
+  valores       ValorGama[]
+
+  @@unique([id, gamaId, tipoDato])
+  @@index([gamaId, estado, orden])
+  @@index([atributoId])
+  @@map("columnas_gama")
+  @@schema("public")
+}
+
+model FilaGama {
+  id            BigInt         @id @default(autoincrement())
+  gamaId        BigInt         @map("gama_id")
+  grupoId       BigInt?        @map("grupo_id")
+  codigo        String         @db.VarChar(80)
+  nombre        String         @db.VarChar(255)
+  descripcion   String?
+  enlaceDetalle String?        @map("enlace_detalle") @db.VarChar(2048)
+  orden         Int
+  estado        Estado         @default(activo)
+  eliminadoEn   DateTime?      @map("eliminado_en") @db.Timestamptz(6)
+  creadoEn      DateTime       @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn DateTime       @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  gama          GamaCategoria  @relation(fields: [gamaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  grupo         GrupoFilaGama? @relation(fields: [grupoId, gamaId], references: [id, gamaId], onDelete: NoAction, onUpdate: NoAction)
+  valores       ValorGama[]
+
+  @@unique([id, gamaId])
+  @@index([gamaId, estado, orden])
+  @@map("filas_gama")
+  @@schema("public")
+}
+
+model ValorGama {
+  filaId        BigInt           @map("fila_id")
+  columnaId     BigInt           @map("columna_id")
+  gamaId        BigInt           @map("gama_id")
+  tipoDato      TipoDatoAtributo @map("tipo_dato")
+  valorTexto    String?          @map("valor_texto")
+  valorNumero   Decimal?         @map("valor_numero") @db.Decimal
+  valorBooleano Boolean?         @map("valor_booleano")
+  creadoEn      DateTime         @default(now()) @map("creado_en") @db.Timestamptz(6)
+  actualizadoEn DateTime         @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz(6)
+  fila          FilaGama         @relation(fields: [filaId, gamaId], references: [id, gamaId], onDelete: NoAction, onUpdate: NoAction)
+  columna       ColumnaGama      @relation(fields: [columnaId, gamaId, tipoDato], references: [id, gamaId, tipoDato], onDelete: NoAction, onUpdate: Cascade)
+
+  @@id([filaId, columnaId])
+  @@index([columnaId, gamaId, tipoDato])
+  @@map("valores_gama")
   @@schema("public")
 }
