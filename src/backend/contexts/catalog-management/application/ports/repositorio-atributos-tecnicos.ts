@@ -1,7 +1,8 @@
+import type { TipoDatoAtributo } from '../../domain/valor-tecnico.js'
 import type { AtributoTecnico, ValoresAtributo } from '../../domain/atributo-tecnico.js'
 import type { Orden } from '../../../../shared/domain/value-objects.js'
 
-export type DatosNuevoAtributoTecnico = { tipoAtributoId: bigint; nombre: string; valores: ValoresAtributo; orden: Orden }
+export type DatosNuevoAtributoTecnico = { tipoDato?: TipoDatoAtributo; tipoAtributoId: bigint; nombre: string; valores: ValoresAtributo; orden: Orden }
 
 export interface RepositorioAtributosTecnicos {
   buscarPorId(id: bigint, incluirEliminados: boolean): Promise<AtributoTecnico | null>

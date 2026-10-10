@@ -1,7 +1,8 @@
+import type { TipoDatoAtributo } from '../../domain/valor-tecnico.js'
 import type { AsignacionAtributo } from '../../domain/asignacion-atributo.js'
 import type { Orden } from '../../../../shared/domain/value-objects.js'
 
-export type DatosNuevaAsignacionAtributo = { categoriaId: bigint; atributoId: bigint; valorPersonalizado: string | null; orden: Orden }
+export type DatosNuevaAsignacionAtributo = { tipoDato?: TipoDatoAtributo; valorTexto?: string | null; valorBooleano?: boolean | null; categoriaId: bigint; atributoId: bigint; valorPersonalizado: string | null; orden: Orden }
 
 export interface RepositorioAsignacionesAtributo {
   buscarPorId(id: bigint, incluirEliminados: boolean): Promise<AsignacionAtributo | null>

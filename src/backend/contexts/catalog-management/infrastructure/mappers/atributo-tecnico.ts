@@ -7,7 +7,7 @@ export type FilaAtributoTecnico = Prisma.AtributoTecnicoGetPayload<{}>
 export function aAtributoTecnico(fila: FilaAtributoTecnico): AtributoTecnico {
   return new AtributoTecnico({
     tipoDato: fila.tipoDato ?? 'numero', id: fila.id, tipoAtributoId: fila.tipoAtributoId, nombre: fila.nombre,
-    valores: { descripcion: fila.descripcion, valorNumerico: fila.valorNumerico?.toString() ?? null,
+    valores: { descripcion: fila.descripcion, valorNumerico: fila.valorNumerico?.toFixed() ?? null,
       unidadMedida: fila.unidadMedida }, orden: Orden.create(fila.orden),
     estado: fila.estado, fechas: { creadoEn: fila.creadoEn, actualizadoEn: fila.actualizadoEn, eliminadoEn: fila.eliminadoEn },
   })

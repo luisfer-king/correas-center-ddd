@@ -1,6 +1,6 @@
 import type { PrismaClient } from '../../../generated/prisma/client.js'
 import type { DatosNuevaAsignacionAtributo, RepositorioAsignacionesAtributo } from '../application/ports/repositorio-asignaciones-atributo.js'
-import type { AsignacionAtributo } from '../domain/asignacion-atributo.js'
+import { AsignacionAtributo } from '../domain/asignacion-atributo.js'
 
 import { idCatalogo } from '../domain/catalog-values.js'
 import { aAsignacionAtributo } from './mappers/asignacion-atributo.js'
@@ -28,12 +28,14 @@ export class PrismaAsignacionesAtributo implements RepositorioAsignacionesAtribu
       await permitirCatalogo(tx, actorId, 'asignaciones-atributo')
       await referenciaActiva(tx, 'categoria', datos.categoriaId)
       await referenciaActiva(tx, 'atributoTecnico', datos.atributoId)
-      const tipo = await tx.atributoTecnico.findUnique({ where: { id: datos.atributoId }, select: { tipoAtributo: { select: { permiteValorNumerico: true } } } })
+      const tipo = await tx.atributoTecnico.findUnique({ where: { id: datos.atributoId }, select: { tipoDato: true, tipoAtributo: { select: { permiteValorNumerico: true } } } })
       if (datos.valorPersonalizado !== null && !tipo?.tipoAtributo.permiteValorNumerico) throw new Error('Valor personalizado incompatible')
       const existente = await tx.categoriaAtributo.findFirst({ where: { categoriaId: datos.categoriaId, atributoId: datos.atributoId }, select: { id: true } })
       if (existente) throw new Error('Asignación ya registrada')
       const ahora = new Date()
-      const fila = await tx.categoriaAtributo.create({ data: { categoriaId: datos.categoriaId, atributoId: datos.atributoId, orden: datos.orden.value, valorPersonalizado: datos.valorPersonalizado, estado: 'activo', creadoEn: ahora, actualizadoEn: ahora } })
+      const entidad = new AsignacionAtributo({ ...datos, tipoDato: datos.tipoDato ?? tipo?.tipoDato ?? 'numero', id: 1n, estado: 'activo', fechas: { creadoEn: ahora, actualizadoEn: ahora } })
+      if (entidad.tipoDato !== (tipo?.tipoDato ?? 'numero')) throw new Error('Tipo de asignación incompatible')
+      const fila = await tx.categoriaAtributo.create({ data: { tipoDato: entidad.tipoDato, valorTexto: entidad.valorTexto, valorBooleano: entidad.valorBooleano, categoriaId: datos.categoriaId, atributoId: datos.atributoId, orden: datos.orden.value, valorPersonalizado: datos.valorPersonalizado, estado: 'activo', creadoEn: ahora, actualizadoEn: ahora } })
       const resultado = aAsignacionAtributo(fila)
       await auditarCatalogo(tx, actorId, 'asignaciones-atributo', fila.id, null, resultado.estado)
       return resultado
@@ -53,7 +55,7 @@ export class PrismaAsignacionesAtributo implements RepositorioAsignacionesAtribu
       }
       const cambio = await tx.categoriaAtributo.updateMany({
         where: { id: registro.id, actualizadoEn: versionCatalogo(versionAnterior), estado: { not: 'eliminado' } },
-        data: { orden: registro.orden.value, valorPersonalizado: registro.valorPersonalizado, estado: registro.estado, actualizadoEn: registro.actualizadoEn }
+        data: { tipoDato: registro.tipoDato, valorTexto: registro.valorTexto, valorBooleano: registro.valorBooleano, orden: registro.orden.value, valorPersonalizado: registro.valorPersonalizado, estado: registro.estado, actualizadoEn: registro.actualizadoEn }
       })
       if (cambio.count !== 1) throw new Error('Asignación modificada por otra operación')
       await auditarCatalogo(tx, actorId, 'asignaciones-atributo', registro.id, anterior.estado, registro.estado)
