@@ -51,10 +51,10 @@ export const gruposPortal: readonly GrupoPortal[] = [
             { etiqueta: 'Secciones', ruta: '/portal/cms/contenidos-seccion', acceso: { contexto: 'cms', recurso: 'contenidos_seccion' } },
             { etiqueta: 'Menús', ruta: '/portal/cms/menus', acceso: { contexto: 'cms', recurso: 'menus' } },
             
-            { etiqueta: 'Footer', ruta: '/portal/cms/elementos-footer', acceso: { contexto: 'cms', recurso: 'elementos_footer' } },
-            { etiqueta: 'Configuración', ruta: '/portal/cms/configuracion-sitio', acceso: { contexto: 'cms', recurso: 'configuracion_sitio' } },
             { etiqueta: 'Wizard', ruta: '/portal/cms/pasos-wizard', acceso: { contexto: 'cms', recurso: 'pasos_wizard' } },
             { etiqueta: 'Registros', ruta: '/portal/cms/registros-cms', acceso: { contexto: 'cms', recurso: 'registros_cms' } },
+            { etiqueta: 'Footer', ruta: '/portal/cms/elementos-footer', acceso: { contexto: 'cms', recurso: 'elementos_footer' } },
+            { etiqueta: 'Configuración', ruta: '/portal/cms/configuracion-sitio', acceso: { contexto: 'cms', recurso: 'configuracion_sitio' } },
             
         ]
     },
