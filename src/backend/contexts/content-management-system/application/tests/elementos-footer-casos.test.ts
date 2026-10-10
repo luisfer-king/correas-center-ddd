@@ -175,7 +175,7 @@ test('FooterElemento: versión obsoleta impide guardar', async () => {
 
 test('FooterElemento: creación inválida se rechaza antes de persistir', async () => {
   const env = entorno('FooterElemento'); const caso = new CrearFooterElemento(env.repo as unknown as ConstructorParameters<typeof CrearFooterElemento>[0], env.auth as unknown as ConstructorParameters<typeof CrearFooterElemento>[1], env.reloj as unknown as ConstructorParameters<typeof CrearFooterElemento>[2])
-  await assert.rejects(caso.ejecutar(contexto, { ...entrada('FooterElemento'), tipo: 'red_social', destino: null, enlace: null }))
+  await assert.rejects(caso.ejecutar(contexto, { ...entrada('FooterElemento'), tipo: 'red_social', destino: null, enlace: 'javascript:alert(1)' }))
   assert.equal(env.llamadas.filter(x => x.operacion === 'crear').length, 0)
 })
 

@@ -10,7 +10,7 @@ export type ConsultaElementosFooter = Readonly<{
   desplazamiento?: number
 }>
 
-export type NuevaFooterElemento = Omit<ConstructorParameters<typeof FooterElemento>[0], 'id' | 'fechas' | 'estado'>
+export type NuevaFooterElemento = Omit<ConstructorParameters<typeof FooterElemento>[0], 'id' | 'fechas' | 'estado' | 'orden'> & { orden?: FooterElemento['orden'] }
 
 export type EscrituraFooterElemento = Readonly<{
   actorId: string

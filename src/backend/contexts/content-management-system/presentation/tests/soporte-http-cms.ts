@@ -4,12 +4,13 @@ import swagger from '@fastify/swagger'
 import { componerCms } from '../../infrastructure/componer-cms.js'
 import { registrarRutasCms } from '../registrar-rutas-cms.js'
 import type { SesionCms } from '../http-cms.js'
+import type { FuentesWizardCms } from '../../application/validaciones-cms.js'
 import { CatalogoFuentesWizardCms } from '../../application/validaciones-cms.js'
 import { entorno, actor, antes, despues } from '../../infrastructure/tests/soporte-pruebas-cms.js'
 export { actor, antes, despues }
 export const lectura = { cookie: 'cc_portal_local=ok', 'user-agent': 'prueba-http-cms' }
 export const escritura = { ...lectura, origin: 'http://localhost:5173', 'x-portal-request': '1' }
-export async function servidorCms(modelo = 'tipoSeccion') {
+export async function servidorCms(modelo = 'tipoSeccion', fuentesWizard?: FuentesWizardCms) {
   const env = entorno(modelo)
   const roles = { superAdmin: false }
   const auth = {
@@ -17,7 +18,7 @@ export async function servidorCms(modelo = 'tipoSeccion') {
     tieneRolActivo: async () => roles.superAdmin,
     tienePermiso: async () => env.opciones.permiso,
   }
-  const casos = componerCms(env.db, { autorizacion: auth, reloj: { ahora: () => despues }, fuentesWizard: new CatalogoFuentesWizardCms({ productos: ['nombre'], texto: [] }) })
+  const casos = componerCms(env.db, { autorizacion: auth, reloj: { ahora: () => despues }, fuentesWizard: fuentesWizard ?? new CatalogoFuentesWizardCms({ productos: ['nombre'], industrias: [], categorias: ['producto_id'], texto: [] }) })
   const iam = { comprobar: { ejecutar: async (jwt: string) => {
     if (jwt !== 'ok') throw new Error('Sesión inválida')
     return { usuarioId: actor }

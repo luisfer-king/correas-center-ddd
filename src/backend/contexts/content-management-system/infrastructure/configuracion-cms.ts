@@ -1,7 +1,7 @@
 import { CatalogoFuentesWizardCms } from '../application/validaciones-cms.js'
-/** Sin variable el catálogo está vacío: las lecturas funcionan; no se habilitan fuentes implícitas. */
+/** Fuentes del ProductSelector. Una configuración explícita reemplaza este catálogo. */
 export function fuentesWizardCmsDesdeEntorno(valor = process.env.CMS_FUENTES_WIZARD_JSON) {
-  if (valor === undefined) return new CatalogoFuentesWizardCms({})
+  if (valor === undefined) return new CatalogoFuentesWizardCms({ industrias: [], productos: [], categorias: ['producto_id'] })
   let datos: unknown
   try { datos = JSON.parse(valor) } catch { throw new Error('CMS_FUENTES_WIZARD_JSON debe ser un objeto JSON') }
   if (!datos || typeof datos !== 'object' || Array.isArray(datos)) throw new Error('CMS_FUENTES_WIZARD_JSON debe ser un objeto JSON')

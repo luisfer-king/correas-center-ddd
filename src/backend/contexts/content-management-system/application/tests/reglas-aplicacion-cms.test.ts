@@ -45,7 +45,7 @@ test('wizard: catálogo explícito rechaza fuente y filtro no registrados', () =
 })
 test('footer: valida correspondencia de destino y seguridad del enlace', () => {
   assert.throws(() => footerCms('producto', { tipo: 'servicio', id: 1n }, null), /no corresponde/)
-  assert.throws(() => footerCms('red_social', null, null), /sin enlace/)
+  assert.deepEqual(footerCms('red_social', null, null), {destino:null,enlace:null})
   assert.throws(() => footerCms('red_social', null, 'javascript:alert(1)'))
   assert.throws(() => footerCms('producto', null, '//externo.example'))
 })

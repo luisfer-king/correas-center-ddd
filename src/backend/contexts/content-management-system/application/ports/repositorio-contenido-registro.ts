@@ -10,7 +10,7 @@ export type ConsultaContenidosRegistro = Readonly<{
   desplazamiento?: number
 }>
 
-export type NuevaContenidoRegistro = Omit<ConstructorParameters<typeof ContenidoRegistro>[0], 'id' | 'fechas' | 'estado'>
+export type NuevaContenidoRegistro = Omit<ConstructorParameters<typeof ContenidoRegistro>[0], 'id' | 'fechas' | 'estado' | 'orden'> & { orden?: ContenidoRegistro['orden'] }
 
 export type EscrituraContenidoRegistro = Readonly<{
   actorId: string

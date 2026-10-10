@@ -1,3 +1,4 @@
+import { Orden } from '../../../shared/domain/value-objects.js'
 import { RegistroCMS as EntidadRegistroCMS } from '../domain/registro-cms.js'
 import type { PrismaClient } from '../../../generated/prisma/client.js'
 import type { RepositorioRegistrosCMS, ConsultaRegistrosCMS, NuevaRegistroCMS, EscrituraRegistroCMS } from '../application/ports/repositorio-registro-cms.js'
@@ -42,7 +43,10 @@ export class PrismaRegistrosCMS implements RepositorioRegistrosCMS {
   async crear(datos: NuevaRegistroCMS, contexto: EscrituraRegistroCMS): Promise<RegistroCMS> {
     return transaccionCms(this.db, async tx => {
       await gestionarCms(tx, contexto, 'registros-cms')
-      const e = new EntidadRegistroCMS({ ...datos, id: 1n, estado: 'activo', fechas: { creadoEn: contexto.cuando, actualizadoEn: contexto.cuando, eliminadoEn: null } })
+      const maximo=await tx.registroCMS.aggregate({where:{eliminadoEn:null,estado:{not:'eliminado'}},_max:{orden:true}})
+      const ultimo=Math.max(0,maximo._max.orden??0)
+      if(!Number.isSafeInteger(ultimo)||ultimo>=2147483647)throw new Error('Orden automático de registro inválido')
+      const e = new EntidadRegistroCMS({ ...datos, orden:Orden.create(ultimo+1), id: 1n, estado: 'activo', fechas: { creadoEn: contexto.cuando, actualizadoEn: contexto.cuando, eliminadoEn: null } })
       const fila = await tx.registroCMS.create({ data: datosRegistroCMS(e) })
       const resultado = mapearRegistroCMS(fila)
       await auditarCms(tx, contexto, 'registros-cms', 'registros', fila.id, null, resultado)
