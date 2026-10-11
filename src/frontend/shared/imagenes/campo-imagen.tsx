@@ -1,3 +1,5 @@
+import { urlImagen } from './url-imagen'
+import { MiniaturaImagen } from './miniatura-imagen'
 import { exportarEdicion, imagenBase64 } from './exportar-edicion'
 import { useEffect, useId, useRef, useState } from 'react'
 import { solicitarApi } from '../api/cliente-http'
@@ -58,7 +60,7 @@ export function CampoImagen({ etiqueta, valor, endpoint, actualizar, actividad, 
   async function editarActual() {
     setError(''); setOcupado(true)
     try {
-      const url = new URL(valor, window.location.origin)
+      const url = new URL(urlImagen(valor), window.location.origin)
       if (!['https:', 'http:'].includes(url.protocol)) throw new Error('URL de imagen no válida.')
       const respuesta = await fetch(url, { credentials: 'same-origin' })
       if (!respuesta.ok) throw new Error('No se pudo cargar la imagen actual.')
@@ -76,7 +78,7 @@ export function CampoImagen({ etiqueta, valor, endpoint, actualizar, actividad, 
       if (base64.length > Math.ceil(limite / 3) * 4) throw new Error('El resultado supera 8 MB. Recorta la imagen o utiliza una de menor resolución.')
       const salida = await solicitarApi<{ url: string }>(endpoint, { metodo: 'POST', cuerpo: { base64 } })
       if (vivo.current) {
-        actualizar(new URL(salida.url, window.location.origin).href)
+        actualizar(urlImagen(salida.url))
         setEditor(false); original.current = null; historial.current = []; setPasos(0)
       }
     } catch (fallo) { if (vivo.current) setError(fallo instanceof Error ? fallo.message : 'No se pudo subir la imagen.') }
@@ -87,7 +89,7 @@ export function CampoImagen({ etiqueta, valor, endpoint, actualizar, actividad, 
     <label htmlFor={id} className="text-sm font-medium">{etiqueta}</label>
     <input id={id} type="file" accept="image/png,image/jpeg,image/webp" disabled={deshabilitado}
       onChange={e => { void seleccionar(e.target.files?.[0]); e.target.value = '' }} />
-    {!editor && valor && <img src={valor} alt={`Vista previa: ${etiqueta}`} className="h-48 w-full rounded border bg-white object-contain" />}
+    {!editor && valor && <MiniaturaImagen url={valor} nombre={`Vista previa: ${etiqueta}`} grande />}
     {!editor && valor && <button type="button" disabled={deshabilitado} onClick={() => void editarActual()} className="justify-self-start rounded border px-3 py-2">Editar imagen actual</button>}
     <div hidden={!editor}>
       <div className="relative mx-auto w-fit max-w-full" style={{ backgroundColor: '#eee', backgroundImage: 'conic-gradient(#ccc 25%, transparent 0 50%, #ccc 0 75%, transparent 0)', backgroundSize: '20px 20px' }}>

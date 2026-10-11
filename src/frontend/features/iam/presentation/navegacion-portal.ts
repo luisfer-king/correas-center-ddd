@@ -9,7 +9,7 @@ export type AccesoPortal =
     | { contexto: 'crm'; recurso: keyof CapacidadesCrm['recursos'] }
     | { contexto: 'catalogo'; recurso: keyof CapacidadesCatalogo['recursos'] }
     | { contexto: 'cms'; recurso: keyof CapacidadesCms['recursos'] }
-export interface EnlacePortal { etiqueta: string; ruta: string; acceso?: AccesoPortal }
+export interface EnlacePortal { etiqueta: string; ruta: string; seccion?: string; acceso?: AccesoPortal }
 export interface GrupoPortal { id: string; titulo: string; enlaces: readonly EnlacePortal[] }
 
 // Edita aquí títulos, orden, enlaces y grupos. El acceso viaja con cada enlace al moverlo.
@@ -24,38 +24,34 @@ export const gruposPortal: readonly GrupoPortal[] = [
     },
     {
         id: 'comercial', titulo: 'Comercial / CRM', enlaces: [
-            { etiqueta: 'Empresas', ruta: '/portal/crm/empresas', acceso: { contexto: 'crm', recurso: 'empresas' } },
-            { etiqueta: 'Sucursales', ruta: '/portal/crm/sucursales', acceso: { contexto: 'crm', recurso: 'sucursales' } },
-            { etiqueta: 'Contactos', ruta: '/portal/crm/contactos', acceso: { contexto: 'crm', recurso: 'contactos' } },
-            { etiqueta: 'Suscriptores', ruta: '/portal/crm/suscriptores', acceso: { contexto: 'crm', recurso: 'suscriptores' } },
-            { etiqueta: 'Leads', ruta: '/portal/crm/leads', acceso: { contexto: 'crm', recurso: 'leads' } },
+            { etiqueta: 'Leads', ruta: '/portal/crm/leads', seccion: 'Relaciones comerciales', acceso: { contexto: 'crm', recurso: 'leads' } },
+            { etiqueta: 'Contactos', ruta: '/portal/crm/contactos', seccion: 'Relaciones comerciales', acceso: { contexto: 'crm', recurso: 'contactos' } },
+            { etiqueta: 'Suscriptores', ruta: '/portal/crm/suscriptores', seccion: 'Relaciones comerciales', acceso: { contexto: 'crm', recurso: 'suscriptores' } },
+            { etiqueta: 'Empresas', ruta: '/portal/crm/empresas', seccion: 'Organización', acceso: { contexto: 'crm', recurso: 'empresas' } },
+            { etiqueta: 'Sucursales', ruta: '/portal/crm/sucursales', seccion: 'Organización', acceso: { contexto: 'crm', recurso: 'sucursales' } },
         ]
     },
     {
         id: 'catalogo', titulo: 'Catálogo', enlaces: [
-            { etiqueta: 'Productos', ruta: '/portal/catalogo/productos', acceso: { contexto: 'catalogo', recurso: 'productos' } },
-            { etiqueta: 'Categorías', ruta: '/portal/catalogo/categorias', acceso: { contexto: 'catalogo', recurso: 'categorias' } },
-            { etiqueta: 'Marcas', ruta: '/portal/catalogo/marcas', acceso: { contexto: 'catalogo', recurso: 'marcas' } },
-            { etiqueta: 'Marcas de productos', ruta: '/portal/catalogo/asignaciones-marca', acceso: { contexto: 'catalogo', recurso: 'asignaciones-marca' } },
-            { etiqueta: 'Industrias', ruta: '/portal/catalogo/industrias', acceso: { contexto: 'catalogo', recurso: 'industrias' } },
-            { etiqueta: 'Servicios', ruta: '/portal/catalogo/servicios', acceso: { contexto: 'catalogo', recurso: 'servicios' } },
-            { etiqueta: 'Tipos de atributo', ruta: '/portal/catalogo/tipos-atributo', acceso: { contexto: 'catalogo', recurso: 'tipos-atributo' } },
-            { etiqueta: 'Atributos técnicos', ruta: '/portal/catalogo/atributos-tecnicos', acceso: { contexto: 'catalogo', recurso: 'atributos-tecnicos' } },
-            { etiqueta: 'Atributos de categorías', ruta: '/portal/catalogo/asignaciones-atributo', acceso: { contexto: 'catalogo', recurso: 'asignaciones-atributo' } },
-            { etiqueta: 'Industrias de categorías y servicios', ruta: '/portal/catalogo/asignaciones-industria', acceso: { contexto: 'catalogo', recurso: 'asignaciones-industria' } },
+            { etiqueta: 'Productos', ruta: '/portal/catalogo/productos', seccion: 'Oferta', acceso: { contexto: 'catalogo', recurso: 'productos' } },
+            { etiqueta: 'Categorías', ruta: '/portal/catalogo/categorias', seccion: 'Oferta', acceso: { contexto: 'catalogo', recurso: 'categorias' } },
+            { etiqueta: 'Marcas', ruta: '/portal/catalogo/marcas', seccion: 'Oferta', acceso: { contexto: 'catalogo', recurso: 'marcas' } },
+            { etiqueta: 'Servicios', ruta: '/portal/catalogo/servicios', seccion: 'Oferta', acceso: { contexto: 'catalogo', recurso: 'servicios' } },
+            { etiqueta: 'Industrias', ruta: '/portal/catalogo/industrias', seccion: 'Aplicaciones', acceso: { contexto: 'catalogo', recurso: 'industrias' } },
+            { etiqueta: 'Aplicaciones por industria', ruta: '/portal/catalogo/asignaciones-industria', seccion: 'Aplicaciones', acceso: { contexto: 'catalogo', recurso: 'asignaciones-industria' } },
+            { etiqueta: 'Tipos de atributo', ruta: '/portal/catalogo/tipos-atributo', seccion: 'Especificaciones técnicas', acceso: { contexto: 'catalogo', recurso: 'tipos-atributo' } },
+            { etiqueta: 'Atributos técnicos', ruta: '/portal/catalogo/atributos-tecnicos', seccion: 'Especificaciones técnicas', acceso: { contexto: 'catalogo', recurso: 'atributos-tecnicos' } },
         ]
     },
     {
         id: 'cms', titulo: 'CMS', enlaces: [
-            { etiqueta: 'Tipos de sección', ruta: '/portal/cms/tipos-seccion', acceso: { contexto: 'cms', recurso: 'tipos_seccion' } },
-            { etiqueta: 'Secciones', ruta: '/portal/cms/contenidos-seccion', acceso: { contexto: 'cms', recurso: 'contenidos_seccion' } },
-            { etiqueta: 'Menús', ruta: '/portal/cms/menus', acceso: { contexto: 'cms', recurso: 'menus' } },
-            
-            { etiqueta: 'Wizard', ruta: '/portal/cms/pasos-wizard', acceso: { contexto: 'cms', recurso: 'pasos_wizard' } },
-            { etiqueta: 'Registros', ruta: '/portal/cms/registros-cms', acceso: { contexto: 'cms', recurso: 'registros_cms' } },
-            { etiqueta: 'Footer', ruta: '/portal/cms/elementos-footer', acceso: { contexto: 'cms', recurso: 'elementos_footer' } },
-            { etiqueta: 'Configuración', ruta: '/portal/cms/configuracion-sitio', acceso: { contexto: 'cms', recurso: 'configuracion_sitio' } },
-            
+            { etiqueta: 'Secciones', ruta: '/portal/cms/contenidos-seccion', seccion: 'Contenido', acceso: { contexto: 'cms', recurso: 'contenidos_seccion' } },
+            { etiqueta: 'Registros', ruta: '/portal/cms/registros-cms', seccion: 'Contenido', acceso: { contexto: 'cms', recurso: 'registros_cms' } },
+            { etiqueta: 'Tipos de sección', ruta: '/portal/cms/tipos-seccion', seccion: 'Contenido', acceso: { contexto: 'cms', recurso: 'tipos_seccion' } },
+            { etiqueta: 'Menús', ruta: '/portal/cms/menus', seccion: 'Navegación pública', acceso: { contexto: 'cms', recurso: 'menus' } },
+            { etiqueta: 'Footer', ruta: '/portal/cms/elementos-footer', seccion: 'Navegación pública', acceso: { contexto: 'cms', recurso: 'elementos_footer' } },
+            { etiqueta: 'Wizard', ruta: '/portal/cms/pasos-wizard', seccion: 'Sitio', acceso: { contexto: 'cms', recurso: 'pasos_wizard' } },
+            { etiqueta: 'Configuración', ruta: '/portal/cms/configuracion-sitio', seccion: 'Sitio', acceso: { contexto: 'cms', recurso: 'configuracion_sitio' } },
         ]
     },
     {

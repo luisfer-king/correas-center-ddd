@@ -9,7 +9,7 @@ export function Navigation({ vista }: { vista: VistaPublica }) {
  const location = useLocation()
  useEffect(() => { setAbierto(false); setGrupoAbierto(null) }, [location.pathname])
  return <header className="publico-header" onKeyDown={e => { if (e.key === 'Escape') { setAbierto(false); setGrupoAbierto(null) } }}>
-  <div className="publico-barra"><Link className="publico-logo" to="/">{imagenPublica(vista.empresa.logo) ? <img src={imagenPublica(vista.empresa.logo)} alt={vista.empresa.nombre} /> : vista.empresa.nombre}<small>Solución confiable</small></Link>
+  <div className="publico-barra"><Link className="publico-logo" to="/">{imagenPublica(vista.empresa.logo) ? <img src={imagenPublica(vista.empresa.logo)} alt={vista.empresa.nombre} /> : vista.empresa.nombre}<small></small></Link>
   <button className="publico-mobile" aria-expanded={abierto} aria-controls="navegacion-publica" onClick={() => setAbierto(!abierto)}>{abierto ? 'Cerrar' : 'Menú'}</button>
   <nav id="navegacion-publica" aria-label="Navegación principal" className={abierto ? 'publico-nav abierto' : 'publico-nav'}>
    <Link to="/">Inicio</Link>
