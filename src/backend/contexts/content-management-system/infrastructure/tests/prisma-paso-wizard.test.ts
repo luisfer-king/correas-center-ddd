@@ -79,3 +79,26 @@ test('wizard: paginación inválida se rechaza antes de consultar', async () => 
   await assert.rejects(new PrismaPasosWizard(env.db).listar({ limite: 0 }), /Paginación inválida/)
   assert.equal(env.consultas.length, 0)
 })
+
+test('wizard: orden automático por empresa cuenta inactivos y excluye eliminados y otras empresas', async () => {
+  const env = entorno('pasoWizard'), base = env.fila()
+  env.tablas.pasoWizard.push({...base,id:3n,orden:2,estado:'inactivo'}, {...base,id:4n,orden:80,estado:'eliminado',eliminadoEn:antes}, {...base,id:5n,empresaId:9n,orden:100})
+  const datos = datosParaCrear(env)
+  delete (datos as Partial<typeof datos>).orden
+  const resultado = await new PrismaPasosWizard(env.db).crear(datos, contexto)
+  assert.equal(resultado.orden.value,3)
+  assert.equal(resultado.estado,'activo')
+  assert.equal(env.consultas[0].args.isolationLevel,'Serializable')
+})
+test('wizard: primer paso empieza en 1 aunque se envíe un orden antiguo', async () => {
+  const env = entorno('pasoWizard'), datos = datosParaCrear(env)
+  env.tablas.pasoWizard.length=0
+  const resultado=await new PrismaPasosWizard(env.db).crear(datos,contexto)
+  assert.equal(resultado.orden.value,1)
+})
+test('wizard: desbordamiento de orden no escribe ni audita', async () => {
+  const env=entorno('pasoWizard'), datos=datosParaCrear(env)
+  env.tablas.pasoWizard[0].orden=2147483647
+  await assert.rejects(new PrismaPasosWizard(env.db).crear(datos,contexto),/Orden automático/)
+  assert.equal(env.auditorias.length,0)
+})

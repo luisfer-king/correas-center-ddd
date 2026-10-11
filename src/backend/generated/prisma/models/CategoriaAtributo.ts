@@ -46,6 +46,9 @@ export type CategoriaAtributoMinAggregateOutputType = {
   id: bigint | null
   categoriaId: bigint | null
   atributoId: bigint | null
+  tipoDato: $Enums.TipoDatoAtributo | null
+  valorTexto: string | null
+  valorBooleano: boolean | null
   valorPersonalizado: runtime.Decimal | null
   orden: number | null
   estado: $Enums.Estado | null
@@ -57,6 +60,9 @@ export type CategoriaAtributoMaxAggregateOutputType = {
   id: bigint | null
   categoriaId: bigint | null
   atributoId: bigint | null
+  tipoDato: $Enums.TipoDatoAtributo | null
+  valorTexto: string | null
+  valorBooleano: boolean | null
   valorPersonalizado: runtime.Decimal | null
   orden: number | null
   estado: $Enums.Estado | null
@@ -68,6 +74,9 @@ export type CategoriaAtributoCountAggregateOutputType = {
   id: number
   categoriaId: number
   atributoId: number
+  tipoDato: number
+  valorTexto: number
+  valorBooleano: number
   valorPersonalizado: number
   orden: number
   estado: number
@@ -97,6 +106,9 @@ export type CategoriaAtributoMinAggregateInputType = {
   id?: true
   categoriaId?: true
   atributoId?: true
+  tipoDato?: true
+  valorTexto?: true
+  valorBooleano?: true
   valorPersonalizado?: true
   orden?: true
   estado?: true
@@ -108,6 +120,9 @@ export type CategoriaAtributoMaxAggregateInputType = {
   id?: true
   categoriaId?: true
   atributoId?: true
+  tipoDato?: true
+  valorTexto?: true
+  valorBooleano?: true
   valorPersonalizado?: true
   orden?: true
   estado?: true
@@ -119,6 +134,9 @@ export type CategoriaAtributoCountAggregateInputType = {
   id?: true
   categoriaId?: true
   atributoId?: true
+  tipoDato?: true
+  valorTexto?: true
+  valorBooleano?: true
   valorPersonalizado?: true
   orden?: true
   estado?: true
@@ -217,6 +235,9 @@ export type CategoriaAtributoGroupByOutputType = {
   id: bigint
   categoriaId: bigint
   atributoId: bigint
+  tipoDato: $Enums.TipoDatoAtributo
+  valorTexto: string | null
+  valorBooleano: boolean | null
   valorPersonalizado: runtime.Decimal | null
   orden: number
   estado: $Enums.Estado
@@ -251,6 +272,9 @@ export type CategoriaAtributoWhereInput = {
   id?: Prisma.BigIntFilter<"CategoriaAtributo"> | bigint | number
   categoriaId?: Prisma.BigIntFilter<"CategoriaAtributo"> | bigint | number
   atributoId?: Prisma.BigIntFilter<"CategoriaAtributo"> | bigint | number
+  tipoDato?: Prisma.EnumTipoDatoAtributoFilter<"CategoriaAtributo"> | $Enums.TipoDatoAtributo
+  valorTexto?: Prisma.StringNullableFilter<"CategoriaAtributo"> | string | null
+  valorBooleano?: Prisma.BoolNullableFilter<"CategoriaAtributo"> | boolean | null
   valorPersonalizado?: Prisma.DecimalNullableFilter<"CategoriaAtributo"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   orden?: Prisma.IntFilter<"CategoriaAtributo"> | number
   estado?: Prisma.EnumEstadoFilter<"CategoriaAtributo"> | $Enums.Estado
@@ -264,6 +288,9 @@ export type CategoriaAtributoOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   categoriaId?: Prisma.SortOrder
   atributoId?: Prisma.SortOrder
+  tipoDato?: Prisma.SortOrder
+  valorTexto?: Prisma.SortOrderInput | Prisma.SortOrder
+  valorBooleano?: Prisma.SortOrderInput | Prisma.SortOrder
   valorPersonalizado?: Prisma.SortOrderInput | Prisma.SortOrder
   orden?: Prisma.SortOrder
   estado?: Prisma.SortOrder
@@ -280,6 +307,9 @@ export type CategoriaAtributoWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.CategoriaAtributoWhereInput | Prisma.CategoriaAtributoWhereInput[]
   categoriaId?: Prisma.BigIntFilter<"CategoriaAtributo"> | bigint | number
   atributoId?: Prisma.BigIntFilter<"CategoriaAtributo"> | bigint | number
+  tipoDato?: Prisma.EnumTipoDatoAtributoFilter<"CategoriaAtributo"> | $Enums.TipoDatoAtributo
+  valorTexto?: Prisma.StringNullableFilter<"CategoriaAtributo"> | string | null
+  valorBooleano?: Prisma.BoolNullableFilter<"CategoriaAtributo"> | boolean | null
   valorPersonalizado?: Prisma.DecimalNullableFilter<"CategoriaAtributo"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   orden?: Prisma.IntFilter<"CategoriaAtributo"> | number
   estado?: Prisma.EnumEstadoFilter<"CategoriaAtributo"> | $Enums.Estado
@@ -293,6 +323,9 @@ export type CategoriaAtributoOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   categoriaId?: Prisma.SortOrder
   atributoId?: Prisma.SortOrder
+  tipoDato?: Prisma.SortOrder
+  valorTexto?: Prisma.SortOrderInput | Prisma.SortOrder
+  valorBooleano?: Prisma.SortOrderInput | Prisma.SortOrder
   valorPersonalizado?: Prisma.SortOrderInput | Prisma.SortOrder
   orden?: Prisma.SortOrder
   estado?: Prisma.SortOrder
@@ -312,6 +345,9 @@ export type CategoriaAtributoScalarWhereWithAggregatesInput = {
   id?: Prisma.BigIntWithAggregatesFilter<"CategoriaAtributo"> | bigint | number
   categoriaId?: Prisma.BigIntWithAggregatesFilter<"CategoriaAtributo"> | bigint | number
   atributoId?: Prisma.BigIntWithAggregatesFilter<"CategoriaAtributo"> | bigint | number
+  tipoDato?: Prisma.EnumTipoDatoAtributoWithAggregatesFilter<"CategoriaAtributo"> | $Enums.TipoDatoAtributo
+  valorTexto?: Prisma.StringNullableWithAggregatesFilter<"CategoriaAtributo"> | string | null
+  valorBooleano?: Prisma.BoolNullableWithAggregatesFilter<"CategoriaAtributo"> | boolean | null
   valorPersonalizado?: Prisma.DecimalNullableWithAggregatesFilter<"CategoriaAtributo"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   orden?: Prisma.IntWithAggregatesFilter<"CategoriaAtributo"> | number
   estado?: Prisma.EnumEstadoWithAggregatesFilter<"CategoriaAtributo"> | $Enums.Estado
@@ -321,6 +357,8 @@ export type CategoriaAtributoScalarWhereWithAggregatesInput = {
 
 export type CategoriaAtributoCreateInput = {
   id?: bigint | number
+  valorTexto?: string | null
+  valorBooleano?: boolean | null
   valorPersonalizado?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   orden?: number
   estado?: $Enums.Estado
@@ -334,6 +372,9 @@ export type CategoriaAtributoUncheckedCreateInput = {
   id?: bigint | number
   categoriaId: bigint | number
   atributoId: bigint | number
+  tipoDato?: $Enums.TipoDatoAtributo
+  valorTexto?: string | null
+  valorBooleano?: boolean | null
   valorPersonalizado?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   orden?: number
   estado?: $Enums.Estado
@@ -343,6 +384,8 @@ export type CategoriaAtributoUncheckedCreateInput = {
 
 export type CategoriaAtributoUpdateInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  valorTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valorBooleano?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   valorPersonalizado?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   orden?: Prisma.IntFieldUpdateOperationsInput | number
   estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
@@ -356,6 +399,9 @@ export type CategoriaAtributoUncheckedUpdateInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   categoriaId?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   atributoId?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  tipoDato?: Prisma.EnumTipoDatoAtributoFieldUpdateOperationsInput | $Enums.TipoDatoAtributo
+  valorTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valorBooleano?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   valorPersonalizado?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   orden?: Prisma.IntFieldUpdateOperationsInput | number
   estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
@@ -367,6 +413,9 @@ export type CategoriaAtributoCreateManyInput = {
   id?: bigint | number
   categoriaId: bigint | number
   atributoId: bigint | number
+  tipoDato?: $Enums.TipoDatoAtributo
+  valorTexto?: string | null
+  valorBooleano?: boolean | null
   valorPersonalizado?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   orden?: number
   estado?: $Enums.Estado
@@ -376,6 +425,8 @@ export type CategoriaAtributoCreateManyInput = {
 
 export type CategoriaAtributoUpdateManyMutationInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  valorTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valorBooleano?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   valorPersonalizado?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   orden?: Prisma.IntFieldUpdateOperationsInput | number
   estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
@@ -387,6 +438,9 @@ export type CategoriaAtributoUncheckedUpdateManyInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   categoriaId?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   atributoId?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  tipoDato?: Prisma.EnumTipoDatoAtributoFieldUpdateOperationsInput | $Enums.TipoDatoAtributo
+  valorTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valorBooleano?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   valorPersonalizado?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   orden?: Prisma.IntFieldUpdateOperationsInput | number
   estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
@@ -408,6 +462,9 @@ export type CategoriaAtributoCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   categoriaId?: Prisma.SortOrder
   atributoId?: Prisma.SortOrder
+  tipoDato?: Prisma.SortOrder
+  valorTexto?: Prisma.SortOrder
+  valorBooleano?: Prisma.SortOrder
   valorPersonalizado?: Prisma.SortOrder
   orden?: Prisma.SortOrder
   estado?: Prisma.SortOrder
@@ -427,6 +484,9 @@ export type CategoriaAtributoMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   categoriaId?: Prisma.SortOrder
   atributoId?: Prisma.SortOrder
+  tipoDato?: Prisma.SortOrder
+  valorTexto?: Prisma.SortOrder
+  valorBooleano?: Prisma.SortOrder
   valorPersonalizado?: Prisma.SortOrder
   orden?: Prisma.SortOrder
   estado?: Prisma.SortOrder
@@ -438,6 +498,9 @@ export type CategoriaAtributoMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   categoriaId?: Prisma.SortOrder
   atributoId?: Prisma.SortOrder
+  tipoDato?: Prisma.SortOrder
+  valorTexto?: Prisma.SortOrder
+  valorBooleano?: Prisma.SortOrder
   valorPersonalizado?: Prisma.SortOrder
   orden?: Prisma.SortOrder
   estado?: Prisma.SortOrder
@@ -537,8 +600,14 @@ export type CategoriaAtributoUncheckedUpdateManyWithoutAtributoTecnicoNestedInpu
   deleteMany?: Prisma.CategoriaAtributoScalarWhereInput | Prisma.CategoriaAtributoScalarWhereInput[]
 }
 
+export type NullableBoolFieldUpdateOperationsInput = {
+  set?: boolean | null
+}
+
 export type CategoriaAtributoCreateWithoutCategoriaInput = {
   id?: bigint | number
+  valorTexto?: string | null
+  valorBooleano?: boolean | null
   valorPersonalizado?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   orden?: number
   estado?: $Enums.Estado
@@ -550,6 +619,9 @@ export type CategoriaAtributoCreateWithoutCategoriaInput = {
 export type CategoriaAtributoUncheckedCreateWithoutCategoriaInput = {
   id?: bigint | number
   atributoId: bigint | number
+  tipoDato?: $Enums.TipoDatoAtributo
+  valorTexto?: string | null
+  valorBooleano?: boolean | null
   valorPersonalizado?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   orden?: number
   estado?: $Enums.Estado
@@ -590,6 +662,9 @@ export type CategoriaAtributoScalarWhereInput = {
   id?: Prisma.BigIntFilter<"CategoriaAtributo"> | bigint | number
   categoriaId?: Prisma.BigIntFilter<"CategoriaAtributo"> | bigint | number
   atributoId?: Prisma.BigIntFilter<"CategoriaAtributo"> | bigint | number
+  tipoDato?: Prisma.EnumTipoDatoAtributoFilter<"CategoriaAtributo"> | $Enums.TipoDatoAtributo
+  valorTexto?: Prisma.StringNullableFilter<"CategoriaAtributo"> | string | null
+  valorBooleano?: Prisma.BoolNullableFilter<"CategoriaAtributo"> | boolean | null
   valorPersonalizado?: Prisma.DecimalNullableFilter<"CategoriaAtributo"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   orden?: Prisma.IntFilter<"CategoriaAtributo"> | number
   estado?: Prisma.EnumEstadoFilter<"CategoriaAtributo"> | $Enums.Estado
@@ -599,6 +674,8 @@ export type CategoriaAtributoScalarWhereInput = {
 
 export type CategoriaAtributoCreateWithoutAtributoTecnicoInput = {
   id?: bigint | number
+  valorTexto?: string | null
+  valorBooleano?: boolean | null
   valorPersonalizado?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   orden?: number
   estado?: $Enums.Estado
@@ -610,6 +687,8 @@ export type CategoriaAtributoCreateWithoutAtributoTecnicoInput = {
 export type CategoriaAtributoUncheckedCreateWithoutAtributoTecnicoInput = {
   id?: bigint | number
   categoriaId: bigint | number
+  valorTexto?: string | null
+  valorBooleano?: boolean | null
   valorPersonalizado?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   orden?: number
   estado?: $Enums.Estado
@@ -646,6 +725,9 @@ export type CategoriaAtributoUpdateManyWithWhereWithoutAtributoTecnicoInput = {
 export type CategoriaAtributoCreateManyCategoriaInput = {
   id?: bigint | number
   atributoId: bigint | number
+  tipoDato?: $Enums.TipoDatoAtributo
+  valorTexto?: string | null
+  valorBooleano?: boolean | null
   valorPersonalizado?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   orden?: number
   estado?: $Enums.Estado
@@ -655,6 +737,8 @@ export type CategoriaAtributoCreateManyCategoriaInput = {
 
 export type CategoriaAtributoUpdateWithoutCategoriaInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  valorTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valorBooleano?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   valorPersonalizado?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   orden?: Prisma.IntFieldUpdateOperationsInput | number
   estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
@@ -666,6 +750,9 @@ export type CategoriaAtributoUpdateWithoutCategoriaInput = {
 export type CategoriaAtributoUncheckedUpdateWithoutCategoriaInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   atributoId?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  tipoDato?: Prisma.EnumTipoDatoAtributoFieldUpdateOperationsInput | $Enums.TipoDatoAtributo
+  valorTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valorBooleano?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   valorPersonalizado?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   orden?: Prisma.IntFieldUpdateOperationsInput | number
   estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
@@ -676,6 +763,9 @@ export type CategoriaAtributoUncheckedUpdateWithoutCategoriaInput = {
 export type CategoriaAtributoUncheckedUpdateManyWithoutCategoriaInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   atributoId?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  tipoDato?: Prisma.EnumTipoDatoAtributoFieldUpdateOperationsInput | $Enums.TipoDatoAtributo
+  valorTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valorBooleano?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   valorPersonalizado?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   orden?: Prisma.IntFieldUpdateOperationsInput | number
   estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
@@ -686,6 +776,8 @@ export type CategoriaAtributoUncheckedUpdateManyWithoutCategoriaInput = {
 export type CategoriaAtributoCreateManyAtributoTecnicoInput = {
   id?: bigint | number
   categoriaId: bigint | number
+  valorTexto?: string | null
+  valorBooleano?: boolean | null
   valorPersonalizado?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   orden?: number
   estado?: $Enums.Estado
@@ -695,6 +787,8 @@ export type CategoriaAtributoCreateManyAtributoTecnicoInput = {
 
 export type CategoriaAtributoUpdateWithoutAtributoTecnicoInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  valorTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valorBooleano?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   valorPersonalizado?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   orden?: Prisma.IntFieldUpdateOperationsInput | number
   estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
@@ -706,6 +800,8 @@ export type CategoriaAtributoUpdateWithoutAtributoTecnicoInput = {
 export type CategoriaAtributoUncheckedUpdateWithoutAtributoTecnicoInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   categoriaId?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  valorTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valorBooleano?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   valorPersonalizado?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   orden?: Prisma.IntFieldUpdateOperationsInput | number
   estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
@@ -716,6 +812,8 @@ export type CategoriaAtributoUncheckedUpdateWithoutAtributoTecnicoInput = {
 export type CategoriaAtributoUncheckedUpdateManyWithoutAtributoTecnicoInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   categoriaId?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  valorTexto?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valorBooleano?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   valorPersonalizado?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   orden?: Prisma.IntFieldUpdateOperationsInput | number
   estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
@@ -729,6 +827,9 @@ export type CategoriaAtributoSelect<ExtArgs extends runtime.Types.Extensions.Int
   id?: boolean
   categoriaId?: boolean
   atributoId?: boolean
+  tipoDato?: boolean
+  valorTexto?: boolean
+  valorBooleano?: boolean
   valorPersonalizado?: boolean
   orden?: boolean
   estado?: boolean
@@ -742,6 +843,9 @@ export type CategoriaAtributoSelectCreateManyAndReturn<ExtArgs extends runtime.T
   id?: boolean
   categoriaId?: boolean
   atributoId?: boolean
+  tipoDato?: boolean
+  valorTexto?: boolean
+  valorBooleano?: boolean
   valorPersonalizado?: boolean
   orden?: boolean
   estado?: boolean
@@ -755,6 +859,9 @@ export type CategoriaAtributoSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   id?: boolean
   categoriaId?: boolean
   atributoId?: boolean
+  tipoDato?: boolean
+  valorTexto?: boolean
+  valorBooleano?: boolean
   valorPersonalizado?: boolean
   orden?: boolean
   estado?: boolean
@@ -768,6 +875,9 @@ export type CategoriaAtributoSelectScalar = {
   id?: boolean
   categoriaId?: boolean
   atributoId?: boolean
+  tipoDato?: boolean
+  valorTexto?: boolean
+  valorBooleano?: boolean
   valorPersonalizado?: boolean
   orden?: boolean
   estado?: boolean
@@ -775,7 +885,7 @@ export type CategoriaAtributoSelectScalar = {
   actualizadoEn?: boolean
 }
 
-export type CategoriaAtributoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "categoriaId" | "atributoId" | "valorPersonalizado" | "orden" | "estado" | "creadoEn" | "actualizadoEn", ExtArgs["result"]["categoriaAtributo"]>
+export type CategoriaAtributoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "categoriaId" | "atributoId" | "tipoDato" | "valorTexto" | "valorBooleano" | "valorPersonalizado" | "orden" | "estado" | "creadoEn" | "actualizadoEn", ExtArgs["result"]["categoriaAtributo"]>
 export type CategoriaAtributoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   atributoTecnico?: boolean | Prisma.AtributoTecnicoDefaultArgs<ExtArgs>
   categoria?: boolean | Prisma.CategoriaDefaultArgs<ExtArgs>
@@ -799,6 +909,9 @@ export type $CategoriaAtributoPayload<ExtArgs extends runtime.Types.Extensions.I
     id: bigint
     categoriaId: bigint
     atributoId: bigint
+    tipoDato: $Enums.TipoDatoAtributo
+    valorTexto: string | null
+    valorBooleano: boolean | null
     valorPersonalizado: runtime.Decimal | null
     orden: number
     estado: $Enums.Estado
@@ -1232,6 +1345,9 @@ export interface CategoriaAtributoFieldRefs {
   readonly id: Prisma.FieldRef<"CategoriaAtributo", 'BigInt'>
   readonly categoriaId: Prisma.FieldRef<"CategoriaAtributo", 'BigInt'>
   readonly atributoId: Prisma.FieldRef<"CategoriaAtributo", 'BigInt'>
+  readonly tipoDato: Prisma.FieldRef<"CategoriaAtributo", 'TipoDatoAtributo'>
+  readonly valorTexto: Prisma.FieldRef<"CategoriaAtributo", 'String'>
+  readonly valorBooleano: Prisma.FieldRef<"CategoriaAtributo", 'Boolean'>
   readonly valorPersonalizado: Prisma.FieldRef<"CategoriaAtributo", 'Decimal'>
   readonly orden: Prisma.FieldRef<"CategoriaAtributo", 'Int'>
   readonly estado: Prisma.FieldRef<"CategoriaAtributo", 'Estado'>

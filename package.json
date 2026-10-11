@@ -4,8 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev:frontend": "vite",
-    "dev:backend": "node --watch --import tsx src/backend/main.ts",
+    "dev:frontend": "node scripts/iniciar-frontend.mjs",
+    "dev:backend": "node --watch --watch-preserve-output --import tsx src/backend/main.ts",
+    "dev:backend:estable": "node --import tsx src/backend/main.ts",
     "typecheck": "tsc -b && tsc -p tsconfig.backend.json",
     "build": "pnpm typecheck && vite build",
     "db:validate": "prisma validate",
@@ -34,6 +35,8 @@
     "sharp": "0.34.5"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "0.4.3",
+    "@electric-sql/pglite-socket": "0.1.3",
     "@eslint/js": "^10.0.1",
     "@tailwindcss/vite": "^4.3.3",
     "@types/jsdom": "^30.0.0",

@@ -52,6 +52,7 @@ export type AtributoTecnicoMinAggregateOutputType = {
   eliminadoEn: Date | null
   creadoEn: Date | null
   actualizadoEn: Date | null
+  tipoDato: $Enums.TipoDatoAtributo | null
 }
 
 export type AtributoTecnicoMaxAggregateOutputType = {
@@ -66,6 +67,7 @@ export type AtributoTecnicoMaxAggregateOutputType = {
   eliminadoEn: Date | null
   creadoEn: Date | null
   actualizadoEn: Date | null
+  tipoDato: $Enums.TipoDatoAtributo | null
 }
 
 export type AtributoTecnicoCountAggregateOutputType = {
@@ -80,6 +82,7 @@ export type AtributoTecnicoCountAggregateOutputType = {
   eliminadoEn: number
   creadoEn: number
   actualizadoEn: number
+  tipoDato: number
   _all: number
 }
 
@@ -110,6 +113,7 @@ export type AtributoTecnicoMinAggregateInputType = {
   eliminadoEn?: true
   creadoEn?: true
   actualizadoEn?: true
+  tipoDato?: true
 }
 
 export type AtributoTecnicoMaxAggregateInputType = {
@@ -124,6 +128,7 @@ export type AtributoTecnicoMaxAggregateInputType = {
   eliminadoEn?: true
   creadoEn?: true
   actualizadoEn?: true
+  tipoDato?: true
 }
 
 export type AtributoTecnicoCountAggregateInputType = {
@@ -138,6 +143,7 @@ export type AtributoTecnicoCountAggregateInputType = {
   eliminadoEn?: true
   creadoEn?: true
   actualizadoEn?: true
+  tipoDato?: true
   _all?: true
 }
 
@@ -239,6 +245,7 @@ export type AtributoTecnicoGroupByOutputType = {
   eliminadoEn: Date | null
   creadoEn: Date
   actualizadoEn: Date
+  tipoDato: $Enums.TipoDatoAtributo
   _count: AtributoTecnicoCountAggregateOutputType | null
   _avg: AtributoTecnicoAvgAggregateOutputType | null
   _sum: AtributoTecnicoSumAggregateOutputType | null
@@ -276,8 +283,10 @@ export type AtributoTecnicoWhereInput = {
   eliminadoEn?: Prisma.DateTimeNullableFilter<"AtributoTecnico"> | Date | string | null
   creadoEn?: Prisma.DateTimeFilter<"AtributoTecnico"> | Date | string
   actualizadoEn?: Prisma.DateTimeFilter<"AtributoTecnico"> | Date | string
+  tipoDato?: Prisma.EnumTipoDatoAtributoFilter<"AtributoTecnico"> | $Enums.TipoDatoAtributo
   tipoAtributo?: Prisma.XOR<Prisma.TipoAtributoScalarRelationFilter, Prisma.TipoAtributoWhereInput>
   relCategoriaAtributo?: Prisma.CategoriaAtributoListRelationFilter
+  columnasGama?: Prisma.ColumnaGamaListRelationFilter
 }
 
 export type AtributoTecnicoOrderByWithRelationInput = {
@@ -292,12 +301,15 @@ export type AtributoTecnicoOrderByWithRelationInput = {
   eliminadoEn?: Prisma.SortOrderInput | Prisma.SortOrder
   creadoEn?: Prisma.SortOrder
   actualizadoEn?: Prisma.SortOrder
+  tipoDato?: Prisma.SortOrder
   tipoAtributo?: Prisma.TipoAtributoOrderByWithRelationInput
   relCategoriaAtributo?: Prisma.CategoriaAtributoOrderByRelationAggregateInput
+  columnasGama?: Prisma.ColumnaGamaOrderByRelationAggregateInput
 }
 
 export type AtributoTecnicoWhereUniqueInput = Prisma.AtLeast<{
   id?: bigint | number
+  id_tipoDato?: Prisma.AtributoTecnicoIdTipoDatoCompoundUniqueInput
   AND?: Prisma.AtributoTecnicoWhereInput | Prisma.AtributoTecnicoWhereInput[]
   OR?: Prisma.AtributoTecnicoWhereInput[]
   NOT?: Prisma.AtributoTecnicoWhereInput | Prisma.AtributoTecnicoWhereInput[]
@@ -311,9 +323,11 @@ export type AtributoTecnicoWhereUniqueInput = Prisma.AtLeast<{
   eliminadoEn?: Prisma.DateTimeNullableFilter<"AtributoTecnico"> | Date | string | null
   creadoEn?: Prisma.DateTimeFilter<"AtributoTecnico"> | Date | string
   actualizadoEn?: Prisma.DateTimeFilter<"AtributoTecnico"> | Date | string
+  tipoDato?: Prisma.EnumTipoDatoAtributoFilter<"AtributoTecnico"> | $Enums.TipoDatoAtributo
   tipoAtributo?: Prisma.XOR<Prisma.TipoAtributoScalarRelationFilter, Prisma.TipoAtributoWhereInput>
   relCategoriaAtributo?: Prisma.CategoriaAtributoListRelationFilter
-}, "id">
+  columnasGama?: Prisma.ColumnaGamaListRelationFilter
+}, "id" | "id_tipoDato">
 
 export type AtributoTecnicoOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -327,6 +341,7 @@ export type AtributoTecnicoOrderByWithAggregationInput = {
   eliminadoEn?: Prisma.SortOrderInput | Prisma.SortOrder
   creadoEn?: Prisma.SortOrder
   actualizadoEn?: Prisma.SortOrder
+  tipoDato?: Prisma.SortOrder
   _count?: Prisma.AtributoTecnicoCountOrderByAggregateInput
   _avg?: Prisma.AtributoTecnicoAvgOrderByAggregateInput
   _max?: Prisma.AtributoTecnicoMaxOrderByAggregateInput
@@ -349,6 +364,7 @@ export type AtributoTecnicoScalarWhereWithAggregatesInput = {
   eliminadoEn?: Prisma.DateTimeNullableWithAggregatesFilter<"AtributoTecnico"> | Date | string | null
   creadoEn?: Prisma.DateTimeWithAggregatesFilter<"AtributoTecnico"> | Date | string
   actualizadoEn?: Prisma.DateTimeWithAggregatesFilter<"AtributoTecnico"> | Date | string
+  tipoDato?: Prisma.EnumTipoDatoAtributoWithAggregatesFilter<"AtributoTecnico"> | $Enums.TipoDatoAtributo
 }
 
 export type AtributoTecnicoCreateInput = {
@@ -362,8 +378,10 @@ export type AtributoTecnicoCreateInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
+  tipoDato?: $Enums.TipoDatoAtributo
   tipoAtributo: Prisma.TipoAtributoCreateNestedOneWithoutRelAtributoTecnicoInput
   relCategoriaAtributo?: Prisma.CategoriaAtributoCreateNestedManyWithoutAtributoTecnicoInput
+  columnasGama?: Prisma.ColumnaGamaCreateNestedManyWithoutAtributoInput
 }
 
 export type AtributoTecnicoUncheckedCreateInput = {
@@ -378,7 +396,9 @@ export type AtributoTecnicoUncheckedCreateInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
+  tipoDato?: $Enums.TipoDatoAtributo
   relCategoriaAtributo?: Prisma.CategoriaAtributoUncheckedCreateNestedManyWithoutAtributoTecnicoInput
+  columnasGama?: Prisma.ColumnaGamaUncheckedCreateNestedManyWithoutAtributoInput
 }
 
 export type AtributoTecnicoUpdateInput = {
@@ -392,8 +412,10 @@ export type AtributoTecnicoUpdateInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tipoDato?: Prisma.EnumTipoDatoAtributoFieldUpdateOperationsInput | $Enums.TipoDatoAtributo
   tipoAtributo?: Prisma.TipoAtributoUpdateOneRequiredWithoutRelAtributoTecnicoNestedInput
   relCategoriaAtributo?: Prisma.CategoriaAtributoUpdateManyWithoutAtributoTecnicoNestedInput
+  columnasGama?: Prisma.ColumnaGamaUpdateManyWithoutAtributoNestedInput
 }
 
 export type AtributoTecnicoUncheckedUpdateInput = {
@@ -408,7 +430,9 @@ export type AtributoTecnicoUncheckedUpdateInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tipoDato?: Prisma.EnumTipoDatoAtributoFieldUpdateOperationsInput | $Enums.TipoDatoAtributo
   relCategoriaAtributo?: Prisma.CategoriaAtributoUncheckedUpdateManyWithoutAtributoTecnicoNestedInput
+  columnasGama?: Prisma.ColumnaGamaUncheckedUpdateManyWithoutAtributoNestedInput
 }
 
 export type AtributoTecnicoCreateManyInput = {
@@ -423,6 +447,7 @@ export type AtributoTecnicoCreateManyInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
+  tipoDato?: $Enums.TipoDatoAtributo
 }
 
 export type AtributoTecnicoUpdateManyMutationInput = {
@@ -436,6 +461,7 @@ export type AtributoTecnicoUpdateManyMutationInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tipoDato?: Prisma.EnumTipoDatoAtributoFieldUpdateOperationsInput | $Enums.TipoDatoAtributo
 }
 
 export type AtributoTecnicoUncheckedUpdateManyInput = {
@@ -450,6 +476,7 @@ export type AtributoTecnicoUncheckedUpdateManyInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tipoDato?: Prisma.EnumTipoDatoAtributoFieldUpdateOperationsInput | $Enums.TipoDatoAtributo
 }
 
 export type AtributoTecnicoListRelationFilter = {
@@ -460,6 +487,11 @@ export type AtributoTecnicoListRelationFilter = {
 
 export type AtributoTecnicoOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type AtributoTecnicoIdTipoDatoCompoundUniqueInput = {
+  id: bigint | number
+  tipoDato: $Enums.TipoDatoAtributo
 }
 
 export type AtributoTecnicoCountOrderByAggregateInput = {
@@ -474,6 +506,7 @@ export type AtributoTecnicoCountOrderByAggregateInput = {
   eliminadoEn?: Prisma.SortOrder
   creadoEn?: Prisma.SortOrder
   actualizadoEn?: Prisma.SortOrder
+  tipoDato?: Prisma.SortOrder
 }
 
 export type AtributoTecnicoAvgOrderByAggregateInput = {
@@ -495,6 +528,7 @@ export type AtributoTecnicoMaxOrderByAggregateInput = {
   eliminadoEn?: Prisma.SortOrder
   creadoEn?: Prisma.SortOrder
   actualizadoEn?: Prisma.SortOrder
+  tipoDato?: Prisma.SortOrder
 }
 
 export type AtributoTecnicoMinOrderByAggregateInput = {
@@ -509,6 +543,7 @@ export type AtributoTecnicoMinOrderByAggregateInput = {
   eliminadoEn?: Prisma.SortOrder
   creadoEn?: Prisma.SortOrder
   actualizadoEn?: Prisma.SortOrder
+  tipoDato?: Prisma.SortOrder
 }
 
 export type AtributoTecnicoSumOrderByAggregateInput = {
@@ -565,6 +600,10 @@ export type AtributoTecnicoUncheckedUpdateManyWithoutTipoAtributoNestedInput = {
   deleteMany?: Prisma.AtributoTecnicoScalarWhereInput | Prisma.AtributoTecnicoScalarWhereInput[]
 }
 
+export type EnumTipoDatoAtributoFieldUpdateOperationsInput = {
+  set?: $Enums.TipoDatoAtributo
+}
+
 export type AtributoTecnicoCreateNestedOneWithoutRelCategoriaAtributoInput = {
   create?: Prisma.XOR<Prisma.AtributoTecnicoCreateWithoutRelCategoriaAtributoInput, Prisma.AtributoTecnicoUncheckedCreateWithoutRelCategoriaAtributoInput>
   connectOrCreate?: Prisma.AtributoTecnicoCreateOrConnectWithoutRelCategoriaAtributoInput
@@ -579,6 +618,20 @@ export type AtributoTecnicoUpdateOneRequiredWithoutRelCategoriaAtributoNestedInp
   update?: Prisma.XOR<Prisma.XOR<Prisma.AtributoTecnicoUpdateToOneWithWhereWithoutRelCategoriaAtributoInput, Prisma.AtributoTecnicoUpdateWithoutRelCategoriaAtributoInput>, Prisma.AtributoTecnicoUncheckedUpdateWithoutRelCategoriaAtributoInput>
 }
 
+export type AtributoTecnicoCreateNestedOneWithoutColumnasGamaInput = {
+  create?: Prisma.XOR<Prisma.AtributoTecnicoCreateWithoutColumnasGamaInput, Prisma.AtributoTecnicoUncheckedCreateWithoutColumnasGamaInput>
+  connectOrCreate?: Prisma.AtributoTecnicoCreateOrConnectWithoutColumnasGamaInput
+  connect?: Prisma.AtributoTecnicoWhereUniqueInput
+}
+
+export type AtributoTecnicoUpdateOneRequiredWithoutColumnasGamaNestedInput = {
+  create?: Prisma.XOR<Prisma.AtributoTecnicoCreateWithoutColumnasGamaInput, Prisma.AtributoTecnicoUncheckedCreateWithoutColumnasGamaInput>
+  connectOrCreate?: Prisma.AtributoTecnicoCreateOrConnectWithoutColumnasGamaInput
+  upsert?: Prisma.AtributoTecnicoUpsertWithoutColumnasGamaInput
+  connect?: Prisma.AtributoTecnicoWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AtributoTecnicoUpdateToOneWithWhereWithoutColumnasGamaInput, Prisma.AtributoTecnicoUpdateWithoutColumnasGamaInput>, Prisma.AtributoTecnicoUncheckedUpdateWithoutColumnasGamaInput>
+}
+
 export type AtributoTecnicoCreateWithoutTipoAtributoInput = {
   id?: bigint | number
   nombre: string
@@ -590,7 +643,9 @@ export type AtributoTecnicoCreateWithoutTipoAtributoInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
+  tipoDato?: $Enums.TipoDatoAtributo
   relCategoriaAtributo?: Prisma.CategoriaAtributoCreateNestedManyWithoutAtributoTecnicoInput
+  columnasGama?: Prisma.ColumnaGamaCreateNestedManyWithoutAtributoInput
 }
 
 export type AtributoTecnicoUncheckedCreateWithoutTipoAtributoInput = {
@@ -604,7 +659,9 @@ export type AtributoTecnicoUncheckedCreateWithoutTipoAtributoInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
+  tipoDato?: $Enums.TipoDatoAtributo
   relCategoriaAtributo?: Prisma.CategoriaAtributoUncheckedCreateNestedManyWithoutAtributoTecnicoInput
+  columnasGama?: Prisma.ColumnaGamaUncheckedCreateNestedManyWithoutAtributoInput
 }
 
 export type AtributoTecnicoCreateOrConnectWithoutTipoAtributoInput = {
@@ -648,6 +705,7 @@ export type AtributoTecnicoScalarWhereInput = {
   eliminadoEn?: Prisma.DateTimeNullableFilter<"AtributoTecnico"> | Date | string | null
   creadoEn?: Prisma.DateTimeFilter<"AtributoTecnico"> | Date | string
   actualizadoEn?: Prisma.DateTimeFilter<"AtributoTecnico"> | Date | string
+  tipoDato?: Prisma.EnumTipoDatoAtributoFilter<"AtributoTecnico"> | $Enums.TipoDatoAtributo
 }
 
 export type AtributoTecnicoCreateWithoutRelCategoriaAtributoInput = {
@@ -661,7 +719,9 @@ export type AtributoTecnicoCreateWithoutRelCategoriaAtributoInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
+  tipoDato?: $Enums.TipoDatoAtributo
   tipoAtributo: Prisma.TipoAtributoCreateNestedOneWithoutRelAtributoTecnicoInput
+  columnasGama?: Prisma.ColumnaGamaCreateNestedManyWithoutAtributoInput
 }
 
 export type AtributoTecnicoUncheckedCreateWithoutRelCategoriaAtributoInput = {
@@ -676,6 +736,8 @@ export type AtributoTecnicoUncheckedCreateWithoutRelCategoriaAtributoInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
+  tipoDato?: $Enums.TipoDatoAtributo
+  columnasGama?: Prisma.ColumnaGamaUncheckedCreateNestedManyWithoutAtributoInput
 }
 
 export type AtributoTecnicoCreateOrConnectWithoutRelCategoriaAtributoInput = {
@@ -705,7 +767,9 @@ export type AtributoTecnicoUpdateWithoutRelCategoriaAtributoInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tipoDato?: Prisma.EnumTipoDatoAtributoFieldUpdateOperationsInput | $Enums.TipoDatoAtributo
   tipoAtributo?: Prisma.TipoAtributoUpdateOneRequiredWithoutRelAtributoTecnicoNestedInput
+  columnasGama?: Prisma.ColumnaGamaUpdateManyWithoutAtributoNestedInput
 }
 
 export type AtributoTecnicoUncheckedUpdateWithoutRelCategoriaAtributoInput = {
@@ -720,6 +784,88 @@ export type AtributoTecnicoUncheckedUpdateWithoutRelCategoriaAtributoInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tipoDato?: Prisma.EnumTipoDatoAtributoFieldUpdateOperationsInput | $Enums.TipoDatoAtributo
+  columnasGama?: Prisma.ColumnaGamaUncheckedUpdateManyWithoutAtributoNestedInput
+}
+
+export type AtributoTecnicoCreateWithoutColumnasGamaInput = {
+  id?: bigint | number
+  nombre: string
+  descripcion?: string | null
+  valorNumerico?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  unidadMedida?: string | null
+  orden?: number
+  estado?: $Enums.Estado
+  eliminadoEn?: Date | string | null
+  creadoEn?: Date | string
+  actualizadoEn?: Date | string
+  tipoDato?: $Enums.TipoDatoAtributo
+  tipoAtributo: Prisma.TipoAtributoCreateNestedOneWithoutRelAtributoTecnicoInput
+  relCategoriaAtributo?: Prisma.CategoriaAtributoCreateNestedManyWithoutAtributoTecnicoInput
+}
+
+export type AtributoTecnicoUncheckedCreateWithoutColumnasGamaInput = {
+  id?: bigint | number
+  tipoAtributoId: bigint | number
+  nombre: string
+  descripcion?: string | null
+  valorNumerico?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  unidadMedida?: string | null
+  orden?: number
+  estado?: $Enums.Estado
+  eliminadoEn?: Date | string | null
+  creadoEn?: Date | string
+  actualizadoEn?: Date | string
+  tipoDato?: $Enums.TipoDatoAtributo
+  relCategoriaAtributo?: Prisma.CategoriaAtributoUncheckedCreateNestedManyWithoutAtributoTecnicoInput
+}
+
+export type AtributoTecnicoCreateOrConnectWithoutColumnasGamaInput = {
+  where: Prisma.AtributoTecnicoWhereUniqueInput
+  create: Prisma.XOR<Prisma.AtributoTecnicoCreateWithoutColumnasGamaInput, Prisma.AtributoTecnicoUncheckedCreateWithoutColumnasGamaInput>
+}
+
+export type AtributoTecnicoUpsertWithoutColumnasGamaInput = {
+  update: Prisma.XOR<Prisma.AtributoTecnicoUpdateWithoutColumnasGamaInput, Prisma.AtributoTecnicoUncheckedUpdateWithoutColumnasGamaInput>
+  create: Prisma.XOR<Prisma.AtributoTecnicoCreateWithoutColumnasGamaInput, Prisma.AtributoTecnicoUncheckedCreateWithoutColumnasGamaInput>
+  where?: Prisma.AtributoTecnicoWhereInput
+}
+
+export type AtributoTecnicoUpdateToOneWithWhereWithoutColumnasGamaInput = {
+  where?: Prisma.AtributoTecnicoWhereInput
+  data: Prisma.XOR<Prisma.AtributoTecnicoUpdateWithoutColumnasGamaInput, Prisma.AtributoTecnicoUncheckedUpdateWithoutColumnasGamaInput>
+}
+
+export type AtributoTecnicoUpdateWithoutColumnasGamaInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valorNumerico?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  unidadMedida?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orden?: Prisma.IntFieldUpdateOperationsInput | number
+  estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
+  eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tipoDato?: Prisma.EnumTipoDatoAtributoFieldUpdateOperationsInput | $Enums.TipoDatoAtributo
+  tipoAtributo?: Prisma.TipoAtributoUpdateOneRequiredWithoutRelAtributoTecnicoNestedInput
+  relCategoriaAtributo?: Prisma.CategoriaAtributoUpdateManyWithoutAtributoTecnicoNestedInput
+}
+
+export type AtributoTecnicoUncheckedUpdateWithoutColumnasGamaInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  tipoAtributoId?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valorNumerico?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  unidadMedida?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orden?: Prisma.IntFieldUpdateOperationsInput | number
+  estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
+  eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tipoDato?: Prisma.EnumTipoDatoAtributoFieldUpdateOperationsInput | $Enums.TipoDatoAtributo
+  relCategoriaAtributo?: Prisma.CategoriaAtributoUncheckedUpdateManyWithoutAtributoTecnicoNestedInput
 }
 
 export type AtributoTecnicoCreateManyTipoAtributoInput = {
@@ -733,6 +879,7 @@ export type AtributoTecnicoCreateManyTipoAtributoInput = {
   eliminadoEn?: Date | string | null
   creadoEn?: Date | string
   actualizadoEn?: Date | string
+  tipoDato?: $Enums.TipoDatoAtributo
 }
 
 export type AtributoTecnicoUpdateWithoutTipoAtributoInput = {
@@ -746,7 +893,9 @@ export type AtributoTecnicoUpdateWithoutTipoAtributoInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tipoDato?: Prisma.EnumTipoDatoAtributoFieldUpdateOperationsInput | $Enums.TipoDatoAtributo
   relCategoriaAtributo?: Prisma.CategoriaAtributoUpdateManyWithoutAtributoTecnicoNestedInput
+  columnasGama?: Prisma.ColumnaGamaUpdateManyWithoutAtributoNestedInput
 }
 
 export type AtributoTecnicoUncheckedUpdateWithoutTipoAtributoInput = {
@@ -760,7 +909,9 @@ export type AtributoTecnicoUncheckedUpdateWithoutTipoAtributoInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tipoDato?: Prisma.EnumTipoDatoAtributoFieldUpdateOperationsInput | $Enums.TipoDatoAtributo
   relCategoriaAtributo?: Prisma.CategoriaAtributoUncheckedUpdateManyWithoutAtributoTecnicoNestedInput
+  columnasGama?: Prisma.ColumnaGamaUncheckedUpdateManyWithoutAtributoNestedInput
 }
 
 export type AtributoTecnicoUncheckedUpdateManyWithoutTipoAtributoInput = {
@@ -774,6 +925,7 @@ export type AtributoTecnicoUncheckedUpdateManyWithoutTipoAtributoInput = {
   eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tipoDato?: Prisma.EnumTipoDatoAtributoFieldUpdateOperationsInput | $Enums.TipoDatoAtributo
 }
 
 
@@ -783,10 +935,12 @@ export type AtributoTecnicoUncheckedUpdateManyWithoutTipoAtributoInput = {
 
 export type AtributoTecnicoCountOutputType = {
   relCategoriaAtributo: number
+  columnasGama: number
 }
 
 export type AtributoTecnicoCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   relCategoriaAtributo?: boolean | AtributoTecnicoCountOutputTypeCountRelCategoriaAtributoArgs
+  columnasGama?: boolean | AtributoTecnicoCountOutputTypeCountColumnasGamaArgs
 }
 
 /**
@@ -806,6 +960,13 @@ export type AtributoTecnicoCountOutputTypeCountRelCategoriaAtributoArgs<ExtArgs 
   where?: Prisma.CategoriaAtributoWhereInput
 }
 
+/**
+ * AtributoTecnicoCountOutputType without action
+ */
+export type AtributoTecnicoCountOutputTypeCountColumnasGamaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ColumnaGamaWhereInput
+}
+
 
 export type AtributoTecnicoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -819,8 +980,10 @@ export type AtributoTecnicoSelect<ExtArgs extends runtime.Types.Extensions.Inter
   eliminadoEn?: boolean
   creadoEn?: boolean
   actualizadoEn?: boolean
+  tipoDato?: boolean
   tipoAtributo?: boolean | Prisma.TipoAtributoDefaultArgs<ExtArgs>
   relCategoriaAtributo?: boolean | Prisma.AtributoTecnico$relCategoriaAtributoArgs<ExtArgs>
+  columnasGama?: boolean | Prisma.AtributoTecnico$columnasGamaArgs<ExtArgs>
   _count?: boolean | Prisma.AtributoTecnicoCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["atributoTecnico"]>
 
@@ -836,6 +999,7 @@ export type AtributoTecnicoSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   eliminadoEn?: boolean
   creadoEn?: boolean
   actualizadoEn?: boolean
+  tipoDato?: boolean
   tipoAtributo?: boolean | Prisma.TipoAtributoDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["atributoTecnico"]>
 
@@ -851,6 +1015,7 @@ export type AtributoTecnicoSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   eliminadoEn?: boolean
   creadoEn?: boolean
   actualizadoEn?: boolean
+  tipoDato?: boolean
   tipoAtributo?: boolean | Prisma.TipoAtributoDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["atributoTecnico"]>
 
@@ -866,12 +1031,14 @@ export type AtributoTecnicoSelectScalar = {
   eliminadoEn?: boolean
   creadoEn?: boolean
   actualizadoEn?: boolean
+  tipoDato?: boolean
 }
 
-export type AtributoTecnicoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tipoAtributoId" | "nombre" | "descripcion" | "valorNumerico" | "unidadMedida" | "orden" | "estado" | "eliminadoEn" | "creadoEn" | "actualizadoEn", ExtArgs["result"]["atributoTecnico"]>
+export type AtributoTecnicoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tipoAtributoId" | "nombre" | "descripcion" | "valorNumerico" | "unidadMedida" | "orden" | "estado" | "eliminadoEn" | "creadoEn" | "actualizadoEn" | "tipoDato", ExtArgs["result"]["atributoTecnico"]>
 export type AtributoTecnicoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tipoAtributo?: boolean | Prisma.TipoAtributoDefaultArgs<ExtArgs>
   relCategoriaAtributo?: boolean | Prisma.AtributoTecnico$relCategoriaAtributoArgs<ExtArgs>
+  columnasGama?: boolean | Prisma.AtributoTecnico$columnasGamaArgs<ExtArgs>
   _count?: boolean | Prisma.AtributoTecnicoCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type AtributoTecnicoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -886,6 +1053,7 @@ export type $AtributoTecnicoPayload<ExtArgs extends runtime.Types.Extensions.Int
   objects: {
     tipoAtributo: Prisma.$TipoAtributoPayload<ExtArgs>
     relCategoriaAtributo: Prisma.$CategoriaAtributoPayload<ExtArgs>[]
+    columnasGama: Prisma.$ColumnaGamaPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: bigint
@@ -899,6 +1067,7 @@ export type $AtributoTecnicoPayload<ExtArgs extends runtime.Types.Extensions.Int
     eliminadoEn: Date | null
     creadoEn: Date
     actualizadoEn: Date
+    tipoDato: $Enums.TipoDatoAtributo
   }, ExtArgs["result"]["atributoTecnico"]>
   composites: {}
 }
@@ -1295,6 +1464,7 @@ export interface Prisma__AtributoTecnicoClient<T, Null = never, ExtArgs extends 
   readonly [Symbol.toStringTag]: "PrismaPromise"
   tipoAtributo<T extends Prisma.TipoAtributoDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TipoAtributoDefaultArgs<ExtArgs>>): Prisma.Prisma__TipoAtributoClient<runtime.Types.Result.GetResult<Prisma.$TipoAtributoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   relCategoriaAtributo<T extends Prisma.AtributoTecnico$relCategoriaAtributoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AtributoTecnico$relCategoriaAtributoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CategoriaAtributoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  columnasGama<T extends Prisma.AtributoTecnico$columnasGamaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AtributoTecnico$columnasGamaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ColumnaGamaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1335,6 +1505,7 @@ export interface AtributoTecnicoFieldRefs {
   readonly eliminadoEn: Prisma.FieldRef<"AtributoTecnico", 'DateTime'>
   readonly creadoEn: Prisma.FieldRef<"AtributoTecnico", 'DateTime'>
   readonly actualizadoEn: Prisma.FieldRef<"AtributoTecnico", 'DateTime'>
+  readonly tipoDato: Prisma.FieldRef<"AtributoTecnico", 'TipoDatoAtributo'>
 }
     
 
@@ -1757,6 +1928,30 @@ export type AtributoTecnico$relCategoriaAtributoArgs<ExtArgs extends runtime.Typ
   take?: number
   skip?: number
   distinct?: Prisma.CategoriaAtributoScalarFieldEnum | Prisma.CategoriaAtributoScalarFieldEnum[]
+}
+
+/**
+ * AtributoTecnico.columnasGama
+ */
+export type AtributoTecnico$columnasGamaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ColumnaGama
+   */
+  select?: Prisma.ColumnaGamaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ColumnaGama
+   */
+  omit?: Prisma.ColumnaGamaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ColumnaGamaInclude<ExtArgs> | null
+  where?: Prisma.ColumnaGamaWhereInput
+  orderBy?: Prisma.ColumnaGamaOrderByWithRelationInput | Prisma.ColumnaGamaOrderByWithRelationInput[]
+  cursor?: Prisma.ColumnaGamaWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ColumnaGamaScalarFieldEnum | Prisma.ColumnaGamaScalarFieldEnum[]
 }
 
 /**

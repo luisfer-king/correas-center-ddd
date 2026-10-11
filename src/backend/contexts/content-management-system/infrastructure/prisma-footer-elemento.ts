@@ -1,3 +1,4 @@
+import { Orden } from '../../../shared/domain/value-objects.js'
 import { FooterElemento as EntidadFooterElemento } from '../domain/footer-elemento.js'
 import type { PrismaClient } from '../../../generated/prisma/client.js'
 import type { RepositorioElementosFooter, ConsultaElementosFooter, NuevaFooterElemento, EscrituraFooterElemento } from '../application/ports/repositorio-footer-elemento.js'
@@ -43,7 +44,10 @@ export class PrismaElementosFooter implements RepositorioElementosFooter {
   async crear(datos: NuevaFooterElemento, contexto: EscrituraFooterElemento): Promise<FooterElemento> {
     return transaccionCms(this.db, async tx => {
       await gestionarCms(tx, contexto, 'elementos-footer')
-      const e = new EntidadFooterElemento({ ...datos, id: 1n, estado: 'activo', fechas: { creadoEn: contexto.cuando, actualizadoEn: contexto.cuando, eliminadoEn: null } })
+      const maximo=await tx.footerElemento.aggregate({where:{empresaId:datos.empresaId,tipo:datos.tipo,eliminadoEn:null,estado:{not:'eliminado'}},_max:{orden:true}})
+      const ultimo=Math.max(0,maximo._max.orden??0)
+      if(!Number.isSafeInteger(ultimo)||ultimo>=2147483647)throw new Error('Orden automático de footer inválido')
+      const e = new EntidadFooterElemento({ ...datos, orden:Orden.create(ultimo+1), id: 1n, estado: 'activo', fechas: { creadoEn: contexto.cuando, actualizadoEn: contexto.cuando, eliminadoEn: null } })
       await validarFooterElemento(tx, e)
       const fila = await tx.footerElemento.create({ data: datosFooterElemento(e) })
       const resultado = mapearFooterElemento(fila)

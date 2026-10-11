@@ -115,6 +115,7 @@ export function ListadoCatalogo<T extends BaseCatalogo>({ config }: { config: Co
             {config.columnas.map(c => <td key={c.clave} className="max-w-72 truncate p-3" title={presentarValor(valorCampo(fila, c.clave))}>{['imagen', 'logo'].includes(c.clave) ? <MiniaturaImagen url={valorCampo(fila, c.clave)} nombre={String(valorCampo(fila, 'nombre') ?? 'Imagen')} /> : presentarValor(valorCampo(fila, c.clave))}</td>)}
             <td className="p-3 capitalize">{fila.estado}</td><td className="p-3"><div className="flex flex-wrap gap-2">
               <button type="button" onClick={() => navegar(`${base}/${fila.id}`)} className="rounded border px-2 py-1">Detalle</button>
+              {config.recurso === 'categorias' && capacidades?.recursos.categorias.leer && <button type="button" onClick={() => navegar(`/portal/catalogo/categorias/${fila.id}/gama`)} className="rounded border border-red-300 px-2 py-1 font-medium text-red-700">Gama técnica</button>}
               {config.recurso === 'productos' &&
                 <button type="button" disabled={fila.estado !== 'activo'}
                   aria-label={`Asignar marcas a ${String(valorCampo(fila, 'nombre') ?? fila.id)}`}

@@ -9,7 +9,7 @@ export type ConsultaPasosWizard = Readonly<{
   desplazamiento?: number
 }>
 
-export type NuevaPasoWizard = Omit<ConstructorParameters<typeof PasoWizard>[0], 'id' | 'fechas' | 'estado'>
+export type NuevaPasoWizard = Omit<ConstructorParameters<typeof PasoWizard>[0], 'id' | 'fechas' | 'estado' | 'orden'> & { orden?: PasoWizard['orden'] }
 
 export type EscrituraPasoWizard = Readonly<{
   actorId: string

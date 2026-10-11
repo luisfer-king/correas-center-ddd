@@ -1,3 +1,5 @@
-import { cuerpo, id, texto, slug, opcional, orden, ordenNullable, capacidades, valores, destino } from './esquemas-catalogo.js'
-export const crearAsignacionAtributo = cuerpo({ categoriaId: id, atributoId: id, valorPersonalizado: opcional, orden: orden })
-export const editarAsignacionAtributo = cuerpo({ valorPersonalizado: opcional, orden: orden })
+import { cuerpo,id,orden,opcional } from './esquemas-catalogo.js'
+import { valorNullable } from './esquemas-gamas.js'
+const alternativa = {oneOf:[{required:['valor']},{required:['valorPersonalizado']}]}
+export const crearAsignacionAtributo = {...cuerpo({categoriaId:id,atributoId:id,valorPersonalizado:opcional,valor:valorNullable,orden},['categoriaId','atributoId','orden']),...alternativa}
+export const editarAsignacionAtributo = {...cuerpo({valorPersonalizado:opcional,valor:valorNullable,orden},['orden']),...alternativa}

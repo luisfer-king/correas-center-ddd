@@ -1,6 +1,6 @@
 import type { PrismaClient } from '../../../generated/prisma/client.js'
 import type { DatosNuevoAtributoTecnico, RepositorioAtributosTecnicos } from '../application/ports/repositorio-atributos-tecnicos.js'
-import type { AtributoTecnico, ValoresAtributo } from '../domain/atributo-tecnico.js'
+import { AtributoTecnico, type ValoresAtributo } from '../domain/atributo-tecnico.js'
 import { idCatalogo } from '../domain/catalog-values.js'
 import { aAtributoTecnico } from './mappers/atributo-tecnico.js'
 import type { TxCatalogo } from './operaciones-catalogo.js'
@@ -22,7 +22,8 @@ export class PrismaAtributosTecnicos implements RepositorioAtributosTecnicos {
       await referenciaActiva(tx, 'tipoAtributo', datos.tipoAtributoId)
       await validarCapacidades(tx, datos.tipoAtributoId, datos.valores)
       const ahora = new Date()
-      const fila = await tx.atributoTecnico.create({ data: { nombre: datos.nombre, tipoAtributoId: datos.tipoAtributoId, orden: datos.orden.value, descripcion: datos.valores.descripcion, valorNumerico: datos.valores.valorNumerico, unidadMedida: datos.valores.unidadMedida, estado: 'activo', creadoEn: ahora, actualizadoEn: ahora } })
+      const entidad = new AtributoTecnico({ ...datos, id: 1n, estado: 'activo', fechas: { creadoEn: ahora, actualizadoEn: ahora, eliminadoEn: null } })
+      const fila = await tx.atributoTecnico.create({ data: { tipoDato: entidad.tipoDato, nombre: datos.nombre, tipoAtributoId: datos.tipoAtributoId, orden: datos.orden.value, descripcion: datos.valores.descripcion, valorNumerico: datos.valores.valorNumerico, unidadMedida: datos.valores.unidadMedida, estado: 'activo', creadoEn: ahora, actualizadoEn: ahora } })
       const resultado = aAtributoTecnico(fila)
       await auditarCatalogo(tx, actorId, 'atributos-tecnicos', fila.id, null, resultado.estado)
       return resultado

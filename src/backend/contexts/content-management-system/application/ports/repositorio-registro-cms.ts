@@ -8,7 +8,7 @@ export type ConsultaRegistrosCMS = Readonly<{
   desplazamiento?: number
 }>
 
-export type NuevaRegistroCMS = Omit<ConstructorParameters<typeof RegistroCMS>[0], 'id' | 'fechas' | 'estado'>
+export type NuevaRegistroCMS = Omit<ConstructorParameters<typeof RegistroCMS>[0], 'id' | 'fechas' | 'estado' | 'orden'> & { orden?: RegistroCMS['orden'] }
 
 export type EscrituraRegistroCMS = Readonly<{
   actorId: string

@@ -1,3 +1,5 @@
+import { urlImagen } from '../../../shared/imagenes/url-imagen'
+import { MiniaturaImagen } from '../../../shared/imagenes/miniatura-imagen'
 import { useEffect, useId, useRef, useState } from 'react';
 import { solicitarApi } from '../../../shared/api/cliente-http';
 
@@ -29,7 +31,7 @@ export function SelectorLogoEmpresa({ valor, actualizar, bloqueado, actividad }:
             const resultado = await solicitarApi<{ url: string }>('/api/portal/crm/empresas/logo', {
                 metodo: 'POST', cuerpo: { base64 },
             })
-            if (vigente.current) { actualizar(new URL(resultado.url, window.location.origin).href); setPrevia('') }
+            if (vigente.current) { actualizar(urlImagen(resultado.url)); setPrevia('') }
         } catch (fallo) {
             if (vigente.current) { setPrevia(''); setError(fallo instanceof Error ? fallo.message : 'No se pudo subir la imagen.') }
         } finally {
@@ -40,8 +42,9 @@ export function SelectorLogoEmpresa({ valor, actualizar, bloqueado, actividad }:
         <label htmlFor={id} className="text-sm font-medium">Logo de la empresa</label>
         <input id={id} type="file" accept="image/png,image/jpeg,image/webp" disabled={bloqueado || subiendo}
             onChange={(e) => { void seleccionar(e.target.files?.[0]); e.target.value = '' }} />
-        {(previa || valor) && <img key={previa || valor} src={previa || valor} alt="Vista previa del logo de la empresa"
+        {previa && <img key={previa} src={previa} alt="Vista previa del logo de la empresa"
             className="h-40 w-full rounded border bg-white p-3 object-contain" />}
+        {!previa && valor && <MiniaturaImagen url={valor} nombre="Vista previa del logo de la empresa" grande />}
         <label className="text-sm">URL del logo
             <input value={valor} readOnly className="mt-1 w-full rounded border bg-neutral-100 p-2" />
         </label>

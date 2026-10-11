@@ -72,3 +72,17 @@ test('HTTP pasos-wizard', async t => {
     env.opciones.fallarAuditoria = false
   })
 })
+
+test('HTTP wizard: crear sin orden normaliza filtro y devuelve secuencia por empresa; editar mantiene orden', async t => {
+ const {app,env}=await servidorCms('pasoWizard');t.after(()=>app.close())
+ env.tablas.pasoWizard.length=0
+ const base='/api/portal/cms/pasos-wizard'
+ const datos={empresaId:'1',identificador:'industria',titulo:'¿En qué industria trabajas?',descripcion:'Selecciona tu sector',fuenteDatos:'industrias',campoFiltro:''}
+ const primero=await app.inject({method:'POST',url:base,headers:escritura,payload:datos})
+ assert.equal(primero.statusCode,201,primero.body);assert.equal(primero.json().orden,1);assert.equal(primero.json().campoFiltro,null)
+ env.tablas.pasoWizard[0].id=98n // El doble asigna siempre 99; distinguimos las dos filas para probar CAS.
+ const segundo=await app.inject({method:'POST',url:base,headers:escritura,payload:{...datos,identificador:'producto',fuenteDatos:'productos',campoFiltro:null,orden:88}})
+ assert.equal(segundo.statusCode,201,segundo.body);assert.equal(segundo.json().orden,2)
+ const editado=await app.inject({method:'PATCH',url:base+'/98',headers:escritura,payload:{version:primero.json().actualizadoEn,titulo:datos.titulo,descripcion:datos.descripcion,fuenteDatos:'industrias',campoFiltro:'   '}})
+ assert.equal(editado.statusCode,200,editado.body);assert.equal(editado.json().campoFiltro,null);assert.equal(editado.json().orden,1)
+})
