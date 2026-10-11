@@ -2,6 +2,7 @@ import type { FastifyInstance } from 'fastify'
 export function registrarErroresCms(app: FastifyInstance): void {
   app.setErrorHandler((error, req, reply) => {
     const e = error as Error & { validation?: unknown; statusCode?: number; code?: string }
+    if (e.message === 'Fuente o filtro del wizard no permitido') return reply.code(400).send({ error: 'La fuente de datos o el filtro seleccionado no está habilitado para el wizard' })
     if (e.validation || e.statusCode === 400 || e.code === 'FST_ERR_CTP_INVALID_JSON_BODY') return reply.code(400).send({ error: 'Solicitud inválida' })
     if (e.statusCode === 413) return reply.code(413).send({ error: 'Solicitud demasiado grande' })
     if (e.statusCode === 415) return reply.code(415).send({ error: 'Tipo de contenido no admitido' })

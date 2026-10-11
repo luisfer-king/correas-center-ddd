@@ -1,3 +1,4 @@
+import { Orden } from '../../../shared/domain/value-objects.js'
 import { PasoWizard as EntidadPasoWizard } from '../domain/paso-wizard.js'
 import type { PrismaClient } from '../../../generated/prisma/client.js'
 import type { RepositorioPasosWizard, ConsultaPasosWizard, NuevaPasoWizard, EscrituraPasoWizard } from '../application/ports/repositorio-paso-wizard.js'
@@ -41,7 +42,10 @@ export class PrismaPasosWizard implements RepositorioPasosWizard {
   async crear(datos: NuevaPasoWizard, contexto: EscrituraPasoWizard): Promise<PasoWizard> {
     return transaccionCms(this.db, async tx => {
       await gestionarCms(tx, contexto, 'pasos-wizard')
-      const e = new EntidadPasoWizard({ ...datos, id: 1n, estado: 'activo', fechas: { creadoEn: contexto.cuando, actualizadoEn: contexto.cuando, eliminadoEn: null } })
+      const maximo = await tx.pasoWizard.aggregate({ where: { empresaId: datos.empresaId, eliminadoEn: null, estado: { not: 'eliminado' } }, _max: { orden: true } })
+      const ultimo = Math.max(0, maximo._max.orden ?? 0)
+      if (!Number.isSafeInteger(ultimo) || ultimo >= 2147483647) throw new Error('Orden automático de paso inválido')
+      const e = new EntidadPasoWizard({ ...datos, orden: Orden.create(ultimo + 1), id: 1n, estado: 'activo', fechas: { creadoEn: contexto.cuando, actualizadoEn: contexto.cuando, eliminadoEn: null } })
       await validarPasoWizard(tx, e)
       const fila = await tx.pasoWizard.create({ data: datosPasoWizard(e) })
       const resultado = mapearPasoWizard(fila)

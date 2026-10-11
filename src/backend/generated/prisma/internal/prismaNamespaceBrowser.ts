@@ -365,7 +365,6 @@ export const ContenidoRegistroScalarFieldEnum = {
   subtitulo: 'subtitulo',
   descripcion: 'descripcion',
   icono: 'icono',
-  stats: 'stats',
   orden: 'orden',
   estado: 'estado',
   eliminadoEn: 'eliminadoEn',

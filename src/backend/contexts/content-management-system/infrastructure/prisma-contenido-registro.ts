@@ -1,3 +1,4 @@
+import { Orden } from '../../../shared/domain/value-objects.js'
 import { ContenidoRegistro as EntidadContenidoRegistro } from '../domain/contenido-registro.js'
 import type { PrismaClient } from '../../../generated/prisma/client.js'
 import type { RepositorioContenidosRegistro, ConsultaContenidosRegistro, NuevaContenidoRegistro, EscrituraContenidoRegistro } from '../application/ports/repositorio-contenido-registro.js'
@@ -15,7 +16,6 @@ function datosContenidoRegistro(e: ContenidoRegistro) {
     subtitulo: e.campos.subtitulo,
     descripcion: e.campos.descripcion,
     icono: e.campos.icono,
-    stats: e.campos.stats,
     orden: e.orden.value,
     estado: e.estado,
     eliminadoEn: e.eliminadoEn,
@@ -43,7 +43,10 @@ export class PrismaContenidosRegistro implements RepositorioContenidosRegistro {
   async crear(datos: NuevaContenidoRegistro, contexto: EscrituraContenidoRegistro): Promise<ContenidoRegistro> {
     return transaccionCms(this.db, async tx => {
       await gestionarCms(tx, contexto, 'contenidos-registro')
-      const e = new EntidadContenidoRegistro({ ...datos, id: 1n, estado: 'activo', fechas: { creadoEn: contexto.cuando, actualizadoEn: contexto.cuando, eliminadoEn: null } })
+      const maximo=await tx.contenidoRegistro.aggregate({where:{registroId:datos.registroId,eliminadoEn:null,estado:{not:'eliminado'}},_max:{orden:true}})
+      const ultimo=Math.max(0,maximo._max.orden??0)
+      if(!Number.isSafeInteger(ultimo)||ultimo>=2147483647)throw new Error('Orden automático de registro inválido')
+      const e = new EntidadContenidoRegistro({ ...datos, orden:Orden.create(ultimo+1), id: 1n, estado: 'activo', fechas: { creadoEn: contexto.cuando, actualizadoEn: contexto.cuando, eliminadoEn: null } })
       await validarContenidoRegistro(tx, e)
       const fila = await tx.contenidoRegistro.create({ data: datosContenidoRegistro(e) })
       const resultado = mapearContenidoRegistro(fila)

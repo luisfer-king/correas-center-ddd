@@ -10,7 +10,7 @@ import { ListadoFooterElemento } from '../features/cms/presentation/listado-elem
 import { ListadoConfiguracionSitio } from '../features/cms/presentation/listado-configuracion-sitio'
 import { ListadoPasoWizard } from '../features/cms/presentation/listado-pasos-wizard'
 import { ListadoRegistroCMS } from '../features/cms/presentation/listado-registros-cms'
-import { ListadoContenidoRegistro } from '../features/cms/presentation/listado-contenidos-registro'
+
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom'
 import { VistaAsignacionesAtributo } from '../features/catalog/presentation/vista-asignaciones-atributo'
 import { VistaAsignacionesIndustria } from '../features/catalog/presentation/vista-asignaciones-industria'
@@ -65,7 +65,7 @@ export function Rutas() {
             <Route path="cms/configuracion-sitio" element={<ListadoConfiguracionSitio />} />
             <Route path="cms/pasos-wizard" element={<ListadoPasoWizard />} />
             <Route path="cms/registros-cms" element={<ListadoRegistroCMS />} />
-            <Route path="cms/contenidos-registro" element={<ListadoContenidoRegistro />} />
+            
           </Route>
           <Route path="roles" element={<ListadoRoles />} />
           <Route path="roles/:id" element={<ListadoRoles />} />

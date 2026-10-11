@@ -11,7 +11,6 @@ export type FilaContenidoRegistro = Readonly<{
   subtitulo: string | null
   descripcion: string | null
   icono: string | null
-  stats: string | null
   orden: number
   estado: EstadoCMS
   eliminadoEn: Date | null
@@ -27,6 +26,6 @@ export function mapearContenidoRegistro(fila: FilaContenidoRegistro): ContenidoR
     orden: Orden.create(fila.orden),
     estado: fila.estado,
     fechas: { creadoEn: fila.creadoEn, actualizadoEn: fila.actualizadoEn, eliminadoEn: fila.eliminadoEn },
-    campos: { titulo: fila.titulo, subtitulo: fila.subtitulo, descripcion: fila.descripcion, icono: fila.icono, stats: fila.stats },
+    campos: { titulo: fila.titulo, subtitulo: fila.subtitulo, descripcion: fila.descripcion, icono: fila.icono },
   })
 }

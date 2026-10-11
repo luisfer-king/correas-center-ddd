@@ -15,7 +15,7 @@ export function entorno(recurso: string) {
     configuracionSitio: { id: 2, empresaId: null, clave: 'texto', valor: null, tipo: null, descripcion: null, grupo: null, activo: null, creadoEn: antes, actualizadoEn: antes },
     pasoWizard: { id: 2n, empresaId: 1n, identificador: 'texto', titulo: 'texto', descripcion: 'texto', fuenteDatos: 'texto', campoFiltro: null, orden: 0, estado: 'activo', eliminadoEn: null, creadoEn: antes, actualizadoEn: antes },
     registroCMS: { id: 2n, identificador: 'texto', nombre: 'texto', descripcion: null, orden: 0, estado: 'activo', eliminadoEn: null, creadoEn: antes, actualizadoEn: antes },
-    contenidoRegistro: { id: 2n, empresaId: 1n, registroId: 1n, titulo: null, subtitulo: null, descripcion: null, icono: null, stats: null, orden: 0, estado: 'activo', eliminadoEn: null, creadoEn: antes, actualizadoEn: antes },
+    contenidoRegistro: { id: 2n, empresaId: 1n, registroId: 1n, titulo: null, subtitulo: null, descripcion: null, icono: null, orden: 0, estado: 'activo', eliminadoEn: null, creadoEn: antes, actualizadoEn: antes },
   }
   let tablas: Record<string, Fila[]> = Object.fromEntries(Object.entries(fixtures).map(([key, value]) => [key, [structuredClone(value)]]))
   tablas.categoria=[{id:1n,productoId:1n,nombre:'Correas en V',slug:'correas-en-v',estado:'activo',eliminadoEn:null}]

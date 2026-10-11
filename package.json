@@ -4,8 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev:frontend": "vite",
-    "dev:backend": "node --watch --import tsx src/backend/main.ts",
+    "dev:frontend": "node scripts/iniciar-frontend.mjs",
+    "dev:backend": "node --watch --watch-preserve-output --import tsx src/backend/main.ts",
+    "dev:backend:estable": "node --import tsx src/backend/main.ts",
     "typecheck": "tsc -b && tsc -p tsconfig.backend.json",
     "build": "pnpm typecheck && vite build",
     "db:validate": "prisma validate",

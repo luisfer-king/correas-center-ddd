@@ -320,7 +320,6 @@ model ContenidoRegistro {
   subtitulo     String?     @db.VarChar
   descripcion   String?
   icono         String?     @db.VarChar
-  stats         String?     @db.VarChar
   orden         Int         @default(0)
   estado        Estado      @default(activo)
   eliminadoEn   DateTime?   @map("eliminado_en") @db.Timestamptz(6)
