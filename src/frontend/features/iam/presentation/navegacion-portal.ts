@@ -36,11 +36,11 @@ export const gruposPortal: readonly GrupoPortal[] = [
             { etiqueta: 'Productos', ruta: '/portal/catalogo/productos', acceso: { contexto: 'catalogo', recurso: 'productos' } },
             { etiqueta: 'Categorías', ruta: '/portal/catalogo/categorias', acceso: { contexto: 'catalogo', recurso: 'categorias' } },
             { etiqueta: 'Marcas', ruta: '/portal/catalogo/marcas', acceso: { contexto: 'catalogo', recurso: 'marcas' } },
+            { etiqueta: 'Marcas de productos', ruta: '/portal/catalogo/asignaciones-marca', acceso: { contexto: 'catalogo', recurso: 'asignaciones-marca' } },
             { etiqueta: 'Industrias', ruta: '/portal/catalogo/industrias', acceso: { contexto: 'catalogo', recurso: 'industrias' } },
             { etiqueta: 'Servicios', ruta: '/portal/catalogo/servicios', acceso: { contexto: 'catalogo', recurso: 'servicios' } },
             { etiqueta: 'Tipos de atributo', ruta: '/portal/catalogo/tipos-atributo', acceso: { contexto: 'catalogo', recurso: 'tipos-atributo' } },
             { etiqueta: 'Atributos técnicos', ruta: '/portal/catalogo/atributos-tecnicos', acceso: { contexto: 'catalogo', recurso: 'atributos-tecnicos' } },
-            { etiqueta: 'Marcas de productos', ruta: '/portal/catalogo/asignaciones-marca', acceso: { contexto: 'catalogo', recurso: 'asignaciones-marca' } },
             { etiqueta: 'Atributos de categorías', ruta: '/portal/catalogo/asignaciones-atributo', acceso: { contexto: 'catalogo', recurso: 'asignaciones-atributo' } },
             { etiqueta: 'Industrias de categorías y servicios', ruta: '/portal/catalogo/asignaciones-industria', acceso: { contexto: 'catalogo', recurso: 'asignaciones-industria' } },
         ]

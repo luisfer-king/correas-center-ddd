@@ -8,7 +8,7 @@ export class ErrorApi extends Error {
     }
 }
 
-type Metodo = 'GET' | 'POST' | 'PATCH' | 'PUT'
+type Metodo = 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE'
 interface Opciones { metodo?: Metodo; cuerpo?: unknown; signal?: AbortSignal }
 
 export async function solicitarApi<T>(ruta: string, opciones: Opciones = {}): Promise<T> {
