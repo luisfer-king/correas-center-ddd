@@ -171,6 +171,9 @@ try {
     assert.equal((await lecturas.buscarPorId(copiaCompleta.gamaId)).gama.estado,'activo')
   })
   console.log(`${pruebas} escenarios de casos de uso correctos. Base temporal descartada.`)
-} catch(e) {fallo=true;console.error('Integración fallida:',e.code??e.name,e.message)}
+} catch (e) {
+  fallo = true;
+  console.error('Integración fallida:', e);
+}
 finally {if(db)await db.$disconnect();if(servidor)await servidor.stop();await memoria.close()}
 if(fallo)process.exit(1)
