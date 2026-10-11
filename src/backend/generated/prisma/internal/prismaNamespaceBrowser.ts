@@ -82,7 +82,14 @@ export const ModelName = {
   EventoAuditoria: 'EventoAuditoria',
   ConfiguracionSitio: 'ConfiguracionSitio',
   Sesion: 'Sesion',
-  Lead: 'Lead'
+  Lead: 'Lead',
+  GamaCategoria: 'GamaCategoria',
+  PlantillaGamaProducto: 'PlantillaGamaProducto',
+  GrupoColumnaGama: 'GrupoColumnaGama',
+  GrupoFilaGama: 'GrupoFilaGama',
+  ColumnaGama: 'ColumnaGama',
+  FilaGama: 'FilaGama',
+  ValorGama: 'ValorGama'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -238,7 +245,8 @@ export const AtributoTecnicoScalarFieldEnum = {
   estado: 'estado',
   eliminadoEn: 'eliminadoEn',
   creadoEn: 'creadoEn',
-  actualizadoEn: 'actualizadoEn'
+  actualizadoEn: 'actualizadoEn',
+  tipoDato: 'tipoDato'
 } as const
 
 export type AtributoTecnicoScalarFieldEnum = (typeof AtributoTecnicoScalarFieldEnum)[keyof typeof AtributoTecnicoScalarFieldEnum]
@@ -248,6 +256,9 @@ export const CategoriaAtributoScalarFieldEnum = {
   id: 'id',
   categoriaId: 'categoriaId',
   atributoId: 'atributoId',
+  tipoDato: 'tipoDato',
+  valorTexto: 'valorTexto',
+  valorBooleano: 'valorBooleano',
   valorPersonalizado: 'valorPersonalizado',
   orden: 'orden',
   estado: 'estado',
@@ -607,6 +618,114 @@ export const LeadScalarFieldEnum = {
 } as const
 
 export type LeadScalarFieldEnum = (typeof LeadScalarFieldEnum)[keyof typeof LeadScalarFieldEnum]
+
+
+export const GamaCategoriaScalarFieldEnum = {
+  id: 'id',
+  categoriaId: 'categoriaId',
+  productoId: 'productoId',
+  titulo: 'titulo',
+  descripcion: 'descripcion',
+  imagen: 'imagen',
+  gamaOrigenId: 'gamaOrigenId',
+  estado: 'estado',
+  eliminadoEn: 'eliminadoEn',
+  creadoEn: 'creadoEn',
+  actualizadoEn: 'actualizadoEn'
+} as const
+
+export type GamaCategoriaScalarFieldEnum = (typeof GamaCategoriaScalarFieldEnum)[keyof typeof GamaCategoriaScalarFieldEnum]
+
+
+export const PlantillaGamaProductoScalarFieldEnum = {
+  productoId: 'productoId',
+  gamaId: 'gamaId',
+  creadoEn: 'creadoEn',
+  actualizadoEn: 'actualizadoEn'
+} as const
+
+export type PlantillaGamaProductoScalarFieldEnum = (typeof PlantillaGamaProductoScalarFieldEnum)[keyof typeof PlantillaGamaProductoScalarFieldEnum]
+
+
+export const GrupoColumnaGamaScalarFieldEnum = {
+  id: 'id',
+  gamaId: 'gamaId',
+  codigo: 'codigo',
+  nombre: 'nombre',
+  orden: 'orden',
+  estado: 'estado',
+  eliminadoEn: 'eliminadoEn',
+  creadoEn: 'creadoEn',
+  actualizadoEn: 'actualizadoEn'
+} as const
+
+export type GrupoColumnaGamaScalarFieldEnum = (typeof GrupoColumnaGamaScalarFieldEnum)[keyof typeof GrupoColumnaGamaScalarFieldEnum]
+
+
+export const GrupoFilaGamaScalarFieldEnum = {
+  id: 'id',
+  gamaId: 'gamaId',
+  codigo: 'codigo',
+  nombre: 'nombre',
+  orden: 'orden',
+  estado: 'estado',
+  eliminadoEn: 'eliminadoEn',
+  creadoEn: 'creadoEn',
+  actualizadoEn: 'actualizadoEn'
+} as const
+
+export type GrupoFilaGamaScalarFieldEnum = (typeof GrupoFilaGamaScalarFieldEnum)[keyof typeof GrupoFilaGamaScalarFieldEnum]
+
+
+export const ColumnaGamaScalarFieldEnum = {
+  id: 'id',
+  gamaId: 'gamaId',
+  atributoId: 'atributoId',
+  tipoDato: 'tipoDato',
+  grupoId: 'grupoId',
+  etiqueta: 'etiqueta',
+  unidadMedida: 'unidadMedida',
+  orden: 'orden',
+  estado: 'estado',
+  eliminadoEn: 'eliminadoEn',
+  creadoEn: 'creadoEn',
+  actualizadoEn: 'actualizadoEn'
+} as const
+
+export type ColumnaGamaScalarFieldEnum = (typeof ColumnaGamaScalarFieldEnum)[keyof typeof ColumnaGamaScalarFieldEnum]
+
+
+export const FilaGamaScalarFieldEnum = {
+  id: 'id',
+  gamaId: 'gamaId',
+  grupoId: 'grupoId',
+  codigo: 'codigo',
+  nombre: 'nombre',
+  descripcion: 'descripcion',
+  enlaceDetalle: 'enlaceDetalle',
+  orden: 'orden',
+  estado: 'estado',
+  eliminadoEn: 'eliminadoEn',
+  creadoEn: 'creadoEn',
+  actualizadoEn: 'actualizadoEn'
+} as const
+
+export type FilaGamaScalarFieldEnum = (typeof FilaGamaScalarFieldEnum)[keyof typeof FilaGamaScalarFieldEnum]
+
+
+export const ValorGamaScalarFieldEnum = {
+  filaId: 'filaId',
+  columnaId: 'columnaId',
+  gamaId: 'gamaId',
+  tipoDato: 'tipoDato',
+  valorTexto: 'valorTexto',
+  valorNumero: 'valorNumero',
+  valorBooleano: 'valorBooleano',
+  creadoEn: 'creadoEn',
+  actualizadoEn: 'actualizadoEn'
+} as const
+
+export type ValorGamaScalarFieldEnum = (typeof ValorGamaScalarFieldEnum)[keyof typeof ValorGamaScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -1,3 +1,6 @@
+import { componerGamas } from './contexts/catalog-management/infrastructure/componer-gamas.js'
+import type { CasosGamas } from './contexts/catalog-management/presentation/http-gamas.js'
+import { registrarRutasGamas } from './contexts/catalog-management/presentation/registrar-rutas-gamas.js'
 import { componerCmsPublico, empresaPublicaDesdeEntorno } from './contexts/content-management-system/infrastructure/componer-cms-publico.js'
 import { registrarRutasPublicasCms } from './contexts/content-management-system/presentation/registrar-rutas-publicas-cms.js'
 import { componerCms, type CasosCms } from './contexts/content-management-system/infrastructure/componer-cms.js';
@@ -16,7 +19,7 @@ import { crearClienteIam } from './contexts/identity-access-management/infrastru
 import { registrarRutasIam } from './contexts/identity-access-management/presentation/registrar-rutas-iam.js';
 import type { SeguridadIam } from './contexts/identity-access-management/presentation/seguridad-http.js';
 
-export async function createApp(pruebas?: { casos: CasosIam; config: SeguridadIam; crm?: CasosCrm; catalogo?: CasosCatalogo; cms?: CasosCms }) {
+export async function createApp(pruebas?: { casos: CasosIam; config: SeguridadIam; crm?: CasosCrm; catalogo?: CasosCatalogo; cms?: CasosCms; gamas?: CasosGamas }) {
   const app = Fastify({ logger: { redact: ['req.headers.cookie', 'req.headers.authorization',
     'req.body.password', 'res.headers.set-cookie'] }, trustProxy: false });
   const origen = process.env.PORTAL_ORIGIN ?? 'http://localhost:5173';
@@ -63,6 +66,9 @@ export async function createApp(pruebas?: { casos: CasosIam; config: SeguridadIa
     registrarRutasCrm(scope, pruebas?.crm ?? componerCrm(db!), casos, config));
   if (db || pruebas?.catalogo) await app.register(async (scope) =>
     registrarRutasCatalogo(scope, pruebas?.catalogo ?? componerCatalogo(db!), casos, config));
+
+  if (db || pruebas?.gamas) await app.register(async (scope) =>
+    registrarRutasGamas(scope, pruebas?.gamas ?? componerGamas(db!), casos, config));
 
   // CMS: registro integrado por entrega 4
   if (db || pruebas?.cms) await app.register(async (scope) =>

@@ -3,7 +3,7 @@ export type Referencia = 'empresas' | RecursoCatalogo | 'destinos'
 export interface CampoCatalogo {
   clave: string
   etiqueta: string
-  tipo?: 'text' | 'textarea' | 'number' | 'number-nullable' | 'decimal' | 'checkbox' | 'select'
+  tipo?: 'text' | 'textarea' | 'number' | 'number-nullable' | 'decimal' | 'checkbox' | 'select' | 'valor-tecnico'
   obligatorio?: boolean
   referencia?: Referencia
   opciones?: readonly { valor: string; etiqueta: string }[]
@@ -31,6 +31,7 @@ export function valorCampo(datos: unknown, ruta: string): unknown {
 export function presentarValor(valor: unknown): string {
   if (valor === null || valor === undefined || valor === '') return '—'
   if (typeof valor === 'boolean') return valor ? 'Sí' : 'No'
+  if (typeof valor === 'object' && 'tipo' in valor && 'valor' in valor) return presentarValor((valor as {valor:unknown}).valor)
   if (typeof valor === 'object') return JSON.stringify(valor)
   return String(valor)
 }

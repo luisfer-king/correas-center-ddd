@@ -1,3 +1,5 @@
+import { lazy, Suspense } from 'react'
+const VistaGamaCategoria = lazy(() => import('../features/catalog/presentation/vista-gama-categoria').then(m => ({ default: m.VistaGamaCategoria })))
 import { VistaPublica } from '../features/publico/presentation/entrada-publica'
 // CMS: integración explícita y navegación central v2
 import { PortalCms } from '../features/cms/presentation/portal-cms'
@@ -86,6 +88,7 @@ export function Rutas() {
           <Route path="catalogo/productos" element={<VistaProductos />} />
           <Route path="catalogo/productos/:id" element={<VistaProductos />} />
           <Route path="catalogo/categorias" element={<VistaCategorias />} />
+          <Route path="catalogo/categorias/:categoriaId/gama" element={<Suspense fallback={<p role="status" className="p-6">Cargando administración de gama…</p>}><VistaGamaCategoria /></Suspense>} />
           <Route path="catalogo/categorias/:id" element={<VistaCategorias />} />
           <Route path="catalogo/marcas" element={<VistaMarcas />} />
           <Route path="catalogo/marcas/:id" element={<VistaMarcas />} />

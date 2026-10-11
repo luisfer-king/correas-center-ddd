@@ -6,8 +6,9 @@ export type FilaAsignacionAtributo = Prisma.CategoriaAtributoGetPayload<{}>
 
 export function aAsignacionAtributo(fila: FilaAsignacionAtributo): AsignacionAtributo {
   return new AsignacionAtributo({
+    tipoDato: fila.tipoDato ?? 'numero', valorTexto: fila.valorTexto ?? null, valorBooleano: fila.valorBooleano ?? null,
     id: fila.id, categoriaId: fila.categoriaId, atributoId: fila.atributoId,
-    valorPersonalizado: fila.valorPersonalizado?.toString() ?? null, orden: Orden.create(fila.orden),
+    valorPersonalizado: fila.valorPersonalizado?.toFixed() ?? null, orden: Orden.create(fila.orden),
     estado: fila.estado, fechas: { creadoEn: fila.creadoEn, actualizadoEn: fila.actualizadoEn },
   })
 }

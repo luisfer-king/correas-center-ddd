@@ -2,7 +2,7 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 
 export interface GrupoNavegacion {
-    id: string; titulo: string; enlaces: readonly { etiqueta: string; ruta: string }[]
+    id: string; titulo: string; enlaces: readonly { etiqueta: string; ruta: string; seccion?: string }[]
 }
 const coincide = (ruta: string, actual: string) => actual === ruta || actual.startsWith(`${ruta}/`)
 
@@ -66,7 +66,9 @@ export function NavegacionAgrupada({ grupos }: { grupos: readonly GrupoNavegacio
                 <div id={panelId} hidden={!expandido} className={`z-40 w-full pt-2 sm:absolute sm:top-full sm:w-80 sm:max-w-[calc(100vw-2rem)] ${alinearDerecha === grupo.id ? 'sm:right-0' : 'sm:left-0'}`}>
                     <div className="max-h-[min(65vh,28rem)] overflow-y-auto rounded-lg border border-neutral-200 bg-white p-2 shadow-xl">
                         <p className="px-3 py-2 text-xs font-semibold uppercase tracking-wide text-neutral-500">{grupo.titulo}</p>
-                        <ul className="space-y-1">{grupo.enlaces.map(enlace => <li key={enlace.ruta}>
+                        <ul className="space-y-1">{grupo.enlaces.map((enlace, indice) => <li key={enlace.ruta}>
+                            {enlace.seccion && (indice === 0 || grupo.enlaces[indice - 1].seccion !== enlace.seccion) &&
+                                <p className="px-3 pb-1 pt-3 text-xs font-semibold uppercase tracking-wide text-neutral-500">{enlace.seccion}</p>}
                             <NavLink to={enlace.ruta} onClick={cerrar} className={() => `block rounded-md px-3 py-2 text-sm font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-red-700 ${coincide(enlace.ruta, pathname) ? 'bg-red-700 text-white' : 'text-neutral-700 hover:bg-neutral-100'}`}>
                                 {enlace.etiqueta}
                             </NavLink>

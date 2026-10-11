@@ -1,3 +1,6 @@
+import { atributos_tecnicosApi } from '../api/atributos-tecnicos'
+import type { TipoDato,ValorTecnico } from '../api/tipos-gamas'
+import { CampoValorTecnico,validarValor } from './gamas/campo-valor-tecnico'
 import { useEffect, useState, type FormEvent } from 'react'
 import { slugNombre } from '../../../../shared/slug-nombre'
 import { CampoImagen } from '../../../shared/imagenes/campo-imagen'
@@ -10,7 +13,17 @@ export function FormularioCatalogo<T extends BaseCatalogo>({ config, registro, c
   config: ConfiguracionCatalogo<T>; registro: T | null; cerrar: () => void; guardado: () => void
 }) {
   const [datos, setDatos] = useState<Record<string, unknown>>(() => Object.fromEntries(config.campos.map(c =>
-    [c.clave, registro ? valorCampo(registro, c.clave) : c.tipo === 'checkbox' ? false : c.tipo === 'number' || c.tipo === 'number-nullable' ? 0 : ''])))
+    [c.clave, registro ? valorCampo(registro, c.clave) : c.clave === 'tipoDato' ? 'numero' : c.tipo === 'valor-tecnico' ? null : c.tipo === 'checkbox' ? false : c.tipo === 'number' || c.tipo === 'number-nullable' ? 0 : ''])))
+  const [tipoValor,setTipoValor]=useState<TipoDato | null>(null)
+  const [errorAtributo,setErrorAtributo]=useState('')
+  const atributoId=String(datos.atributoId??'')
+  useEffect(()=>{
+    if(config.recurso!=='asignaciones-atributo')return
+    const c=new AbortController();setTipoValor(null);setErrorAtributo('')
+    if(!atributoId)return()=>c.abort()
+    void atributos_tecnicosApi.obtener(atributoId,{signal:c.signal}).then(a=>{if(!c.signal.aborted){setTipoValor(a.tipoDato);if(!registro)setDatos(d=>({...d,valor:null}))}}).catch(()=>{if(!c.signal.aborted)setErrorAtributo('No se pudo consultar el tipo del atributo. Comprueba el permiso de lectura de atributos.')})
+    return()=>c.abort()
+  },[atributoId,config.recurso,registro])
   const [slugProducto, setSlugProducto] = useState('')
   const [cargandoProducto, setCargandoProducto] = useState(false)
   const [errorProducto, setErrorProducto] = useState('')
@@ -39,13 +52,15 @@ export function FormularioCatalogo<T extends BaseCatalogo>({ config, registro, c
     try {
       const camposEnvio = automatico ? config.campos.filter(c => c.clave !== 'slug') : config.campos
       const cuerpo = cuerpoFormulario(camposEnvio, datos, registro !== null)
+      if(config.recurso==='asignaciones-atributo'){if(!tipoValor)throw new Error('Selecciona un atributo disponible.');validarValor(cuerpo.valor as ValorTecnico|null)}
+      if(config.recurso==='atributos-tecnicos'&&datos.tipoDato!=='numero') (cuerpo.valores as {valorNumerico:string|null}).valorNumerico=null
       if (registro) await config.editar(registro.id, cuerpo)
       else await config.crear(cuerpo)
       guardado()
     } catch (fallo) { setError(fallo instanceof Error ? fallo.message : 'No se pudo guardar.') }
     finally { setOcupado(false) }
   }
-  const campos = config.campos.filter(c => (!registro || !c.soloCrear) && (!automatico || c.clave !== 'slug'))
+  const campos = config.campos.filter(c => !(config.recurso==='atributos-tecnicos'&&c.clave==='valores.valorNumerico'&&datos.tipoDato!=='numero') && (!registro || !c.soloCrear) && (!automatico || c.clave !== 'slug'))
   return <ModalPortal titulo={`${registro ? 'Editar' : 'Crear'} · ${config.titulo}`} cerrar={cerrar} bloqueado={ocupado}>
     <form onSubmit={e => void enviar(e)} className="grid gap-4 sm:grid-cols-2">
       {campos.map(c => {
@@ -59,6 +74,7 @@ export function FormularioCatalogo<T extends BaseCatalogo>({ config, registro, c
         if (['productos', 'categorias', 'marcas', 'industrias', 'servicios'].includes(config.recurso) && ['imagen', 'logo'].includes(c.clave))
           return <CampoImagen key={c.clave} etiqueta={c.etiqueta} valor={String(valor ?? '')} actualizar={actualizar}
             endpoint={`/api/portal/catalogo/imagenes/${config.recurso}`} actividad={setImagenPendiente} bloqueado={ocupado} />
+        if(c.tipo==='valor-tecnico')return <div key={c.clave} className="sm:col-span-2"><span>{c.etiqueta}</span>{tipoValor?<CampoValorTecnico tipo={tipoValor} valor={(valor??null) as ValorTecnico|null} cambiar={actualizar} nombre={c.etiqueta} bloqueado={ocupado}/>:<p>{errorAtributo||'Selecciona un atributo para cargar el tipo de valor.'}</p>}</div>
         return <label key={c.clave} className={c.tipo === 'textarea' ? 'sm:col-span-2' : ''}>
           <span className="mb-1 block text-sm font-medium">{c.etiqueta}</span>
           {c.referencia === 'destinos' && !referencia ? <p className="rounded border p-2 text-sm text-neutral-500">Selecciona primero el tipo de destino.</p> : referencia ? <SelectorCatalogo referencia={referencia} valor={String(valor ?? '')} actualizar={actualizar}

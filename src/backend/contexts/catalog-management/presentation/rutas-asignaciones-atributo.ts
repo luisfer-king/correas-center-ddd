@@ -1,3 +1,5 @@
+import type { DatosValorAsignacion } from '../application/valor-asignacion-aplicacion.js'
+import { validarJsonExacto } from './http-gamas.js'
 import type { FastifyInstance } from 'fastify'
 import type { CasosIam } from '../../identity-access-management/infrastructure/componer-iam.js'
 import { exigirOrigen, exigirSesion, type SeguridadIam } from '../../identity-access-management/presentation/seguridad-http.js'
@@ -7,8 +9,8 @@ import { crearAsignacionAtributo, editarAsignacionAtributo } from './esquema-asi
 import { dtoAsignacionAtributo } from './salidas/asignacion-atributo.js'
 type Id = { id: string }
 type Query = { pagina?: number; categoriaId: string }
-type Crear = { categoriaId: string; atributoId: string; valorPersonalizado: string | null; orden: number }
-type Editar = { valorPersonalizado: string | null; orden: number }
+type Crear = DatosValorAsignacion & { categoriaId: string; atributoId: string; orden: number }
+type Editar = DatosValorAsignacion & { orden: number }
 export function rutasAsignacionesAtributo(app: FastifyInstance, casos: CasosCatalogo, iam: CasosIam, config: SeguridadIam) {
   const base = '/api/portal/catalogo/asignaciones-atributo'
   const casosRecurso = casos['asignaciones-atributo']
@@ -27,18 +29,18 @@ export function rutasAsignacionesAtributo(app: FastifyInstance, casos: CasosCata
     await casos.registrarLectura.ejecutar(actor, 'asignaciones-atributo', req.params.id)
     return dtoAsignacionAtributo(registro)
   })
-  app.post<{ Body: Crear }>(base, { onRequest: origen, schema: { ...meta, body: crearAsignacionAtributo, response: { 201: respuesta, ...errores } } }, async (req, reply) => {
+  app.post<{ Body: Crear }>(base, { onRequest: origen, preValidation: validarJsonExacto, schema: { ...meta, body: crearAsignacionAtributo, response: { 201: respuesta, ...errores } } }, async (req, reply) => {
     const actor = await sesion(req, reply); if (!actor) return reply
     const body = req.body
-    const registro = await casosRecurso.crear.ejecutar(actor, { categoriaId: BigInt(body.categoriaId), atributoId: BigInt(body.atributoId), valorPersonalizado: body.valorPersonalizado, orden: body.orden })
+    const registro = await casosRecurso.crear.ejecutar(actor, { ...body, categoriaId: BigInt(body.categoriaId), atributoId: BigInt(body.atributoId) })
     return reply.code(201).send(dtoAsignacionAtributo(registro))
   })
-  app.patch<{ Params: Id; Body: Editar }>(`${base}/:id`, { onRequest: origen, schema: { ...meta, params, body: editarAsignacionAtributo, response: { 200: respuesta, ...errores } } }, async (req, reply) => {
+  app.patch<{ Params: Id; Body: Editar }>(`${base}/:id`, { onRequest: origen, preValidation: validarJsonExacto, schema: { ...meta, params, body: editarAsignacionAtributo, response: { 200: respuesta, ...errores } } }, async (req, reply) => {
     const actor = await sesion(req, reply); if (!actor) return reply
     return dtoAsignacionAtributo(await casosRecurso.editar.ejecutar(actor, BigInt(req.params.id), req.body))
   })
   for (const accion of ['activar','inactivar','eliminar'] as const) {
-    app.patch<{ Params: Id }>(`${base}/:id/${accion}`, { onRequest: origen, schema: { ...meta, params, response: { 200: ok, ...errores } } }, async (req, reply) => {
+    app.patch<{ Params: Id }>(`${base}/:id/${accion}`, { onRequest: origen, preValidation: validarJsonExacto, schema: { ...meta, params, response: { 200: ok, ...errores } } }, async (req, reply) => {
       const actor = await sesion(req, reply); if (!actor) return reply
       await casosRecurso[accion].ejecutar(actor, BigInt(req.params.id))
       return { ok: true }

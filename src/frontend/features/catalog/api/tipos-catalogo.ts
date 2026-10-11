@@ -1,3 +1,4 @@
+import type { TipoDato,ValorTecnico } from './tipos-gamas'
 export type RecursoCatalogo = 'productos' | 'categorias' | 'marcas' | 'tipos-atributo' | 'atributos-tecnicos' |
   'industrias' | 'servicios' | 'asignaciones-marca' | 'asignaciones-atributo' | 'asignaciones-industria'
 export type EstadoCatalogo = 'activo' | 'inactivo' | 'eliminado'
@@ -10,12 +11,12 @@ export interface CategoriaCatalogo extends BaseCatalogo { productoId: string; no
 export interface MarcaCatalogo extends BaseCatalogo { nombre: string; slug: string; logo: string | null; orden: number }
 export interface TipoAtributoCatalogo extends BaseCatalogo { nombre: string; slug: string; descripcion: string | null;
   icono: string | null; capacidades: { descripcion: boolean; numero: boolean; unidad: boolean }; orden: number }
-export interface AtributoTecnicoCatalogo extends BaseCatalogo { tipoAtributoId: string; nombre: string;
+export interface AtributoTecnicoCatalogo extends BaseCatalogo { tipoDato: TipoDato; tipoAtributoId: string; nombre: string;
   valores: { descripcion: string | null; valorNumerico: string | null; unidadMedida: string | null }; orden: number }
 export interface IndustriaCatalogo extends BaseCatalogo { empresaId: string; nombre: string; slug: string; imagen: string | null; orden: number }
 export interface ServicioCatalogo extends BaseCatalogo { empresaId: string; nombre: string; descripcion: string | null; imagen: string | null; orden: number }
 export interface AsignacionMarcaCatalogo extends BaseCatalogo { productoId: string; marcaId: string; orden: number | null }
-export interface AsignacionAtributoCatalogo extends BaseCatalogo { categoriaId: string; atributoId: string; valorPersonalizado: string | null; orden: number }
+export interface AsignacionAtributoCatalogo extends BaseCatalogo { tipoDato: TipoDato; valor: ValorTecnico | null; categoriaId: string; atributoId: string; valorPersonalizado: string | null; orden: number }
 export interface AsignacionIndustriaCatalogo extends BaseCatalogo { industriaId: string; destino: { tipo: 'categoria' | 'servicio'; id: string }; orden: number }
 export type RegistroCatalogo = ProductoCatalogo | CategoriaCatalogo | MarcaCatalogo | TipoAtributoCatalogo |
   AtributoTecnicoCatalogo | IndustriaCatalogo | ServicioCatalogo | AsignacionMarcaCatalogo | AsignacionAtributoCatalogo | AsignacionIndustriaCatalogo
