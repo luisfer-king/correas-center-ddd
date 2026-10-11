@@ -1,3 +1,4 @@
+import type { TipoDatoAtributo } from '../domain/valor-tecnico.js'
 import type { FastifyInstance } from 'fastify'
 import type { CasosIam } from '../../identity-access-management/infrastructure/componer-iam.js'
 import { exigirOrigen, exigirSesion, type SeguridadIam } from '../../identity-access-management/presentation/seguridad-http.js'
@@ -7,7 +8,7 @@ import { crearAtributoTecnico, editarAtributoTecnico } from './esquema-atributo-
 import { dtoAtributoTecnico } from './salidas/atributo-tecnico.js'
 type Id = { id: string }
 type Query = { pagina?: number; tipoAtributoId: string }
-type Crear = { tipoAtributoId: string; nombre: string; valores: { descripcion: string | null; valorNumerico: string | null; unidadMedida: string | null }; orden: number }
+type Crear = { tipoDato?: TipoDatoAtributo; tipoAtributoId: string; nombre: string; valores: { descripcion: string | null; valorNumerico: string | null; unidadMedida: string | null }; orden: number }
 type Editar = { nombre: string; valores: { descripcion: string | null; valorNumerico: string | null; unidadMedida: string | null } }
 export function rutasAtributosTecnicos(app: FastifyInstance, casos: CasosCatalogo, iam: CasosIam, config: SeguridadIam) {
   const base = '/api/portal/catalogo/atributos-tecnicos'
@@ -30,7 +31,7 @@ export function rutasAtributosTecnicos(app: FastifyInstance, casos: CasosCatalog
   app.post<{ Body: Crear }>(base, { onRequest: origen, schema: { ...meta, body: crearAtributoTecnico, response: { 201: respuesta, ...errores } } }, async (req, reply) => {
     const actor = await sesion(req, reply); if (!actor) return reply
     const body = req.body
-    const registro = await casosRecurso.crear.ejecutar(actor, { tipoAtributoId: BigInt(body.tipoAtributoId), nombre: body.nombre, valores: body.valores, orden: body.orden })
+    const registro = await casosRecurso.crear.ejecutar(actor, { tipoAtributoId: BigInt(body.tipoAtributoId), tipoDato: body.tipoDato, nombre: body.nombre, valores: body.valores, orden: body.orden })
     return reply.code(201).send(dtoAtributoTecnico(registro))
   })
   app.patch<{ Params: Id; Body: Editar }>(`${base}/:id`, { onRequest: origen, schema: { ...meta, params, body: editarAtributoTecnico, response: { 200: respuesta, ...errores } } }, async (req, reply) => {

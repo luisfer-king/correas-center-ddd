@@ -7,7 +7,5 @@ export const grupoCatalogo = { titulo: 'Catálogo', enlaces: [
   { etiqueta: 'Atributos técnicos', ruta: '/portal/catalogo/atributos-tecnicos', recurso: 'atributos-tecnicos' },
   { etiqueta: 'Industrias', ruta: '/portal/catalogo/industrias', recurso: 'industrias' },
   { etiqueta: 'Servicios', ruta: '/portal/catalogo/servicios', recurso: 'servicios' },
-  { etiqueta: 'Marcas de productos', ruta: '/portal/catalogo/asignaciones-marca', recurso: 'asignaciones-marca' },
-  { etiqueta: 'Atributos de categorías', ruta: '/portal/catalogo/asignaciones-atributo', recurso: 'asignaciones-atributo' },
-  { etiqueta: 'Industrias de categorías y servicios', ruta: '/portal/catalogo/asignaciones-industria', recurso: 'asignaciones-industria' },
+  { etiqueta: 'Aplicaciones por industria', ruta: '/portal/catalogo/asignaciones-industria', recurso: 'asignaciones-industria' },
 ] } as const

@@ -267,6 +267,7 @@ export type ProductoWhereInput = {
   relCategoria?: Prisma.CategoriaListRelationFilter
   relProductoMarca?: Prisma.ProductoMarcaListRelationFilter
   empresa?: Prisma.XOR<Prisma.EmpresaScalarRelationFilter, Prisma.EmpresaWhereInput>
+  relPlantillaGama?: Prisma.XOR<Prisma.PlantillaGamaProductoNullableScalarRelationFilter, Prisma.PlantillaGamaProductoWhereInput> | null
 }
 
 export type ProductoOrderByWithRelationInput = {
@@ -283,6 +284,7 @@ export type ProductoOrderByWithRelationInput = {
   relCategoria?: Prisma.CategoriaOrderByRelationAggregateInput
   relProductoMarca?: Prisma.ProductoMarcaOrderByRelationAggregateInput
   empresa?: Prisma.EmpresaOrderByWithRelationInput
+  relPlantillaGama?: Prisma.PlantillaGamaProductoOrderByWithRelationInput
 }
 
 export type ProductoWhereUniqueInput = Prisma.AtLeast<{
@@ -302,6 +304,7 @@ export type ProductoWhereUniqueInput = Prisma.AtLeast<{
   relCategoria?: Prisma.CategoriaListRelationFilter
   relProductoMarca?: Prisma.ProductoMarcaListRelationFilter
   empresa?: Prisma.XOR<Prisma.EmpresaScalarRelationFilter, Prisma.EmpresaWhereInput>
+  relPlantillaGama?: Prisma.XOR<Prisma.PlantillaGamaProductoNullableScalarRelationFilter, Prisma.PlantillaGamaProductoWhereInput> | null
 }, "id" | "slug">
 
 export type ProductoOrderByWithAggregationInput = {
@@ -351,6 +354,7 @@ export type ProductoCreateInput = {
   relCategoria?: Prisma.CategoriaCreateNestedManyWithoutProductoInput
   relProductoMarca?: Prisma.ProductoMarcaCreateNestedManyWithoutProductoInput
   empresa: Prisma.EmpresaCreateNestedOneWithoutRelProductoInput
+  relPlantillaGama?: Prisma.PlantillaGamaProductoCreateNestedOneWithoutProductoInput
 }
 
 export type ProductoUncheckedCreateInput = {
@@ -366,6 +370,7 @@ export type ProductoUncheckedCreateInput = {
   actualizadoEn?: Date | string
   relCategoria?: Prisma.CategoriaUncheckedCreateNestedManyWithoutProductoInput
   relProductoMarca?: Prisma.ProductoMarcaUncheckedCreateNestedManyWithoutProductoInput
+  relPlantillaGama?: Prisma.PlantillaGamaProductoUncheckedCreateNestedOneWithoutProductoInput
 }
 
 export type ProductoUpdateInput = {
@@ -381,6 +386,7 @@ export type ProductoUpdateInput = {
   relCategoria?: Prisma.CategoriaUpdateManyWithoutProductoNestedInput
   relProductoMarca?: Prisma.ProductoMarcaUpdateManyWithoutProductoNestedInput
   empresa?: Prisma.EmpresaUpdateOneRequiredWithoutRelProductoNestedInput
+  relPlantillaGama?: Prisma.PlantillaGamaProductoUpdateOneWithoutProductoNestedInput
 }
 
 export type ProductoUncheckedUpdateInput = {
@@ -396,6 +402,7 @@ export type ProductoUncheckedUpdateInput = {
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   relCategoria?: Prisma.CategoriaUncheckedUpdateManyWithoutProductoNestedInput
   relProductoMarca?: Prisma.ProductoMarcaUncheckedUpdateManyWithoutProductoNestedInput
+  relPlantillaGama?: Prisma.PlantillaGamaProductoUncheckedUpdateOneWithoutProductoNestedInput
 }
 
 export type ProductoCreateManyInput = {
@@ -572,6 +579,20 @@ export type ProductoUpdateOneRequiredWithoutRelProductoMarcaNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProductoUpdateToOneWithWhereWithoutRelProductoMarcaInput, Prisma.ProductoUpdateWithoutRelProductoMarcaInput>, Prisma.ProductoUncheckedUpdateWithoutRelProductoMarcaInput>
 }
 
+export type ProductoCreateNestedOneWithoutRelPlantillaGamaInput = {
+  create?: Prisma.XOR<Prisma.ProductoCreateWithoutRelPlantillaGamaInput, Prisma.ProductoUncheckedCreateWithoutRelPlantillaGamaInput>
+  connectOrCreate?: Prisma.ProductoCreateOrConnectWithoutRelPlantillaGamaInput
+  connect?: Prisma.ProductoWhereUniqueInput
+}
+
+export type ProductoUpdateOneRequiredWithoutRelPlantillaGamaNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductoCreateWithoutRelPlantillaGamaInput, Prisma.ProductoUncheckedCreateWithoutRelPlantillaGamaInput>
+  connectOrCreate?: Prisma.ProductoCreateOrConnectWithoutRelPlantillaGamaInput
+  upsert?: Prisma.ProductoUpsertWithoutRelPlantillaGamaInput
+  connect?: Prisma.ProductoWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProductoUpdateToOneWithWhereWithoutRelPlantillaGamaInput, Prisma.ProductoUpdateWithoutRelPlantillaGamaInput>, Prisma.ProductoUncheckedUpdateWithoutRelPlantillaGamaInput>
+}
+
 export type ProductoCreateWithoutEmpresaInput = {
   id?: bigint | number
   nombre: string
@@ -584,6 +605,7 @@ export type ProductoCreateWithoutEmpresaInput = {
   actualizadoEn?: Date | string
   relCategoria?: Prisma.CategoriaCreateNestedManyWithoutProductoInput
   relProductoMarca?: Prisma.ProductoMarcaCreateNestedManyWithoutProductoInput
+  relPlantillaGama?: Prisma.PlantillaGamaProductoCreateNestedOneWithoutProductoInput
 }
 
 export type ProductoUncheckedCreateWithoutEmpresaInput = {
@@ -598,6 +620,7 @@ export type ProductoUncheckedCreateWithoutEmpresaInput = {
   actualizadoEn?: Date | string
   relCategoria?: Prisma.CategoriaUncheckedCreateNestedManyWithoutProductoInput
   relProductoMarca?: Prisma.ProductoMarcaUncheckedCreateNestedManyWithoutProductoInput
+  relPlantillaGama?: Prisma.PlantillaGamaProductoUncheckedCreateNestedOneWithoutProductoInput
 }
 
 export type ProductoCreateOrConnectWithoutEmpresaInput = {
@@ -654,6 +677,7 @@ export type ProductoCreateWithoutRelCategoriaInput = {
   actualizadoEn?: Date | string
   relProductoMarca?: Prisma.ProductoMarcaCreateNestedManyWithoutProductoInput
   empresa: Prisma.EmpresaCreateNestedOneWithoutRelProductoInput
+  relPlantillaGama?: Prisma.PlantillaGamaProductoCreateNestedOneWithoutProductoInput
 }
 
 export type ProductoUncheckedCreateWithoutRelCategoriaInput = {
@@ -668,6 +692,7 @@ export type ProductoUncheckedCreateWithoutRelCategoriaInput = {
   creadoEn?: Date | string
   actualizadoEn?: Date | string
   relProductoMarca?: Prisma.ProductoMarcaUncheckedCreateNestedManyWithoutProductoInput
+  relPlantillaGama?: Prisma.PlantillaGamaProductoUncheckedCreateNestedOneWithoutProductoInput
 }
 
 export type ProductoCreateOrConnectWithoutRelCategoriaInput = {
@@ -698,6 +723,7 @@ export type ProductoUpdateWithoutRelCategoriaInput = {
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   relProductoMarca?: Prisma.ProductoMarcaUpdateManyWithoutProductoNestedInput
   empresa?: Prisma.EmpresaUpdateOneRequiredWithoutRelProductoNestedInput
+  relPlantillaGama?: Prisma.PlantillaGamaProductoUpdateOneWithoutProductoNestedInput
 }
 
 export type ProductoUncheckedUpdateWithoutRelCategoriaInput = {
@@ -712,6 +738,7 @@ export type ProductoUncheckedUpdateWithoutRelCategoriaInput = {
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   relProductoMarca?: Prisma.ProductoMarcaUncheckedUpdateManyWithoutProductoNestedInput
+  relPlantillaGama?: Prisma.PlantillaGamaProductoUncheckedUpdateOneWithoutProductoNestedInput
 }
 
 export type ProductoCreateWithoutRelProductoMarcaInput = {
@@ -726,6 +753,7 @@ export type ProductoCreateWithoutRelProductoMarcaInput = {
   actualizadoEn?: Date | string
   relCategoria?: Prisma.CategoriaCreateNestedManyWithoutProductoInput
   empresa: Prisma.EmpresaCreateNestedOneWithoutRelProductoInput
+  relPlantillaGama?: Prisma.PlantillaGamaProductoCreateNestedOneWithoutProductoInput
 }
 
 export type ProductoUncheckedCreateWithoutRelProductoMarcaInput = {
@@ -740,6 +768,7 @@ export type ProductoUncheckedCreateWithoutRelProductoMarcaInput = {
   creadoEn?: Date | string
   actualizadoEn?: Date | string
   relCategoria?: Prisma.CategoriaUncheckedCreateNestedManyWithoutProductoInput
+  relPlantillaGama?: Prisma.PlantillaGamaProductoUncheckedCreateNestedOneWithoutProductoInput
 }
 
 export type ProductoCreateOrConnectWithoutRelProductoMarcaInput = {
@@ -770,6 +799,7 @@ export type ProductoUpdateWithoutRelProductoMarcaInput = {
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   relCategoria?: Prisma.CategoriaUpdateManyWithoutProductoNestedInput
   empresa?: Prisma.EmpresaUpdateOneRequiredWithoutRelProductoNestedInput
+  relPlantillaGama?: Prisma.PlantillaGamaProductoUpdateOneWithoutProductoNestedInput
 }
 
 export type ProductoUncheckedUpdateWithoutRelProductoMarcaInput = {
@@ -784,6 +814,83 @@ export type ProductoUncheckedUpdateWithoutRelProductoMarcaInput = {
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   relCategoria?: Prisma.CategoriaUncheckedUpdateManyWithoutProductoNestedInput
+  relPlantillaGama?: Prisma.PlantillaGamaProductoUncheckedUpdateOneWithoutProductoNestedInput
+}
+
+export type ProductoCreateWithoutRelPlantillaGamaInput = {
+  id?: bigint | number
+  nombre: string
+  slug: string
+  imagen?: string | null
+  orden?: number
+  estado?: $Enums.Estado
+  eliminadoEn?: Date | string | null
+  creadoEn?: Date | string
+  actualizadoEn?: Date | string
+  relCategoria?: Prisma.CategoriaCreateNestedManyWithoutProductoInput
+  relProductoMarca?: Prisma.ProductoMarcaCreateNestedManyWithoutProductoInput
+  empresa: Prisma.EmpresaCreateNestedOneWithoutRelProductoInput
+}
+
+export type ProductoUncheckedCreateWithoutRelPlantillaGamaInput = {
+  id?: bigint | number
+  empresaId: bigint | number
+  nombre: string
+  slug: string
+  imagen?: string | null
+  orden?: number
+  estado?: $Enums.Estado
+  eliminadoEn?: Date | string | null
+  creadoEn?: Date | string
+  actualizadoEn?: Date | string
+  relCategoria?: Prisma.CategoriaUncheckedCreateNestedManyWithoutProductoInput
+  relProductoMarca?: Prisma.ProductoMarcaUncheckedCreateNestedManyWithoutProductoInput
+}
+
+export type ProductoCreateOrConnectWithoutRelPlantillaGamaInput = {
+  where: Prisma.ProductoWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProductoCreateWithoutRelPlantillaGamaInput, Prisma.ProductoUncheckedCreateWithoutRelPlantillaGamaInput>
+}
+
+export type ProductoUpsertWithoutRelPlantillaGamaInput = {
+  update: Prisma.XOR<Prisma.ProductoUpdateWithoutRelPlantillaGamaInput, Prisma.ProductoUncheckedUpdateWithoutRelPlantillaGamaInput>
+  create: Prisma.XOR<Prisma.ProductoCreateWithoutRelPlantillaGamaInput, Prisma.ProductoUncheckedCreateWithoutRelPlantillaGamaInput>
+  where?: Prisma.ProductoWhereInput
+}
+
+export type ProductoUpdateToOneWithWhereWithoutRelPlantillaGamaInput = {
+  where?: Prisma.ProductoWhereInput
+  data: Prisma.XOR<Prisma.ProductoUpdateWithoutRelPlantillaGamaInput, Prisma.ProductoUncheckedUpdateWithoutRelPlantillaGamaInput>
+}
+
+export type ProductoUpdateWithoutRelPlantillaGamaInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  imagen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orden?: Prisma.IntFieldUpdateOperationsInput | number
+  estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
+  eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  relCategoria?: Prisma.CategoriaUpdateManyWithoutProductoNestedInput
+  relProductoMarca?: Prisma.ProductoMarcaUpdateManyWithoutProductoNestedInput
+  empresa?: Prisma.EmpresaUpdateOneRequiredWithoutRelProductoNestedInput
+}
+
+export type ProductoUncheckedUpdateWithoutRelPlantillaGamaInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  empresaId?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  imagen?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orden?: Prisma.IntFieldUpdateOperationsInput | number
+  estado?: Prisma.EnumEstadoFieldUpdateOperationsInput | $Enums.Estado
+  eliminadoEn?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  relCategoria?: Prisma.CategoriaUncheckedUpdateManyWithoutProductoNestedInput
+  relProductoMarca?: Prisma.ProductoMarcaUncheckedUpdateManyWithoutProductoNestedInput
 }
 
 export type ProductoCreateManyEmpresaInput = {
@@ -810,6 +917,7 @@ export type ProductoUpdateWithoutEmpresaInput = {
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   relCategoria?: Prisma.CategoriaUpdateManyWithoutProductoNestedInput
   relProductoMarca?: Prisma.ProductoMarcaUpdateManyWithoutProductoNestedInput
+  relPlantillaGama?: Prisma.PlantillaGamaProductoUpdateOneWithoutProductoNestedInput
 }
 
 export type ProductoUncheckedUpdateWithoutEmpresaInput = {
@@ -824,6 +932,7 @@ export type ProductoUncheckedUpdateWithoutEmpresaInput = {
   actualizadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   relCategoria?: Prisma.CategoriaUncheckedUpdateManyWithoutProductoNestedInput
   relProductoMarca?: Prisma.ProductoMarcaUncheckedUpdateManyWithoutProductoNestedInput
+  relPlantillaGama?: Prisma.PlantillaGamaProductoUncheckedUpdateOneWithoutProductoNestedInput
 }
 
 export type ProductoUncheckedUpdateManyWithoutEmpresaInput = {
@@ -892,6 +1001,7 @@ export type ProductoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   relCategoria?: boolean | Prisma.Producto$relCategoriaArgs<ExtArgs>
   relProductoMarca?: boolean | Prisma.Producto$relProductoMarcaArgs<ExtArgs>
   empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
+  relPlantillaGama?: boolean | Prisma.Producto$relPlantillaGamaArgs<ExtArgs>
   _count?: boolean | Prisma.ProductoCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["producto"]>
 
@@ -941,6 +1051,7 @@ export type ProductoInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   relCategoria?: boolean | Prisma.Producto$relCategoriaArgs<ExtArgs>
   relProductoMarca?: boolean | Prisma.Producto$relProductoMarcaArgs<ExtArgs>
   empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
+  relPlantillaGama?: boolean | Prisma.Producto$relPlantillaGamaArgs<ExtArgs>
   _count?: boolean | Prisma.ProductoCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProductoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -956,6 +1067,7 @@ export type $ProductoPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     relCategoria: Prisma.$CategoriaPayload<ExtArgs>[]
     relProductoMarca: Prisma.$ProductoMarcaPayload<ExtArgs>[]
     empresa: Prisma.$EmpresaPayload<ExtArgs>
+    relPlantillaGama: Prisma.$PlantillaGamaProductoPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: bigint
@@ -1365,6 +1477,7 @@ export interface Prisma__ProductoClient<T, Null = never, ExtArgs extends runtime
   relCategoria<T extends Prisma.Producto$relCategoriaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Producto$relCategoriaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CategoriaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   relProductoMarca<T extends Prisma.Producto$relProductoMarcaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Producto$relProductoMarcaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductoMarcaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   empresa<T extends Prisma.EmpresaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EmpresaDefaultArgs<ExtArgs>>): Prisma.Prisma__EmpresaClient<runtime.Types.Result.GetResult<Prisma.$EmpresaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  relPlantillaGama<T extends Prisma.Producto$relPlantillaGamaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Producto$relPlantillaGamaArgs<ExtArgs>>): Prisma.Prisma__PlantillaGamaProductoClient<runtime.Types.Result.GetResult<Prisma.$PlantillaGamaProductoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1850,6 +1963,25 @@ export type Producto$relProductoMarcaArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.ProductoMarcaScalarFieldEnum | Prisma.ProductoMarcaScalarFieldEnum[]
+}
+
+/**
+ * Producto.relPlantillaGama
+ */
+export type Producto$relPlantillaGamaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PlantillaGamaProducto
+   */
+  select?: Prisma.PlantillaGamaProductoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PlantillaGamaProducto
+   */
+  omit?: Prisma.PlantillaGamaProductoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PlantillaGamaProductoInclude<ExtArgs> | null
+  where?: Prisma.PlantillaGamaProductoWhereInput
 }
 
 /**

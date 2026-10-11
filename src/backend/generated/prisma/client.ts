@@ -201,3 +201,38 @@ export type Sesion = Prisma.SesionModel
  * 
  */
 export type Lead = Prisma.LeadModel
+/**
+ * Model GamaCategoria
+ * 
+ */
+export type GamaCategoria = Prisma.GamaCategoriaModel
+/**
+ * Model PlantillaGamaProducto
+ * 
+ */
+export type PlantillaGamaProducto = Prisma.PlantillaGamaProductoModel
+/**
+ * Model GrupoColumnaGama
+ * 
+ */
+export type GrupoColumnaGama = Prisma.GrupoColumnaGamaModel
+/**
+ * Model GrupoFilaGama
+ * 
+ */
+export type GrupoFilaGama = Prisma.GrupoFilaGamaModel
+/**
+ * Model ColumnaGama
+ * 
+ */
+export type ColumnaGama = Prisma.ColumnaGamaModel
+/**
+ * Model FilaGama
+ * 
+ */
+export type FilaGama = Prisma.FilaGamaModel
+/**
+ * Model ValorGama
+ * 
+ */
+export type ValorGama = Prisma.ValorGamaModel

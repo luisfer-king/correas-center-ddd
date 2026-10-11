@@ -516,10 +516,6 @@ export type ConfiguracionSitioUncheckedUpdateManyWithoutEmpresaNestedInput = {
   deleteMany?: Prisma.ConfiguracionSitioScalarWhereInput | Prisma.ConfiguracionSitioScalarWhereInput[]
 }
 
-export type NullableBoolFieldUpdateOperationsInput = {
-  set?: boolean | null
-}
-
 export type ConfiguracionSitioCreateWithoutEmpresaInput = {
   clave: string
   valor?: string | null

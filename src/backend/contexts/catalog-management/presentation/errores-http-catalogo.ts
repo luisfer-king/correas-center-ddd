@@ -1,7 +1,11 @@
+import { estadoErrorGamas } from './errores-gamas.js'
 import type { FastifyInstance } from 'fastify'
 export function registrarErroresCatalogo(app: FastifyInstance) {
   app.setErrorHandler((error, request, reply) => {
     const fallo = error as Error & { validation?: unknown; code?: string; statusCode?: number }
+    const estadoGamas = estadoErrorGamas(fallo.message)
+    if (estadoGamas) return reply.code(estadoGamas).send({ error: fallo.message })
+    if (fallo.statusCode === 413) return reply.code(413).send({error:'Solicitud demasiado grande'})
     if (fallo.validation || fallo.statusCode === 400 || /^(Slug|Orden|ID|Página|Decimal|Fecha|Número|Nombre|Tipo|Capacidades|Versión).*inválid/.test(fallo.message) || /(obligatorio|incompatible)$/.test(fallo.message)) return reply.code(400).send({ error: 'Solicitud inválida' })
     if (fallo.message === 'Sesión inválida') return reply.code(401).send({ error: fallo.message })
     if (fallo.message === 'Acceso denegado') return reply.code(403).send({ error: fallo.message })
