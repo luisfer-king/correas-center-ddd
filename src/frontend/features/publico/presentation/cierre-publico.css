@@ -1,0 +1,8 @@
+.publico :where(a,button,input,textarea,select,summary,[tabindex]):focus-visible{outline:3px solid #b91c1c;outline-offset:4px}
+.publico #contenido-publico:focus{outline:none}
+.publico :where(input,select,textarea){max-width:100%}
+.publico :where(p,h1,h2,h3,a){overflow-wrap:anywhere}
+@media(max-width:640px){.publico :where(button,summary){min-height:44px}.publico :where(input,select,textarea){font-size:16px}}
+@media(prefers-reduced-motion:reduce){.publico *,.publico *::before,.publico *::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+.publico-aviso-actualizacion{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;padding:1rem 5%;background:#fff5e6;color:#3b2410}.publico-aviso-actualizacion button{padding:.6rem 1rem;border:1px solid currentColor;border-radius:.4rem;background:white;color:#3b2410}

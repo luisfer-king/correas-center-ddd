@@ -1,38 +1,51 @@
-import { useEffect, useState } from 'react'
+import { AvisoActualizacionPublica } from './aviso-actualizacion-publica'
+import { IntegracionesPublicas } from './integraciones-publicas'
+import { MetadatosPublicos } from './metadatos-publicos'
+import './cierre-publico.css'
+import './captacion-publica.css'
+import { esRutaSoluciones } from './soluciones-rutas'
+import { invalidarCachePublica } from '../api/cache-publica'
+import { esRutaCatalogo } from './datos-catalogo-publico'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import type { VistaPublica as DatosVista } from '../../../../shared/vista-publica'
-import { rutaPublica } from '../../../../shared/vista-publica'
-import { obtenerVistaPublica } from '../api/cliente-vista-publica'
+import { obtenerMarcoPublico, type DatosMarcoPublico } from '../api/cliente-marco-publico'
+import { destinoPublico, normalizarRutaPublica, vistaParaNavigation } from './datos-marco-publico'
 import { Navigation } from './navigation'
+import { FooterPublico } from './footer-publico'
+import { BreadcrumbsPublico } from './breadcrumbs-publico'
+import { WhatsAppPublico } from './whatsapp-publico'
+const ContenidoInicioPublico = lazy(() => import('./contenido-inicio-publico').then(m => ({default: m.ContenidoInicioPublico})))
 import './publico.css'
-import { imagenPublica } from './imagen-publica'
+import './marco-publico.css'
+import './diseno-aprobado.css'
+import './inicio-institucional.css'
+import './diseno-entrega4.css'
+import './entrega5.css'
+const Soluciones = lazy(()=>import('./soluciones-publicas').then(m=>({default:m.SolucionesPublicas})))
+const Contacto = lazy(()=>import('./contacto-publico').then(m=>({default:m.ContactoPublico})))
+const Catalogo = lazy(()=>import('./catalogo-publico').then(m=>({default:m.CatalogoPublico})))
+const Institucional = lazy(()=>import('./contenido-institucional').then(m=>({default:m.ContenidoInstitucional})))
 export function VistaPublica() {
- const [vista, setVista] = useState<DatosVista | null>(null), [error, setError] = useState(''), [carga, setCarga] = useState(true), [revision, setRevision] = useState(0)
- const location = useLocation()
+ const [datos, setDatos] = useState<DatosMarcoPublico | null>(null), [error, setError] = useState(''), [carga, setCarga] = useState(true), [revision, setRevision] = useState(0)
+ const revisionVista = useRef(revision)
+ const location = useLocation(), main = useRef<HTMLElement>(null), rutaAnterior = useRef(location.pathname)
  useEffect(() => {
-  const controlador = new AbortController(); setCarga(true); setError('')
-  obtenerVistaPublica(controlador.signal).then(setVista).catch(e => { if (!controlador.signal.aborted) setError(e instanceof Error ? e.message : 'No se pudo cargar la vista.') }).finally(() => { if (!controlador.signal.aborted) setCarga(false) })
+  const controlador = new AbortController(); setCarga(true); setError(''); if(revisionVista.current!==revision){setDatos(null);revisionVista.current=revision}
+  obtenerMarcoPublico(controlador.signal,location.pathname).then(d => { if (!controlador.signal.aborted) setDatos(d) }).catch(e => { if (!controlador.signal.aborted) { setDatos(null); setError(e instanceof Error ? e.message : 'No se pudo cargar el sitio.') } }).finally(() => { if (!controlador.signal.aborted) setCarga(false) })
   return () => controlador.abort()
- }, [revision])
- if (!vista) return <div className="publico"><main className="publico-estado">{carga ? <p role="status">Cargando Correas Center…</p> : <><p role="alert">{error}</p><button onClick={() => setRevision(r => r + 1)}>Reintentar</button></>}</main></div>
- const menus = Object.values(vista.menus).flat(), rutaActual = location.pathname.replace(/\/$/, '') || '/'
- const menu = menus.find(m => m.ruta.replace(/\/$/, '') === rutaActual), hijo = menus.flatMap(m => m.items).find(i => i.ruta.replace(/\/$/, '') === rutaActual)
- return <div className="publico"><Navigation vista={vista} /><main>
-  {error && <p className="publico-aviso" role="alert">{error}</p>}
-  {rutaActual === '/' ? <>
-   {vista.secciones.length ? vista.secciones.map((s, indice) => <section className={indice === 0 ? 'publico-seccion publico-hero' : 'publico-seccion'} key={s.id}>
-    <div className="publico-contenido"><div>
-     {typeof s.metadata.badge_text === 'string' && <span className="publico-badge">{s.metadata.badge_text}</span>}
-     {s.titulo && (indice === 0 ? <h1>{s.titulo}</h1> : <h2>{s.titulo}</h2>)}
-     {s.subtitulo && <p className="publico-subtitulo">{s.subtitulo}</p>}
-     {s.descripcion && <p className="publico-descripcion">{s.descripcion}</p>}
-     <div className="publico-acciones">{['primary', 'secondary'].map(tipo => {
-      const texto = s.metadata['cta_' + tipo + '_text'], href = rutaPublica(s.metadata['cta_' + tipo + '_href'])
-      return typeof texto === 'string' && href ? <Link key={tipo} className={'publico-cta ' + tipo} to={href}>{texto}</Link> : null
-     })}</div>
-    </div>{imagenPublica(s.imagen) && <img src={imagenPublica(s.imagen)} alt="" loading={indice === 0 ? 'eager' : 'lazy'} />}</div>
-   </section>) : <section className="publico-seccion publico-hero"><h1>{vista.empresa.nombre}</h1><p>Explora nuestras soluciones industriales.</p></section>}
-   <section className="publico-seccion"><h2>Soluciones para tu industria</h2><div className="publico-tarjetas">{menus.map(m => <Link key={m.id} to={m.ruta}><h3>{m.nombre}</h3><span>Ver soluciones →</span></Link>)}</div></section>
-  </> : <section className="publico-seccion publico-destino"><Link to="/">← Volver al inicio</Link><h1>{hijo?.nombre ?? menu?.nombre ?? 'Contenido en preparación'}</h1><p>Este destino permite comprobar los enlaces del menú. La página detallada se desarrollará en la siguiente fase.</p>{menu?.items.length ? <ul>{menu.items.map(i => <li key={i.id}><Link to={i.ruta}>{i.nombre}</Link></li>)}</ul> : null}</section>}
- </main><footer className="publico-footer"><span>{vista.empresa.nombre}</span><button disabled={carga} onClick={() => setRevision(r => r + 1)}>{carga ? 'Actualizando…' : 'Actualizar contenido'}</button></footer></div>
+ }, [revision,location.pathname === '/'])
+ const ruta = normalizarRutaPublica(location.pathname), destino = datos ? destinoPublico(ruta, datos) : null
+ useEffect(() => {
+  if (!datos) return
+  document.title = (ruta === '/' ? '' : (destino?.nombre || (esRutaCatalogo(ruta,datos.menus)?'Catálogo':esRutaSoluciones(ruta,datos.menus)?'Soluciones':'Página no encontrada')) + ' | ') + datos.empresa.nombre
+  if (rutaAnterior.current !== location.pathname) { main.current?.focus(); window.scrollTo?.({ top: 0, behavior: 'instant' }); rutaAnterior.current = location.pathname }
+ }, [location.pathname, datos, ruta, destino?.nombre])
+ if (!datos) return <div className="publico"><main className="publico-estado">{carga ? <p role="status">Cargando Correas Center…</p> : <><h1>No se pudo cargar el sitio</h1><p role="alert">{error}</p><button onClick={() => setRevision(r => r + 1)}>Reintentar</button></>}</main></div>
+ return <div className="publico"><MetadatosPublicos empresa={datos.empresa.nombre}/><IntegracionesPublicas configuracion={datos.configuracion}/><a className="publico-saltar" href="#contenido-publico">Saltar al contenido</a><Navigation vista={vistaParaNavigation(datos)} institucional />
+ <AvisoActualizacionPublica actualizar={() => { invalidarCachePublica(); setRevision(r => r + 1) }}/><main id="contenido-publico" tabIndex={-1} ref={main}>
+  {ruta !== '/' && !esRutaCatalogo(ruta,datos.menus) && !esRutaSoluciones(ruta,datos.menus) && <BreadcrumbsPublico nombre={destino?.nombre || 'Página no encontrada'} padre={destino?.padre} />}
+  {ruta === '/' ? <Suspense fallback={<p role="status">Cargando inicio…</p>}><ContenidoInicioPublico datos={datos} /></Suspense> : ruta==='/contact'?<Suspense fallback={<p role="status">Cargando contacto…</p>}><Contacto datos={datos}/></Suspense> : ['/about','/privacy','/terms'].includes(ruta) ? <Suspense fallback={<p role="status">Cargando contenido…</p>}><Institucional key={ruta} ruta={ruta} empresa={datos.empresa.nombre} /></Suspense> : esRutaCatalogo(ruta,datos.menus) ? <Suspense fallback={<p role="status">Cargando catálogo…</p>}><Catalogo key={ruta} ruta={ruta} datos={datos} /></Suspense> : esRutaSoluciones(ruta,datos.menus) ? <Suspense fallback={<p role="status">Cargando soluciones…</p>}><Soluciones key={ruta} ruta={ruta} datos={datos}/></Suspense> : !destino ? <section className="publico-seccion publico-destino"><span className="publico-badge">404</span><h1>Página no encontrada</h1><p>El enlace no está disponible. Puedes volver al inicio o consultar nuestras soluciones.</p><Link className="publico-cta primary" to="/">Volver al inicio</Link></section> : <section className="publico-seccion publico-destino"><h1>{destino.nombre}</h1><p>Consulta a nuestro equipo para recibir información y asesoramiento.</p><div className="publico-acciones"><Link className="publico-cta primary" to={ruta === '/contact' ? '/' : '/contact'}>{ruta === '/contact' ? 'Volver al inicio' : 'Contactar con Correas Center'}</Link></div>
+   {datos.menus.find(m=>normalizarRutaPublica(m.ruta)===ruta)?.items.length ? <ul>{datos.menus.find(m=>normalizarRutaPublica(m.ruta)===ruta)!.items.map(i=><li key={i.id}><Link to={i.ruta}>{i.nombre}</Link></li>)}</ul> : null}
+  </section>}
+ </main><FooterPublico datos={datos} actualizar={() => { invalidarCachePublica(); setRevision(r => r + 1) }} cargando={carga} /><WhatsAppPublico configuracion={datos.configuracion.whatsapp} /></div>
 }

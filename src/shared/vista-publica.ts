@@ -1,6 +1,6 @@
 export type GrupoPublico = 'Producto' | 'Aplicacion' | 'Servicio'
 export interface EnlacePublico { id: string; nombre: string; ruta: string; orden: number }
-export interface MenuPublico extends EnlacePublico { grupo: GrupoPublico; icono: string | null; items: EnlacePublico[] }
+export interface MenuPublico extends EnlacePublico { grupo: GrupoPublico; icono: string | null; cargarSubmenu?: boolean; items: EnlacePublico[] }
 export interface SeccionPublica { id: string; tipo: string; titulo: string | null; subtitulo: string | null; descripcion: string | null; imagen: string | null; metadata: Record<string, unknown>; orden: number }
 export interface VistaPublica { empresa: { id: string; nombre: string; logo: string | null }; menus: Record<GrupoPublico, MenuPublico[]>; secciones: SeccionPublica[] }
 export function rutaPublica(valor: unknown): string | null {

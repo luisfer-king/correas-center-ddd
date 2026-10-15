@@ -1,3 +1,4 @@
+import { componerPublicacion, registrarPublicacion, type CasosPublicacion } from './composition/componer-publicacion.js'
 import { componerGamas } from './contexts/catalog-management/infrastructure/componer-gamas.js'
 import type { CasosGamas } from './contexts/catalog-management/presentation/http-gamas.js'
 import { registrarRutasGamas } from './contexts/catalog-management/presentation/registrar-rutas-gamas.js'
@@ -19,7 +20,7 @@ import { crearClienteIam } from './contexts/identity-access-management/infrastru
 import { registrarRutasIam } from './contexts/identity-access-management/presentation/registrar-rutas-iam.js';
 import type { SeguridadIam } from './contexts/identity-access-management/presentation/seguridad-http.js';
 
-export async function createApp(pruebas?: { casos: CasosIam; config: SeguridadIam; crm?: CasosCrm; catalogo?: CasosCatalogo; cms?: CasosCms; gamas?: CasosGamas }) {
+export async function createApp(pruebas?: { casos: CasosIam; config: SeguridadIam; crm?: CasosCrm; catalogo?: CasosCatalogo; cms?: CasosCms; gamas?: CasosGamas; publico?: CasosPublicacion; empresaPublicaId?: bigint }) {
   const app = Fastify({ logger: { redact: ['req.headers.cookie', 'req.headers.authorization',
     'req.body.password', 'res.headers.set-cookie'] }, trustProxy: false });
   const origen = process.env.PORTAL_ORIGIN ?? 'http://localhost:5173';
@@ -90,5 +91,8 @@ export async function createApp(pruebas?: { casos: CasosIam; config: SeguridadIa
 
   // CMS público: vista inicial v1
   if (db) registrarRutasPublicasCms(app, componerCmsPublico(db), empresaPublicaDesdeEntorno());
+// Fase 4, entrega 1: consultas públicas por contexto, sin sesión IAM.
+  if (db || pruebas?.publico) await app.register(async scope => registrarPublicacion(scope,
+    pruebas?.publico ?? componerPublicacion(db!), pruebas?.empresaPublicaId ?? empresaPublicaDesdeEntorno(), config.origen));
   return app;
 }

@@ -1,3 +1,4 @@
+import { ModalSolucionesIndustria } from './modal-soluciones-industria'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ErrorApi } from '../../../shared/api/cliente-http'
@@ -13,6 +14,7 @@ type Consulta<T> = { tipo: 'cargando' } | { tipo: 'listo'; filas: T[] } | { tipo
 export function ListadoCatalogo<T extends BaseCatalogo>({ config }: { config: ConfiguracionCatalogo<T> }) {
   const { id } = useParams<{ id: string }>()
   const navegar = useNavigate()
+  const [industriaSoluciones, setIndustriaSoluciones] = useState<T | null>(null)
   const [productoMarcas, setProductoMarcas] = useState<T | null>(null)
   const [pagina, setPagina] = useState(1)
   const [filtro, setFiltro] = useState('')
@@ -116,6 +118,7 @@ export function ListadoCatalogo<T extends BaseCatalogo>({ config }: { config: Co
             <td className="p-3 capitalize">{fila.estado}</td><td className="p-3"><div className="flex flex-wrap gap-2">
               <button type="button" onClick={() => navegar(`${base}/${fila.id}`)} className="rounded border px-2 py-1">Detalle</button>
               {config.recurso === 'categorias' && capacidades?.recursos.categorias.leer && <button type="button" onClick={() => navegar(`/portal/catalogo/categorias/${fila.id}/gama`)} className="rounded border border-red-300 px-2 py-1 font-medium text-red-700">Gama técnica</button>}
+              {config.recurso === 'industrias' && <button type="button" disabled={fila.estado !== 'activo'} title={fila.estado === 'activo' ? 'Asignar productos y servicios' : 'Activa la industria para gestionar sus asignaciones'} aria-label={`Asignar productos y servicios a ${String(valorCampo(fila, 'nombre') ?? fila.id)}`} onClick={() => setIndustriaSoluciones(fila)} className="rounded border border-red-300 px-2 py-1 font-medium text-red-700 disabled:opacity-50">Asignar</button>}
               {config.recurso === 'productos' &&
                 <button type="button" disabled={fila.estado !== 'activo'}
                   aria-label={`Asignar marcas a ${String(valorCampo(fila, 'nombre') ?? fila.id)}`}
@@ -136,6 +139,7 @@ export function ListadoCatalogo<T extends BaseCatalogo>({ config }: { config: Co
       <dl className="grid gap-3 sm:grid-cols-2">{Object.entries(detalle).map(([clave, valor]) => <div key={clave}><dt className="text-xs uppercase text-neutral-500">{clave}</dt>
         <dd className="break-words whitespace-pre-wrap">{['imagen', 'logo'].includes(clave) ? <MiniaturaImagen url={valor} grande /> : presentarValor(valor)}</dd></div>)}</dl>
     </ModalPortal>}
+    {industriaSoluciones && <ModalSolucionesIndustria key={industriaSoluciones.id} industriaId={industriaSoluciones.id} empresaId={String(valorCampo(industriaSoluciones, 'empresaId'))} nombre={String(valorCampo(industriaSoluciones, 'nombre'))} puedeGestionar={capacidades?.recursos['asignaciones-industria']?.gestionar === true} cerrar={() => setIndustriaSoluciones(null)}/>}
     {productoMarcas && <ModalMarcasProducto key={productoMarcas.id} puedeGestionar={capacidades?.recursos['asignaciones-marca']?.gestionar === true} permisosComprobados={capacidades !== null} productoId={productoMarcas.id} nombre={String(valorCampo(productoMarcas, 'nombre') ?? '')}
       cerrar={() => setProductoMarcas(null)} guardado={() => { setProductoMarcas(null); setMensaje('Marcas actualizadas.'); actualizar() }} />}
     {formulario && <FormularioCatalogo key={formulario === 'nuevo' ? 'nuevo' : formulario.id} config={config}

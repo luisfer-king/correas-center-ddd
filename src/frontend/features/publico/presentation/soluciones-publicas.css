@@ -1,0 +1,55 @@
+/* Diseño de Aplicaciones/Servicios: cabecera oscura, tarjetas claras y rojo corporativo. */
+.publico .soluciones-publicas{background:#fff;color:#111827;overflow-wrap:anywhere}
+.publico .soluciones-cabecera{position:relative;isolation:isolate;overflow:hidden;padding:72px 0;background:linear-gradient(110deg,#111827,#1f2937 55%,#111827);color:white}
+.publico .soluciones-cabecera-fondo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.16;z-index:-1}
+.publico .soluciones-cabecera-interior{display:flex;align-items:center;gap:28px;position:relative}
+.publico .soluciones-cabecera h1{font-size:clamp(30px,4vw,48px);font-weight:750;line-height:1.15;letter-spacing:-.025em;color:#fff;margin:0 0 18px}
+.publico .soluciones-cabecera p{font-size:18px;line-height:1.75;color:#d1d5db;max-width:780px;margin:0}
+.publico .soluciones-cabecera-centrada .soluciones-cabecera-interior{flex-direction:column;text-align:center;gap:24px}
+.publico .soluciones-cabecera-centrada p{margin:auto;max-width:640px}
+.publico .soluciones-insignia{display:inline-flex;align-items:center;gap:9px;border:1px solid #ea0a2a66;background:#ea0a2a26;padding:9px 17px;border-radius:999px;font-size:14px;font-weight:600;color:#fff}
+.publico .soluciones-insignia svg{color:#ff4861}
+.publico .soluciones-icono-principal{flex-shrink:0;display:grid;place-items:center;background:#ea0a2a;width:100px;height:100px;border-radius:14px;box-shadow:0 10px 25px #0002}
+.publico .soluciones-seccion{padding-top:56px;padding-bottom:64px}
+.publico .soluciones-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.publico .soluciones-tarjeta{display:flex;flex-direction:column;min-width:0;background:#fff;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;box-shadow:0 4px 14px #0000000b;color:#111827;transition:transform .25s,box-shadow .25s,border-color .25s;text-decoration:none}
+.publico .soluciones-imagen{position:relative;display:grid;place-items:center;overflow:hidden;aspect-ratio:16/9;background:linear-gradient(135deg,#ea0a2a,#c90825);color:white}
+.publico .soluciones-imagen img{width:100%;height:100%;object-fit:cover;transition:transform .5s;position:absolute;inset:0}
+.publico .soluciones-tarjeta-contenido{display:flex;flex-direction:column;flex:1;padding:24px}
+.publico .soluciones-tarjeta h3{font-size:21px;font-weight:700;line-height:1.4;margin:0 0 12px;color:#111827;transition:color .2s}
+.publico .soluciones-resumen{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;color:#6b7280;font-size:15px;line-height:1.75;margin:0 0 20px}
+.publico .soluciones-resumen .publico-html,.publico .soluciones-resumen p{font-size:inherit;line-height:inherit;color:inherit;margin:0}
+.publico .soluciones-enlace{display:flex;gap:8px;align-items:center;color:#ea0a2a;font-size:14px;font-weight:700;margin-top:auto;padding-top:8px}
+.publico .soluciones-enlace svg{flex-shrink:0}
+.publico .soluciones-producto{align-self:flex-start;border-radius:999px;background:#ea0a2a12;color:#c90825;padding:5px 11px;font-size:12px;font-weight:650;margin-bottom:15px}
+.publico .soluciones-titulo{display:flex;align-items:center;gap:16px;margin-bottom:30px}
+.publico .soluciones-titulo>span{display:grid;place-items:center;flex-shrink:0;width:56px;height:56px;background:#ea0a2a12;color:#ea0a2a;border-radius:12px}
+.publico .soluciones-titulo h2,.publico .soluciones-cta h2{font-size:clamp(23px,3vw,30px);font-weight:700;line-height:1.3;color:#111827;margin:0 0 7px}
+.publico .soluciones-titulo small{display:inline-block;vertical-align:middle;margin-left:12px;padding:3px 9px;border-radius:20px;background:#f3f4f6;color:#6b7280;font-size:13px;font-weight:600}
+.publico .soluciones-titulo p{color:#6b7280;margin:0;font-size:14px;line-height:1.6}
+.publico .soluciones-servicios,.publico .soluciones-cta{background:#f9fafb;border-top:1px solid #f3f4f6}
+.publico .soluciones-cta{padding:52px 0;text-align:center}
+.publico .soluciones-cta p{color:#6b7280;margin:16px auto 24px;max-width:620px;line-height:1.7}
+.publico .soluciones-cta .publico-inicio-contenedor>div{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.publico .soluciones-boton{display:inline-flex;justify-content:center;align-items:center;gap:9px;background:#ea0a2a;color:white;padding:13px 22px;border:1px solid transparent;border-radius:8px;font-weight:650;font-size:14px;min-height:48px;text-decoration:none;transition:background .2s,box-shadow .2s}
+.publico .soluciones-boton svg{width:20px;height:20px;flex-shrink:0}
+.publico .soluciones-boton-whatsapp{background:#15803d}
+.publico .soluciones-detalle{display:grid;grid-template-columns:minmax(0,2fr) minmax(280px,1fr);gap:36px;align-items:start}
+.publico .soluciones-servicio-principal>.soluciones-imagen{border-radius:12px;box-shadow:0 4px 20px #0001}
+.publico .soluciones-descripcion{margin-top:32px}
+.publico .soluciones-descripcion .publico-html{color:#4b5563;line-height:1.85;font-size:16px}
+.publico .soluciones-contacto{background:linear-gradient(135deg,#ea0a2a,#c90825);border-radius:12px;padding:30px;color:white;position:sticky;top:110px;box-shadow:0 10px 26px #ea0a2a20}
+.publico .soluciones-contacto-icono{display:grid;place-items:center;width:52px;height:52px;border-radius:12px;background:#ffffff20;margin-bottom:20px}
+.publico .soluciones-contacto h2{font-size:26px;font-weight:700;line-height:1.3;color:#fff;margin:0 0 14px}
+.publico .soluciones-contacto p{color:#fff;line-height:1.7;margin:0 0 24px}
+.publico .soluciones-contacto .soluciones-boton{display:flex;background:#fff;color:#c90825;width:100%;margin-top:12px}
+.publico .soluciones-contacto .soluciones-boton-borde{background:transparent;color:#fff;border-color:#ffffff80}
+.publico .soluciones-volver{display:block;margin-top:22px;color:#fff;text-align:center;text-decoration:underline;font-size:14px;text-underline-offset:4px}
+.publico .soluciones-vacio{padding:42px 24px;text-align:center;background:#f9fafb;border:1px dashed #d1d5db;border-radius:12px;color:#6b7280}
+.publico .soluciones-vacio svg{margin:0 auto 14px;color:#9ca3af}
+.publico .soluciones-publicas :focus-visible{outline:3px solid #ea0a2a;outline-offset:4px}
+.publico .soluciones-contacto :focus-visible{outline-color:white}
+@media(hover:hover) and (pointer:fine){.publico .soluciones-tarjeta:hover{transform:translateY(-4px);box-shadow:0 14px 30px #00000016;border-color:#ea0a2a55}.publico .soluciones-tarjeta:hover .soluciones-imagen img{transform:scale(1.05)}.publico .soluciones-tarjeta:hover h3{color:#ea0a2a}.publico .soluciones-boton:hover{box-shadow:0 4px 14px #0002}}
+@media(max-width:960px){.publico .soluciones-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.publico .soluciones-detalle{grid-template-columns:1fr}.publico .soluciones-contacto{position:static}}
+@media(max-width:600px){.publico .soluciones-grid{grid-template-columns:1fr;gap:22px}.publico .soluciones-cabecera{padding:42px 0}.publico .soluciones-cabecera-interior{flex-direction:column;align-items:flex-start;gap:20px}.publico .soluciones-cabecera-centrada .soluciones-cabecera-interior{align-items:center}.publico .soluciones-icono-principal{width:68px;height:68px}.publico .soluciones-icono-principal svg{width:32px;height:32px}.publico .soluciones-cabecera p{font-size:16px}.publico .soluciones-seccion{padding-top:36px;padding-bottom:40px}.publico .soluciones-contacto{padding:24px}.publico .soluciones-cta .soluciones-boton{width:100%}.publico .soluciones-titulo{align-items:flex-start}}
+@media(prefers-reduced-motion:reduce){.publico .soluciones-tarjeta,.publico .soluciones-imagen img,.publico .soluciones-boton{transition:none}.publico .soluciones-tarjeta:hover,.publico .soluciones-tarjeta:hover .soluciones-imagen img{transform:none}}
