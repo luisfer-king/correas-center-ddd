@@ -24,3 +24,10 @@ dist-ssr
 *.sw?
 
 /generated/prisma
+
+
+# Respaldos comprimidos
+*.zip
+*.7z
+*.rar
+*.bundle

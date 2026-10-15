@@ -1,3 +1,4 @@
+import { notificarCambioPublico } from '../../publico/api/actualizacion-publica'
 import { FormularioConfiguracionSitio } from './formulario-configuracion-sitio'
 import { FormularioPasoWizard } from './formulario-paso-wizard'
 import { ContenidosRegistro } from './contenidos-registro'
@@ -63,6 +64,7 @@ export function ListadoCms({ configuracion: c }: { configuracion: ConfiguracionV
     const cuerpo = dialogo.accion === 'visibilidad' ? {mostrar:!dialogo.fila.mostrar} : dialogo.accion === 'actividad' ? {activo:!dialogo.fila.activo} : datos
     await c.api.accion(dialogo.fila.id,dialogo.fila.actualizadoEn,dialogo.accion,cuerpo)
    }
+   notificarCambioPublico()
    if (vivo.current) { setDialogo(undefined); setAviso('Cambios guardados.'); setRevision(i=>i+1) }
   } catch(e) { throw new Error(mensajeError(e)) } finally { bloqueo.current = false; if (vivo.current) setOcupado(false) }
  }
