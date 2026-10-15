@@ -15,12 +15,13 @@ async function avanzarMenu(tx: TxCms, menuId: bigint, cuando: Date) {
 }
 async function hermanos(tx: TxCms, menuId: bigint) { return tx.menuItem.findMany({ where: { menuId, eliminadoEn: null }, orderBy: [{ orden: 'asc' }, { id: 'asc' }] }) }
 type Fila = Awaited<ReturnType<typeof hermanos>>[number]
-/** Desocupar las posiciones evita colisiones transitorias del índice único al intercambiar 1 y 2. */
+/** Reservar órdenes sin avanzar la versión: @updatedAt debe conservarse explícitamente
+ * hasta la escritura definitiva que usa la misma versión optimista. */
 async function recolocar(tx: TxCms, lista: Fila[], ctx: EscrituraMenuItem, target?: { entidad: MenuItem; anterior: Fila }) {
   const cambios = lista.map((f, i) => ({ fila: f, orden: i + 1 })).filter(x => x.fila.orden !== x.orden || x.fila.id === target?.entidad.id)
   for (const { fila, orden } of cambios) {
     if (ctx.cuando <= fila.actualizadoEn) throw new Error('La versión del ítem debe avanzar')
-    if ((await tx.menuItem.updateMany({ where: { id: fila.id, actualizadoEn: fila.actualizadoEn, eliminadoEn: null }, data: { orden: -orden } })).count !== 1) throw new Error('Ítem modificado por otra operación')
+    if ((await tx.menuItem.updateMany({ where: { id: fila.id, actualizadoEn: fila.actualizadoEn, eliminadoEn: null }, data: { orden: -orden, actualizadoEn: fila.actualizadoEn } })).count !== 1) throw new Error('Ítem modificado por otra operación')
   }
   for (const { fila, orden } of cambios) {
     let data

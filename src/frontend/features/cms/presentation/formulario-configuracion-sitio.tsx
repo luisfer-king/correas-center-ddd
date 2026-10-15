@@ -1,9 +1,10 @@
+import { PreviewMarcas } from './preview-marcas'
 import { useState, type FormEvent } from 'react'
 import { empresasApi } from '../../commercial/api/empresas'
 import { SelectorSeccion } from './selector-seccion'
 import type { DatosFormularioCms } from './campos-cms'
 
-export const gruposConfiguracionSitio = ['general', 'analytics', 'whatsapp', 'chat', 'redes_sociales'] as const
+export const gruposConfiguracionSitio = ['general', 'analytics', 'whatsapp', 'chat', 'redes_sociales', 'inicio'] as const
 async function cargarEmpresas(pagina: number, signal: AbortSignal) {
   const lote = await empresasApi.listar(pagina, { signal })
   return { opciones: lote.filter(e => e.estado === 'activo').map(e => ({ id: e.id, nombre: e.nombre })), mas: lote.length === 100 }
@@ -14,6 +15,7 @@ type ValoresConfiguracion = {
 export function datosConfiguracionSitio(valores: ValoresConfiguracion, editar = false) {
   const { empresa, global, clave, valor, tipo, descripcion, grupo, activo } = valores
   const cuerpo = { valor: valor === '' ? null : valor, tipo: tipo.trim() || null, descripcion: descripcion === '' ? null : descripcion, grupo: grupo || null }
+  if (clave === 'marcas_presentacion' && !['carrusel', 'todas'].includes(valor)) throw new Error('Selecciona la presentación de marcas')
   if (editar) return cuerpo
   if (!global && !/^[1-9][0-9]{0,18}$/.test(empresa)) throw new Error('Selecciona una empresa')
   if (!clave.trim()) throw new Error('La clave es obligatoria')
@@ -44,8 +46,9 @@ export function FormularioConfiguracionSitio({ datos = {}, editar = false, guard
   return <form className="cms-form" onSubmit={e => void enviar(e)}><fieldset disabled={ocupado}>
     <label className="cms-check"><input type="checkbox" checked={global} disabled={editar} onChange={e => setGlobal(e.target.checked)}/>Configuración global (sin empresa)</label>
     {global ? <p>Empresa: configuración global</p> : <SelectorSeccion etiqueta="Empresa" valor={empresa} cargar={cargarEmpresas} cambiar={setEmpresa} bloqueado={editar || ocupado}/>}
+    {!editar && <button type="button" onClick={() => { setClave('marcas_presentacion'); setValor('carrusel'); setTipo('texto'); setGrupo('inicio'); setActivo('true'); setDescripcion('Presentación de marcas en Inicio') }}>Configurar presentación de marcas</button>}
     <label>Clave *<input required readOnly={editar} value={clave} placeholder="titulo_sitio o whatsapp_activo" onChange={e => setClave(e.target.value)}/></label>
-    <label>Valor (opcional)<textarea value={valor} onChange={e => setValor(e.target.value)}/><small>Para tipo booleano escribe true o false. El valor se conserva como texto en la base de datos.</small></label>
+    {clave === 'marcas_presentacion' ? <><label>Presentación de marcas<select value={valor === 'todas' ? 'todas' : 'carrusel'} onChange={e => setValor(e.target.value)}><option value="carrusel">Carrusel</option><option value="todas">Mostrar todas</option></select></label><PreviewMarcas modo={valor === 'todas' ? 'todas' : 'carrusel'} /></> : <label>Valor (opcional)<textarea value={valor} onChange={e => setValor(e.target.value)}/><small>Para tipo booleano escribe true o false. El valor se conserva como texto en la base de datos.</small></label>}
     <label>Tipo (opcional)<input list="configuracion-tipos" value={tipo} onChange={e => setTipo(e.target.value)}/><datalist id="configuracion-tipos"><option value="texto"/><option value="booleano"/></datalist></label>
     <label>Descripción (opcional)<textarea value={descripcion} onChange={e => setDescripcion(e.target.value)}/></label>
     <label>Grupo<select value={grupo} onChange={e => setGrupo(e.target.value)}><option value="">Sin definir</option>{grupoHistorico && <option value={grupo}>{grupo} (actual)</option>}{gruposConfiguracionSitio.map(g => <option key={g} value={g}>{g}</option>)}</select></label>

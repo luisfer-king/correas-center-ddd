@@ -23,6 +23,7 @@ export class ConfiguracionSitio {
         this.id = enteroPositivo(d.id)
         this.empresaId = d.empresaId === null ? null : idCMS(d.empresaId)
         this.clave = textoCMS(d.clave, 'Clave')
+        if (this.clave === 'marcas_presentacion' && !['carrusel', 'todas'].includes(d.valor ?? '')) throw new Error('Presentación de marcas inválida')
         this._valor = d.valor; this._tipo = d.tipo; this._descripcion = d.descripcion
         this._grupo = d.grupo; this._activo = d.activo
         this._creadoEn = d.creadoEn === null ? null : fechaCMS(d.creadoEn)
@@ -41,8 +42,10 @@ export class ConfiguracionSitio {
         this._actualizadoEn = siguiente
     }
     editar(d: { valor: string | null; tipo: string | null; descripcion: string | null; grupo: string | null }, cuando: Date): void {
+        if (this.clave === 'marcas_presentacion' && !['carrusel', 'todas'].includes(d.valor ?? '')) throw new Error('Selecciona carrusel o todas para marcas')
         if (d.tipo !== null) textoCMS(d.tipo, 'Tipo')
-        this.tocar(cuando); this._valor = d.valor; this._tipo = d.tipo
+        this.tocar(cuando);
+        this._valor = d.valor; this._tipo = d.tipo
         this._descripcion = d.descripcion; this._grupo = d.grupo
     }
     cambiarActivo(activo: boolean, cuando: Date): void {

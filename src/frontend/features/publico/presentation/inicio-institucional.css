@@ -1,0 +1,69 @@
+.publico .publico-footer-contenedor{max-width:none;width:100%;padding-left:40px;padding-right:40px}
+.publico .publico-identidad{display:flex;flex-direction:column;gap:4px;min-width:0}
+.publico .publico-identidad small{font-size:12px;font-weight:400;color:#ffe2e7;margin:0;line-height:1.2}
+.publico .publico-fa{width:20px;height:20px;display:block;flex-shrink:0}
+.publico .publico-whatsapp{gap:9px;background:#15803d}
+.publico .publico-whatsapp .publico-fa{width:25px;height:25px}
+.publico .publico-inicio-contenedor{width:100%;max-width:1280px;margin:0 auto;padding:0 32px}
+.publico .publico-hero-inicio{position:relative;isolation:isolate;min-height:calc(100svh - 80px);display:flex;align-items:center;background:linear-gradient(120deg,#111827,#1f2937);color:#fff;padding:80px 0}
+.publico .publico-hero-fondo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.publico .publico-hero-sombra{position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#000a,#0002)}
+.publico .publico-hero-texto h1{color:#fff;font-size:clamp(36px,4.2vw,64px);font-weight:800;line-height:1.12;margin:24px 0;max-width:850px}
+.publico .publico-hero-texto>p{max-width:760px;font-size:20px;color:#ffffffed;line-height:1.65;margin:12px 0}
+.publico .publico-hero-etiqueta{display:inline-block;font-size:14px;border:1px solid #ffffff55;background:#ffffff1a;padding:10px 18px;border-radius:999px}
+.publico .publico-hero-inicio .publico-cta.primary{background:#ea0a2a;border-color:#ea0a2a;color:#fff}
+.publico .publico-hero-inicio .publico-cta.secondary{border-color:#fff;color:#fff;background:#ffffff1a}
+.publico .publico-carrusel-controles{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;gap:10px;align-items:center}
+.publico .publico-carrusel-controles button{border:1px solid #ffffff88;border-radius:999px;background:#ffffff44;color:#fff;min-width:12px;height:12px;padding:0}
+.publico .publico-carrusel-controles button.activo{background:#ea0a2a;border-color:#ea0a2a;min-width:28px}
+.publico .publico-carrusel-controles button:has(svg){display:flex;align-items:center;justify-content:center;width:32px;height:32px}
+.publico .publico-bloque-inicio{padding:72px 0;content-visibility:auto;contain-intrinsic-size:auto 550px}
+.publico .publico-titulo-inicio{text-align:center;margin-bottom:40px}
+.publico .publico-titulo-inicio>span{font-size:14px;text-transform:uppercase;letter-spacing:.1em;font-weight:650;color:#ea0a2a}
+.publico .publico-titulo-inicio h2{font-size:clamp(28px,3vw,40px);font-weight:750;line-height:1.2;margin:12px 0;color:#111827}
+.publico .publico-grid-inicio{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.publico .publico-tarjeta-inicio{display:block;background:#fff;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;box-shadow:0 4px 15px #00008;transition:box-shadow .15s,border-color .15s}
+.publico .publico-tarjeta-inicio:hover{border-color:#ea0a2a;box-shadow:0 10px 24px #0002}
+.publico .publico-tarjeta-inicio>img{display:block;width:100%;height:190px;object-fit:contain;background:#f9fafb;padding:16px}
+.publico .publico-tarjeta-inicio>div{padding:24px}
+.publico .publico-tarjeta-inicio h3,.publico .publico-tarjeta-cms h3{font-size:18px;font-weight:700;line-height:1.35;color:#111827;margin:12px 0}
+.publico .publico-tarjeta-inicio p{font-size:14px;line-height:1.7;color:#6b7280;margin-bottom:16px}
+.publico .publico-tarjeta-ver{font-size:14px;font-weight:650;color:#ea0a2a}
+.publico .publico-inicio-ver-todos{text-align:center;margin-top:36px}
+.publico .publico-inicio-ver-todos .publico-cta{display:inline-block}
+.publico .publico-bloque-marcas{background:#f9fafb;padding:48px 0}
+.publico .publico-marcas-inicio{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:24px;align-items:center}
+.publico .publico-marca{min-height:110px;display:flex;align-items:center;justify-content:center;background:#fff;padding:18px;border:1px solid #eee;border-radius:8px}
+.publico .publico-marca img{max-width:100%;height:80px;object-fit:contain}
+.publico .publico-tarjeta-cms{padding:28px;border:1px solid #e5e7eb;background:#fff;border-radius:12px;min-width:0}
+.publico .publico-tarjeta-cms>.publico-icono{color:#ea0a2a;width:40px;height:40px;border-radius:8px;background:#ea0a2a15}
+.publico .publico-tarjeta-cms>img{width:100%;height:180px;object-fit:contain;display:block;margin-bottom:16px}
+.publico .publico-tarjeta-cms p{font-size:15px;color:#4b5563;line-height:1.7;overflow-wrap:anywhere}
+.publico .publico-cms-destacado{font-size:24px!important;color:#ea0a2a!important;font-weight:750;margin:12px 0}
+.publico .publico-bloque-oscuro{background:#111827;color:#fff}
+.publico .publico-bloque-oscuro h2{color:#fff}
+.publico .publico-bloque-sucursales{background:#f9fafb}
+.publico .publico-bloque-sucursales .publico-tarjeta-cms>svg{color:#ea0a2a}
+.publico .publico-bloque-sucursales .publico-tarjeta-cms>p:has(svg){display:flex;gap:8px;align-items:center}
+.publico .publico-contacto-inicio{background:linear-gradient(90deg,#ea0a2a,#b1001b);color:#fff;text-align:center}
+.publico .publico-contacto-inicio h2{color:#fff;font-size:32px;font-weight:750}
+.publico .publico-contacto-inicio p{font-size:18px;margin:20px 0 30px}
+.publico .publico-contacto-inicio .publico-cta{display:inline-block;background:#111827;color:#fff;border:0}
+.publico .publico-esqueleto-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;min-height:220px}
+.publico .publico-esqueleto-grid>div{background:#f3f4f6;border-radius:12px}
+.publico .publico-sin-contenido{text-align:center;color:#6b7280}
+.publico .publico-institucional-hero{background:radial-gradient(ellipse at 30% 20%,#331027,#111827 65%);color:white;text-align:center;padding:80px 0}
+.publico .publico-institucional-hero h1{color:#fff;font-weight:750;margin:24px auto}
+.publico .publico-institucional-hero>.publico-inicio-contenedor>span{color:#ea0a2a;text-transform:uppercase;font-size:14px;letter-spacing:.1em}
+.publico .publico-institucional-hero .publico-html{font-size:20px;color:#d1d5db;max-width:900px;margin:auto}
+.publico .publico-institucional-contenido{padding-top:56px;padding-bottom:72px}
+.publico .publico-institucional-contenido h2{font-size:28px;font-weight:700;color:#111827;margin:24px 0}
+.publico .publico-institucional-contenido h3{font-size:20px;font-weight:700;margin:16px 0}
+.publico .publico-html{font-size:16px;line-height:1.8;overflow-wrap:anywhere;white-space:normal}
+.publico .publico-html p{margin:12px 0}.publico .publico-html ul,.publico .publico-html ol{padding-left:24px;margin:16px 0}.publico .publico-html ul{list-style:disc}.publico .publico-html ol{list-style:decimal}.publico .publico-html .font-semibold{font-weight:650}.publico .publico-html strong{font-weight:700}
+.publico .publico-institucional-tabs{display:flex;gap:12px;flex-wrap:wrap;margin:40px 0 24px;padding-bottom:16px;border-bottom:1px solid #e5e7eb}
+.publico .publico-institucional-tabs button{padding:12px 20px;border:1px solid #e5e7eb;border-radius:8px;background:#f9fafb;color:#374151;font-weight:650}
+.publico .publico-institucional-tabs button[aria-selected=true]{background:#ea0a2a;color:#fff;border-color:#ea0a2a}
+@media(max-width:1023px){.publico .publico-grid-inicio,.publico .publico-esqueleto-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.publico .publico-marcas-inicio{grid-template-columns:repeat(3,minmax(0,1fr))}.publico .publico-hero-inicio{min-height:650px}.publico .publico-footer-contenedor{padding-left:24px;padding-right:24px}}
+@media(max-width:639px){.publico .publico-grid-inicio,.publico .publico-esqueleto-grid{grid-template-columns:1fr}.publico .publico-marcas-inicio{grid-template-columns:repeat(2,minmax(0,1fr))}.publico .publico-inicio-contenedor,.publico .publico-footer-contenedor{padding-left:20px;padding-right:20px}.publico .publico-bloque-inicio{padding:44px 0}.publico .publico-hero-inicio{min-height:600px;padding:64px 0}.publico .publico-institucional-hero{padding:48px 0}.publico .publico-hero-texto>p{font-size:17px}.publico .publico-identidad small{font-size:10px}.publico .publico-titulo-inicio{margin-bottom:28px}}
+@media(prefers-reduced-motion:reduce){.publico .publico-tarjeta-inicio{transition:none}}
